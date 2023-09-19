@@ -1,0 +1,1292 @@
+---
+# ====== Page: Add/Edit Stop =================================
+id: 110
+identification: 
+  name: Add/Edit Stop
+  alias: STOP
+  title: Add/Edit Stop
+  page-group: ' MAIN' # 67422548002820357
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+dialog: 
+  width: 800
+  chained: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authorization-scheme: MASTER - IS_USER # 59731356907418259
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: &P110_HEADER. ===============================
+  id: 61508979059840437
+  identification: 
+    title: '&P110_HEADER.'
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 17759298553506472
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: [FORM] ======================================
+  id: 61509134372840438
+  identification: 
+    title: '[FORM]'
+    type: Form
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TRP_ITINERARY
+    include-rowid-column: false
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 17725987703506456
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+
+page-items: 
+- # ====== Page Item: P110_STOP_ID =============================
+  id: 23617864431153256
+  identification: 
+    name: P110_STOP_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: STOP_ID
+    data-type: NUMBER
+    query-only: false
+    primary-key: true
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_STOP_NAME ===========================
+  id: 23617982792153257
+  identification: 
+    name: P110_STOP_NAME
+    type: Text Field
+
+  label: 
+    label: Stop Name
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 10
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: true
+    maximum-length: 128
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: STOP_NAME
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_CATEGORY_ID =========================
+  id: 23618039986153258
+  identification: 
+    name: P110_CATEGORY_ID
+    type: Select List
+
+  label: 
+    label: Category Id
+    alignment: Left
+
+  settings: 
+    page-action-on-selection: None
+    allow-multi-selection: false
+
+  layout: 
+    sequence: 20
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+    height: 1
+
+  validation: 
+    value-required: true
+
+  list-of-values: 
+    type: Shared Component
+    list-of-values: LOV_CATEGORIES # 23213761854288039
+    display-extra-values: false
+    display-null-value: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: CATEGORY_ID
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_PRICE ===============================
+  id: 23618218845153259
+  identification: 
+    name: P110_PRICE
+    type: Number Field
+
+  label: 
+    label: Price
+    alignment: Left
+
+  settings: 
+    number-alignment: Start
+    virtual-keyboard: Decimal
+
+  layout: 
+    sequence: 30
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: PRICE
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_NOTES ===============================
+  id: 23618272079153260
+  identification: 
+    name: P110_NOTES
+    type: Textarea
+
+  label: 
+    label: Notes
+    alignment: Left
+
+  settings: 
+    resizable: true
+    auto-height: false
+    character-counter: false
+    trim-spaces: Leading and Trailing
+
+  layout: 
+    sequence: 140
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+    height: 5
+
+  validation: 
+    value-required: false
+    maximum-length: 4000
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: NOTES
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_COLOR_FILL ==========================
+  id: 23618422450153261
+  identification: 
+    name: P110_COLOR_FILL
+    type: Color Picker
+
+  label: 
+    label: Color Fill
+    alignment: Left
+
+  settings: 
+    use-defaults: true
+
+  layout: 
+    sequence: 100
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+    maximum-length: 8
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: COLOR_FILL
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_IS_RESERVED =========================
+  id: 23618533665153262
+  identification: 
+    name: P110_IS_RESERVED
+    type: Switch
+
+  label: 
+    label: Is Reserved
+    alignment: Left
+
+  settings: 
+    use-defaults: false
+    on-value: Y
+    on-label: Y
+
+  layout: 
+    sequence: 110
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: 7
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: IS_RESERVED
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_IS_PAID =============================
+  id: 23618576951153263
+  identification: 
+    name: P110_IS_PAID
+    type: Switch
+
+  label: 
+    label: Is Paid
+    alignment: Left
+
+  settings: 
+    use-defaults: false
+    on-value: Y
+    on-label: Y
+
+  layout: 
+    sequence: 120
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: 9
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: IS_PAID
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_IS_PENDING ==========================
+  id: 23618734525153264
+  identification: 
+    name: P110_IS_PENDING
+    type: Switch
+
+  label: 
+    label: Is Pending
+    alignment: Left
+
+  settings: 
+    use-defaults: false
+    on-value: Y
+    on-label: Y
+
+  layout: 
+    sequence: 130
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: 11
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: IS_PENDING
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_SUBMIT ==============================
+  id: 23619525893153272
+  identification: 
+    name: P110_SUBMIT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: '&P110_HEADER.' # 61508979059840437
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_LINK_RESERVATION ====================
+  id: 23620227116153279
+  identification: 
+    name: P110_LINK_RESERVATION
+    type: Text Field
+
+  label: 
+    label: Link Reservation
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 80
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+    maximum-length: 2000
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: LINK_RESERVATION
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_LINK_EVENT ==========================
+  id: 23620272277153280
+  identification: 
+    name: P110_LINK_EVENT
+    type: Text Field
+
+  label: 
+    label: Link Event
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 90
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+    maximum-length: 2000
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: LINK_EVENT
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_TRIP_START_AT =======================
+  id: 23983277497895345
+  identification: 
+    name: P110_TRIP_START_AT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: '&P110_HEADER.' # 61508979059840437
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_TRIP_ID =============================
+  id: 33441589586905216
+  identification: 
+    name: P110_TRIP_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: TRIP_ID
+    data-type: NUMBER
+    query-only: false
+    primary-key: true
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_START_AT ============================
+  id: 33441853523905218
+  identification: 
+    name: P110_START_AT
+    type: Date Picker
+
+  label: 
+    label: Start At
+    alignment: Left
+
+  settings: 
+    show-time: true
+    display-as: Popup
+    minimum-date: Item
+    minimum-item: P110_TRIP_START_AT
+    maximum-date: None
+    multiple-months: No
+    use-defaults: false
+    appearance-&-behavior: 'MONTH-PICKER:YEAR-PICKER:TODAY-BUTTON'
+    days-outside-month: Visible
+    time-increment: 5
+    show-on: Item Focus
+
+  layout: 
+    sequence: 60
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+    format-mask: 'YYYY-MM-DD HH24:MI'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: START_AT
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_END_AT ==============================
+  id: 33441899168905219
+  identification: 
+    name: P110_END_AT
+    type: Date Picker
+
+  label: 
+    label: End At
+    alignment: Left
+
+  settings: 
+    show-time: true
+    display-as: Popup
+    minimum-date: Item
+    minimum-item: P110_START_AT
+    maximum-date: None
+    multiple-months: No
+    use-defaults: false
+    appearance-&-behavior: 'MONTH-PICKER:YEAR-PICKER:TODAY-BUTTON'
+    days-outside-month: Visible
+    time-increment: 5
+    show-on: Item Focus
+
+  layout: 
+    sequence: 70
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+    format-mask: 'YYYY-MM-DD HH24:MI'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: END_AT
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_CREATED_BY ==========================
+  id: 33442006465905220
+  identification: 
+    name: P110_CREATED_BY
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 150
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: CREATED_BY
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_CREATED_AT ==========================
+  id: 33442103515905221
+  identification: 
+    name: P110_CREATED_AT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 160
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: CREATED_AT
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_HEADER ==============================
+  id: 61510472604840447
+  identification: 
+    name: P110_HEADER
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: '&P110_HEADER.' # 61508979059840437
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: DELETE_STOP =================================
+  id: 23620092432153278
+  identification: 
+    button-name: DELETE_STOP
+    label: Delete Stop
+
+  layout: 
+    sequence: 80
+    region: '[FORM]' # 61509134372840438
+    position: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 17865448457506535
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+    icon: fa-trash-o
+
+  behavior: 
+    action: Submit Page
+    execute-validations: false
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL DELETE action
+
+  confirmation: 
+    message: Do you really want to delete the stop?
+    style: Default
+
+- # ====== Button: CLOSE_DIALOG ================================
+  id: 23709120144896202
+  identification: 
+    button-name: CLOSE_DIALOG
+    label: Close Dialog
+
+  layout: 
+    sequence: 10
+    region: '&P110_HEADER.' # 61508979059840437
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 17865448457506535
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+    icon: fa-times
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: false
+
+- # ====== Button: CREATE_STOP =================================
+  id: 23710179682896203
+  identification: 
+    button-name: CREATE_STOP
+    label: '&P110_SUBMIT.'
+
+  layout: 
+    sequence: 70
+    region: '[FORM]' # 61509134372840438
+    position: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 17866172241506537
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
+dynamic-actions: 
+- # ====== Dynamic Action: CLOSE_DIALOG ========================
+  id: 23715562144896209
+  identification: 
+    name: CLOSE_DIALOG
+
+  execution: 
+    sequence: 10
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CLICK
+    selection-type: Button
+    button: CLOSE_DIALOG # 23709120144896202
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Close Dialog ================================
+    id: 23716055237896209
+    identification: 
+      action: Close Dialog
+
+    execution: 
+      sequence: 10
+      event: CLOSE_DIALOG # 23715562144896209
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+computations: 
+- # ====== Computation: P110_SUBMIT ============================
+  id: 23619623265153273
+  identification: 
+    item-name: P110_SUBMIT
+
+  execution: 
+    sequence: 20
+    point: Before Regions
+
+  computation: 
+    type: Expression
+    language: SQL
+    sql-expression: |
+      CASE WHEN :P110_STOP_ID IS NULL
+          THEN 'Create Stop'
+          ELSE 'Update Stop' END
+
+- # ====== Computation: P110_HEADER ============================
+  id: 23714865348896208
+  identification: 
+    item-name: P110_HEADER
+
+  execution: 
+    sequence: 10
+    point: Before Regions
+
+  computation: 
+    type: Expression
+    language: SQL
+    sql-expression: |
+      CASE WHEN :P110_STOP_ID IS NULL
+          THEN 'Create Stop'
+          ELSE 'Update Stop' END
+
+- # ====== Computation: P110_TRIP_START_AT =====================
+  id: 23983364696895346
+  identification: 
+    item-name: P110_TRIP_START_AT
+
+  execution: 
+    sequence: 30
+    point: Before Regions
+
+  computation: 
+    type: SQL Query (return single value)
+    sql-query: |
+      SELECT TO_CHAR(MIN(t.start_at), 'YYYY-MM-DD')
+      FROM trp_trips t
+      WHERE t.trip_id = :P110_TRIP_ID
+
+processes: 
+- # ====== Process: CLOSE_DIALOG ===============================
+  id: 23619660468153274
+  identification: 
+    name: CLOSE_DIALOG
+    type: Close Dialog
+    execution-chain: None
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+- # ====== Process: INIT_FORM ==================================
+  id: 23714320565896207
+  identification: 
+    name: INIT_FORM
+    type: Form - Initialization
+    execution-chain: None
+    form-region: '[FORM]' # 61509134372840438
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: SAVE_FORM ==================================
+  id: 23715238080896208
+  identification: 
+    name: SAVE_FORM
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TRP_APP
+    procedure-or-function: SAVE_ITINERARY
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+

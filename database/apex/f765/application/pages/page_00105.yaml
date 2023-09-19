@@ -1,0 +1,591 @@
+---
+# ====== Page: Add Trip ======================================
+id: 105
+identification: 
+  name: Add Trip
+  alias: ADD-TRIP
+  title: Add Trip
+  page-group: ' MAIN' # 67422548002820357
+
+appearance: 
+  page-mode: Modal Dialog
+  dialog-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+dialog: 
+  chained: false
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authorization-scheme: MASTER - IS_USER # 59731356907418259
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: &P105_HEADER. ===============================
+  id: 51686091932088472
+  identification: 
+    title: '&P105_HEADER.'
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 17759298553506472
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: [FORM] ======================================
+  id: 51686247245088473
+  identification: 
+    title: '[FORM]'
+    type: Form
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TRP_TRIPS
+    include-rowid-column: false
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 17725987703506456
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      lost-update-type: Row Values
+
+page-items: 
+- # ====== Page Item: P105_TRIP_ID =============================
+  id: 23616653939153244
+  identification: 
+    name: P105_TRIP_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: '[FORM]' # 51686247245088473
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 51686247245088473
+    column: TRIP_ID
+    data-type: NUMBER
+    query-only: false
+    primary-key: true
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Checksum Required - Session Level
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_TRIP_NAME ===========================
+  id: 23616817772153245
+  identification: 
+    name: P105_TRIP_NAME
+    type: Text Field
+
+  label: 
+    label: Trip Name
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 20
+    region: '[FORM]' # 51686247245088473
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: true
+    maximum-length: 128
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 51686247245088473
+    column: TRIP_NAME
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_START_AT ============================
+  id: 23616917876153246
+  identification: 
+    name: P105_START_AT
+    type: Date Picker
+
+  label: 
+    label: Start At
+    alignment: Left
+
+  settings: 
+    show-time: false
+    display-as: Popup
+    minimum-date: None
+    maximum-date: None
+    multiple-months: No
+    use-defaults: true
+
+  layout: 
+    sequence: 30
+    region: '[FORM]' # 51686247245088473
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+    format-mask: YYYY-MM-DD
+    width: 30
+
+  validation: 
+    value-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 51686247245088473
+    column: START_AT
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_END_AT ==============================
+  id: 23616963521153247
+  identification: 
+    name: P105_END_AT
+    type: Date Picker
+
+  label: 
+    label: End At
+    alignment: Left
+
+  settings: 
+    show-time: false
+    display-as: Popup
+    minimum-date: None
+    maximum-date: None
+    multiple-months: No
+    use-defaults: true
+
+  layout: 
+    sequence: 40
+    region: '[FORM]' # 51686247245088473
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+    format-mask: YYYY-MM-DD
+    width: 30
+
+  validation: 
+    value-required: true
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 51686247245088473
+    column: END_AT
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_CREATED_BY ==========================
+  id: 23617070818153248
+  identification: 
+    name: P105_CREATED_BY
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: '[FORM]' # 51686247245088473
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 51686247245088473
+    column: CREATED_BY
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_CREATED_AT ==========================
+  id: 23617167868153249
+  identification: 
+    name: P105_CREATED_AT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 60
+    region: '[FORM]' # 51686247245088473
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 51686247245088473
+    column: CREATED_AT
+    data-type: DATE
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_HEADER ==============================
+  id: 51686655245088477
+  identification: 
+    name: P105_HEADER
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: '&P105_HEADER.' # 51686091932088472
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: true
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: CREATE_TRIP =================================
+  id: 23617400024153251
+  identification: 
+    button-name: CREATE_TRIP
+    label: Create Trip
+
+  layout: 
+    sequence: 70
+    region: '[FORM]' # 51686247245088473
+    position: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 17866172241506537
+    hot: true
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
+- # ====== Button: CLOSE_DIALOG ================================
+  id: 51686291274088474
+  identification: 
+    button-name: CLOSE_DIALOG
+    label: Close Dialog
+
+  layout: 
+    sequence: 10
+    region: '&P105_HEADER.' # 51686091932088472
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 17865448457506535
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+    icon: fa-times
+
+  behavior: 
+    action: Defined by Dynamic Action
+    execute-validations: false
+
+dynamic-actions: 
+- # ====== Dynamic Action: CLOSE_DIALOG ========================
+  id: 51686385814088475
+  identification: 
+    name: CLOSE_DIALOG
+
+  execution: 
+    sequence: 10
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CLICK
+    selection-type: Button
+    button: CLOSE_DIALOG # 51686291274088474
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Close Dialog ================================
+    id: 51686570698088476
+    identification: 
+      action: Close Dialog
+
+    execution: 
+      sequence: 10
+      event: CLOSE_DIALOG # 51686385814088475
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+computations: 
+- # ====== Computation: P105_HEADER ============================
+  id: 51686763805088478
+  identification: 
+    item-name: P105_HEADER
+
+  execution: 
+    sequence: 10
+    point: Before Regions
+
+  computation: 
+    type: SQL Query (return single value)
+    sql-query: |
+      SELECT p.page_name
+      FROM apex_application_pages p
+      WHERE p.application_id  = :APP_ID
+          AND p.page_id       = :APP_PAGE_ID;
+
+processes: 
+- # ====== Process: Initialize form Add Trip ===================
+  id: 23616560977153243
+  identification: 
+    name: Initialize form Add Trip
+    type: Form - Initialization
+    execution-chain: None
+    form-region: '[FORM]' # 51686247245088473
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: SAVE_FORM ==================================
+  id: 23617294270153250
+  identification: 
+    name: SAVE_FORM
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TRP_APP
+    procedure-or-function: SAVE_TRIPS
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+

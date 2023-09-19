@@ -1,0 +1,86 @@
+---
+- # ====== Authorization: MASTER - NOBODY ======================
+  id: 52903934467606020
+  identification: 
+    name: MASTER - NOBODY
+
+  subscription: 
+    master: 
+      referenced-id: 29735378348651510
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: RETURN FALSE;
+
+  server-cache: 
+    evaluation-point: Once per Session
+
+- # ====== Authorization: MASTER - IS_DEVELOPER ================
+  id: 57889166082913574
+  identification: 
+    name: MASTER - IS_DEVELOPER
+
+  subscription: 
+    master: 
+      referenced-id: 34702806164823143
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: RETURN core.is_developer();
+
+  server-cache: 
+    evaluation-point: Once per Session
+
+  error: 
+    error-message: ACCESS_DENIED
+
+- # ====== Authorization: MASTER - IS_ADMIN ====================
+  id: 59731110067418258
+  identification: 
+    name: MASTER - IS_ADMIN
+
+  subscription: 
+    master: 
+      referenced-id: 38537511032053456
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: RETURN FALSE;
+
+  server-cache: 
+    evaluation-point: Once per Page View
+
+  error: 
+    error-message: ACCESS_DENIED|ADMIN
+
+- # ====== Authorization: MASTER - IS_USER =====================
+  id: 59731356907418259
+  identification: 
+    name: MASTER - IS_USER
+
+  subscription: 
+    master: 
+      app: 800 # Master
+      referenced-id: 43462402185717150 # IS_USER
+
+  authorization-scheme: 
+    type: PL/SQL Function Returning Boolean
+
+  settings: 
+    pl/sql-function-body: RETURN app.is_user() = 'Y';
+
+  server-cache: 
+    evaluation-point: Once per Page View
+
+  error: 
+    error-message: ACCESS_DENIED|IS_USER
+
+  comments: 
+    comments: This needs to be relevant to active application
+

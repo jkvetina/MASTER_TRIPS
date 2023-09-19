@@ -1,0 +1,132 @@
+---
+# ====== Page: Global Page ===================================
+id: 0
+identification: 
+  name: Global Page
+  page-group: __ INTERNAL # 23434444450035233
+
+regions: 
+- # ====== Region: JS ==========================================
+  id: 73410433413984788
+  identification: 
+    title: JS
+    type: Static Content
+
+  source: 
+    html-code: |
+      <script>
+      </script>
+      
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    position: BEFORE_FOOTER
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 17725987703506456
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: CSS =========================================
+  id: 87810683727143060
+  identification: 
+    title: CSS
+    type: Static Content
+
+  source: 
+    html-code: |
+      <style>
+      </style>
+      
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    position: BEFORE_FOOTER
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 17725987703506456
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+dynamic-actions: 
+- # ====== Dynamic Action: INIT_PAGE ===========================
+  id: 14690193213436115
+  identification: 
+    name: INIT_PAGE
+
+  execution: 
+    sequence: 10
+
+  when: 
+    event: EVENT.EVENT.BROWSER.READY
+
+  execution: 
+    event-scope: Static
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 14690279819436116
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: init_page();
+
+    execution: 
+      sequence: 10
+      event: INIT_PAGE # 14690193213436115
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+

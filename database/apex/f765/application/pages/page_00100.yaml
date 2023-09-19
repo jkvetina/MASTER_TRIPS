@@ -1,0 +1,3149 @@
+---
+# ====== Page: &APP_NAME. ====================================
+id: 100
+identification: 
+  name: '&APP_NAME.'
+  alias: HOME
+  title: '&APP_NAME.'
+  page-group: ' MAIN' # 67422548002820357
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+css: 
+  inline: |
+    .DEFAULT {
+      stroke:           #222;
+      stroke-width:     1px;
+    }
+    .HOTEL, .CAR_RENTAL {
+      fill:             #ccc;
+      stroke:           #666;
+      stroke-width:     1px;
+      stroke-dasharray: 4, 4;
+    }
+    .BASELINE {
+      fill:             #E7242D;
+    }
+    
+
+security: 
+  authorization-scheme: MASTER - IS_USER # 59731356907418259
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: Arguments Must Have Checksum
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
+
+regions: 
+- # ====== Region: Gantt [CHART] ===============================
+  id: 22657826332266471
+  identification: 
+    title: Gantt [CHART]
+    type: Chart
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TRP_ITINERARY_GANTT_V
+    include-rowid-column: false
+    page-items-to-submit: 
+    - P100_TRIP_ID
+    - P100_TRIP_START
+    - P100_TRIP_END
+    - P100_DAY
+
+  order-by: 
+    type: None
+
+  layout: 
+    sequence: 20
+    parent-region: ITINERARY # 23220046690318982
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 17725987703506456
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    static-id: GANTT_CHART
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: |
+      SELECT 1
+      FROM trp_itinerary_grid_v
+      WHERE ROWNUM = 1
+
+  security: 
+    escape-special-characters: true
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 22657894868266472
+    chart: 
+      type: Gantt
+
+    layout: 
+      height: 70
+
+    settings: 
+      show-horizontal-grid: true
+      show-vertical-grid: true
+      show-row-axis: true
+      axis-position: Top
+
+    animation: 
+      on-display: None
+      on-data-change: None
+
+    tooltip: 
+      show: true
+      show-row: false
+      show-label: true
+      show-start-date: true
+      show-end-date: true
+      show-progress: true
+      show-baseline: true
+
+    advanced: 
+      initialization-javascript-function: |
+        function (options) {
+            var event = new Date();
+        
+            // define reference object line on the chart
+            var constantLine = [
+                { value: event.toISOString() }
+            ];
+            options.referenceObjects = constantLine;
+            options.selectionMode = 'single';
+        
+            return options;
+        }
+        
+
+    series: 
+    - # ====== Series: Itinerary ===================================
+      id: 22658013276266473
+      identification: 
+        name: Itinerary
+
+      execution: 
+        sequence: 10
+
+      source: 
+        location: Region Source
+
+      timeline: 
+        start-date-source-type: Database Column
+        start-date-column: GANTT_START_DATE
+        end-date-source-type: Database Column
+        end-date-column: GANTT_END_DATE
+
+      column-mapping: 
+        row-id: ROW_ID
+        row-name: CATEGORY_NAME
+        task-id: STOP_ID
+        task-name: STOP_NAME
+        task-start-date: START_AT
+        task-end-date: END_AT
+        baseline-start-date: BASELINE_START_AT
+        baseline-end-date: BASELINE_END_AT
+
+      viewport: 
+        start-date-source-type: Database Column
+        start-date-column: GANTT_START_DATE
+        end-date-source-type: Database Column
+        end-date-column: GANTT_END_DATE
+
+      appearance: 
+        task-css-classes: 
+        - '&CSS_CLASS.'
+        baseline-css-classes: 
+        - BASELINE
+
+      label: 
+        show: true
+        task-label-position: End
+
+    axes: 
+    - # ====== Axis: major =========================================
+      id: 22658322931266476
+      identification: 
+        name: major
+
+      time-scale: 
+        scale: Days
+
+      zoom-scale: 
+        seconds: false
+        minutes: false
+        hours: true
+        days: true
+        weeks: false
+        months: false
+        quarters: false
+        years: false
+
+      identification: 
+        show-axis: true
+        title: MAJOR
+
+      value: 
+        format: Date - Full
+
+    - # ====== Axis: minor =========================================
+      id: 22658433319266477
+      identification: 
+        name: minor
+
+      time-scale: 
+        scale: Hours
+
+      zoom-scale: 
+        seconds: false
+        minutes: true
+        hours: true
+        days: true
+        weeks: false
+        months: false
+        quarters: false
+        years: false
+
+      identification: 
+        title: MINOR
+
+      value: 
+        format: Time - Long
+        pattern: HH
+
+- # ====== Region: &P100_ITINERARY_HEADER!RAW. =================
+  id: 23180114996012361
+  identification: 
+    title: '&P100_ITINERARY_HEADER!RAW.'
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: ITINERARY # 23220046690318982
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 17759298553506472
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Itinerary [GRID] ============================
+  id: 23180577614012366
+  identification: 
+    title: Itinerary [GRID]
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TRP_ITINERARY_GRID_V
+    include-rowid-column: false
+
+  layout: 
+    sequence: 40
+    parent-region: ITINERARY # 23220046690318982
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report # 17782732707506484
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 23180682891012367
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+      add-row-if-empty: false
+
+    performance: 
+      lazy-loading: false
+
+    appearance: 
+      select-first-row: false
+      fixed-row-height: true
+
+    pagination: 
+      type: Page
+      show-total-count: true
+
+    toolbar: 
+      show: true
+      controls: 
+      - Search Column Selection
+      - Search Field
+      - Actions Menu
+      - Save Button
+
+    enable-users-to: 
+      save-public-report: false
+      flashback: true
+      define-chart-view: true
+      download: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 23190016395218846
+      identification: 
+        name: Primary Report
+        alias: 93044
+
+    - # ====== Saved Report: Pending ===============================
+      id: 32753990035559767
+      identification: 
+        name: Pending
+        alias: 95641
+
+    - # ====== Saved Report: Reserved ==============================
+      id: 42318584598902707
+      identification: 
+        name: Reserved
+        alias: 95647
+
+    - # ====== Saved Report: Paid ==================================
+      id: 51883708951249920
+      identification: 
+        name: Paid
+        alias: 95653
+
+  column-groups: 
+  - # ====== Column Group: Flags =================================
+    id: 19758683403896031
+    heading: 
+      heading: Flags
+
+  - # ====== Column Group: Event =================================
+    id: 19758780616896032
+    heading: 
+      heading: Event
+
+  - # ====== Column Group: Info ==================================
+    id: 19758840032896033
+    heading: 
+      heading: Info
+
+  - # ====== Column Group: Links =================================
+    id: 19758990839896034
+    heading: 
+      heading: Links
+
+  columns: 
+  - # ====== Column: TRIP_ID =====================================
+    id: 23180823013012368
+    identification: 
+      column-name: TRIP_ID
+      type: Display Only
+
+    heading: 
+      heading: Trip Id
+      alignment: start
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      group: Info # 19758840032896033
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: TRIP_ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      type: Item
+      item: P100_TRIP_ID
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: Use List of Values
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: STOP_ID =====================================
+    id: 23180925112012369
+    identification: 
+      column-name: STOP_ID
+      type: Number Field
+
+    heading: 
+      heading: Stop Id
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 60
+      column-alignment: end
+      group: Info # 19758840032896033
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+
+    source: 
+      type: Database Column
+      database-column: STOP_ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: STOP_NAME ===================================
+    id: 23181004424012370
+    identification: 
+      column-name: STOP_NAME
+      type: Text Field
+
+    heading: 
+      heading: Stop Name
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 70
+      column-alignment: start
+      group: Info # 19758840032896033
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+      maximum-length: 128
+
+    source: 
+      type: Database Column
+      database-column: STOP_NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: CATEGORY_ID =================================
+    id: 23181093551012371
+    identification: 
+      column-name: CATEGORY_ID
+      type: Select List
+
+    heading: 
+      heading: Category Id
+      alignment: start
+
+    layout: 
+      sequence: 80
+      column-alignment: start
+      group: Info # 19758840032896033
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+
+    list-of-values: 
+      type: Shared Component
+      list-of-values: LOV_CATEGORIES # 23213761854288039
+      display-extra-values: false
+      display-null-value: true
+
+    source: 
+      type: Database Column
+      database-column: CATEGORY_ID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Use List of Values
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: PRICE =======================================
+    id: 23181147322012372
+    identification: 
+      column-name: PRICE
+      type: Number Field
+
+    heading: 
+      heading: Price
+      alignment: end
+
+    settings: 
+      number-alignment: Start
+      virtual-keyboard: Decimal
+
+    layout: 
+      sequence: 90
+      column-alignment: end
+      group: Info # 19758840032896033
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: PRICE
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: START_AT ====================================
+    id: 23181247841012373
+    identification: 
+      column-name: START_AT
+      type: Date Picker
+
+    heading: 
+      heading: Start At
+      alignment: center
+
+    settings: 
+      show-time: true
+      display-as: Popup
+      minimum-date: None
+      maximum-date: None
+      multiple-months: No
+      use-defaults: false
+      appearance-&-behavior: 'MONTH-PICKER:YEAR-PICKER'
+      days-outside-month: Visible
+      time-increment: 5
+      show-on: Item Focus
+
+    layout: 
+      sequence: 100
+      column-alignment: center
+      group: Event # 19758780616896032
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 'YYYY-MM-DD HH24:MI'
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: START_AT
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      type: Expression
+      language: SQL
+      sql-expression: "NVL(:P100_DAY, SUBSTR(:P100_TRIP_START, 1, 10)) || ' 00:00'"
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: END_AT ======================================
+    id: 23181427408012374
+    identification: 
+      column-name: END_AT
+      type: Date Picker
+
+    heading: 
+      heading: End At
+      alignment: center
+
+    settings: 
+      show-time: true
+      display-as: Popup
+      minimum-date: None
+      maximum-date: None
+      multiple-months: No
+      use-defaults: false
+      appearance-&-behavior: 'MONTH-PICKER:YEAR-PICKER'
+      days-outside-month: Visible
+      time-increment: 5
+      show-on: Item Focus
+
+    layout: 
+      sequence: 110
+      column-alignment: center
+      group: Event # 19758780616896032
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: 'YYYY-MM-DD HH24:MI'
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: END_AT
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      type: Expression
+      language: SQL
+      sql-expression: "NVL(:P100_DAY, SUBSTR(:P100_TRIP_END, 1, 10)) || ' 00:00'"
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: NOTES =======================================
+    id: 23181520681012375
+    identification: 
+      column-name: NOTES
+      type: Text Field
+
+    heading: 
+      heading: Notes
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 120
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 4000
+
+    source: 
+      type: Database Column
+      database-column: NOTES
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: APEX$ROW_ACTION =============================
+    id: 23181572672012376
+    identification: 
+      column-name: APEX$ROW_ACTION
+      type: Actions Menu
+
+    layout: 
+      sequence: 20
+
+  - # ====== Column: APEX$ROW_SELECTOR ===========================
+    id: 23181663272012377
+    identification: 
+      column-name: APEX$ROW_SELECTOR
+      type: Row Selector
+
+    settings: 
+      enable-multi-select: true
+      show-select-all: true
+      hide-control: false
+
+    layout: 
+      sequence: 10
+
+  - # ====== Column: DAY# ========================================
+    id: 23216259259318944
+    identification: 
+      column-name: DAY#
+      type: Display Only
+
+    heading: 
+      heading: Day#
+      alignment: start
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 190
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: DAY#
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: OLD_TRIP_ID =================================
+    id: 23216485058318946
+    identification: 
+      column-name: OLD_TRIP_ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 30
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: OLD_TRIP_ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: OLD_STOP_ID =================================
+    id: 23216600118318947
+    identification: 
+      column-name: OLD_STOP_ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 40
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: OLD_STOP_ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: COLOR_FILL ==================================
+    id: 23218070994318962
+    identification: 
+      column-name: COLOR_FILL
+      type: Color Picker
+
+    heading: 
+      heading: Color Fill
+      alignment: start
+
+    settings: 
+      use-defaults: true
+
+    layout: 
+      sequence: 130
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 8
+
+    source: 
+      type: Database Column
+      database-column: COLOR_FILL
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: IS_RESERVED =================================
+    id: 23219427692318975
+    identification: 
+      column-name: IS_RESERVED
+      type: Checkbox
+
+    heading: 
+      heading: Reserved
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 140
+      column-alignment: center
+      group: Flags # 19758683403896031
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_RESERVED
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: IS_PAID =====================================
+    id: 23219455358318976
+    identification: 
+      column-name: IS_PAID
+      type: Checkbox
+
+    heading: 
+      heading: Paid
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 150
+      column-alignment: center
+      group: Flags # 19758683403896031
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_PAID
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: DAY_ ========================================
+    id: 23219630402318977
+    identification: 
+      column-name: DAY_
+      type: Display Only
+
+    heading: 
+      heading: Day
+      alignment: center
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 200
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: DAY_
+      data-type: VARCHAR2
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: IS_PENDING ==================================
+    id: 23219700889318978
+    identification: 
+      column-name: IS_PENDING
+      type: Checkbox
+
+    heading: 
+      heading: Pending
+      alignment: center
+
+    settings: 
+      use-defaults: false
+      checked-value: Y
+
+    layout: 
+      sequence: 160
+      column-alignment: center
+      group: Flags # 19758683403896031
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+
+    source: 
+      type: Database Column
+      database-column: IS_PENDING
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: LINK_RESERVATION ============================
+    id: 23620360391153281
+    identification: 
+      column-name: LINK_RESERVATION
+      type: Display Only
+
+    heading: 
+      heading: Reservation
+      alignment: center
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 170
+      column-alignment: center
+      group: Links # 19758990839896034
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: '&LINK_RESERVATION.'
+      link-text: LINK
+      link-attributes: target="_blank"
+
+    source: 
+      type: Database Column
+      database-column: LINK_RESERVATION
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  - # ====== Column: LINK_EVENT ==================================
+    id: 23620441916153282
+    identification: 
+      column-name: LINK_EVENT
+      type: Display Only
+
+    heading: 
+      heading: Event
+      alignment: center
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 180
+      column-alignment: center
+      group: Links # 19758990839896034
+      use-group-for: Both
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: '&LINK_EVENT.'
+      link-text: LINK
+      link-attributes: target="_blank"
+
+    source: 
+      type: Database Column
+      database-column: LINK_EVENT
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: None
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: false
+      hide: true
+
+  printing: 
+    page: 
+      size: Letter
+      orientation: Landscape
+      units: Inches
+      width: 11
+      height: 8.5
+      border-width: 0.5
+      border-color: '#666666'
+
+    page-header: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+      page-header-text: Itinerary [GRID]
+
+    column-headings: 
+      font: Helvetica
+      font-weight: Bold
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#EEEEEE'
+
+    columns: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#FFFFFF'
+
+    page-footer: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+- # ====== Region: &P100_TRIP_HEADER!RAW. ======================
+  id: 23215188288318933
+  identification: 
+    title: '&P100_TRIP_HEADER!RAW.'
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: ITINERARY # 23220046690318982
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 17759298553506472
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Rows returned
+    sql-query: |
+      SELECT 1
+      FROM trp_itinerary_grid_v
+      WHERE ROWNUM = 1
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: CSS =========================================
+  id: 23218207406318963
+  identification: 
+    title: CSS
+    type: Dynamic Content
+
+  source: 
+    language: PL/SQL
+    pl/sql-function-body-returning-a-clob: RETURN trp_app.set_colors();
+    page-items-to-submit: 
+    - P100_TRIP_ID
+
+  layout: 
+    sequence: 50
+    parent-region: ITINERARY # 23220046690318982
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 17725987703506456
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    performance: 
+      lazy-loading: false
+
+- # ====== Region: ITINERARY ===================================
+  id: 23220046690318982
+  identification: 
+    title: ITINERARY
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 17725987703506456
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P100_TRIP_ID
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: TRIPS =======================================
+  id: 23615638986153234
+  identification: 
+    title: TRIPS
+    type: Static Content
+
+  layout: 
+    sequence: 20
+    parent-region: No Parent
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 17725987703506456
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P100_TRIP_ID
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Trips =======================================
+  id: 23615827817153235
+  identification: 
+    title: Trips
+    type: Static Content
+
+  layout: 
+    sequence: 10
+    parent-region: TRIPS # 23615638986153234
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Hero # 17759298553506472
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
+- # ====== Region: Trips [GRID] ================================
+  id: 42540448134606088
+  identification: 
+    title: Trips [GRID]
+    type: Interactive Grid
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TRP_TRIPS_GRID_V
+    include-rowid-column: false
+
+  layout: 
+    sequence: 20
+    parent-region: TRIPS # 23615638986153234
+    position: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Interactive Report # 17782732707506484
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 42540553433606089
+    edit: 
+      enabled: true
+      allowed-operations: 
+      - Add Row
+      - Update Row
+      - Delete Row
+      lost-update-type: Row Values
+      add-row-if-empty: false
+
+    performance: 
+      lazy-loading: false
+
+    appearance: 
+      select-first-row: false
+      fixed-row-height: true
+
+    pagination: 
+      type: Page
+      show-total-count: true
+
+    toolbar: 
+      show: true
+      controls: 
+      - Search Column Selection
+      - Search Field
+      - Actions Menu
+      - Save Button
+
+    enable-users-to: 
+      save-public-report: false
+      flashback: true
+      define-chart-view: true
+      download: true
+
+    download: 
+      formats: 
+      - CSV
+      - HTML
+      - Excel
+      - PDF
+      send-as-email: true
+
+    heading: 
+      fixed-to: Page
+
+    icon-view: 
+      show: false
+
+    detail-view: 
+      show: false
+
+    saved-reports: 
+    - # ====== Saved Report: Primary Report ========================
+      id: 42551721372812595
+      identification: 
+        name: Primary Report
+        alias: 93030
+
+  columns: 
+  - # ====== Column: OLD_TRIP_ID =================================
+    id: 32944884779323851
+    identification: 
+      column-name: OLD_TRIP_ID
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 30
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: OLD_TRIP_ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: true
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: TRIP_ID =====================================
+    id: 42540721198606090
+    identification: 
+      column-name: TRIP_ID
+      type: Display Only
+
+    heading: 
+      heading: Trip Id
+      alignment: end
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 40
+      column-alignment: end
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TRIP_ID:&OLD_TRIP_ID.'
+        page: 105 # Add Trip
+        clear-cache: 105
+        values: 
+          p105_trip_id: '&OLD_TRIP_ID.'
+
+      link-text: '&TRIP_ID.'
+
+    source: 
+      type: Database Column
+      database-column: TRIP_ID
+      data-type: NUMBER
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    column-filter: 
+      enabled: true
+      lov-type: Use List of Values
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: TRIP_NAME ===================================
+    id: 42540818915606091
+    identification: 
+      column-name: TRIP_NAME
+      type: Text Field
+
+    heading: 
+      heading: Trip Name
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 50
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: true
+      maximum-length: 128
+
+    source: 
+      type: Database Column
+      database-column: TRIP_NAME
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: START_AT ====================================
+    id: 42540848320606092
+    identification: 
+      column-name: START_AT
+      type: Date Picker
+
+    heading: 
+      heading: Start At
+      alignment: start
+
+    settings: 
+      show-time: false
+      display-as: Popup
+      minimum-date: None
+      maximum-date: None
+      multiple-months: No
+      use-defaults: true
+
+    layout: 
+      sequence: 60
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: YYYY-MM-DD
+
+    validation: 
+      value-required: true
+
+    source: 
+      type: Database Column
+      database-column: START_AT
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: END_AT ======================================
+    id: 42541029110606093
+    identification: 
+      column-name: END_AT
+      type: Date Picker
+
+    heading: 
+      heading: End At
+      alignment: start
+
+    settings: 
+      show-time: false
+      display-as: Popup
+      minimum-date: None
+      maximum-date: None
+      multiple-months: No
+      use-defaults: true
+
+    layout: 
+      sequence: 70
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    appearance: 
+      format-mask: YYYY-MM-DD
+
+    validation: 
+      value-required: true
+
+    source: 
+      type: Database Column
+      database-column: END_AT
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      lov-type: Distinct Column
+      date-ranges: All
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
+  - # ====== Column: APEX$ROW_ACTION =============================
+    id: 42541172621606095
+    identification: 
+      column-name: APEX$ROW_ACTION
+      type: Actions Menu
+
+    layout: 
+      sequence: 20
+
+  - # ====== Column: APEX$ROW_SELECTOR ===========================
+    id: 42541305704606096
+    identification: 
+      column-name: APEX$ROW_SELECTOR
+      type: Row Selector
+
+    settings: 
+      enable-multi-select: true
+      show-select-all: true
+      hide-control: false
+
+    layout: 
+      sequence: 10
+
+  - # ====== Column: CREATED_BY ==================================
+    id: 42582095245912725
+    identification: 
+      column-name: CREATED_BY
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 80
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: CREATED_BY
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  - # ====== Column: CREATED_AT ==================================
+    id: 42582152496912726
+    identification: 
+      column-name: CREATED_AT
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 100
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: CREATED_AT
+      data-type: DATE
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: false
+
+  printing: 
+    page: 
+      size: Letter
+      orientation: Landscape
+      units: Inches
+      width: 11
+      height: 8.5
+      border-width: 0.5
+      border-color: '#666666'
+
+    page-header: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+      page-header-text: Trips [GRID]
+
+    column-headings: 
+      font: Helvetica
+      font-weight: Bold
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#EEEEEE'
+
+    columns: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 10
+      font-color: '#000000'
+      background-color: '#FFFFFF'
+
+    page-footer: 
+      font: Helvetica
+      font-weight: Normal
+      font-size: 12
+      font-color: '#000000'
+      alignment: center
+
+page-items: 
+- # ====== Page Item: P100_TRIP_START ==========================
+  id: 22658513694266478
+  identification: 
+    name: P100_TRIP_START
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_TRIP_END ============================
+  id: 22658582075266479
+  identification: 
+    name: P100_TRIP_END
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_TRIP_ID =============================
+  id: 22658646377266480
+  identification: 
+    name: P100_TRIP_ID
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 10
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_DAY =================================
+  id: 23216858438318950
+  identification: 
+    name: P100_DAY
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_DAY_PREV ============================
+  id: 23217256685318954
+  identification: 
+    name: P100_DAY_PREV
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 70
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_DAY_NEXT ============================
+  id: 23217345201318955
+  identification: 
+    name: P100_DAY_NEXT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 90
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_DAY_PREV_ATTR =======================
+  id: 23217683770318958
+  identification: 
+    name: P100_DAY_PREV_ATTR
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 80
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_DAY_NEXT_ATTR =======================
+  id: 23217821392318959
+  identification: 
+    name: P100_DAY_NEXT_ATTR
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 100
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_TRIP_HEADER =========================
+  id: 23218357761318965
+  identification: 
+    name: P100_TRIP_HEADER
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 20
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_DAY_ATTR ============================
+  id: 23615889430153236
+  identification: 
+    name: P100_DAY_ATTR
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 60
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_ITINERARY_HEADER ====================
+  id: 23982216750895334
+  identification: 
+    name: P100_ITINERARY_HEADER
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 110
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P100_STATUS ==============================
+  id: 23982971294895342
+  identification: 
+    name: P100_STATUS
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 120
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+buttons: 
+- # ====== Button: PREV_DAY ====================================
+  id: 23216715429318948
+  identification: 
+    button-name: PREV_DAY
+    label: Prev Day
+
+  layout: 
+    sequence: 10
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 17865448457506535
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-arrow-left
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:&P100_DAY_PREV.'
+      page: 100 # &APP_NAME.
+      values: 
+        p100_day: '&P100_DAY_PREV.'
+
+    warn-on-unsaved-changes: Page Default
+
+  advanced: 
+    custom-attributes: 
+    - '&P100_DAY_PREV_ATTR.'
+
+- # ====== Button: NEXT_DAY ====================================
+  id: 23216757969318949
+  identification: 
+    button-name: NEXT_DAY
+    label: Next Day
+
+  layout: 
+    sequence: 20
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 17865448457506535
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-arrow-right
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:&P100_DAY_NEXT.'
+      page: 100 # &APP_NAME.
+      values: 
+        p100_day: '&P100_DAY_NEXT.'
+
+    warn-on-unsaved-changes: Page Default
+
+  advanced: 
+    custom-attributes: 
+    - '&P100_DAY_NEXT_ATTR.'
+
+- # ====== Button: WHOLE_TRIP ==================================
+  id: 23217223796318953
+  identification: 
+    button-name: WHOLE_TRIP
+    label: Whole Trip
+
+  layout: 
+    sequence: 30
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 17865448457506535
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-calendar-o
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:'
+      page: 100 # &APP_NAME.
+      values: 
+
+    warn-on-unsaved-changes: Page Default
+
+  advanced: 
+    custom-attributes: 
+    - '&P100_DAY_ATTR.'
+
+- # ====== Button: ADD_TRIP ====================================
+  id: 23616348809153241
+  identification: 
+    button-name: ADD_TRIP
+    label: Add Trip
+
+  layout: 
+    sequence: 10
+    region: Trips # 23615827817153235
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 17865448457506535
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-plus
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
+      page: 105 # Add Trip
+      clear-cache: 105
+
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: ADD_STOP ====================================
+  id: 23617486234153252
+  identification: 
+    button-name: ADD_STOP
+    label: Add Stop
+
+  layout: 
+    sequence: 10
+    region: '&P100_ITINERARY_HEADER!RAW.' # 23180114996012361
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 17865448457506535
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-plus
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110:P110_TRIP_ID,P110_STOP_ID,P110_START_AT:&P100_TRIP_ID.,,&P100_DAY.'
+      page: 110 # Add/Edit Stop
+      clear-cache: 110
+      values: 
+        p110_trip_id: '&P100_TRIP_ID.'
+        p110_start_at: '&P100_DAY.'
+
+    warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: SWITCH_COLORS ===============================
+  id: 23983082801895343
+  identification: 
+    button-name: SWITCH_COLORS
+    label: Colors by Status
+
+  layout: 
+    sequence: 40
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 17866172241506537
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_STATUS:PAID'
+      page: 100 # &APP_NAME.
+      values: 
+        p100_status: PAID
+
+    warn-on-unsaved-changes: Page Default
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P100_STATUS
+
+- # ====== Button: SWITCH_COLORS_DEFAULT =======================
+  id: 23983482993895347
+  identification: 
+    button-name: SWITCH_COLORS_DEFAULT
+    label: Colors by Category
+
+  layout: 
+    sequence: 50
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 17866172241506537
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_STATUS:'
+      page: 100 # &APP_NAME.
+      values: 
+
+    warn-on-unsaved-changes: Page Default
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P100_STATUS
+
+dynamic-actions: 
+- # ====== Dynamic Action: REFRESH_CHART =======================
+  id: 23217887047318960
+  identification: 
+    name: REFRESH_CHART
+
+  execution: 
+    sequence: 50
+
+  when: 
+    event: NATIVE_IG|REGION TYPE|interactivegridsave
+    selection-type: Region
+    region: Itinerary [GRID] # 23180577614012366
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 23217957859318961
+    identification: 
+      action: Refresh
+
+    affected-elements: 
+      selection-type: Region
+      region: Gantt [CHART] # 22657826332266471
+
+    execution: 
+      sequence: 10
+      event: REFRESH_CHART # 23217887047318960
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Refresh =====================================
+    id: 23218245964318964
+    identification: 
+      action: Refresh
+
+    affected-elements: 
+      selection-type: Region
+      region: CSS # 23218207406318963
+
+    execution: 
+      sequence: 20
+      event: REFRESH_CHART # 23217887047318960
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: REFRESH_TRIPS =======================
+  id: 23615947535153237
+  identification: 
+    name: REFRESH_TRIPS
+
+  execution: 
+    sequence: 60
+
+  when: 
+    event: NATIVE_IG|REGION TYPE|interactivegridsave
+    selection-type: Region
+    region: Trips [GRID] # 42540448134606088
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Submit Page =================================
+    id: 23616118344153238
+    identification: 
+      action: Submit Page
+
+    settings: 
+      show-processing: true
+
+    execution: 
+      sequence: 10
+      event: REFRESH_TRIPS # 23615947535153237
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: GANTT_CLICKED =======================
+  id: 23617715615153254
+  identification: 
+    name: GANTT_CLICKED
+
+  execution: 
+    sequence: 70
+
+  when: 
+    event: EVENT.EVENT.CUSTOM.CUSTOM
+    custom-event: ojoptionchange
+    selection-type: Region
+    region: Gantt [CHART] # 22657826332266471
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 23617828660153255
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        // open modal dialog with detail
+        var data = this.data;
+        if (data.option === "selection" && data.value[0] !== undefined) {
+            var trip_id = apex.item('P100_TRIP_ID').getValue();
+            var stop_id = data.value[0];
+            console.log('TASK', trip_id, stop_id, data);
+            //
+            apex.server.process('GET_DETAIL_LINK', {
+                x01: trip_id,
+                x02: stop_id,
+            },
+            {
+                dataType: 'text',
+                success: function(url) {
+                    apex.navigation.redirect(url);
+                }
+            });
+        }
+        
+
+    execution: 
+      sequence: 10
+      event: GANTT_CLICKED # 23617715615153254
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: DETECT_MODAL_CLOSED =================
+  id: 23618956089153267
+  identification: 
+    name: DETECT_MODAL_CLOSED
+
+  execution: 
+    sequence: 80
+
+  when: 
+    event: EVENT.EVENT.FAMEWORK.APEXAFTERCLOSEDIALOG
+    selection-type: JavaScript Expression
+    javascript-expression: window
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Refresh =====================================
+    id: 23619073126153268
+    identification: 
+      action: Refresh
+
+    affected-elements: 
+      selection-type: Region
+      region: Gantt [CHART] # 22657826332266471
+
+    execution: 
+      sequence: 10
+      event: DETECT_MODAL_CLOSED # 23618956089153267
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Refresh =====================================
+    id: 23619237703153269
+    identification: 
+      action: Refresh
+
+    affected-elements: 
+      selection-type: Region
+      region: Itinerary [GRID] # 23180577614012366
+
+    execution: 
+      sequence: 20
+      event: DETECT_MODAL_CLOSED # 23618956089153267
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+- # ====== Dynamic Action: GANTT_REFRESHED =====================
+  id: 23619813436153275
+  identification: 
+    name: GANTT_REFRESHED
+
+  execution: 
+    sequence: 90
+
+  when: 
+    event: EVENT.EVENT.FAMEWORK.APEXAFTERREFRESH
+    selection-type: Region
+    region: Gantt [CHART] # 22657826332266471
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 23619927197153276
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: |
+        // adjust gantt chart height
+        try {
+            var chart_id    = 'GANTT_CHART';
+            var trip_id     = apex.item('P100_TRIP_ID').getValue();
+            //
+            apex.server.process('GET_LINES', {
+                x01: trip_id
+            },
+            {
+                dataType: 'text',
+                success: function(lines) {
+                    var height = 70 + (49 * lines);
+                    console.log('Refreshing', chart_id, height);
+                    $('#' + chart_id + '_jet').css('height', height);
+                }
+            });
+        }
+        catch (err) {
+            console.error('ERROR', err);
+        }
+
+    execution: 
+      sequence: 10
+      event: GANTT_REFRESHED # 23619813436153275
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+processes: 
+- # ====== Process: SAVE_ITINERARY =============================
+  id: 23181838242012378
+  identification: 
+    name: SAVE_ITINERARY
+    type: Invoke API
+    execution-chain: None
+    editable-region: Itinerary [GRID] # 23180577614012366
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TRP_APP
+    procedure-or-function: SAVE_ITINERARY
+
+  execution: 
+    sequence: 10
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
+
+- # ====== Process: SET_DAYS ===================================
+  id: 23217538902318957
+  identification: 
+    name: SET_DAYS
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TRP_APP
+    procedure-or-function: SET_DAYS
+
+  execution: 
+    sequence: 20
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: SET_DEFAULTS ===============================
+  id: 23218893977318970
+  identification: 
+    name: SET_DEFAULTS
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TRP_APP
+    procedure-or-function: SET_DEFAULTS
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: SAVE_TRIPS =================================
+  id: 23615298350151037
+  identification: 
+    name: SAVE_TRIPS
+    type: Invoke API
+    execution-chain: None
+    editable-region: Trips [GRID] # 42540448134606088
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TRP_APP
+    procedure-or-function: SAVE_TRIPS
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
+  server-side-condition: 
+    execution-scope: For Created and Modified Rows
+
+- # ====== Process: GET_DETAIL_LINK ============================
+  id: 23618881823153266
+  identification: 
+    name: GET_DETAIL_LINK
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      HTP.P(APEX_PAGE.GET_URL(
+          p_page      => 110,
+          p_items     => 'P110_TRIP_ID,P110_STOP_ID',
+          p_values    => APEX_APPLICATION.G_X01 || ',' || APEX_APPLICATION.G_X02
+      ));
+      
+
+  execution: 
+    sequence: 10
+    point: Ajax Callback
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: GET_LINES ==================================
+  id: 23619998350153277
+  identification: 
+    name: GET_LINES
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      FOR c IN (
+          SELECT COUNT(DISTINCT category_name) AS lines
+          FROM trp_itinerary_gantt_v
+      ) LOOP
+          HTP.P(c.lines);
+      END LOOP;
+      
+
+  execution: 
+    sequence: 20
+    point: Ajax Callback
+    run-process: Once Per Page Visit (default)
+
