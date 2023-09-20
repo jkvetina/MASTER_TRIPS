@@ -7,7 +7,7 @@ WITH x AS (
     WHERE t.trip_id         = core.get_number_item('$TRIP_ID')
         AND t.created_by    = core.get_user_id()
 ),
-r AS (
+filter_days AS (
     SELECT /*+ MATERIALIZE */
         t.trip_id,
         t.day_,
@@ -43,15 +43,15 @@ SELECT
     t.notes,
     t.color_fill,
     --
-    r.day#,
+    CASE WHEN t.start_at IS NULL THEN 0 ELSE r.day# END AS day#,
     r.day_
 FROM trp_itinerary t
 JOIN x
-    ON x.trip_id = t.trip_id
-JOIN r
-    ON r.day_ = TO_CHAR(TRUNC(t.start_at), 'YYYY-MM-DD')
+    ON x.trip_id    = t.trip_id
+JOIN filter_days r
+    ON (r.day_      = TO_CHAR(TRUNC(t.start_at), 'YYYY-MM-DD') OR t.start_at IS NULL)
 WHERE 1 = 1
-    AND (r.day_ = x.day_ OR x.day_ IS NULL);
+    AND (r.day_     = x.day_ OR x.day_ IS NULL);
 --
 COMMENT ON TABLE trp_itinerary_grid_v IS '';
 
