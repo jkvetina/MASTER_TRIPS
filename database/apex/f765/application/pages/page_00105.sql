@@ -159,6 +159,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_DATE_PICKER_APEX'
 ,p_cSize=>30
+,p_begin_on_new_line=>'N'
 ,p_field_template=>wwv_flow_imp.id(17863699601506533)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_is_persistent=>'N'
