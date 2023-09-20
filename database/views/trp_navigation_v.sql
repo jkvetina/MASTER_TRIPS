@@ -35,9 +35,9 @@ SELECT
 FROM app_navigation_v n
 UNION ALL
 --
-SELECT                      -- append favorite boards
-    curr.app_id             AS page_id,
-    NULL AS page_id,
+SELECT                      -- append favorites
+    curr.app_id,
+    100  AS page_id,
     NULL AS parent_id,
     NULL AS auth_scheme,
     NULL AS procedure_name,

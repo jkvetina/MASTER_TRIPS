@@ -18,7 +18,7 @@ wwv_flow_imp_page.create_page(
 ,p_page_mode=>'MODAL'
 ,p_step_title=>'Help'
 ,p_autocomplete_on_off=>'OFF'
-,p_group_id=>wwv_flow_imp.id(23660722781484627)  -- _ABOUT
+,p_group_id=>wwv_flow_imp.id(23660722781484627)  -- ABOUT
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'ol li {',
 '  line-height: 200%;',

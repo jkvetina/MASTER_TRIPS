@@ -15,7 +15,6 @@ prompt --install
 @@application/shared_components/security/authorizations/master_is_admin.sql
 @@application/shared_components/security/authorizations/master_is_user.sql
 @@application/shared_components/navigation/navigation_bar.sql
-@@application/shared_components/logic/application_processes/after_auth.sql
 @@application/shared_components/logic/application_processes/init_defaults.sql
 @@application/shared_components/logic/application_items/g_app_id.sql
 @@application/shared_components/logic/application_items/g_app_name.sql
@@ -126,7 +125,6 @@ prompt --install
 @@application/pages/page_00110.sql
 @@application/pages/page_00200.sql
 @@application/pages/page_00980.sql
-@@application/pages/page_09999.sql
 @@application/deployment/definition.sql
 @@application/deployment/checks.sql
 @@application/deployment/buildoptions.sql

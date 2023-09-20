@@ -23,10 +23,6 @@ CREATE OR REPLACE PACKAGE trp_app as
     FUNCTION set_colors
     RETURN CLOB;
 
-
-
-    PROCEDURE after_auth;
-
 END;
 /
 

@@ -16,12 +16,8 @@ wwv_flow_imp_page.create_page_group(
 ,p_group_name=>' MAIN'
 );
 wwv_flow_imp_page.create_page_group(
- p_id=>wwv_flow_imp.id(67422723757820811)  -- ADMIN
-,p_group_name=>'ADMIN'
-);
-wwv_flow_imp_page.create_page_group(
- p_id=>wwv_flow_imp.id(23660722781484627)  -- _ABOUT
-,p_group_name=>'_ABOUT'
+ p_id=>wwv_flow_imp.id(23660722781484627)  -- ABOUT
+,p_group_name=>'ABOUT'
 );
 wwv_flow_imp_page.create_page_group(
  p_id=>wwv_flow_imp.id(23434444450035233)  -- __ INTERNAL
