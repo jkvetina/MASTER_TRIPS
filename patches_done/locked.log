@@ -23,5 +23,6 @@ database/tables/trp_itinerary.sql
 database/tables/trp_trips.sql
 database/views/trp_itinerary_gantt_v.sql
 database/views/trp_itinerary_grid_v.sql
+database/views/trp_lov_categories_v.sql
 database/views/trp_navigation_v.sql
 database/views/trp_trips_grid_v.sql
