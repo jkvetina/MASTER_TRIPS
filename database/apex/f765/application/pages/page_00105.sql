@@ -67,8 +67,22 @@ wwv_flow_imp_page.create_page_button(
 ,p_database_action=>'INSERT'
 );
 wwv_flow_imp_page.create_page_button(
- p_id=>wwv_flow_imp.id(51686291274088474)
+ p_id=>wwv_flow_imp.id(19759192171896036)
 ,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(51686091932088472)
+,p_button_name=>'SHOW_ITINERARY'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(17866172241506537)
+,p_button_image_alt=>'Show Itinerary'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_button_redirect_url=>'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_TRIP_ID:&P105_TRIP_ID.'
+,p_button_condition=>'P105_TRIP_ID'
+,p_button_condition_type=>'ITEM_IS_NOT_NULL'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(51686291274088474)
+,p_button_sequence=>20
 ,p_button_plug_id=>wwv_flow_imp.id(51686091932088472)
 ,p_button_name=>'CLOSE_DIALOG'
 ,p_button_action=>'DEFINED_BY_DA'

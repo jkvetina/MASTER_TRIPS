@@ -447,6 +447,43 @@ page-items:
     restricted-characters: All characters can be saved.
 
 buttons: 
+- # ====== Button: SHOW_ITINERARY ==============================
+  id: 19759192171896036
+  identification: 
+    button-name: SHOW_ITINERARY
+    label: Show Itinerary
+
+  layout: 
+    sequence: 10
+    region: '&P105_HEADER.' # 51686091932088472
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Text # 17866172241506537
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_TRIP_ID:&P105_TRIP_ID.'
+      page: 100 # &APP_NAME.
+      clear-cache: 100
+      values: 
+        p100_trip_id: '&P105_TRIP_ID.'
+
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P105_TRIP_ID
+
 - # ====== Button: CREATE_TRIP =================================
   id: 23617400024153251
   identification: 
@@ -484,7 +521,7 @@ buttons:
     label: Close Dialog
 
   layout: 
-    sequence: 10
+    sequence: 20
     region: '&P105_HEADER.' # 51686091932088472
     position: RIGHT_OF_TITLE
     start-new-layout: false
