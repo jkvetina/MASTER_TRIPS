@@ -2,9 +2,10 @@ CREATE OR REPLACE FORCE VIEW trp_itinerary_grid_v AS
 WITH x AS (
     SELECT /*+ MATERIALIZE */
         t.trip_id,
-        core.get_item('P100_DAY') AS day_
+        core.get_item('$DAY') AS day_
     FROM trp_trips t
-    WHERE t.trip_id = core.get_number_item('P100_TRIP_ID')
+    WHERE t.trip_id         = core.get_number_item('$TRIP_ID')
+        AND t.created_by    = core.get_user_id()
 ),
 r AS (
     SELECT /*+ MATERIALIZE */

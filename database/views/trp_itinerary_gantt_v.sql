@@ -3,17 +3,17 @@ WITH d AS (
     SELECT /*+ MATERIALIZE */
         t.trip_id,
         --
-        CASE WHEN core.get_item('P100_DAY') IS NULL
+        CASE WHEN core.get_item('$DAY') IS NULL
             THEN t.start_at
             ELSE g.gantt_start_date
             END AS gantt_start_date,
         --
-        CASE WHEN core.get_item('P100_DAY') IS NULL
+        CASE WHEN core.get_item('$DAY') IS NULL
             THEN t.end_at
             ELSE g.gantt_end_date
             END + 1 AS gantt_end_date,
         --
-        core.get_item('P100_STATUS') AS status
+        core.get_item('$STATUS') AS status
         --
     FROM trp_trips t
     JOIN (
@@ -24,8 +24,9 @@ WITH d AS (
         FROM trp_itinerary_grid_v t
         GROUP BY t.trip_id
     ) g
-        ON g.trip_id = t.trip_id
-    WHERE t.trip_id = core.get_number_item('P100_TRIP_ID')
+        ON g.trip_id        = t.trip_id
+    WHERE t.trip_id         = core.get_number_item('$TRIP_ID')
+        AND t.created_by    = core.get_user_id()
 ),
 t AS (
     SELECT /*+ MATERIALIZE */
