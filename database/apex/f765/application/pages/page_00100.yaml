@@ -359,7 +359,7 @@ regions:
       fixed-row-height: true
 
     pagination: 
-      type: Page
+      type: Scroll
       show-total-count: true
 
     toolbar: 
@@ -1738,7 +1738,7 @@ regions:
       fixed-row-height: true
 
     pagination: 
-      type: Page
+      type: Scroll
       show-total-count: true
 
     toolbar: 
@@ -2528,6 +2528,41 @@ page-items:
     restricted-characters: All characters can be saved.
 
 buttons: 
+- # ====== Button: CLOSE_TRIP ==================================
+  id: 19759056701896035
+  identification: 
+    button-name: CLOSE_TRIP
+    label: Close Trip
+
+  layout: 
+    sequence: 40
+    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 17865448457506535
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+    icon: fa-times
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_TRIP_ID:'
+      page: 100 # &APP_NAME.
+      clear-cache: 100
+      values: 
+
+    warn-on-unsaved-changes: Page Default
+
 - # ====== Button: PREV_DAY ====================================
   id: 23216715429318948
   identification: 
@@ -2712,7 +2747,7 @@ buttons:
     label: Colors by Status
 
   layout: 
-    sequence: 40
+    sequence: 50
     region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
     position: RIGHT_OF_TITLE
     start-new-layout: false
@@ -2750,7 +2785,7 @@ buttons:
     label: Colors by Category
 
   layout: 
-    sequence: 50
+    sequence: 60
     region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
     position: RIGHT_OF_TITLE
     start-new-layout: false
