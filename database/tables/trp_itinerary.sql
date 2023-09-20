@@ -30,11 +30,7 @@ CREATE TABLE trp_itinerary (
     --
     CONSTRAINT fk_trp_itinerary_trip
         FOREIGN KEY (trip_id)
-        REFERENCES trp_trips (trip_id),
-    --
-    CONSTRAINT fk_trp_itinerary_category
-        FOREIGN KEY (category_id)
-        REFERENCES trp_categories (category_id)
+        REFERENCES trp_trips (trip_id)
 );
 --
 COMMENT ON TABLE trp_itinerary IS '';
