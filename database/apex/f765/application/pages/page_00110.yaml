@@ -24,6 +24,13 @@ navigation:
   cursor-focus: Do not focus cursor
   warn-on-unsaved-changes: true
 
+css: 
+  inline: |
+    .GOTO_BUTTON {
+        margin-top: 0.9rem;
+        float: right;
+    }
+
 security: 
   authorization-scheme: MASTER - IS_USER # 59731356907418259
   authentication: Page Requires Authentication
@@ -365,7 +372,7 @@ page-items:
     trim-spaces: Leading and Trailing
 
   layout: 
-    sequence: 140
+    sequence: 170
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
@@ -423,7 +430,7 @@ page-items:
     use-defaults: true
 
   layout: 
-    sequence: 100
+    sequence: 130
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
@@ -480,7 +487,7 @@ page-items:
     on-label: Y
 
   layout: 
-    sequence: 110
+    sequence: 140
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
@@ -533,7 +540,7 @@ page-items:
     on-label: Y
 
   layout: 
-    sequence: 120
+    sequence: 150
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
@@ -586,7 +593,7 @@ page-items:
     on-label: Y
 
   layout: 
-    sequence: 130
+    sequence: 160
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
@@ -731,13 +738,13 @@ page-items:
     disabled: false
 
   layout: 
-    sequence: 90
+    sequence: 100
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
     start-new-layout: false
     start-new-row: false
-    column: Automatic
+    column: 7
     new-column: true
     column-span: Automatic
     label-column-span: Page Template Default
@@ -978,7 +985,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 150
+    sequence: 180
     region: '[FORM]' # 61509134372840438
     position: BODY
 
@@ -1011,7 +1018,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 160
+    sequence: 190
     region: '[FORM]' # 61509134372840438
     position: BODY
 
@@ -1065,6 +1072,78 @@ page-items:
     restricted-characters: All characters can be saved.
 
 buttons: 
+- # ====== Button: GOTO_EVENT ==================================
+  id: 19759262131896037
+  identification: 
+    button-name: GOTO_EVENT
+    label: Go
+
+  layout: 
+    sequence: 110
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: 12
+    new-column: true
+    column-span: 1
+    alignment: Left center
+
+  appearance: 
+    button-template: Text # 17866172241506537
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - GOTO_BUTTON
+    icon: fa-external-link
+
+  behavior: 
+    action: Redirect to URL
+    target: "javascript:window.open('&P110_LINK_EVENT.', '_blank');"
+    execute-validations: false
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P110_LINK_EVENT
+
+- # ====== Button: GOTO_RESERVATION ============================
+  id: 19759300777896038
+  identification: 
+    button-name: GOTO_RESERVATION
+    label: Go
+
+  layout: 
+    sequence: 90
+    region: '[FORM]' # 61509134372840438
+    position: BODY
+    start-new-layout: false
+    start-new-row: false
+    column: 6
+    new-column: true
+    column-span: 1
+    alignment: Left center
+
+  appearance: 
+    button-template: Text # 17866172241506537
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - GOTO_BUTTON
+    icon: fa-external-link
+
+  behavior: 
+    action: Redirect to URL
+    target: "javascript:window.open('&P110_LINK_RESERVATION.', '_blank');"
+    execute-validations: false
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P110_LINK_RESERVATION
+
 - # ====== Button: DELETE_STOP =================================
   id: 23620092432153278
   identification: 
