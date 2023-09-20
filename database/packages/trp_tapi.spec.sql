@@ -30,21 +30,6 @@ CREATE OR REPLACE PACKAGE trp_tapi as
         in_stop_id          trp_itinerary.stop_id%TYPE
     );
 
-
-
-    PROCEDURE save_categories (
-        rec                     IN OUT NOCOPY   trp_categories%ROWTYPE,
-        --
-        in_action               CHAR                                    := NULL,
-        in_category_id          trp_categories.category_id%TYPE         := NULL
-    );
-
-
-
-    PROCEDURE save_categories_d (
-        in_category_id          trp_categories.category_id%TYPE
-    );
-
 END;
 /
 

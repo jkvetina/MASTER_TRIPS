@@ -8,10 +8,6 @@ CREATE OR REPLACE PACKAGE trp_app as
 
 
 
-    PROCEDURE save_categories;
-
-
-
     PROCEDURE set_defaults;
 
 

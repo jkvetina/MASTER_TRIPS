@@ -48,12 +48,11 @@ t AS (
         t.is_reserved,
         t.is_pending
     FROM trp_itinerary_grid_v t
-    JOIN trp_categories c
+    JOIN trp_lov_categories_v c
         ON c.category_id = t.category_id
     JOIN d
         ON d.trip_id    = t.trip_id
-    WHERE c.is_lov      = 'Y'
-        AND c.order#    IS NOT NULL
+    WHERE c.order#      IS NOT NULL
 )
 SELECT
     d.trip_id,
@@ -70,7 +69,7 @@ SELECT
     d.gantt_start_date,
     d.gantt_end_date,
     NULL                AS css_class
-FROM trp_categories c
+FROM trp_lov_categories_v c
 CROSS JOIN d
 WHERE c.category_id IN (
     SELECT t.category_id

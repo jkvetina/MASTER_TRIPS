@@ -107,38 +107,6 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
 
 
 
-    PROCEDURE save_categories
-    AS
-        rec                     trp_categories%ROWTYPE;
-        in_action               CONSTANT CHAR := core.get_grid_action();
-    BEGIN
-        -- change record in table
-        rec.category_id         := core.get_grid_data('CATEGORY_ID');
-        rec.category_name       := core.get_grid_data('CATEGORY_NAME');
-        rec.order#              := core.get_grid_data('ORDER#');
-        rec.color_fill          := core.get_grid_data('COLOR_FILL');
-        rec.is_lov              := core.get_grid_data('IS_LOV');
-        --
-        trp_tapi.save_categories (rec,
-            in_action               => in_action,
-            in_category_id          => NVL(core.get_grid_data('OLD_CATEGORY_ID'), rec.category_id)
-        );
-        --
-        IF in_action = 'D' THEN
-            RETURN;     -- exit this procedure
-        END IF;
-
-        -- update primary key back to APEX grid for proper row refresh
-        core.set_grid_data('OLD_CATEGORY_ID',       rec.category_id);
-    EXCEPTION
-    WHEN core.app_exception THEN
-        RAISE;
-    WHEN OTHERS THEN
-        core.raise_error();
-    END;
-
-
-
     PROCEDURE set_defaults
     AS
         in_trip_id              CONSTANT trp_trips.trip_id%TYPE := core.get_number_item('P100_TRIP_ID');
@@ -280,7 +248,7 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
             SELECT DISTINCT
                 t.category_id,
                 t.color_fill
-            FROM trp_categories t
+            FROM trp_lov_categories_v t
             WHERE t.color_fill IS NOT NULL
         ) LOOP
             l_result := l_result || '.' || c.category_id || ' { fill: ' || c.color_fill || '; }' || CHR(10);
