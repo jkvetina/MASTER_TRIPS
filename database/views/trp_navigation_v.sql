@@ -1,8 +1,9 @@
 CREATE OR REPLACE FORCE VIEW trp_navigation_v AS
 WITH curr AS (
     SELECT /*+ MATERIALIZE */
-        core.get_app_id()       AS app_id,
-        core.get_user_id()      AS user_id
+        core.get_app_id()           AS app_id,
+        core.get_user_id()          AS user_id,
+        core.get_item('$TRIP_ID')   AS trip_id
     FROM DUAL
 ),
 y AS (
@@ -90,7 +91,9 @@ SELECT                      -- append favorites
     NULL AS image,
     NULL AS image_attribute,
     NULL AS image_alt_attribute,
-    NULL AS attribute01,
+    --
+    CASE WHEN t.trip_id = curr.trip_id THEN 'ACTIVE' END AS attribute01,
+    --
     NULL AS attribute02,
     NULL AS attribute03,
     NULL AS attribute04,
