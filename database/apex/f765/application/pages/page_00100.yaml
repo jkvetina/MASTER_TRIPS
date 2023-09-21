@@ -1780,6 +1780,61 @@ regions:
         alias: 93030
 
   columns: 
+  - # ====== Column: YEAR_ =======================================
+    id: 22777555401601005
+    identification: 
+      column-name: YEAR_
+      type: Text Field
+
+    heading: 
+      heading: Year
+      alignment: start
+
+    settings: 
+      trim-spaces: Leading and Trailing
+      text-case: NO CHANGE
+
+    layout: 
+      sequence: 110
+      column-alignment: start
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    validation: 
+      value-required: false
+      maximum-length: 4
+
+    source: 
+      type: Database Column
+      database-column: YEAR_
+      data-type: VARCHAR2
+      query-only: false
+      primary-key: false
+
+    default: 
+      duplicate-copies-existing-value: true
+
+    column-filter: 
+      enabled: true
+      performance-impacting-operators: 
+      - Contains
+      - Starts With
+      - Case Insensitive
+      - Regular Expression
+      text-case: Mixed
+      lov-type: Distinct Column
+      exact-match: true
+
+    export-/-printing: 
+      include-in-export-/-print: true
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
+      hide: true
+
   - # ====== Column: OLD_TRIP_ID =================================
     id: 32944884779323851
     identification: 
@@ -1839,7 +1894,7 @@ regions:
     link: 
       target: 
         url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TRIP_ID:&OLD_TRIP_ID.'
-        page: 105 # Add Trip
+        page: 105 # Trip Detail
         clear-cache: 105
         values: 
           p105_trip_id: '&OLD_TRIP_ID.'
@@ -1934,7 +1989,7 @@ regions:
 
     heading: 
       heading: Start At
-      alignment: start
+      alignment: center
 
     settings: 
       show-time: false
@@ -1946,7 +2001,7 @@ regions:
 
     layout: 
       sequence: 60
-      column-alignment: start
+      column-alignment: center
       stretch: Use Report Setting
 
     accessibility: 
@@ -1989,7 +2044,7 @@ regions:
 
     heading: 
       heading: End At
-      alignment: start
+      alignment: center
 
     settings: 
       show-time: false
@@ -2001,7 +2056,7 @@ regions:
 
     layout: 
       sequence: 70
-      column-alignment: start
+      column-alignment: center
       stretch: Use Report Setting
 
     accessibility: 
@@ -2700,7 +2755,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
-      page: 105 # Add Trip
+      page: 105 # Trip Detail
       clear-cache: 105
 
     warn-on-unsaved-changes: Do Not Check
@@ -2732,7 +2787,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110:P110_TRIP_ID,P110_STOP_ID,P110_START_AT:&P100_TRIP_ID.,,&P100_DAY.'
-      page: 110 # Add/Edit Stop
+      page: 110 # Stop Detail
       clear-cache: 110
       values: 
         p110_trip_id: '&P100_TRIP_ID.'
@@ -2966,6 +3021,21 @@ dynamic-actions:
     type: Immediate
 
   actions: 
+  - # ====== Action: Refresh =====================================
+    id: 22777767742601007
+    identification: 
+      action: Refresh
+
+    affected-elements: 
+      selection-type: Region
+      region: Trips [GRID] # 42540448134606088
+
+    execution: 
+      sequence: 30
+      event: DETECT_MODAL_CLOSED # 23618956089153267
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
   - # ====== Action: Refresh =====================================
     id: 23619073126153268
     identification: 

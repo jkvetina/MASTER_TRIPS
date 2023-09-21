@@ -21,6 +21,7 @@ database/sequences/trp_stop_id.sql
 database/sequences/trp_trip_id.sql
 database/tables/trp_itinerary.sql
 database/tables/trp_trips.sql
+database/triggers/trp_trips__.sql
 database/views/trp_itinerary_gantt_v.sql
 database/views/trp_itinerary_grid_v.sql
 database/views/trp_lov_categories_v.sql

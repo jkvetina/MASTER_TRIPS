@@ -3,6 +3,7 @@ CREATE TABLE trp_trips (
     trip_name                       VARCHAR2(128)   NOT NULL,
     start_at                        DATE            NOT NULL,
     end_at                          DATE            NOT NULL,
+    year_                           VARCHAR2(4),
     created_by                      VARCHAR2(128),
     created_at                      DATE,
     --
@@ -16,4 +17,5 @@ COMMENT ON COLUMN trp_trips.trip_id     IS '';
 COMMENT ON COLUMN trp_trips.trip_name   IS '';
 COMMENT ON COLUMN trp_trips.start_at    IS '';
 COMMENT ON COLUMN trp_trips.end_at      IS '';
+COMMENT ON COLUMN trp_trips.year_       IS '';
 

@@ -7,7 +7,8 @@ SELECT
     t.start_at,
     t.end_at,
     t.created_by,
-    t.created_at
+    t.created_at,
+    t.year_
     --
 FROM trp_trips t
 WHERE t.created_by = core.get_user_id();
