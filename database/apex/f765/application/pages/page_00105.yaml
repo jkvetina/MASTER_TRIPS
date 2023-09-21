@@ -1,10 +1,10 @@
 ---
-# ====== Page: Add Trip ======================================
+# ====== Page: Trip Detail ===================================
 id: 105
 identification: 
-  name: Add Trip
-  alias: ADD-TRIP
-  title: Add Trip
+  name: Trip Detail
+  alias: DETAIL-TRIP
+  title: Trip Detail
   page-group: ' MAIN' # 67422548002820357
 
 appearance: 
@@ -592,6 +592,21 @@ computations:
           AND p.page_id       = :APP_PAGE_ID;
 
 processes: 
+- # ====== Process: CLOSE_DIALOG ===============================
+  id: 22777605035601006
+  identification: 
+    name: CLOSE_DIALOG
+    type: Close Dialog
+    execution-chain: None
+
+  execution: 
+    sequence: 20
+    point: Processing
+    run-process: Once Per Page Visit (default)
+
+  error: 
+    display-location: Inline in Notification
+
 - # ====== Process: Initialize form Add Trip ===================
   id: 23616560977153243
   identification: 

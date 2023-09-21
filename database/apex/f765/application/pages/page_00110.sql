@@ -13,10 +13,10 @@ wwv_flow_imp.component_begin (
 );
 wwv_flow_imp_page.create_page(
  p_id=>110
-,p_name=>'Add/Edit Stop'
-,p_alias=>'STOP'
+,p_name=>'Stop Detail'
+,p_alias=>'DETAIL-STOP'
 ,p_page_mode=>'MODAL'
-,p_step_title=>'Add/Edit Stop'
+,p_step_title=>'Stop Detail'
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_imp.id(67422548002820357)  --  MAIN
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(

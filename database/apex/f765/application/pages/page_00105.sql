@@ -13,10 +13,10 @@ wwv_flow_imp.component_begin (
 );
 wwv_flow_imp_page.create_page(
  p_id=>105
-,p_name=>'Add Trip'
-,p_alias=>'ADD-TRIP'
+,p_name=>'Trip Detail'
+,p_alias=>'DETAIL-TRIP'
 ,p_page_mode=>'MODAL'
-,p_step_title=>'Add Trip'
+,p_step_title=>'Trip Detail'
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_imp.id(67422548002820357)  --  MAIN
 ,p_page_template_options=>'#DEFAULT#'
@@ -262,6 +262,15 @@ wwv_flow_imp_page.create_page_process(
 ,p_attribute_04=>'SAVE_TRIPS'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_internal_uid=>9731655903009018
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(22777605035601006)
+,p_process_sequence=>20
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_CLOSE_WINDOW'
+,p_process_name=>'CLOSE_DIALOG'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_internal_uid=>22777605035601006
 );
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(23616560977153243)

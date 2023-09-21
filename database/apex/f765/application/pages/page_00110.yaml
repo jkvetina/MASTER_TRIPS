@@ -1,10 +1,10 @@
 ---
-# ====== Page: Add/Edit Stop =================================
+# ====== Page: Stop Detail ===================================
 id: 110
 identification: 
-  name: Add/Edit Stop
-  alias: STOP
-  title: Add/Edit Stop
+  name: Stop Detail
+  alias: DETAIL-STOP
+  title: Stop Detail
   page-group: ' MAIN' # 67422548002820357
 
 appearance: 
