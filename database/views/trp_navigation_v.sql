@@ -14,7 +14,10 @@ y AS (
         CASE WHEN t.year_ = MIN(t.year_) OVER()
             THEN TO_NUMBER(REGEXP_SUBSTR(MIN(CASE WHEN t.start_at >= TRUNC(SYSDATE)
                 THEN t.start_at || '|' || t.end_at || '|' || t.trip_id END), '\d+$'))
-            END AS next_trip
+            END AS next_trip,
+        --
+        MAX(COUNT(*)) OVER()                AS max_rows,
+        MAX(COUNT(*)) OVER() - COUNT(*) + 1 AS missing_rows
         --
     FROM trp_trips t
     JOIN curr
@@ -162,7 +165,11 @@ SELECT                                  -- ADD EXTRA ROWS TO ALIGN YEARS
     NULL AS image_alt_attribute,
     --
     'NO_HOVER TRANSPARENT' AS attribute01,
-    '<span style="margin: -0.3rem 0.5rem -0.3rem 2rem; font-size: 70%;">&' || 'nbsp;</span>' AS attribute02,
+    --
+    CASE WHEN d.row_id = y.missing_rows
+        THEN '<div style="height: 0; overflow: hidden; margin: 1.5rem 0 0;">&' || 'nbsp;</div>'  -- last row shorter
+        ELSE '<span style="margin: -0.3rem 0.5rem -0.3rem 2rem; font-size: 70%;">&' || 'nbsp;</span>'
+        END AS attribute02,
     --
     NULL AS attribute03,
     NULL AS attribute04,
@@ -173,27 +180,15 @@ SELECT                                  -- ADD EXTRA ROWS TO ALIGN YEARS
     NULL AS attribute09,
     NULL AS attribute10,
     --
-    '/100.100/' || t.order# || '.' || t.year_ || '/Z/' || d.row_id AS order#
+    '/100.100/' || y.order# || '.' || y.year_ || '/Z/' || d.row_id AS order#
     --
-FROM (
-    SELECT
-        y.year_,
-        y.year_count,
-        y.order#,
-        MAX(y.year_count) OVER() - y.year_count AS missing_rows
-        --
-    FROM y
-    GROUP BY
-        y.year_,
-        y.year_count,
-        y.order#
-) t
+FROM y
 JOIN (
     SELECT LEVEL AS row_id
     FROM DUAL
     CONNECT BY LEVEL <= 20      -- max 20 rows per year
 ) d
-    ON d.row_id <= t.missing_rows;
+    ON d.row_id <= y.missing_rows;
 --
 COMMENT ON TABLE trp_navigation_v IS '';
 
