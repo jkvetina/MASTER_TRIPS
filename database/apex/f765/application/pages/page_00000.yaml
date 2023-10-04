@@ -3,11 +3,86 @@
 id: 0
 identification: 
   name: Global Page
-  page-group: __ INTERNAL # 23434444450035233
+  alias: GLOBAL-PAGE
+  title: Global Page
+
+appearance: 
+  page-mode: Normal
+  page-template: Theme Default
+  template-options: 
+  - '#DEFAULT#'
+
+navigation-menu: 
+  override-user-interface-level: false
+
+navigation: 
+  cursor-focus: Do not focus cursor
+  warn-on-unsaved-changes: true
+
+security: 
+  authentication: Page Requires Authentication
+  deep-linking: Application Default
+  page-access-protection: No URL Access
+  form-auto-complete: Off
+  browser-cache: Application Default
+
+session-management: 
+  rejoin-sessions: Application Default
+
+advanced: 
+  enable-duplicate-page-submissions: Yes - Enable page to be re-posted
+  reload-on-submit: Only for Success
+
+server-cache: 
+  caching: Disabled
 
 regions: 
+- # ====== Region: ITEMS =======================================
+  id: 38204264322003816
+  identification: 
+    title: ITEMS
+    type: Static Content
+
+  layout: 
+    sequence: 30
+    parent-region: No Parent
+    position: BEFORE_FOOTER
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes # 17725987703506456
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: true
+    exclude-title-from-translation: false
+
+  security: 
+    authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
 - # ====== Region: JS ==========================================
-  id: 73410433413984788
+  id: 87628781361049986
   identification: 
     title: JS
     type: Static Content
@@ -16,7 +91,6 @@ regions:
     html-code: |
       <script>
       </script>
-      
 
   layout: 
     sequence: 20
@@ -42,6 +116,9 @@ regions:
     region-display-selector: true
     exclude-title-from-translation: false
 
+  security: 
+    authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+
   server-cache: 
     caching: Disabled
 
@@ -54,7 +131,7 @@ regions:
       expand-shortcuts: false
 
 - # ====== Region: CSS =========================================
-  id: 87810683727143060
+  id: 102029031674208258
   identification: 
     title: CSS
     type: Static Content
@@ -63,7 +140,6 @@ regions:
     html-code: |
       <style>
       </style>
-      
 
   layout: 
     sequence: 10
@@ -89,6 +165,9 @@ regions:
     region-display-selector: true
     exclude-title-from-translation: false
 
+  security: 
+    authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+
   server-cache: 
     caching: Disabled
 
@@ -100,33 +179,38 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-dynamic-actions: 
-- # ====== Dynamic Action: INIT_PAGE ===========================
-  id: 14690193213436115
+page-items: 
+- # ====== Page Item: P0_AJAX_PING_INTERVAL ====================
+  id: 38205116828003844
   identification: 
-    name: INIT_PAGE
+    name: P0_AJAX_PING_INTERVAL
+    type: Hidden
 
-  execution: 
+  settings: 
+    value-protected: true
+
+  layout: 
     sequence: 10
+    region: ITEMS # 38204264322003816
+    position: BODY
 
-  when: 
-    event: EVENT.EVENT.BROWSER.READY
+  advanced: 
+    warn-on-unsaved-changes: Page Default
 
-  execution: 
-    event-scope: Static
+  source: 
+    type: Static Value
+    static-value: 10
+    used: Only when current value in session state is null
 
-  actions: 
-  - # ====== Action: Execute JavaScript Code =====================
-    id: 14690279819436116
-    identification: 
-      action: Execute JavaScript Code
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
 
-    settings: 
-      code: init_page();
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
 
-    execution: 
-      sequence: 10
-      event: INIT_PAGE # 14690193213436115
-      fire-when-event-result-is: True
-      fire-on-initialization: false
+  comments: 
+    comments: Interval in seconds to fire AJAX_PING process
 

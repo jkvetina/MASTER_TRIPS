@@ -55,6 +55,15 @@ advanced:
 server-cache: 
   caching: Disabled
 
+help: 
+  help-text: |
+    How to use the app?
+    
+    - create a trip on the Trips Planning page
+    - fill in the itinerary
+    - check your trip in the chart
+    
+
 regions: 
 - # ====== Region: Gantt [CHART] ===============================
   id: 22657826332266471
@@ -276,6 +285,8 @@ regions:
     template: Hero # 17759298553506472
     template-options: 
     - '#DEFAULT#'
+    css-classes: 
+    - SECOND
     render-components: Above Content
 
   accessibility: 

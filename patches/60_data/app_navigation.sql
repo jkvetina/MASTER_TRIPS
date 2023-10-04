@@ -10,10 +10,10 @@ WHERE app_id = 765;
 --
 MERGE INTO app_navigation t
 USING (
+    SELECT 765 AS app_id, 0 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 666 AS order#, NULL AS col_id FROM DUAL UNION ALL
     SELECT 765 AS app_id, 100 AS page_id, NULL AS parent_id, NULL AS is_hidden, NULL AS is_reset, 10 AS order#, NULL AS col_id FROM DUAL UNION ALL
     SELECT 765 AS app_id, 105 AS page_id, 100 AS parent_id, 'Y' AS is_hidden, NULL AS is_reset, NULL AS order#, NULL AS col_id FROM DUAL UNION ALL
     SELECT 765 AS app_id, 110 AS page_id, 100 AS parent_id, 'Y' AS is_hidden, NULL AS is_reset, NULL AS order#, NULL AS col_id FROM DUAL UNION ALL
-    SELECT 765 AS app_id, 200 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 200 AS order#, NULL AS col_id FROM DUAL UNION ALL
     SELECT 765 AS app_id, 980 AS page_id, NULL AS parent_id, NULL AS is_hidden, 'Y' AS is_reset, 980 AS order#, NULL AS col_id FROM DUAL
 ) s
 ON (

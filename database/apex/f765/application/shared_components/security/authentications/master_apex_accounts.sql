@@ -15,11 +15,15 @@ wwv_flow_imp_shared.create_authentication(
  p_id=>wwv_flow_imp.id(59727607674330582)
 ,p_name=>'MASTER - APEX_ACCOUNTS'
 ,p_scheme_type=>'NATIVE_APEX_ACCOUNTS'
-,p_invalid_session_type=>'LOGIN'
+,p_invalid_session_type=>'URL'
+,p_invalid_session_url=>'f?p=800:9999:0'
+,p_logout_url=>'f?p=800:9999:0'
+,p_post_auth_process=>'app_auth.after_auth'
 ,p_cookie_name=>'&WORKSPACE_COOKIE.'
 ,p_use_secure_cookie_yn=>'N'
 ,p_ras_mode=>0
-,p_reference_id=>37901138623322271
+,p_switch_in_session_yn=>'Y'
+,p_reference_id=>63288166491439030
 );
 wwv_flow_imp.component_end;
 end;

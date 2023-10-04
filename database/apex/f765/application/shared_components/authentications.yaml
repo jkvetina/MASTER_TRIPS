@@ -6,16 +6,25 @@
 
   subscription: 
     master: 
-      referenced-id: 37901138623322271
+      app: 800 # Master
+      referenced-id: 63288166491439030 # APEX_ACCOUNTS
 
   settings: 
     type: Oracle APEX Accounts
 
   session-not-valid: 
-    redirect-to: Login Page
+    redirect-to: URL
+    invalid-session-url: 
+      url: 'f?p=800:9999:0'
+      app: 800
+      page: 9999
 
   login-processing: 
-    switch-in-session: false
+    post-authentication-procedure-name: app_auth.after_auth
+    switch-in-session: true
+
+  post-logout-url: 
+    post-logout-url: 'f?p=800:9999:0'
 
   real-application-security: 
     ras-mode: Disabled
@@ -27,13 +36,26 @@
 
   subscription: 
     master: 
-      referenced-id: 38115413754324720
+      app: 800 # Master
+      referenced-id: 63502441622441479 # OPEN_DOOR (TESTING ONLY)
 
   settings: 
-    type: Open Door Credentials
+    type: Custom
+    enable-legacy-authentication-attributes: false
+
+  session-not-valid: 
+    redirect-to: URL
+    invalid-session-url: 
+      url: 'f?p=800:9999:0'
+      app: 800
+      page: 9999
 
   login-processing: 
-    switch-in-session: false
+    post-authentication-procedure-name: app_auth.after_auth
+    switch-in-session: true
+
+  post-logout-url: 
+    post-logout-url: 'f?p=800:9999:0'
 
   real-application-security: 
     ras-mode: Disabled

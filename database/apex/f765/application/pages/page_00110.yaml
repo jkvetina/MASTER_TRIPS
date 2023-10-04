@@ -59,7 +59,7 @@ regions:
   layout: 
     sequence: 10
     parent-region: No Parent
-    position: BODY
+    position: REGION_POSITION_01
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -1188,7 +1188,7 @@ buttons:
   layout: 
     sequence: 10
     region: '&P110_HEADER.' # 61508979059840437
-    position: RIGHT_OF_TITLE
+    position: UP
     start-new-layout: false
     start-new-row: true
     column: Automatic

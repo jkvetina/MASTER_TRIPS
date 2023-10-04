@@ -33,21 +33,21 @@ prompt APPLICATION 765 - Trips Planning
 -- Application Export:
 --   Application:     765
 --   Name:            Trips Planning
---   Date and Time:   17:32 Čtvrtek Září 21, 2023
+--   Date and Time:   20:03 Středa Říjen 4, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
---     Pages:                      5
---       Items:                   38
+--     Pages:                      4
+--       Items:                   39
 --       Computations:             4
 --       Processes:               12
---       Regions:                 17
+--       Regions:                 16
 --       Buttons:                 16
---       Dynamic Actions:          8
+--       Dynamic Actions:          7
 --     Shared Components:
 --       Logic:
 --         Items:                  2
---         Processes:              1
+--         Processes:              2
 --         App Settings:           1
 --         Build Options:          1
 --       Navigation:
@@ -121,7 +121,7 @@ wwv_imp_workspace.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2023-09-21'
+,p_flow_version=>'2023-10-04'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -156,7 +156,6 @@ wwv_flow_imp_shared.create_user_interface(
 ,p_login_url=>'f?p=&APP_ID.:LOGIN:&APP_SESSION.::&DEBUG.:::'
 ,p_theme_style_by_user_pref=>false
 ,p_built_with_love=>false
-,p_global_page_id=>0
 ,p_navigation_list_position=>'TOP'
 ,p_navigation_list_template_id=>wwv_flow_imp.id(17853508706506526)
 ,p_nav_list_template_options=>'#DEFAULT#:js-tabLike'
@@ -586,7 +585,7 @@ wwv_flow_imp_shared.create_security_scheme(
  p_id=>wwv_flow_imp.id(59731356907418259)  -- MASTER - IS_USER
 ,p_name=>'MASTER - IS_USER'
 ,p_scheme_type=>'NATIVE_FUNCTION_BODY'
-,p_attribute_01=>'RETURN app.is_user() = ''Y'';'
+,p_attribute_01=>'RETURN app_auth.is_user() = ''Y'';'
 ,p_error_message=>'ACCESS_DENIED|IS_USER'
 ,p_reference_id=>43462402185717150
 ,p_caching=>'BY_USER_BY_PAGE_VIEW'
@@ -608,6 +607,20 @@ wwv_flow_imp_shared.create_flow_process(
 ,p_process_type=>'NATIVE_PLSQL'
 ,p_process_name=>'INIT_DEFAULTS'
 ,p_process_sql_clob=>'app.init_defaults();'
+,p_process_clob_language=>'PLSQL'
+,p_security_scheme=>'MUST_NOT_BE_PUBLIC_USER'
+);
+end;
+/
+prompt --application/shared_components/logic/application_processes/get_avatar
+begin
+wwv_flow_imp_shared.create_flow_process(
+ p_id=>wwv_flow_imp.id(24674529903843761)
+,p_process_sequence=>0
+,p_process_point=>'ON_DEMAND'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'GET_AVATAR'
+,p_process_sql_clob=>'app.download_avatar();'
 ,p_process_clob_language=>'PLSQL'
 ,p_security_scheme=>'MUST_NOT_BE_PUBLIC_USER'
 );
@@ -3515,7 +3528,8 @@ wwv_flow_imp_shared.create_template(
 '            #BUILT_WITH_LOVE_USING_APEX#',
 '          </div>',
 '        </div>',
-'        <div class="t-Footer-top">',
+'        <div class="t-Footer-top" style="display: flex;">',
+'          <a href="f?p=800:985:&APP_SESSION.:::::" class="t-Footer-topButton BUTTON" title="" id="BUTTON_FEEDBACK">Feedback</a>',
 '          <a href="#top" class="t-Footer-topButton" id="t_Footer_topButton" title="&"APP_TEXT$APEX.UI.BACK_TO_TOP"." aria-label="&"APP_TEXT$APEX.UI.BACK_TO_TOP"."><span class="a-Icon icon-up-chevron" aria-hidden="true"></span></a>',
 '        </div>',
 '      </footer>',
@@ -3630,7 +3644,7 @@ wwv_flow_imp_shared.create_template(
 ,p_reference_id=>63188215361701831
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(21315569359244651)
+ p_id=>wwv_flow_imp.id(23983549723567682)
 ,p_page_template_id=>wwv_flow_imp.id(17715841242506449)
 ,p_name=>'After Logo'
 ,p_placeholder=>'AFTER_LOGO'
@@ -3642,7 +3656,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_max_fixed_grid_columns=>4
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(21316001430244651)
+ p_id=>wwv_flow_imp.id(23984048603567682)
 ,p_page_template_id=>wwv_flow_imp.id(17715841242506449)
 ,p_name=>'After Navigation Bar'
 ,p_placeholder=>'AFTER_NAVIGATION_BAR'
@@ -3654,7 +3668,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_max_fixed_grid_columns=>4
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(21316586693244651)
+ p_id=>wwv_flow_imp.id(23984514090567683)
 ,p_page_template_id=>wwv_flow_imp.id(17715841242506449)
 ,p_name=>'Before Navigation Bar'
 ,p_placeholder=>'BEFORE_NAVIGATION_BAR'
@@ -3666,7 +3680,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_max_fixed_grid_columns=>4
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(21317032328244652)
+ p_id=>wwv_flow_imp.id(23985070832567683)
 ,p_page_template_id=>wwv_flow_imp.id(17715841242506449)
 ,p_name=>'Body'
 ,p_placeholder=>'BODY'
@@ -3678,7 +3692,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_max_fixed_grid_columns=>12
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(21317508579244652)
+ p_id=>wwv_flow_imp.id(23985516548567683)
 ,p_page_template_id=>wwv_flow_imp.id(17715841242506449)
 ,p_name=>'Breadcrumb Bar'
 ,p_placeholder=>'REGION_POSITION_01'
@@ -3689,7 +3703,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(21318003729244652)
+ p_id=>wwv_flow_imp.id(23986033281567684)
 ,p_page_template_id=>wwv_flow_imp.id(17715841242506449)
 ,p_name=>'Dialogs, Drawers and Popups'
 ,p_placeholder=>'REGION_POSITION_04'
@@ -3701,7 +3715,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_max_fixed_grid_columns=>12
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(21318549523244652)
+ p_id=>wwv_flow_imp.id(23986518056567684)
 ,p_page_template_id=>wwv_flow_imp.id(17715841242506449)
 ,p_name=>'Footer'
 ,p_placeholder=>'REGION_POSITION_05'
@@ -3713,7 +3727,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_max_fixed_grid_columns=>12
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(21319013106244653)
+ p_id=>wwv_flow_imp.id(23987002060567684)
 ,p_page_template_id=>wwv_flow_imp.id(17715841242506449)
 ,p_name=>'Top Navigation'
 ,p_placeholder=>'REGION_POSITION_06'
@@ -3724,7 +3738,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(21319574266244653)
+ p_id=>wwv_flow_imp.id(23987552631567684)
 ,p_page_template_id=>wwv_flow_imp.id(17715841242506449)
 ,p_name=>'Banner'
 ,p_placeholder=>'REGION_POSITION_07'
@@ -3735,7 +3749,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(21320039276244653)
+ p_id=>wwv_flow_imp.id(23988045781567685)
 ,p_page_template_id=>wwv_flow_imp.id(17715841242506449)
 ,p_name=>'Full Width Content'
 ,p_placeholder=>'REGION_POSITION_08'
@@ -15273,11 +15287,15 @@ wwv_flow_imp_shared.create_authentication(
  p_id=>wwv_flow_imp.id(59727607674330582)
 ,p_name=>'MASTER - APEX_ACCOUNTS'
 ,p_scheme_type=>'NATIVE_APEX_ACCOUNTS'
-,p_invalid_session_type=>'LOGIN'
+,p_invalid_session_type=>'URL'
+,p_invalid_session_url=>'f?p=800:9999:0'
+,p_logout_url=>'f?p=800:9999:0'
+,p_post_auth_process=>'app_auth.after_auth'
 ,p_cookie_name=>'&WORKSPACE_COOKIE.'
 ,p_use_secure_cookie_yn=>'N'
 ,p_ras_mode=>0
-,p_reference_id=>37901138623322271
+,p_switch_in_session_yn=>'Y'
+,p_reference_id=>63288166491439030
 );
 end;
 /
@@ -15286,11 +15304,17 @@ begin
 wwv_flow_imp_shared.create_authentication(
  p_id=>wwv_flow_imp.id(59727810078330583)
 ,p_name=>'MASTER - OPEN_DOOR (TESTING ONLY)'
-,p_scheme_type=>'NATIVE_OPEN_DOOR'
+,p_scheme_type=>'NATIVE_CUSTOM'
+,p_attribute_05=>'N'
+,p_invalid_session_type=>'URL'
+,p_invalid_session_url=>'f?p=800:9999:0'
+,p_logout_url=>'f?p=800:9999:0'
+,p_post_auth_process=>'app_auth.after_auth'
 ,p_cookie_name=>'&WORKSPACE_COOKIE.'
 ,p_use_secure_cookie_yn=>'N'
 ,p_ras_mode=>0
-,p_reference_id=>38115413754324720
+,p_switch_in_session_yn=>'Y'
+,p_reference_id=>63502441622441479
 );
 end;
 /
@@ -18374,16 +18398,29 @@ begin
 wwv_flow_imp_page.create_page(
  p_id=>0
 ,p_name=>'Global Page'
+,p_alias=>'GLOBAL-PAGE'
+,p_step_title=>'Global Page'
 ,p_autocomplete_on_off=>'OFF'
-,p_group_id=>wwv_flow_imp.id(23434444450035233)  -- __ INTERNAL
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'D'
-,p_page_component_map=>'14'
+,p_page_component_map=>'17'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
 );
 wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(73410433413984788)
+ p_id=>wwv_flow_imp.id(38204264322003816)
+,p_plug_name=>'ITEMS'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(17725987703506456)
+,p_plug_display_sequence=>30
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BEFORE_FOOTER'
+,p_plug_required_role=>'MUST_NOT_BE_PUBLIC_USER'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(87628781361049986)
 ,p_plug_name=>'JS'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(17725987703506456)
@@ -18392,13 +18429,13 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_point=>'BEFORE_FOOTER'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<script>',
-'</script>',
-''))
+'</script>'))
+,p_plug_required_role=>'MUST_NOT_BE_PUBLIC_USER'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
 wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(87810683727143060)
+ p_id=>wwv_flow_imp.id(102029031674208258)
 ,p_plug_name=>'CSS'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(17725987703506456)
@@ -18407,26 +18444,22 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_point=>'BEFORE_FOOTER'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<style>',
-'</style>',
-''))
+'</style>'))
+,p_plug_required_role=>'MUST_NOT_BE_PUBLIC_USER'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
-wwv_flow_imp_page.create_page_da_event(
- p_id=>wwv_flow_imp.id(14690193213436115)
-,p_name=>'INIT_PAGE'
-,p_event_sequence=>10
-,p_bind_type=>'bind'
-,p_bind_event_type=>'ready'
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(14690279819436116)
-,p_event_id=>wwv_flow_imp.id(14690193213436115)
-,p_event_result=>'TRUE'
-,p_action_sequence=>10
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_JAVASCRIPT_CODE'
-,p_attribute_01=>'init_page();'
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(38205116828003844)
+,p_name=>'P0_AJAX_PING_INTERVAL'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(38204264322003816)
+,p_source=>'10'
+,p_source_type=>'STATIC'
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'Y'
+,p_item_comment=>'Interval in seconds to fire AJAX_PING process'
 );
 end;
 /
@@ -18457,6 +18490,13 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_required_role=>wwv_flow_imp.id(59731356907418259)  -- MASTER - IS_USER
 ,p_protection_level=>'C'
+,p_help_text=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'How to use the app?',
+'',
+'- create a trip on the Trips Planning page',
+'- fill in the itinerary',
+'- check your trip in the chart',
+''))
 ,p_page_component_map=>'25'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
@@ -18616,6 +18656,7 @@ wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(23180114996012361)
 ,p_plug_name=>'&P100_ITINERARY_HEADER!RAW.'
 ,p_parent_plug_id=>wwv_flow_imp.id(23220046690318982)
+,p_region_css_classes=>'SECOND'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(17759298553506472)
 ,p_plug_display_sequence=>30
@@ -19530,6 +19571,9 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_is_frozen=>false
 ,p_width=>100
 );
+end;
+/
+begin
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(32768040201559826)
 ,p_view_id=>wwv_flow_imp.id(32754174504559767)
@@ -19542,9 +19586,6 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_sort_direction=>'ASC'
 ,p_sort_nulls=>'LAST'
 );
-end;
-/
-begin
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(32769008308559829)
 ,p_view_id=>wwv_flow_imp.id(32754174504559767)
@@ -20597,6 +20638,9 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
 );
+end;
+/
+begin
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(22658646377266480)
 ,p_name=>'P100_TRIP_ID'
@@ -20606,9 +20650,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
 );
-end;
-/
-begin
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23216858438318950)
 ,p_name=>'P100_DAY'
@@ -20965,6 +21006,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_template=>wwv_flow_imp.id(17759298553506472)
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'REGION_POSITION_01'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -21020,7 +21062,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(17865448457506535)
 ,p_button_image_alt=>'Close Dialog'
-,p_button_position=>'RIGHT_OF_TITLE'
+,p_button_position=>'UP'
 ,p_button_execute_validations=>'N'
 ,p_warn_on_unsaved_changes=>null
 ,p_button_css_classes=>'u-pullRight'
@@ -21209,7 +21251,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'BEFORE_HEADER'
 ,p_region_id=>wwv_flow_imp.id(51686247245088473)
 ,p_process_type=>'NATIVE_FORM_INIT'
-,p_process_name=>'Initialize form Add Trip'
+,p_process_name=>'INIT_FORM'
 ,p_internal_uid=>9730922610009011
 );
 end;
@@ -21245,6 +21287,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_template=>wwv_flow_imp.id(17759298553506472)
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'REGION_POSITION_01'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -21340,7 +21383,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(17865448457506535)
 ,p_button_image_alt=>'Close Dialog'
-,p_button_position=>'RIGHT_OF_TITLE'
+,p_button_position=>'UP'
 ,p_button_execute_validations=>'N'
 ,p_warn_on_unsaved_changes=>null
 ,p_button_css_classes=>'u-pullRight'
@@ -21793,55 +21836,6 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_type=>'NATIVE_FORM_INIT'
 ,p_process_name=>'INIT_FORM'
 ,p_internal_uid=>9828682198751975
-);
-end;
-/
-prompt --application/pages/page_00980
-begin
-wwv_flow_imp_page.create_page(
- p_id=>980
-,p_name=>'#fa-question-circle'
-,p_alias=>'HELP'
-,p_page_mode=>'MODAL'
-,p_step_title=>'Help'
-,p_autocomplete_on_off=>'OFF'
-,p_group_id=>wwv_flow_imp.id(23660722781484627)  -- ABOUT
-,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'ol li {',
-'  line-height: 200%;',
-'}'))
-,p_step_template=>wwv_flow_imp.id(17683267850506429)
-,p_page_template_options=>'#DEFAULT#:js-dialog-class-t-Drawer--pullOutEnd'
-,p_required_role=>wwv_flow_imp.id(59731356907418259)  -- MASTER - IS_USER
-,p_protection_level=>'C'
-,p_page_component_map=>'11'
-,p_last_updated_by=>'DEV'
-,p_last_upd_yyyymmddhh24miss=>'20220101000000'
-);
-wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(23616227563153239)
-,p_plug_name=>'How to use the app'
-,p_region_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_imp.id(17759298553506472)
-,p_plug_display_sequence=>10
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
-);
-wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(23616287160153240)
-,p_plug_name=>'[CONTENT]'
-,p_region_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_imp.id(17725987703506456)
-,p_plug_display_sequence=>20
-,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'<ol>',
-'<li>create a trip on the Trips Planning page</li>',
-'<li>fill in the itinerary</li>',
-'<li>check your trip in the chart</li>',
-'</ol>',
-''))
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
 );
 end;
 /

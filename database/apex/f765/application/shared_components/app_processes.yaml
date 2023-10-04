@@ -17,3 +17,21 @@
   security: 
     authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
 
+- # ====== Application Process: GET_AVATAR =====================
+  id: 24674529903843761
+  identification: 
+    name: GET_AVATAR
+    type: NATIVE_PLSQL
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: app.download_avatar();
+
+  execution: 
+    sequence: 0
+    point: Ajax Callback
+
+  security: 
+    authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+

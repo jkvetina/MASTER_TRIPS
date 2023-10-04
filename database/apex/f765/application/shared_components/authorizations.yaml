@@ -73,7 +73,7 @@
     type: PL/SQL Function Returning Boolean
 
   settings: 
-    pl/sql-function-body: RETURN app.is_user() = 'Y';
+    pl/sql-function-body: RETURN app_auth.is_user() = 'Y';
 
   server-cache: 
     evaluation-point: Once per Page View

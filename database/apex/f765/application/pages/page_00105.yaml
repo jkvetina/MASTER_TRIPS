@@ -51,7 +51,7 @@ regions:
   layout: 
     sequence: 10
     parent-region: No Parent
-    position: BODY
+    position: REGION_POSITION_01
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -523,7 +523,7 @@ buttons:
   layout: 
     sequence: 20
     region: '&P105_HEADER.' # 51686091932088472
-    position: RIGHT_OF_TITLE
+    position: UP
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -607,10 +607,10 @@ processes:
   error: 
     display-location: Inline in Notification
 
-- # ====== Process: Initialize form Add Trip ===================
+- # ====== Process: INIT_FORM ==================================
   id: 23616560977153243
   identification: 
-    name: Initialize form Add Trip
+    name: INIT_FORM
     type: Form - Initialization
     execution-chain: None
     form-region: '[FORM]' # 51686247245088473

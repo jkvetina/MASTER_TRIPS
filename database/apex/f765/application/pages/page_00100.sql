@@ -36,6 +36,13 @@ wwv_flow_imp_page.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_required_role=>wwv_flow_imp.id(59731356907418259)  -- MASTER - IS_USER
 ,p_protection_level=>'C'
+,p_help_text=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'How to use the app?',
+'',
+'- create a trip on the Trips Planning page',
+'- fill in the itinerary',
+'- check your trip in the chart',
+''))
 ,p_page_component_map=>'25'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
@@ -195,6 +202,7 @@ wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(23180114996012361)
 ,p_plug_name=>'&P100_ITINERARY_HEADER!RAW.'
 ,p_parent_plug_id=>wwv_flow_imp.id(23220046690318982)
+,p_region_css_classes=>'SECOND'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(17759298553506472)
 ,p_plug_display_sequence=>30
@@ -1100,15 +1108,6 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_is_frozen=>false
 ,p_width=>120
 );
-wwv_flow_imp_page.create_ig_report_column(
- p_id=>wwv_flow_imp.id(32767135533559823)
-,p_view_id=>wwv_flow_imp.id(32754174504559767)
-,p_display_seq=>6
-,p_column_id=>wwv_flow_imp.id(23181147322012372)
-,p_is_visible=>true
-,p_is_frozen=>false
-,p_width=>100
-);
 wwv_flow_imp.component_end;
 end;
 /
@@ -1120,6 +1119,15 @@ wwv_flow_imp.component_begin (
 ,p_default_application_id=>765
 ,p_default_id_offset=>13885638367144232
 ,p_default_owner=>'APPS'
+);
+wwv_flow_imp_page.create_ig_report_column(
+ p_id=>wwv_flow_imp.id(32767135533559823)
+,p_view_id=>wwv_flow_imp.id(32754174504559767)
+,p_display_seq=>6
+,p_column_id=>wwv_flow_imp.id(23181147322012372)
+,p_is_visible=>true
+,p_is_frozen=>false
+,p_width=>100
 );
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(32768040201559826)
@@ -2167,15 +2175,6 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_button_css_classes=>'u-pullRight'
 );
-wwv_flow_imp_page.create_page_item(
- p_id=>wwv_flow_imp.id(22658513694266478)
-,p_name=>'P100_TRIP_START'
-,p_item_sequence=>30
-,p_item_plug_id=>wwv_flow_imp.id(23215188288318933)
-,p_display_as=>'NATIVE_HIDDEN'
-,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'Y'
-);
 wwv_flow_imp.component_end;
 end;
 /
@@ -2187,6 +2186,15 @@ wwv_flow_imp.component_begin (
 ,p_default_application_id=>765
 ,p_default_id_offset=>13885638367144232
 ,p_default_owner=>'APPS'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(22658513694266478)
+,p_name=>'P100_TRIP_START'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_imp.id(23215188288318933)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'Y'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(22658582075266479)
