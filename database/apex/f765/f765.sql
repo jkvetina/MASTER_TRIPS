@@ -19,7 +19,7 @@ whenever sqlerror exit sql.sqlcode rollback
 begin
 wwv_flow_imp.import_begin (
  p_version_yyyy_mm_dd=>'2023.04.28'
-,p_release=>'23.1.2'
+,p_release=>'23.1.5'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
 ,p_default_id_offset=>13885638367144232
@@ -33,7 +33,7 @@ prompt APPLICATION 765 - Trips Planning
 -- Application Export:
 --   Application:     765
 --   Name:            Trips Planning
---   Date and Time:   20:03 Středa Říjen 4, 2023
+--   Date and Time:   17:15 Čtvrtek Říjen 19, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -53,7 +53,7 @@ prompt APPLICATION 765 - Trips Planning
 --       Navigation:
 --         Lists:                  1
 --       Security:
---         Authentication:         2
+--         Authentication:         1
 --         Authorization:          4
 --       User Interface:
 --         Themes:                 1
@@ -74,7 +74,7 @@ prompt APPLICATION 765 - Trips Planning
 --       Reports:
 --       E-Mail:
 --     Supporting Objects:  Included
---   Version:         23.1.2
+--   Version:         23.1.5
 --   Instance ID:     7462307610850096
 --
 
@@ -97,10 +97,10 @@ wwv_imp_workspace.create_flow(
 ,p_page_protection_enabled_y_n=>'Y'
 ,p_checksum_salt=>'9CBCC171912554FE4A8996BCA5DC653BEC59C661B634BF18F954B71B4DA3D6FD'
 ,p_bookmark_checksum_function=>'SH512'
-,p_max_session_length_sec=>86400
-,p_on_max_session_timeout_url=>'#LOGOUT_URL#'
-,p_max_session_idle_sec=>14400
-,p_on_max_idle_timeout_url=>'#LOGOUT_URL#'
+,p_max_session_length_sec=>32400
+,p_on_max_session_timeout_url=>'/ords/f?p=800:9999:0::::P9999_ERROR:SESSION_TIMEOUT'
+,p_max_session_idle_sec=>5400
+,p_on_max_idle_timeout_url=>'/ords/f?p=800:9999:0::::P9999_ERROR:SESSION_TIMEOUT'
 ,p_session_timeout_warning_sec=>0
 ,p_compatibility_mode=>'21.2'
 ,p_session_state_commits=>'IMMEDIATE'
@@ -121,7 +121,7 @@ wwv_imp_workspace.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2023-10-04'
+,p_flow_version=>'2023-10-19'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -15281,24 +15281,6 @@ begin
 null;
 end;
 /
-prompt --application/shared_components/security/authentications/master_apex_accounts
-begin
-wwv_flow_imp_shared.create_authentication(
- p_id=>wwv_flow_imp.id(59727607674330582)
-,p_name=>'MASTER - APEX_ACCOUNTS'
-,p_scheme_type=>'NATIVE_APEX_ACCOUNTS'
-,p_invalid_session_type=>'URL'
-,p_invalid_session_url=>'f?p=800:9999:0'
-,p_logout_url=>'f?p=800:9999:0'
-,p_post_auth_process=>'app_auth.after_auth'
-,p_cookie_name=>'&WORKSPACE_COOKIE.'
-,p_use_secure_cookie_yn=>'N'
-,p_ras_mode=>0
-,p_switch_in_session_yn=>'Y'
-,p_reference_id=>63288166491439030
-);
-end;
-/
 prompt --application/shared_components/security/authentications/master_open_door_testing_only
 begin
 wwv_flow_imp_shared.create_authentication(
@@ -15307,8 +15289,8 @@ wwv_flow_imp_shared.create_authentication(
 ,p_scheme_type=>'NATIVE_CUSTOM'
 ,p_attribute_05=>'N'
 ,p_invalid_session_type=>'URL'
-,p_invalid_session_url=>'f?p=800:9999:0'
-,p_logout_url=>'f?p=800:9999:0'
+,p_invalid_session_url=>'/ords/f?p=800:9999:0::::P9999_ERROR:SESSION_INVALID'
+,p_logout_url=>'/ords/f?p=800:9999:0'
 ,p_post_auth_process=>'app_auth.after_auth'
 ,p_cookie_name=>'&WORKSPACE_COOKIE.'
 ,p_use_secure_cookie_yn=>'N'

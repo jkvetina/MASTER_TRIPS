@@ -6,18 +6,6 @@ body {
 
 
 
-/* HIDE HEADER ON MODAL DIALOG PAGES */
-/* USE HERO FOR TITLE AND CUSTOM BUTTONS */
-.ui-dialog-titlebar {
-    border-bottom       : 0;
-    margin-bottom       : 0;
-}
-.ui-dialog-titlebar > * {
-    display             : none;
-}
-
-
-
 /*
  * ADJUST MODAL + DRAWER DIALOGS
  */
@@ -29,11 +17,11 @@ body.t-Drawer-page .t-Dialog-header {
 body.t-Dialog-page .t-HeroRegion,
 body.t-Drawer-page .t-HeroRegion {
     margin              : 0 !important;
-    padding             : 0.3rem 0.5rem 0.5rem !important;
+    padding             : 0.3rem 0.2rem 0.75rem !important;
 }
 body.t-Drawer-page .t-HeroRegion {
-    margin-bottom       : 0 !important;
-    padding             : 0.3rem 1.25rem 0 !important;
+    margin-bottom       : -0.25rem !important;
+    padding             : 0.3rem 1rem 0 !important;
 }
 body.t-Dialog-page .t-HeroRegion .t-HeroRegion-buttons:empty,
 body.t-Drawer-page .t-HeroRegion .t-HeroRegion-buttons:empty {
@@ -46,38 +34,58 @@ body.t-Drawer-page .t-HeroRegion .t-HeroRegion-icon {
 body.t-Dialog-page .t-HeroRegion-col--beforeIcon,
 body.t-Drawer-page .t-HeroRegion-col--beforeIcon {
     order               : 5;
-    margin              : -0.15rem 0 0;
+    margin              : 0;
+    gap                 : 0.13rem;  /* TO FIX BUTTON SPACING IN HERO.UP REGION */
 }
 body.t-Dialog-page .t-HeroRegion-col--beforeIcon button,
 body.t-Drawer-page .t-HeroRegion-col--beforeIcon button {
     margin-top          : 0 !important;
 }
 
-/* MODAL DIALOG, REMOVE THE IMAGE AND PADDING AT TOP */
+/* MODAL DIALOGS, REMOVE THE IMAGE AND PADDING AT TOP */
 .ui-dialog .ui-dialog-titlebar {
-    -webkit-padding-before  : 0.6rem;
-    padding-block-start     : 0.6rem;
+    border-bottom       : 0;
+    margin-bottom       : 0;
+    padding             : 0.4rem;
+}
+.ui-dialog .ui-dialog-titlebar > * {
+    display             : none;
 }
 .ui-dialog .ui-dialog-titlebar:before {
     background-image        : none;
-}
-.ui-dialog .ui-dialog-titlebar:before {
     /* background: gray; */
 }
 
 
 
-/* HERO REGION */
+/*
+ * HERO REGION
+ */
 .t-HeroRegion {
     padding             : 0.75rem 0.5rem 1rem;
 }
-.t-HeroRegion.SECOND {
-    margin-top          : 3rem;
+.t-HeroRegion.SECOND,
+body.t-Dialog-page .t-HeroRegion.SECOND,
+body.t-Drawer-page .t-HeroRegion.SECOND {
+    margin-top          : 2rem !important;
 }
 h1.t-HeroRegion-title {
     font-size           : 1.8rem;
     line-height         : 150%;
 }
+.t-HeroRegion-wrap {    /* TO ALSO ALIGN RIGHT/UP BUTTON PROPERLY */
+    align-items         : flex-start;
+}
+
+/* HERO REGION - MOVE UP REGION TO THE RIGHT - USED FOR BUTTONS */
+.t-HeroRegion-col--beforeIcon,
+.t-HeroRegion-col--beforeIcon {
+    order               : 5;
+    margin              : 1px 0 0;
+    gap                 : 0.13rem;
+}
+
+
 
 /* HERO REGION - HIDE ICONS */
 .t-HeroRegion .t-HeroRegion-icon {
@@ -109,8 +117,25 @@ h1.t-HeroRegion-title button:first-child {
 
 
 
+/* HOT BUTTONS */
+.t-Button--hot,
+.ui-button--hot {
+    background: #444;
+}
+.t-Button--hot:hover,
+.ui-button--hot:hover {
+    background: #222;
+}
+
+
+
+/* FIX BUTTON OFFSET ON LINE WITH OTHER ITEMS */
+.FILTERS button {
+    margin-top          : 0.9rem;
+}
+
 /* BUTTON BADGES */
-BUTTON .BADGE {
+button .BADGE {
     display             : block;
     float               : right;
     position            : absolute;
@@ -133,7 +158,8 @@ BUTTON .BADGE {
 #t_Header > #top_header > nav ul li.RED {
     background          : red;
 }
-#t_Header > #top_header > nav ul li a > span.BADGE {
+#t_Header > #top_header > nav ul li a > span.BADGE,
+span.BADGE {
     position            : relative;
     top                 : -0.65rem;
     padding             : 0.1rem 0.45rem 0;
@@ -145,6 +171,17 @@ BUTTON .BADGE {
     font-weight         : 500;
     font-size           : 0.75rem;
     line-height         : 1.15rem;
+}
+ul.t-Tabs span.BADGE {
+    margin-left         : 0;
+    line-height         : 0.7rem;
+}
+span.BADGE {
+    padding             : 0.25rem 0.45rem 0.2rem;
+    background          : red;
+}
+span.BADGE.DECENT {
+    background          : #888;
 }
 
 
@@ -163,21 +200,34 @@ ul.t-Tabs li.t-Tabs-item a.t-Tabs-link {
 ul.t-Tabs {
     margin-bottom       : 0.5rem;
 }
+ul.t-Tabs::selection {
+    user-select         : none;
+}
 ul.t-Tabs .t-Tabs-link {
     padding-bottom      : 0.5rem;
     background          : transparent;
+    font-size           : 1rem;
 }
-ul.t-Tabs .is-active .t-Tabs-link {
+ul.t-Tabs li.t-Tabs-item a.t-Tabs-link,
+ul.t-Tabs li.t-Tabs-item.is-active a.t-Tabs-link {
     outline             : none;
     box-shadow          : none;
-    border-bottom       : 5px solid #555;
     font-weight         : 600;
-}
-ul.t-Tabs li.t-Tabs-item a.t-Tabs-link:hover {
+    color               : #444;
     background          : transparent;
-    border-bottom       : 5px solid #555 !important;
-    font-weight         : 600;
+    padding-bottom      : 0.6rem;
+    border-bottom       : 8px solid #ededed;
 }
+ul.t-Tabs li.t-Tabs-item.is-active a.t-Tabs-link {
+    color               : #000;
+    border-bottom       : 8px solid #555 !important;
+}
+ul.t-Tabs li.t-Tabs-item a.t-Tabs-link:hover,
+ul.t-Tabs li.t-Tabs-item.is-active a.t-Tabs-link:hover {
+    color               : #000;
+    border-bottom       : 8px solid #222 !important;
+}
+
 .t-TabsRegion-items > div {
     display             : none;
 }
@@ -186,6 +236,16 @@ ul.t-Tabs li.t-Tabs-item a.t-Tabs-link:hover {
 }
 a.t-Tabs-link::before {
     display             : none;  /* remove dupe green border */
+}
+ul.t-Tabs li.t-Tabs-item {
+    margin-right        : 8px;
+}
+
+ul.t-Tabs li.t-Tabs-item {
+    margin-right        : 8px;
+}
+ul.t-Tabs li.t-Tabs-item:last-child {
+    margin-right        : 0;
 }
 
 
@@ -252,6 +312,29 @@ div.a-Toolbar-group [data-action="edit"] {
 th.a-GV-header {
     border-left         : 1px solid var(--a-gv-header-cell-border-color);
     border-bottom       : 2px solid var(--a-gv-header-cell-border-color);
+}
+
+
+
+/* LINK COLOR IN GRID */
+td.a-GV-cell a {
+    color               : #5498a9;
+    color               : #a26924;
+    color               : #738830;
+    font-weight         : 600;
+    text-decoration     : none;
+}
+td.a-GV-cell a:hover {
+    color               : #000;
+    text-decoration     : none;
+}
+
+
+
+/* LIGHTER CHECKED CHECKBOXES IN GRID */
+.apex-item-single-checkbox input:checked+.u-checkbox,
+.apex-item-single-checkbox input:checked+label, .u-checkbox.is-checked {
+    --a-checkbox-background-color: #555;
 }
 
 
@@ -392,5 +475,17 @@ button .a-Button-label,
 #t_Body_title.t-Body-title::after {
     background-image    : none;
     display             : none !important;
+}
+
+
+
+/* DECENT BUTTONS */
+button.DECENT {
+    background          : transparent;
+    color               : #999;
+}
+button.TRANSPARENT {
+    background          : transparent;
+    color               : #222;
 }
 
