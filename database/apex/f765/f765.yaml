@@ -99,13 +99,12 @@ navigation-menu:
   list-template: Navigation Bar Q # 17853508706506526
   template-options: 
   - '#DEFAULT#'
-  - js-tabLike
   list-position: Top
 
 navigation-bar: 
   implementation: List
   list: NAVIGATION # 23407920305865460
-  list-template: Navigation Bar Q # 17853508706506526
+  list-template: Navigation Q23 # 29823902065064279
   template-options: 
   - '#DEFAULT#'
 
@@ -116,8 +115,8 @@ javascript:
 
 css: 
   file-urls: 
-  - '#WORKSPACE_FILES#master_fonts#MIN#.css?version=#APP_VERSION#'
-  - '#WORKSPACE_FILES#master_menu_top#MIN#.css?version=#APP_VERSION#'
+  - '#WORKSPACE_FILES#master_fonts#MIN#.css?version=#APP_VERSION#'
+  - '#WORKSPACE_FILES#master_menu_top#MIN#.css?version=#APP_VERSION#'
   - '#WORKSPACE_FILES#master_app#MIN#.css?version=#APP_VERSION#'
 
 attributes: 
