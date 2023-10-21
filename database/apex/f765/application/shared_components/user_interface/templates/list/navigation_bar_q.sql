@@ -62,7 +62,6 @@ wwv_flow_imp_shared.create_list_template(
 ,p_a07_label=>'<a>#TEXT ...</a>'
 ,p_a08_label=>'</a>...'
 ,p_a09_label=>'<ul class="...">'
-,p_reference_id=>60837470868358458
 );
 wwv_flow_imp.component_end;
 end;

@@ -20,7 +20,7 @@ wwv_flow_imp_shared.create_user_interface(
 ,p_built_with_love=>false
 ,p_navigation_list_position=>'TOP'
 ,p_navigation_list_template_id=>wwv_flow_imp.id(17853508706506526)
-,p_nav_list_template_options=>'#DEFAULT#:js-tabLike'
+,p_nav_list_template_options=>'#DEFAULT#'
 ,p_css_file_urls=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '#WORKSPACE_FILES#master_fonts#MIN#.css?version=#APP_VERSION#',
 '#WORKSPACE_FILES#master_menu_top#MIN#.css?version=#APP_VERSION#',
@@ -28,7 +28,7 @@ wwv_flow_imp_shared.create_user_interface(
 ,p_javascript_file_urls=>'#WORKSPACE_FILES#master_app#MIN#.js?version=#APP_VERSION#'
 ,p_nav_bar_type=>'LIST'
 ,p_nav_bar_list_id=>wwv_flow_imp.id(23407920305865460)
-,p_nav_bar_list_template_id=>wwv_flow_imp.id(17853508706506526)
+,p_nav_bar_list_template_id=>wwv_flow_imp.id(29823902065064279)
 ,p_nav_bar_template_options=>'#DEFAULT#'
 );
 wwv_flow_imp.component_end;
