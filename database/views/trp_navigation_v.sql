@@ -20,10 +20,6 @@ future_years AS (
 future_trips AS (
     -- data to show in menu, with some flags precalculated
     SELECT /*+ MATERIALIZE */
-        CASE WHEN ROW_NUMBER() OVER (PARTITION BY t.year_ ORDER BY t.start_at, t.end_at, t.trip_id) = COUNT(t.trip_id) OVER (PARTITION BY t.year_)
-            THEN 'Y'
-            END AS is_last_trip,
-        --
         CASE WHEN t.trip_id = x.trip_id THEN 'Y' END AS is_current_trip,
         --
         CASE WHEN t.year_ = TO_CHAR(TRUNC(SYSDATE), 'YYYY') AND t.trip_id = MIN(CASE WHEN t.end_at > TRUNC(SYSDATE) THEN t.trip_id END) KEEP (DENSE_RANK FIRST ORDER BY t.start_at DESC)
@@ -151,7 +147,7 @@ SELECT
     '' AS attribute05,
     '' AS attribute06,
     '' AS attribute07,
-    '' AS attribute08,
+    '</ul><ul>' AS attribute08,     -- start new column with each year
     '' AS attribute09,
     '' AS attribute10,
     --
@@ -194,8 +190,7 @@ SELECT
     '' AS attribute06,
     '' AS attribute07,
     '' AS attribute08,
-    --
-    CASE WHEN t.is_last_trip = 'Y' THEN '</ul><ul>' END AS attribute09,
+    '' AS attribute09,
     --
     CASE WHEN t.is_current_trip = 'Y' THEN ' class="ACTIVE"' END AS attribute10,
     --
