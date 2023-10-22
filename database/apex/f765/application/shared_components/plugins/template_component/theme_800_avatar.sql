@@ -38,7 +38,7 @@ wwv_flow_imp_shared.create_plugin(
 ,p_version_identifier=>'1.0'
 );
 wwv_flow_imp_shared.create_plugin_attribute(
- p_id=>wwv_flow_imp.id(30824905226082089)
+ p_id=>wwv_flow_imp.id(36435179848126376)
 ,p_plugin_id=>wwv_flow_imp.id(17868110936506543)
 ,p_attribute_scope=>'COMPONENT'
 ,p_attribute_sequence=>1
@@ -55,28 +55,28 @@ wwv_flow_imp_shared.create_plugin_attribute(
 ,p_help_text=>'Select the type of content that will be displayed in the avatar.'
 );
 wwv_flow_imp_shared.create_plugin_attr_value(
- p_id=>wwv_flow_imp.id(30825453466082090)
-,p_plugin_attribute_id=>wwv_flow_imp.id(30824905226082089)
+ p_id=>wwv_flow_imp.id(36435624753126377)
+,p_plugin_attribute_id=>wwv_flow_imp.id(36435179848126376)
 ,p_display_sequence=>10
 ,p_display_value=>'Image'
 ,p_return_value=>'IMAGE'
 );
 wwv_flow_imp_shared.create_plugin_attr_value(
- p_id=>wwv_flow_imp.id(30826016847082090)
-,p_plugin_attribute_id=>wwv_flow_imp.id(30824905226082089)
+ p_id=>wwv_flow_imp.id(36436284918126377)
+,p_plugin_attribute_id=>wwv_flow_imp.id(36435179848126376)
 ,p_display_sequence=>20
 ,p_display_value=>'Initials'
 ,p_return_value=>'INITIALS'
 );
 wwv_flow_imp_shared.create_plugin_attr_value(
- p_id=>wwv_flow_imp.id(30826616784082090)
-,p_plugin_attribute_id=>wwv_flow_imp.id(30824905226082089)
+ p_id=>wwv_flow_imp.id(36436819309126378)
+,p_plugin_attribute_id=>wwv_flow_imp.id(36435179848126376)
 ,p_display_sequence=>30
 ,p_display_value=>'Icon'
 ,p_return_value=>'ICON'
 );
 wwv_flow_imp_shared.create_plugin_attribute(
- p_id=>wwv_flow_imp.id(30827287129082091)
+ p_id=>wwv_flow_imp.id(36437475269126378)
 ,p_plugin_id=>wwv_flow_imp.id(17868110936506543)
 ,p_attribute_scope=>'COMPONENT'
 ,p_attribute_sequence=>2
@@ -88,7 +88,7 @@ wwv_flow_imp_shared.create_plugin_attribute(
 ,p_demo_value=>'#APEX_FILES#apex_ui/img/favicons/app-artwork-catalog.png'
 ,p_escape_mode=>'ATTR'
 ,p_is_translatable=>false
-,p_depending_on_attribute_id=>wwv_flow_imp.id(30824905226082089)
+,p_depending_on_attribute_id=>wwv_flow_imp.id(36435179848126376)
 ,p_depending_on_has_to_exist=>true
 ,p_depending_on_condition_type=>'EQUALS'
 ,p_depending_on_expression=>'IMAGE'
@@ -104,7 +104,7 @@ wwv_flow_imp_shared.create_plugin_attribute(
 '</p>'))
 );
 wwv_flow_imp_shared.create_plugin_attribute(
- p_id=>wwv_flow_imp.id(30827727484082091)
+ p_id=>wwv_flow_imp.id(36437995467126378)
 ,p_plugin_id=>wwv_flow_imp.id(17868110936506543)
 ,p_attribute_scope=>'COMPONENT'
 ,p_attribute_sequence=>3
@@ -115,13 +115,13 @@ wwv_flow_imp_shared.create_plugin_attribute(
 ,p_is_required=>false
 ,p_escape_mode=>'ATTR'
 ,p_is_translatable=>false
-,p_depending_on_attribute_id=>wwv_flow_imp.id(30827287129082091)
+,p_depending_on_attribute_id=>wwv_flow_imp.id(36437475269126378)
 ,p_depending_on_has_to_exist=>true
 ,p_depending_on_condition_type=>'NOT_NULL'
 ,p_help_text=>'Enter a short description of the image or select a source column from the quick pick options. This will be used as alt text for the avatar image.'
 );
 wwv_flow_imp_shared.create_plugin_attribute(
- p_id=>wwv_flow_imp.id(30828202019082091)
+ p_id=>wwv_flow_imp.id(36438456643126379)
 ,p_plugin_id=>wwv_flow_imp.id(17868110936506543)
 ,p_attribute_scope=>'COMPONENT'
 ,p_attribute_sequence=>4
@@ -133,14 +133,14 @@ wwv_flow_imp_shared.create_plugin_attribute(
 ,p_escape_mode=>'HTML'
 ,p_column_data_types=>'VARCHAR2'
 ,p_is_translatable=>false
-,p_depending_on_attribute_id=>wwv_flow_imp.id(30824905226082089)
+,p_depending_on_attribute_id=>wwv_flow_imp.id(36435179848126376)
 ,p_depending_on_has_to_exist=>true
 ,p_depending_on_condition_type=>'EQUALS'
 ,p_depending_on_expression=>'INITIALS'
 ,p_help_text=>'Select the source column to be displayed within each avatar. Only varchar2 data types are supported.'
 );
 wwv_flow_imp_shared.create_plugin_attribute(
- p_id=>wwv_flow_imp.id(30828744648082092)
+ p_id=>wwv_flow_imp.id(36438936981126379)
 ,p_plugin_id=>wwv_flow_imp.id(17868110936506543)
 ,p_attribute_scope=>'COMPONENT'
 ,p_attribute_sequence=>5
@@ -151,14 +151,14 @@ wwv_flow_imp_shared.create_plugin_attribute(
 ,p_is_required=>false
 ,p_escape_mode=>'ATTR'
 ,p_is_translatable=>false
-,p_depending_on_attribute_id=>wwv_flow_imp.id(30824905226082089)
+,p_depending_on_attribute_id=>wwv_flow_imp.id(36435179848126376)
 ,p_depending_on_has_to_exist=>true
 ,p_depending_on_condition_type=>'EQUALS'
 ,p_depending_on_expression=>'ICON'
 ,p_help_text=>'Enter an icon class or use the Pick Icon dialog to select the icon you want to add to display in the avatar.'
 );
 wwv_flow_imp_shared.create_plugin_attribute(
- p_id=>wwv_flow_imp.id(30829206484082092)
+ p_id=>wwv_flow_imp.id(36439402301126379)
 ,p_plugin_id=>wwv_flow_imp.id(17868110936506543)
 ,p_attribute_scope=>'COMPONENT'
 ,p_attribute_sequence=>6
@@ -174,31 +174,31 @@ wwv_flow_imp_shared.create_plugin_attribute(
 ,p_help_text=>'Select the shape of the avatar. Default inherits the shape set by the containing template.'
 );
 wwv_flow_imp_shared.create_plugin_attr_value(
- p_id=>wwv_flow_imp.id(30829780025082092)
-,p_plugin_attribute_id=>wwv_flow_imp.id(30829206484082092)
+ p_id=>wwv_flow_imp.id(36439958558126380)
+,p_plugin_attribute_id=>wwv_flow_imp.id(36439402301126379)
 ,p_display_sequence=>10
 ,p_display_value=>'Rounded'
 ,p_return_value=>'t-Avatar--rounded'
 ,p_help_text=>'Displayed within a square with rounded corners.'
 );
 wwv_flow_imp_shared.create_plugin_attr_value(
- p_id=>wwv_flow_imp.id(30830331611082092)
-,p_plugin_attribute_id=>wwv_flow_imp.id(30829206484082092)
+ p_id=>wwv_flow_imp.id(36440583606126380)
+,p_plugin_attribute_id=>wwv_flow_imp.id(36439402301126379)
 ,p_display_sequence=>20
 ,p_display_value=>'Circular'
 ,p_return_value=>'t-Avatar--circle'
 ,p_help_text=>'Displayed within a circular shape.'
 );
 wwv_flow_imp_shared.create_plugin_attr_value(
- p_id=>wwv_flow_imp.id(30830966125082093)
-,p_plugin_attribute_id=>wwv_flow_imp.id(30829206484082092)
+ p_id=>wwv_flow_imp.id(36441117123126381)
+,p_plugin_attribute_id=>wwv_flow_imp.id(36439402301126379)
 ,p_display_sequence=>30
 ,p_display_value=>'Square'
 ,p_return_value=>'t-Avatar--square'
 ,p_help_text=>'Displayed within a square shape.'
 );
 wwv_flow_imp_shared.create_plugin_attribute(
- p_id=>wwv_flow_imp.id(30831591916082093)
+ p_id=>wwv_flow_imp.id(36441724513126381)
 ,p_plugin_id=>wwv_flow_imp.id(17868110936506543)
 ,p_attribute_scope=>'COMPONENT'
 ,p_attribute_sequence=>7
@@ -214,56 +214,56 @@ wwv_flow_imp_shared.create_plugin_attribute(
 ,p_help_text=>'Set the size of the avatar. The default inherits the sizing set by the containing template.'
 );
 wwv_flow_imp_shared.create_plugin_attr_value(
- p_id=>wwv_flow_imp.id(30832076675082093)
-,p_plugin_attribute_id=>wwv_flow_imp.id(30831591916082093)
+ p_id=>wwv_flow_imp.id(36442226613126381)
+,p_plugin_attribute_id=>wwv_flow_imp.id(36441724513126381)
 ,p_display_sequence=>10
 ,p_display_value=>'Extra Extra Small'
 ,p_return_value=>'t-Avatar--xs'
 );
 wwv_flow_imp_shared.create_plugin_attr_value(
- p_id=>wwv_flow_imp.id(30832679918082094)
-,p_plugin_attribute_id=>wwv_flow_imp.id(30831591916082093)
+ p_id=>wwv_flow_imp.id(36442876822126382)
+,p_plugin_attribute_id=>wwv_flow_imp.id(36441724513126381)
 ,p_display_sequence=>20
 ,p_display_value=>'Extra Small'
 ,p_return_value=>'t-Avatar--xs'
 );
 wwv_flow_imp_shared.create_plugin_attr_value(
- p_id=>wwv_flow_imp.id(30833247822082094)
-,p_plugin_attribute_id=>wwv_flow_imp.id(30831591916082093)
+ p_id=>wwv_flow_imp.id(36443420881126382)
+,p_plugin_attribute_id=>wwv_flow_imp.id(36441724513126381)
 ,p_display_sequence=>30
 ,p_display_value=>'Small'
 ,p_return_value=>'t-Avatar--sm'
 );
 wwv_flow_imp_shared.create_plugin_attr_value(
- p_id=>wwv_flow_imp.id(30833849129082095)
-,p_plugin_attribute_id=>wwv_flow_imp.id(30831591916082093)
+ p_id=>wwv_flow_imp.id(36444098135126383)
+,p_plugin_attribute_id=>wwv_flow_imp.id(36441724513126381)
 ,p_display_sequence=>40
 ,p_display_value=>'Medium'
 ,p_return_value=>'t-Avatar--md'
 );
 wwv_flow_imp_shared.create_plugin_attr_value(
- p_id=>wwv_flow_imp.id(30834497156082095)
-,p_plugin_attribute_id=>wwv_flow_imp.id(30831591916082093)
+ p_id=>wwv_flow_imp.id(36444682996126383)
+,p_plugin_attribute_id=>wwv_flow_imp.id(36441724513126381)
 ,p_display_sequence=>50
 ,p_display_value=>'Large'
 ,p_return_value=>'t-Avatar--lg'
 );
 wwv_flow_imp_shared.create_plugin_attr_value(
- p_id=>wwv_flow_imp.id(30835031575082095)
-,p_plugin_attribute_id=>wwv_flow_imp.id(30831591916082093)
+ p_id=>wwv_flow_imp.id(36445285704126383)
+,p_plugin_attribute_id=>wwv_flow_imp.id(36441724513126381)
 ,p_display_sequence=>60
 ,p_display_value=>'Extra Large'
 ,p_return_value=>'t-Avatar--xl'
 );
 wwv_flow_imp_shared.create_plugin_attr_value(
- p_id=>wwv_flow_imp.id(30835623646082096)
-,p_plugin_attribute_id=>wwv_flow_imp.id(30831591916082093)
+ p_id=>wwv_flow_imp.id(36445822374126384)
+,p_plugin_attribute_id=>wwv_flow_imp.id(36441724513126381)
 ,p_display_sequence=>70
 ,p_display_value=>'Extra Extra Large'
 ,p_return_value=>'t-Avatar--xxl'
 );
 wwv_flow_imp_shared.create_plugin_attribute(
- p_id=>wwv_flow_imp.id(30836213627082096)
+ p_id=>wwv_flow_imp.id(36446400505126384)
 ,p_plugin_id=>wwv_flow_imp.id(17868110936506543)
 ,p_attribute_scope=>'COMPONENT'
 ,p_attribute_sequence=>8

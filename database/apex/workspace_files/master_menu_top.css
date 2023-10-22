@@ -18,7 +18,6 @@
     margin              : 0;
     padding             : 0;
     color               : #fff;
-    font-size           : 1rem;
     line-height         : 1rem;
     user-select         : none;
 }
@@ -54,9 +53,8 @@
     display             : block;
     padding             : 1rem 1rem;
     line-height         : 1rem;
-    font-size           : 1rem;
-    font-style          : normal;
-    font-weight         : 400;
+    font-family         : 'Roboto Slab', sans-serif;
+    font-size           : 0.95rem;
     white-space         : nowrap;
 }
 #t_Header > #top_header > nav a,
@@ -64,9 +62,8 @@
     display             : block;
     padding             : 1rem 1rem;
     line-height         : 1rem;
-    font-size           : 1rem;
-    font-style          : normal;
-    font-weight         : 400;
+    font-family         : 'Roboto Slab', sans-serif;
+    font-size           : 0.95rem;
     text-decoration     : none;
     white-space         : nowrap;
     color               : #fff;
@@ -74,7 +71,6 @@
     max-height          : 3rem;
 }
 #t_Header > #top_header > nav a:hover {
-    line-height         : 0.95rem; /* FOR SOME REASON IT MOVES ON HOVER */
     background          : #222;
 }
 
@@ -147,41 +143,21 @@
 #t_Header > #top_header > nav ul li.ACTIVE:hover {
     background          : #222;
 }
-#t_Header > #top_header > nav ul li.ACTIVE > a,
-#t_Header > #top_header > nav ul li.ACTIVE > span {
-    font-weight         : 600 !important;
-}
 
-/* ADJUST BADGES */
-#t_Header > #top_header > nav a > span.BADGE,
-#t_Header > #top_header > nav a:hover > span.BADGE {
-    position            : relative;
-    top                 : -0.5rem;
-    margin              : 0 -0.5rem 0 0.25rem;
-    padding             : 0.2rem 0.4rem 0.1rem;
-    font-size           : 0.75rem;
-    border-radius       : 1rem 1rem;
-    font-family         : "Roboto", sans-serif;
-    font-weight         : 500;
-    background          : red;
-    color               : #fff;
+/* ADJUST LEVEL ITEMS */
+#t_Header > #top_header > nav a.NAV_L2 {
 }
-#t_Header > #top_header > nav a > span.BADGE.DECENT,
-#t_Header > #top_header > nav a:hover > span.BADGE.DECENT {
-    background          : transparent;
+#t_Header > #top_header > nav a.NAV_L2,
+#t_Header > #top_header > nav a.NAV_L2 > span {
+    font-size           : 0.9rem;
+    line-height         : 0.9rem;
 }
-#t_Header > #top_header > nav ul li.ACTIVE span.BADGE {
-    font-weight         : 500 !important;
-}
-
-/* ADJUST LEVEL 3 ITEMS */
 #t_Header > #top_header > nav a.NAV_L3 {
     padding             : 0.7rem 2rem 0.7rem 2.8rem;
-    font-size           : 0.85rem !important;
-    line-height         : 0.8rem !important;
 }
+#t_Header > #top_header > nav a.NAV_L3,
 #t_Header > #top_header > nav a.NAV_L3 > span {
-    font-size           : 0.85rem !important;
-    line-height         : 0.8rem !important;
+    font-size           : 0.85rem;
+    line-height         : 0.85rem;
 }
 
