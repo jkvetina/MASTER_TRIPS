@@ -7,28 +7,57 @@ WITH x AS (
     FROM DUAL
 ),
 future_years AS (
+    -- columns used to divide trips
     SELECT /*+ MATERIALIZE */
-        t.year_,
-        CASE WHEN t.year_ = TO_CHAR(TRUNC(SYSDATE), 'YYYY')
-            THEN MIN(CASE WHEN t.end_at > TRUNC(SYSDATE) THEN t.trip_id END) KEEP (DENSE_RANK FIRST ORDER BY t.start_at DESC)
-            END AS next_trip,
-        --
-        x.app_id
+        t.year_
     FROM trp_trips t
     JOIN x
         ON x.user_id    = t.created_by
     WHERE t.year_       >= TO_CHAR(TRUNC(SYSDATE), 'YYYY')
     GROUP BY
-        t.year_,
-        x.app_id
+        t.year_
 ),
-home AS (
+future_trips AS (
+    -- data to show in menu, with some flags precalculated
     SELECT /*+ MATERIALIZE */
-        n.order#
+        CASE WHEN ROW_NUMBER() OVER (PARTITION BY t.year_ ORDER BY t.start_at, t.end_at, t.trip_id) = COUNT(t.trip_id) OVER (PARTITION BY t.year_)
+            THEN 'Y'
+            END AS is_last_trip,
+        --
+        CASE WHEN t.trip_id = x.trip_id THEN 'Y' END AS is_current_trip,
+        --
+        CASE WHEN t.year_ = TO_CHAR(TRUNC(SYSDATE), 'YYYY') AND t.trip_id = MIN(CASE WHEN t.end_at > TRUNC(SYSDATE) THEN t.trip_id END) KEEP (DENSE_RANK FIRST ORDER BY t.start_at DESC)
+            THEN 'Y'
+            END AS is_next_trip,
+        --
+        LPAD(ROW_NUMBER() OVER (PARTITION BY t.year_ ORDER BY t.start_at, t.end_at, t.trip_id), 8, '0') AS order#,
+        --
+        t.year_,
+        t.trip_id,
+        t.trip_name,
+        t.end_at
+        --
+    FROM trp_trips t
+    JOIN future_years y
+        ON y.year_      = t.year_
+    JOIN x
+        ON x.user_id    = t.created_by
+    GROUP BY
+        t.year_,
+        x.trip_id,
+        t.trip_id,
+        t.trip_name,
+        t.start_at,
+        t.end_at
+),
+endpoints AS (
+    -- endpoints to attach dynamic stuff, make sure this returns just 1 row
+    SELECT /*+ MATERIALIZE */
+        MAX(CASE WHEN n.page_id = 100 THEN n.order# END) AS trips
+        --
     FROM app_navigation_v n
     JOIN x
         ON x.app_id     = n.app_id
-        AND n.page_id   = 100
 )
 --
 SELECT
@@ -47,14 +76,14 @@ SELECT
 FROM app_navigation_v n
 UNION ALL
 --
--- CLASSIC MENU
+-- CLASSIC MENU - REMOVE AFTER PRESENTATION
 --
 SELECT
     1 AS lvl,
     --
     '<a href="' ||
     APEX_PAGE.GET_URL (
-        p_application   => y.app_id,
+        --p_application   => x.app_id,
         p_page          => 100,
         p_clear_cache   => 100,
         p_items         => 'P100_YEAR',
@@ -109,7 +138,7 @@ JOIN x
 WHERE t.year_       >= TO_CHAR(TRUNC(SYSDATE), 'YYYY')
 UNION ALL
 --
--- ONE MENU
+-- SAME THING BUT AS MULTICOLUMN MENU WITH ICONS/FLAGS
 --
 SELECT
     2 AS lvl,
@@ -126,10 +155,11 @@ SELECT
     '' AS attribute09,
     '' AS attribute10,
     --
-    home.order# || '/' || y.year_ AS order#
+    e.trips || '/' || y.year_ AS order#
     --
 FROM future_years y
-CROSS JOIN home
+JOIN endpoints e
+    ON e.trips IS NOT NULL
 UNION ALL
 --
 SELECT
@@ -147,7 +177,7 @@ SELECT
         WHEN t.end_at <= TRUNC(SYSDATE)
             THEN core.get_icon('fa-check') || ' &nbsp;'
             --
-        WHEN t.trip_id = y.next_trip
+        WHEN t.is_next_trip = 'Y'
             THEN core.get_icon('fa-arrow-right') || ' &nbsp;'
             --
         WHEN t.trip_name LIKE '%(?)%'
@@ -165,21 +195,15 @@ SELECT
     '' AS attribute07,
     '' AS attribute08,
     --
-    CASE WHEN ROW_NUMBER() OVER (PARTITION BY t.year_ ORDER BY t.start_at, t.end_at, t.trip_id) = COUNT(t.trip_id) OVER (PARTITION BY t.year_)
-        THEN '</ul><ul>'
-        END AS attribute09,
+    CASE WHEN t.is_last_trip = 'Y' THEN '</ul><ul>' END AS attribute09,
     --
-    CASE WHEN t.trip_id = x.trip_id THEN ' class="ACTIVE"' END AS attribute10,
+    CASE WHEN t.is_current_trip = 'Y' THEN ' class="ACTIVE"' END AS attribute10,
     --
-    home.order# || '/' || t.year_ || '/' || LPAD(ROW_NUMBER() OVER (PARTITION BY t.year_ ORDER BY t.start_at, t.end_at, t.trip_id), 8, '0') AS order#
+    e.trips || '/' || t.year_ || '/' || t.order# AS order#
     --
-FROM trp_trips t
-JOIN future_years y
-    ON y.year_      = t.year_
-CROSS JOIN home
-JOIN x
-    ON x.user_id    = t.created_by
-WHERE t.year_       >= TO_CHAR(TRUNC(SYSDATE), 'YYYY');
+FROM future_trips t
+JOIN endpoints e
+    ON e.trips IS NOT NULL;
 --
 COMMENT ON TABLE trp_navigation_v IS '';
 
