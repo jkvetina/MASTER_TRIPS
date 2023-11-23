@@ -50,6 +50,50 @@ server-cache:
   caching: Disabled
 
 regions: 
+- # ====== Region: BUTTON at the end, 23.1, need class =========
+  id: 40847961129003015
+  identification: 
+    title: BUTTON at the end, 23.1, need class
+    type: Static Content
+
+  layout: 
+    sequence: 120
+    parent-region: '[FORM]' # 61509134372840438
+    position: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Item Container # 17784873390506485
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  server-side-condition: 
+    type: Never
+
+  server-cache: 
+    caching: Disabled
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    settings: 
+      output-as: HTML
+      expand-shortcuts: false
+
 - # ====== Region: &P110_HEADER. ===============================
   id: 61508979059840437
   identification: 
@@ -372,7 +416,7 @@ page-items:
     trim-spaces: Leading and Trailing
 
   layout: 
-    sequence: 170
+    sequence: 180
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
@@ -430,7 +474,7 @@ page-items:
     use-defaults: true
 
   layout: 
-    sequence: 130
+    sequence: 140
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
@@ -487,7 +531,7 @@ page-items:
     on-label: Y
 
   layout: 
-    sequence: 140
+    sequence: 150
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
@@ -540,7 +584,7 @@ page-items:
     on-label: Y
 
   layout: 
-    sequence: 150
+    sequence: 160
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
@@ -593,7 +637,7 @@ page-items:
     on-label: Y
 
   layout: 
-    sequence: 160
+    sequence: 170
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
@@ -700,6 +744,7 @@ page-items:
     maximum-length: 2000
 
   advanced: 
+    post-text-: '&P110_LINK_RESERVATION_BUTTON!RAW.'
     warn-on-unsaved-changes: Page Default
 
   source: 
@@ -760,6 +805,7 @@ page-items:
     maximum-length: 2000
 
   advanced: 
+    post-text-: '&P110_LINK_EVENT_BUTTON!RAW.'
     warn-on-unsaved-changes: Page Default
 
   source: 
@@ -985,7 +1031,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 180
+    sequence: 190
     region: '[FORM]' # 61509134372840438
     position: BODY
 
@@ -1018,7 +1064,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 190
+    sequence: 200
     region: '[FORM]' # 61509134372840438
     position: BODY
 
@@ -1035,6 +1081,126 @@ page-items:
   session-state: 
     data-type: VARCHAR2
     storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_LINK_EVENT_BUTTON ===================
+  id: 40847210776003008
+  identification: 
+    name: P110_LINK_EVENT_BUTTON
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 50
+    region: '&P110_HEADER.' # 61508979059840437
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_LINK_RESERVATION_BUTTON =============
+  id: 40847530815003011
+  identification: 
+    name: P110_LINK_RESERVATION_BUTTON
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 60
+    region: '&P110_HEADER.' # 61508979059840437
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_LINK_EVENT_1 ========================
+  id: 40847874780003014
+  identification: 
+    name: P110_LINK_EVENT_1
+    type: Text Field
+
+  label: 
+    label: EVENT
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 10
+    region: BUTTON at the end, 23.1, need class # 40847961129003015
+    position: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating # 17863699601506533
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+    maximum-length: 2000
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 61509134372840438
+    column: LINK_EVENT
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
 
   security: 
     session-state-protection: Unrestricted
@@ -1072,78 +1238,6 @@ page-items:
     restricted-characters: All characters can be saved.
 
 buttons: 
-- # ====== Button: GOTO_EVENT ==================================
-  id: 19759262131896037
-  identification: 
-    button-name: GOTO_EVENT
-    label: Go
-
-  layout: 
-    sequence: 110
-    region: '[FORM]' # 61509134372840438
-    position: BODY
-    start-new-layout: false
-    start-new-row: false
-    column: 12
-    new-column: true
-    column-span: 1
-    alignment: Left center
-
-  appearance: 
-    button-template: Text # 17866172241506537
-    hot: false
-    template-options: 
-    - '#DEFAULT#'
-    css-classes: 
-    - GOTO_BUTTON
-    icon: fa-external-link
-
-  behavior: 
-    action: Redirect to URL
-    target: "javascript:window.open('&P110_LINK_EVENT.', '_blank');"
-    execute-validations: false
-    warn-on-unsaved-changes: Do Not Check
-
-  server-side-condition: 
-    type: Item is NOT NULL
-    item: P110_LINK_EVENT
-
-- # ====== Button: GOTO_RESERVATION ============================
-  id: 19759300777896038
-  identification: 
-    button-name: GOTO_RESERVATION
-    label: Go
-
-  layout: 
-    sequence: 90
-    region: '[FORM]' # 61509134372840438
-    position: BODY
-    start-new-layout: false
-    start-new-row: false
-    column: 6
-    new-column: true
-    column-span: 1
-    alignment: Left center
-
-  appearance: 
-    button-template: Text # 17866172241506537
-    hot: false
-    template-options: 
-    - '#DEFAULT#'
-    css-classes: 
-    - GOTO_BUTTON
-    icon: fa-external-link
-
-  behavior: 
-    action: Redirect to URL
-    target: "javascript:window.open('&P110_LINK_RESERVATION.', '_blank');"
-    execute-validations: false
-    warn-on-unsaved-changes: Do Not Check
-
-  server-side-condition: 
-    type: Item is NOT NULL
-    item: P110_LINK_RESERVATION
-
 - # ====== Button: DELETE_STOP =================================
   id: 23620092432153278
   identification: 
@@ -1238,6 +1332,34 @@ buttons:
     warn-on-unsaved-changes: Do Not Check
     database-action: SQL INSERT action
 
+- # ====== Button: END =========================================
+  id: 40848080758003016
+  identification: 
+    button-name: END
+    label: End
+
+  layout: 
+    sequence: 10
+    region: BUTTON at the end, 23.1, need class # 40847961129003015
+    position: BUTTON_END
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 17865448457506535
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-anchor
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+
 dynamic-actions: 
 - # ====== Dynamic Action: CLOSE_DIALOG ========================
   id: 23715562144896209
@@ -1267,6 +1389,52 @@ dynamic-actions:
       event: CLOSE_DIALOG # 23715562144896209
       fire-when-event-result-is: True
       fire-on-initialization: false
+
+- # ====== Dynamic Action: CHANGED_START_DATE ==================
+  id: 40846967291003005
+  identification: 
+    name: CHANGED_START_DATE
+
+  execution: 
+    sequence: 20
+
+  when: 
+    event: EVENT.EVENT.BROWSER.CHANGE
+    selection-type: Item(s)
+    item(s): 
+    - P110_START_AT
+
+  execution: 
+    event-scope: Static
+    type: Immediate
+
+  actions: 
+  - # ====== Action: Set Value ===================================
+    id: 40847037699003006
+    identification: 
+      action: Set Value
+
+    settings: 
+      set-type: PL/SQL Expression
+      pl/sql-expression: "TO_CHAR(core.get_date(:P110_START_AT), 'YYYY-MM-DD') || ' ' || TO_CHAR(core.get_date(:P110_END_AT), 'HH24:MI')"
+      items-to-submit: 
+      - P110_START_AT
+      - P110_END_AT
+      escape-special-characters: true
+      suppress-change-event: false
+
+    affected-elements: 
+      selection-type: Item(s)
+      item(s): 
+      - P110_END_AT
+
+    execution: 
+      sequence: 10
+      event: CHANGED_START_DATE # 40846967291003005
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+      stop-execution-on-error: true
+      wait-for-result: true
 
 computations: 
 - # ====== Computation: P110_SUBMIT ============================
@@ -1318,6 +1486,72 @@ computations:
       SELECT TO_CHAR(MIN(t.start_at), 'YYYY-MM-DD')
       FROM trp_trips t
       WHERE t.trip_id = :P110_TRIP_ID
+
+- # ====== Computation: P110_LINK_EVENT_BUTTON =================
+  id: 40847337210003009
+  identification: 
+    item-name: P110_LINK_EVENT_BUTTON
+
+  execution: 
+    sequence: 40
+    point: Before Regions
+
+  computation: 
+    type: Static Value
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P110_LINK_EVENT
+
+- # ====== Computation: P110_LINK_RESERVATION_BUTTON ===========
+  id: 40847468096003010
+  identification: 
+    item-name: P110_LINK_RESERVATION_BUTTON
+
+  execution: 
+    sequence: 60
+    point: Before Regions
+
+  computation: 
+    type: Static Value
+
+  server-side-condition: 
+    type: Item is NULL
+    item: P110_LINK_RESERVATION
+
+- # ====== Computation: P110_LINK_EVENT_BUTTON =================
+  id: 40847638054003012
+  identification: 
+    item-name: P110_LINK_EVENT_BUTTON
+
+  execution: 
+    sequence: 50
+    point: Before Regions
+
+  computation: 
+    type: Static Value
+    static-value: "<button type=\"button\" class=\"a-Button\" aria-label=\"Open link\" tabindex=\"-1\" style=\"height: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;\" onclick=\"javascript:window.open('&P110_LINK_EVENT.', '_blank');\"><span class=\"fa fa-anchor\"></span></button>"
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P110_LINK_EVENT
+
+- # ====== Computation: P110_LINK_RESERVATION_BUTTON ===========
+  id: 40847746212003013
+  identification: 
+    item-name: P110_LINK_RESERVATION_BUTTON
+
+  execution: 
+    sequence: 70
+    point: Before Regions
+
+  computation: 
+    type: Static Value
+    static-value: "<button type=\"button\" class=\"a-Button\" aria-label=\"Open link\" tabindex=\"-1\" style=\"height: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;\" onclick=\"javascript:window.open('&P110_LINK_RESERVATION.', '_blank');\"><span class=\"fa fa-anchor\"></span></button>"
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P110_LINK_RESERVATION
 
 processes: 
 - # ====== Process: CLOSE_DIALOG ===============================
