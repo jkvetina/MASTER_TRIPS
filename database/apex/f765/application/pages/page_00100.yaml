@@ -1,8 +1,8 @@
 ---
-# ====== Page: &APP_NAME. ====================================
+# ====== Page: #APP_NAME# ====================================
 id: 100
 identification: 
-  name: '&APP_NAME.'
+  name: '#APP_NAME#'
   alias: HOME
   title: '&APP_NAME.'
   page-group: ' MAIN' # 67422548002820357
@@ -2625,7 +2625,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_TRIP_ID:'
-      page: 100 # &APP_NAME.
+      page: 100 # #APP_NAME#
       clear-cache: 100
       values: 
 
@@ -2658,7 +2658,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:&P100_DAY_PREV.'
-      page: 100 # &APP_NAME.
+      page: 100 # #APP_NAME#
       values: 
         p100_day: '&P100_DAY_PREV.'
 
@@ -2695,7 +2695,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:&P100_DAY_NEXT.'
-      page: 100 # &APP_NAME.
+      page: 100 # #APP_NAME#
       values: 
         p100_day: '&P100_DAY_NEXT.'
 
@@ -2732,7 +2732,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:'
-      page: 100 # &APP_NAME.
+      page: 100 # #APP_NAME#
       values: 
 
     warn-on-unsaved-changes: Page Default
@@ -2836,7 +2836,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_STATUS:PAID'
-      page: 100 # &APP_NAME.
+      page: 100 # #APP_NAME#
       values: 
         p100_status: PAID
 
@@ -2874,7 +2874,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_STATUS:'
-      page: 100 # &APP_NAME.
+      page: 100 # #APP_NAME#
       values: 
 
     warn-on-unsaved-changes: Page Default
