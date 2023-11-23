@@ -1,62 +1,349 @@
 //
-// HANDLE AJAX PROCESS MESSAGES
+// WHEN PAGE LOADS
 //
-const show_success = function(message) {
-    apex.message.showPageSuccess(extract_message(message));
+var ping_active = !$('body').hasClass('t-Dialog-page');     // not on modals
+var ping_loop;
+var last_scheduler;
+//
+const init_page_asap = function() {
+    const autohide_after = 2300;
+
+    // autohide success messages
+    // this actually dont work together with the following setThemeHooks
+    apex.theme42.util.configAPEXMsgs({
+        autoDismiss : true,
+        duration    : autohide_after
+    });
+
+    // catch message event
+    apex.message.setThemeHooks({
+        beforeShow: function(pMsgType, pElement$) {
+            // error messages
+            if (pMsgType === apex.message.TYPE.ERROR) {
+                var msg = get_message(pElement$.find('ul.a-Notification-list li').html());
+                console.log('MESSAGE.ERROR:', msg);
+
+                // switch error to warning
+                if (msg.status == 'WARNING') {
+                    pElement$.find('.t-Alert--warning').addClass('t-Alert--yellow');
+                }
+
+                // change message
+                pElement$.find('.a-Notification-item').first().html(msg.message);
+                //
+                // @TODO: need fix for multiple messages
+                //
+
+                // stop pinging on session timeout error
+                if (msg.message.toUpperCase().includes('YOUR SESSION HAS ENDED')) {
+                    ping_active = false;
+                    for (var i = 0 ; i <= ping_loop; i++) {
+                        clearTimeout(i); 
+                    }
+                    redirect_to_login();
+                }
+            }
+
+            // success messages
+            if (pMsgType === apex.message.TYPE.SUCCESS) {
+                var msg = get_message($('#APEX_SUCCESS_MESSAGE h2.t-Alert-title').html());
+                console.log('MESSAGE.SUCCESS:', msg);
+
+                // change message
+                $('#APEX_SUCCESS_MESSAGE h2.t-Alert-title').text(msg.message);
+
+                // auto hide success message
+                // this message can be from AJAX call (AJAX_PING process) and then it wont be autoclosed
+                clearTimeout(last_scheduler);
+                last_scheduler = setTimeout(() => {
+                    apex.message.hidePageSuccess();
+                }, autohide_after);
+            }
+
+            // execute action if requested
+            if (!!msg.action) {
+                console.log('TRIGGER_ACTION', msg.action);
+                $.event.trigger(msg.action);    // @TODO: pass more arguments
+            }
+        },
+        beforeHide: function(pMsgType, pElement$) {
+        }
+    });
+
+    //
+    // PING FOR LOGGED USERS
+    //
+    var ping_interval = parseInt(apex.item('P0_AJAX_PING_INTERVAL').getValue());
+    var ping_fn = function() {
+        if (!ping_active) {
+            return;
+        }
+        //
+        console.log('CALL AJAX_PING');
+        apex.server.process (
+            'AJAX_PING',
+            {
+                //x01: 1,
+                //x02: 2,
+                //x03: 3,
+                //p_arg_names   : [''],     // set items?
+                //p_arg_values  : [''],
+            },  // params
+            {
+                async       : true,
+                dataType    : 'text',
+                success     : function(payload) {
+                    if (payload.trim().length > 0) {
+                        try {
+                            const obj = JSON.parse(payload);
+                            console.log('PING RECEIVED, JSON', obj);
+                            show_message(obj);
+                        }
+                        catch(err) {
+                            console.log('PING RECEIVED, TEXT', payload, err);
+                            show_message(payload);
+                        }
+                    }
+                }
+            }
+        );
+        //
+        if (ping_active && ping_interval > 0) {
+            ping_loop = setTimeout(function() { ping_fn(); }, ping_interval * 1000);
+        }
+    };
+    if (ping_active && ping_interval > 0 && apex.item('P0_AJAX_PING_INTERVAL').node) {
+        ping_loop = ping_fn();
+    }
 };
 //
-const show_warning = function(message) {
+const init_page_delayed = function() {
+    fix_grid_default();
+};
+//
+const init_page = function() {
+    //
+    // ADJUST GRIDS
+    //
+    fix_grid_toolbars();
+    fix_grid_save_button();
+    //
+    delay(300).then(() => init_page_delayed());
+
+    //
+    // INIT ACTION MENUS
+    //
+    $('body').on('click', 'button.ACTION_MENU', show_action_menu);
+    $('html').click(function() {
+        $('div.ACTION_MENU').hide();
+    });
+    $('div.ACTION_MENU a').click(function(e) {
+        var f = $(this);
+        console.log('MENU CLICK', f, e);
+    });
+};
+
+// fix badges on buttons
+$('button > .t-Button-label').each(function(k, id) {
+    $(id).html($(id).html().replace(/\[([^\]]+)\]/, '<div class="BADGE">$1</div>'));
+});
+
+// when page is loaded
+$(function() {
+    init_page_asap();
+    reset_tabs();
+});
+
+// when all APEX components are loaded
+apex.jQuery(window).on('theme42ready', function() {
+    init_page();
+
+
+
+    //
+    // TEST TO CATCH GRID REFRESH
+    // TEST TO CATCH GRID COLUMN CHANGE
+    //
+    $('.a-IG').each(function() {
+        var $parent     = $(this).parent();
+        var static_id   = $parent.attr('id');
+        //
+        if (!$parent.hasClass('ORIGINAL')) {
+            var grid        = apex.region(static_id).widget();
+            var model       = grid.interactiveGrid('getViews', 'grid').model;
+            var viewId = model.subscribe({
+                onChange: function(changeType, change) {
+                    var grid        = apex.region(static_id).widget();
+                    var model       = grid.interactiveGrid('getViews', 'grid').model;
+                    var gridview    = grid.interactiveGrid('getViews').grid;
+                    var columns     = {};
+                    //
+                    gridview.getColumns().forEach(function(row) {
+                        columns[row.property] = row.index;
+                    });
+                    //
+                    console.group('GRID_CHANGED', static_id);
+                    console.log('TYPE', changeType);
+                    console.log('CHANGE', change);
+                    console.log('MODEL', model);
+                    console.log('VIEW', gridview);
+                    //console.log('COLUMNS:', columns, gridview.getColumns());
+
+                    if (changeType == 'set') {
+                        console.log('CHANGED COLUMN', 'KEY=' + change.recordId, 'COL=' + change.field, 'OLD=' + change.oldValue, 'NEW=' + change.record[columns[change.field]], 'DATA:', change.record);
+
+                        var new_default = change.field == 'IS_DEFAULT' && change.oldValue === '' && change.record[columns[change.field]] == 'Y';
+                        if (new_default) {
+                            model.forEach(function(r, idx, id) {
+                                console.log('EDITED=', id === change.recordId, 'MODEL ROW', idx, id, r);
+                                //if (id === change.recordId) {
+                                //    console.log('MODEL DATA', idx, r);
+                                //}
+
+                                // new default selected, remove old values
+                                if (id !== change.recordId) {
+                                    if (model.getValue(r, 'IS_DEFAULT') == 'Y') {
+                                        model.setValue(r, 'IS_DEFAULT', '');
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                    //
+                    // THIS FIRE BEFORE THE GRID IS REFRESHED
+                    //
+
+                    if (changeType == 'refresh') {
+                        //model.fetchAll(function() {});
+                        //grid.interactiveGrid('getCurrentView').model.fetch();
+                        //grid.interactiveGrid('getViews').grid.refresh();
+
+                        //model.forEach(function(r, i, id) {
+                        //    console.log('ROW___', i, id, r);
+                        //});
+
+                        //alert('ON_CHANGE EVENT, TYPE=REFRESH');
+
+                        console.warn('REAPPLY_GRID_INIT + DELAYED', static_id);
+                        delay(300).then(() => fix_grid_default(static_id));
+                    }
+
+
+                    if (change.field == 'IS_DEFAULT') {
+                        //console.log('IS_DEFAULT');
+
+                        //grid_one_checkbox_only(static_id, change.field);
+                    }
+
+                    console.groupEnd();
+                }
+            });
+            console.log('GRID INIT', static_id, grid, model);
+        }
+    });
+});
+
+
+
+//
+// CHECK SESSION - redirect to login page when session expire
+//
+const redirect_to_login = function() {
+    if (apex.env.APP_ID == 800 && apex.env.APP_PAGE_ID == 9999 && (
+        apex.env.APP_SESSION == 0   // dont work for 0
+        || window.location.search.startsWith('?p=800:9999:0:')
+        || window.location.search.startsWith('?session=0'))) {
+        return;  // already on login page
+    }
+    if (!!apex.item('P0_SESSION_TIMEOUT_URL').getValue()) {
+        window.location.href = apex.item('P0_SESSION_TIMEOUT_URL').getValue();
+    }
+    else {
+        //apex.navigation.redirect("&LOGOUT_URL.");     // not available here
+        apex.navigation.redirect('/ords/f?p=800:9999:0::::P9999_ERROR:SESSION_TIMEOUT');
+    }
+};
+//
+const check_session = function () {
+    $(document).on('dialogopen', function(event) {  
+        if ($('button:contains("Sign In Again")').length > 0) {
+            event.preventDefault();
+            event.stopPropagation();
+            //
+            //redirect_to_login();
+            return false;
+        }
+    });
+};
+
+
+
+//
+// HANDLE AJAX PROCESS MESSAGES
+//
+const show_success = function(msg) {
+    apex.message.showPageSuccess(JSON.stringify(get_message(msg, 'SUCCESS')));
+};
+//
+const show_warning = function(msg) {
     apex.message.clearErrors();
     apex.message.showErrors([{
         type:       apex.message.TYPE.ERROR,    // sadly no warning supported
         location:   ['page'],
-        message:    'WARNING! ' + message,      // so we will fake it
+        message:    JSON.stringify(get_message(msg, 'WARNING')),
         unsafe:     false
     }]);
 };
 //
-const show_error = function(message) {
+const show_error = function(msg) {
     apex.message.clearErrors();
     apex.message.showErrors([{
         type:       apex.message.TYPE.ERROR,
         location:   ['page'],
-        message:    message,
+        message:    JSON.stringify(get_message(msg, 'ERROR')),
         unsafe:     false
     }]);
 };
 //
-const show_message = function(data) {           // expecting JSON objects, ideally from core.set_json_message
-    if (data.message) {
-        if (data.status == 'SUCCESS') {
-            apex.message.showPageSuccess(data.message);
+const show_message = function(msg) {           // expecting JSON objects, ideally from core.set_json_message
+    if (!!msg.message) {
+        if (msg.status == 'SUCCESS') {
+            show_success(msg);
+        }
+        else if (msg.status == 'WARNING') {
+            show_warning(msg);
         }
         else {
-            apex.message.showErrors([{
-                type:       data.status,
-                location:   ['page'],
-                message:    data.message,
-                unsafe:     false
-            }]);
+            show_error(msg);
         }
     }
 };
 //
-const extract_message = function(message) {
-    if (message.substring(0, 1) === '{' && message.trim().slice(-1) === '}') {
+const get_message = function(payload, status, action) {
+    var msg = {
+        'message'   : payload,
+        'status'    : status,
+        'action'    : action
+    };
+    if (typeof payload == 'object') {
+        msg.message = (!!payload.message ? payload.message : msg.message);
+        msg.status  = (!!payload.status  ? payload.status  : msg.status);
+        msg.action  = (!!payload.action  ? payload.action  : msg.action);
+    }
+    else if (typeof payload == 'string' && payload.substring(0, 1) === '{' && payload.trim().slice(-1) === '}') {
         try {
-            const obj = JSON.parse(message);
+            const obj = JSON.parse(payload);
             //
-            message = (!!obj.message ? obj.message : '');
-            //
-            if (!!obj.action) {
-                console.log('TRIGGER_ACTION', obj.action);
-                $.event.trigger(obj.action);
-            }
+            msg.message = (!!obj.message ? obj.message : msg.message);
+            msg.status  = (!!obj.status  ? obj.status  : msg.status);
+            msg.action  = (!!obj.action  ? obj.action  : msg.action);
         }
         catch(err) {
+            console.error('JSON_PARSE_FAILED', payload, err);
         }
     }
-    return message;
+    return msg;
 };
 
 
@@ -87,7 +374,7 @@ const wait_for_element = function(search, start, fn, disconnect) {
 //
 const delay = function (time) {
     return new Promise(resolve => setTimeout(resolve, time));
-}
+};
 
 
 
@@ -101,7 +388,7 @@ const copy_to_clipboard = function (text) {
     dummy.select();
     document.execCommand('copy');
     document.body.removeChild(dummy);
-}
+};
 
 
 
@@ -138,142 +425,27 @@ const color_cell = function (options, value, title, color_bg, color_text) {
         };
     }
     return options;
-}
-
-
-
-//
-// WHEN PAGE LOADS
-//
-var ping_active = true;
-var ping_loop;
-var last_scheduler;
-//
-const init_page = function() {
-    // autohide success messages
-    // this actually dont work together with the following setThemeHooks
-    apex.theme42.util.configAPEXMsgs({
-        autoDismiss : true,
-        duration    : 2300
-    });
-
-    // catch message event
-    apex.message.setThemeHooks({
-        beforeShow: function(pMsgType, pElement$) {
-            console.log('MESSAGE:', pMsgType, pElement$);
-
-            if (pMsgType === apex.message.TYPE.ERROR) {
-                var message = pElement$.find('ul.a-Notification-list li').text();
-                console.log('MESSAGE.ERROR:', message);
-                message = extract_message(message);
-
-                // switch error to warning
-                if (message.includes('WARNING!')) {
-                    message = message.replace('WARNING!', '').trim();
-                    pElement$.find('.t-Alert--warning').addClass('t-Alert--yellow');
-                    pElement$.find('.a-Notification-item').first().html(message);
-                }
-
-                // stop pinging on session timeout error
-                if (message.toUpperCase().includes('YOUR SESSION HAS ENDED')) {
-                    ping_active = false;
-                    for (var i = 0 ; i <= ping_loop; i++) {
-                        clearTimeout(i); 
-                    }
-                    // also redirect to login page
-                    window.location.href = apex.item('P0_SESSION_TIMEOUT_URL').getValue();
-                }
-            }
-
-            // autohide success messages
-            // this message can be from AJAX call (AJAX_PING process) and then it wont be autoclosed
-            if (pMsgType === apex.message.TYPE.SUCCESS) {
-                var message = extract_message($('#APEX_SUCCESS_MESSAGE h2.t-Alert-title').text());
-                console.log('MESSAGE.SUCCESS:', message);
-                $('#APEX_SUCCESS_MESSAGE h2.t-Alert-title').text(message);
-                clearTimeout(last_scheduler);
-                last_scheduler = setTimeout(() => {
-                    apex.message.hidePageSuccess();
-                }, 2300);
-            }
-        },
-        beforeHide: function(pMsgType, pElement$) {
-        }
-    });
-
-    //
-    // PING FOR LOGGED USERS
-    //
-    var ping_interval = parseInt(apex.item('P0_AJAX_PING_INTERVAL').getValue());
-    var ping_fn = function() {
-        if (!ping_active) {
-            return;
-        }
-        //
-        console.log('CALL AJAX_PING');
-        apex.server.process (
-            'AJAX_PING',
-            {
-                //x01: 1,
-                //x02: 2,
-                //x03: 3,
-                //p_arg_names   : [''],     // set items?
-                //p_arg_values  : [''],
-            },  // params
-            {
-                async       : true,
-                dataType    : 'json',
-                success     : function(data) {
-                    //console.log('PING RECEIVED', ping_loop, data);
-                    show_message(data);
-                }
-            }
-        );
-        //
-        if (ping_active && ping_interval > 0) {
-            ping_loop = setTimeout(function() { ping_fn(); }, ping_interval * 1000);
-        }
-    };
-    if (ping_active && ping_interval > 0 && apex.item('P0_AJAX_PING_INTERVAL').node) {
-        ping_loop = ping_fn();
-    }
-
-    //
-    // ADJUST GRIDS
-    //
-    fix_grid_toolbars();
-    fix_grid_save_button();
 };
-
-// fix badges on buttons
-$('button > .t-Button-label').each(function(k, id) {
-    $(id).html($(id).html().replace(/\[([^\]]+)\]/, '<div class="BADGE">$1</div>'));
-});
-
-// when page is loaded
-$(function() {
-});
-
-// when all APEX components are loaded
-apex.jQuery(window).on('theme42ready', function() {
-    init_page();
-});
-
-
+//
+const cell_class = function (options, value, title) {
+    options.defaultGridColumnOptions = {
+        cellCssClassesColumn: 'CSS_CLASS'
+    };
+    return options;
+};
 
 
 
 //
 // COMMON TOOLBAR FOR ALL GRIDS
 //
-const fix_grid_toolbars = function () {
+const fix_grid_toolbars = function (grid_id) {
     $('.a-IG').each(function() {
-        var $parent = $(this).parent();
-        var id      = $parent.attr('id');
+        var $parent     = $(this).parent();
+        var static_id   = $parent.attr('id');
         //
-        if (!$parent.hasClass('ORIGINAL')) {
-            //console.log('GRID MODIFIED', id);
-            fix_grid_toolbar(id);
+        if ((grid_id === undefined || grid_id === static_id) && !$parent.hasClass('ORIGINAL')) {
+            fix_grid_toolbar(static_id);
         }
     })
 };
@@ -447,8 +619,19 @@ const fix_grid_toolbar = function (region_id) {
 
     // keep selected rows
     config.defaultGridViewOptions = {
-        persistSelection: true
+        persistSelection: true,
+        rowHeader: "sequence",      // not working
+        singleRowView: false
     };
+
+    // turn off single row view - NOT WORKING
+    //var features = apex.util.getNestedObject( config, 'views.grid.features');
+    //features.singleRowView = false;
+    //config.views.grid.features.rowHeader = 'sequence';
+    //config.views.grid.features.singleRowView = false;
+    //config.defaultGridViewOptions.rowHeader = "sequence";
+    //config.defaultGridViewOptions.singleRowView = false;
+    
 
     //actions.set('edit', true);    // not working
     //config.editable = true;
@@ -482,6 +665,69 @@ const fix_grid_save_button = function () {
         observer.observe($el[0], {
             attributes: true
         });
+    });
+};
+
+
+
+//
+// FIX GRID CHECKBOX CLICK
+// ACTIVATE EDIT MODE, SELECT CURRENT ROW, PROCEED WITH GRID_ONE FUNCTION
+//
+const fix_grid_checkbox = function(grid_id, grid_one_column) {
+    console.log('FIXING CHECKBOX....', grid_id, grid_one_column);
+    //
+    $('#' + grid_id + ' div.a-IG div.a-IG-body div.a-IG-contentContainer div.a-GV div.a-GV-bdy table.a-GV-table.a-GV-table--checkbox tbody td span.u-checkbox').on('click', function() {
+        apex.region(grid_id).call('getActions').set('edit', true);
+        $(this).closest('th.a-GV-cell.a-GV-selHeader').click();
+        //
+        if (grid_one_column) {
+        //    grid_one_checkbox_only(grid_id, grid_one_column);
+        }
+    });
+};
+
+
+
+//
+// MARK CURRENT ROW WITH ARROW,
+// FIX IS_DEFAULT COLUMNS (ONE CHECKBOX ONLY FOR ALL ROWS)
+//
+const fix_grid_default = function(grid_id) {
+    $('.a-IG').each(function() {
+        var $parent     = $(this).parent();
+        var static_id   = $parent.attr('id');
+        //
+        if ((grid_id === undefined || grid_id === static_id) && !$parent.hasClass('ORIGINAL')) {
+            console.group('GRID_MODIFIED + DELAYED', static_id);
+            //
+            var grid        = apex.region(static_id).widget();
+            var model       = grid.interactiveGrid('getViews', 'grid').model;
+            var gridview    = grid.interactiveGrid('getViews').grid;
+            //
+            console.log('GRID', grid);
+            console.log('MODEL', model);
+            console.log('VIEW', gridview);
+
+            // find IS_DEFAULT column
+            if (!!gridview.modelColumns['IS_DEFAULT']) {
+                fix_grid_checkbox(static_id, 'IS_DEFAULT');
+            }
+
+            // find current row selector
+            var current_id = apex.item('P#_CURRENT_'.replace('#', apex.env.APP_PAGE_ID) + static_id).getValue();
+            if (current_id) {
+                current_id = current_id.replaceAll('&quot;', '').replace('[', '').replace(']', '');  // for composite keys
+                $('#' + static_id + ' .a-GV-bdy tr').each(function () {
+                    if ('' + $(this).data('id') === current_id) {
+                        var current_row = $(this).find('.a-GV-cell.u-tS.has-button > button > span');
+                        current_row.removeClass('a-Icon').addClass('fa fa-arrow-circle-right');
+                        console.log('CURRENT ROW FIXED', current_row);
+                    }
+                });
+            }
+            console.groupEnd();
+        }
     });
 };
 
@@ -522,7 +768,7 @@ const process_grid_all_rows = function (static_id, fake_column_name, action_name
     var grid    = apex.region(static_id).widget();
     var model   = grid.interactiveGrid('getViews', 'grid').model;
     //
-    model.forEach(function(r) {
+    model.forEach(function(r, i) {
         try {
             model.setValue(r, fake_column_name, model.getValue(r, fake_column_name) + '!');
         }
@@ -567,5 +813,105 @@ const process_grid_selected_rows = function (static_id, fake_column_name, action
     });
     //grid.interactiveGrid('getActions').invoke('save');
     apex.submit(action_name);
+};
+
+
+
+//
+// RENUMBER ROWS IN GRID SO WE ENSURE THE ORDER OF ROWS
+//
+const renumber_grid_rows = function (static_id, column_name) {
+    var grid    = apex.region(static_id).widget();
+    var model   = grid.interactiveGrid('getViews', 'grid').model;
+    //
+    model.forEach(function(r, i) {
+        var res;
+        try {
+            res = model.setValue(r, column_name, '#' + i);
+        }
+        catch(err) {
+            console.error('ERROR:', i, r, res, err);
+        }
+    });
+};
+
+
+
+//
+// MAKE SURE WE CAN SELECT ONLY ONE CHECKBOX IN A COLUMN THROUGH ALL ROWS
+// GRID MUST BE IN EDIT MODE TO MAKE THIS WORK
+//
+const grid_one_checkbox_only = function (static_id, column_name) {
+    var grid        = apex.region(static_id).widget();
+    var model       = grid.interactiveGrid('getViews', 'grid').model;
+    var gridview    = grid.interactiveGrid('getViews').grid;
+    var selected    = grid.interactiveGrid('getViews').grid.getSelectedRecords();
+    var selected_id;
+    if (selected && selected.length > 0) {
+        selected_id = gridview.model.getRecordId(selected[0]);
+    }
+    //
+    //console.group('CHECKBOX', static_id);
+    //console.log('SELECTED:', selected);
+    //console.log('GRID:', grid);
+    //console.log('MODEL:', model);
+    //
+    model.forEach(function(r, idx, id) {
+        //var id = gridview.model.getRecordId(r);
+        //console.log('RECORD', idx, id === selected_id, r === selected[0], r);
+        try {
+            if (id !== selected_id && model.getValue(r, column_name) === 'Y') {
+                model.setValue(r, column_name, '');
+                console.log('^ CHANGED');
+            }
+        }
+        catch(err) {
+            console.log('ERROR', err);
+        }
+    });
+    //console.groupEnd();
+};
+
+
+
+//
+// RENDER ACTION MENU BELOW CURRENT BUTTON
+//
+const show_action_menu = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    //
+    var $id = $(this).attr('id');  // e.target.id, this.triggeringElement.id;
+    var pos = $('button#' + $id).offset();
+    console.log('BUTTON', $id, pos, 'MENU', $('div.ACTION_MENU').offset(), $('div.ACTION_MENU[data-id="' + $id + '"]'));
+    //
+    $('div.ACTION_MENU').css({
+        display   : 'none'
+    });
+    $('div.ACTION_MENU[data-id="' + $id + '"]').css({
+        display   : 'block',
+        position  : 'fixed',
+        top       : pos.top,
+        left      : pos.left
+    });
+    //$('div.ACTION_MENU[data-id="' + $id + '"] a:first').focus();
+};
+
+
+
+//
+// RESET TABS ON PAGE RESET EVEN IF THEY HAVE MEMORY
+//
+const reset_tabs = function() {
+    // check if page reset was requested
+    if (window.location.search.includes('&clear=') || window.location.search.includes('?clear=')) {
+        $('div.t-TabsRegion.js-useLocalStorage').each(function() {
+            var region_id   = $(this).attr('id');
+            var key         = 'ORA_WWV_apex.apexTabs.' + apex.env.APP_ID + '.' + apex.env.APP_PAGE_ID + '.' + region_id + '.activeTab';
+            var value       = sessionStorage.getItem(key);
+            console.log('RESET_TABS', region_id, key, value);
+            sessionStorage.setItem(key, '');
+        });
+    }
 };
 

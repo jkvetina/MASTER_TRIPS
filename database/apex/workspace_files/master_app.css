@@ -52,7 +52,7 @@ body.t-Drawer-page .t-HeroRegion-col--beforeIcon button {
     display             : none;
 }
 .ui-dialog .ui-dialog-titlebar:before {
-    background-image        : none;
+    background-image    : none;
     /* background: gray; */
 }
 
@@ -117,17 +117,38 @@ h1.t-HeroRegion-title button:first-child {
 
 
 
+/* NORMAL BUTTONS */
+button.t-Button,
+button.ui-button,
+.apex-item-filedrop-action.a-Button.a-Button--hot {
+    background          : #E9E7E7;
+}
+button.t-Button:hover,
+button.ui-button:hover,
+.apex-item-filedrop-action.a-Button.a-Button--hot:hover {
+    background          : #DFDEDC;
+    background          : #d7d6d4;
+}
+
 /* HOT BUTTONS */
-.t-Button--hot,
-.ui-button--hot {
-    background: #444;
+button.t-Button--hot,
+button.ui-button--hot,
+button.js-confirmBtn.ui-button--danger,
+button.a-Button.a-Toolbar-item.a-Button--hot {
+    background          : #5f5c58;
 }
-.t-Button--hot:hover,
-.ui-button--hot:hover {
-    background: #222;
+button.t-Button--hot:hover,
+button.ui-button--hot:hover,
+button.a-Button.a-Toolbar-item.a-Button--hot:hover,
+button.js-confirmBtn.ui-button--danger:hover {
+    background          : #333;
 }
 
-
+/* BUTTON TO UPLOAD FILES */
+.apex-item-filedrop-action.a-Button.a-Button--hot {
+    padding             : 0.5rem 0.9rem;
+    color               : #222;
+}
 
 /* FIX BUTTON OFFSET ON LINE WITH OTHER ITEMS */
 .FILTERS button {
@@ -159,8 +180,8 @@ button .BADGE {
 span.BADGE {
     position            : relative;
     top                 : -0.65rem;
-    padding             : 0.1rem 0.35rem 0;
     margin              : 0 -0.25rem 0 0.25rem;
+    padding             : 0.1rem 0.35rem 0;
     border-radius       : 15px 15px;
     background          : red;
     color               : #fff;
@@ -176,8 +197,26 @@ span.BADGE {
     padding             : 0.25rem 0.45rem 0.2rem;
     background          : red;
 }
+#t_Header > #top_header > nav ul li a > span.BADGE.DECENT,
+.t-Tabs-item span.BADGE.DECENT,
 span.BADGE.DECENT {
+    top                 : -0.5rem;
+    margin              : 0 -0.3rem 0 0.3rem;
+    padding             : 0;
     background          : transparent;
+}
+.t-Tabs-item span.BADGE.DECENT {
+    color               : #222;
+}
+
+/* ADJUST BADGES WITH ICONS */
+span.BADGE.ICON {
+    padding-left        : 0.1rem;
+    padding-right       : 0.1rem;
+    background          : transparent;
+}
+span.BADGE.ICON > .fa {
+    top                 : 0.3rem;
 }
 
 
@@ -216,12 +255,12 @@ ul.t-Tabs li.t-Tabs-item.is-active a.t-Tabs-link {
 }
 ul.t-Tabs li.t-Tabs-item.is-active a.t-Tabs-link {
     color               : #000;
-    border-bottom       : 8px solid #555 !important;
+    border-bottom       : 8px solid #5f5c58 !important;
 }
 ul.t-Tabs li.t-Tabs-item a.t-Tabs-link:hover,
 ul.t-Tabs li.t-Tabs-item.is-active a.t-Tabs-link:hover {
     color               : #000;
-    border-bottom       : 8px solid #222 !important;
+    border-bottom       : 8px solid #333 !important;
 }
 
 .t-TabsRegion-items > div {
@@ -265,6 +304,11 @@ ul.t-Tabs li.t-Tabs-item:last-child {
 /* CARDS - ADD SPACE TO SEE OUTLINE */
 ul.a-CardView-items {
     padding             : 2px;
+}
+
+/* CARDS - ALLOW MORE COLUMNS THEN 5 */
+.CARDS6 ul.a-CardView-items {
+    grid-template-columns: repeat(6, minmax(0,1fr));
 }
 
 
@@ -312,17 +356,56 @@ th.a-GV-header {
 
 
 
-/* LINK COLOR IN GRID */
+/* LINKS COLOR IN GRID */
 td.a-GV-cell a {
-    color               : #5498a9;
-    color               : #a26924;
     color               : #738830;
+    color               : #5d9700;
+    color               : #648e00;
     font-weight         : 600;
     text-decoration     : none;
 }
 td.a-GV-cell a:hover {
     color               : #000;
     text-decoration     : none;
+}
+
+/* KEEP WHITE BACKGROUND FOR READONLY CELLS */
+.a-GV--editMode .a-GV-cell.is-readonly,
+.a-GV--editMode .a-GV-row.is-readonly .a-GV-cell {
+    background          : #fff;
+    color               : #000;
+}
+
+/* CHANGE EDITED CELL TRIANGLE */
+.a-GV-cell.is-changed:not(.is-active):before,
+.a-GV-row.is-inserted .a-GV-selHeader:before,
+.a-GV-row.is-updated .a-GV-selHeader:before {
+    color               : #648e00;
+}
+
+/* ADJUST BACKGROUND COLORS FOR UPDATED/SELECTED ROWS */
+/* tr.is-selected, tr.is-updated, tr.is-hover, td.is-readonly */
+tr.a-GV-row.is-inserted td,
+tr.a-GV-row.is-inserted th,
+tr.a-GV-row.is-updated td,
+tr.a-GV-row.is-updated th {
+    background          : white !important;
+}
+tr.a-GV-row.is-selected td,
+tr.a-GV-row.is-selected th {
+    background          : #F5F4F2 !important;
+}
+tr.a-GV-row.is-hover td,
+tr.a-GV-row.is-hover th {
+    background          : #F5F4F2 !important;
+}
+tr.a-GV-row.is-selected.is-hover td,
+tr.a-GV-row.is-selected.is-hover th {
+    background          : #E9E7E7 !important;
+}
+tr.a-GV-row.is-selected td.is-readonly,
+tr.a-GV-row.is-hover td.is-readonly {
+    background          : #FBFAF8 !important;
 }
 
 
@@ -435,11 +518,20 @@ button.a-Button.a-Button--notification.js-showDetails {
     align-items         : end;
 }
 
+/* SESSION DIALOGS */
+div#apex_session_alert_dlg {
+    padding-top         : 1rem;
+    font-size           : 1rem;
+    line-height         : 1.5rem;
+    color               : #000;
+}
+
 
 
 /* ADJUST FONTS ON BUTTONS AND MENUS */
 button .t-Button-label,
 button .a-Button-label,
+.apex-item-filedrop-action.a-Button.a-Button--hot,
 .a-CardView-subTitle,
 #t_Footer .t-Footer-version {
     font-family         : 'Roboto Slab', sans-serif;
@@ -477,6 +569,63 @@ button.DECENT {
 }
 button.TRANSPARENT {
     background          : transparent;
+    color               : #555;
+    outline             : none !important;
+}
+button.TRANSPARENT:hover {
+    background          : transparent;
+    color               : #000;
+}
+
+/* SHOW CURRENT VALUE UNDER SWITCH BUTTONS (ACTION MENU) */
+button.TRANSPARENT .t-Button-label {
+    display         : inline-grid;
+    text-align      : left;
+}
+span.CURRENT {
+    font-size       : 0.7rem;
+    font-weight     : 300;
+    color           : #555;
+    margin-top      : -0.3rem;
+    margin-bottom   : -1.2rem;
+}
+span.CURRENT:hover {
+    color           : #222;
+}
+
+
+
+/* ADJUST COMMENT BUBBLES */
+.t-Comments-icon {
+    flex-grow           : 0;
+    padding             : 0;
+}
+.t-Comments-userIcon {
+    width               : auto;
+    padding             : 0;
+    margin              : 0;
+    background          : transparent;
     color               : #222;
+    line-height         : 1.8rem;
+    text-transform      : none;
+    text-align          : left;
+    font-family         : 'Roboto Slab';
+    font-size           : 0.9rem;
+    font-weight         : 400;
+}
+.t-Comments-comment {
+    font-family         : 'Roboto Slab';
+}
+.t-Comments-actions {
+    display             : block;
+    float               : right;
+    margin              : 0.25rem 0 -0.25rem;
+}
+.t-Comments--chat .t-Comments-comment a {
+    text-decoration     : underline;
+    color               : #222;
+}
+.t-Comments-comment .GREY {
+    color               : #888;
 }
 
