@@ -44,7 +44,10 @@ SELECT
     t.color_fill,
     --
     CASE WHEN t.start_at IS NULL THEN 0 ELSE r.day# END AS day#,
-    r.day_
+    r.day_,
+    --
+    ROW_NUMBER() OVER (ORDER BY t.start_at) AS r#
+    --
 FROM trp_itinerary t
 JOIN x
     ON x.trip_id    = t.trip_id

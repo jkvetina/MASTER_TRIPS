@@ -14,7 +14,7 @@ appearance:
   - '#DEFAULT#'
 
 dialog: 
-  width: 800
+  width: 1024
   chained: false
 
 navigation-menu: 
@@ -57,7 +57,7 @@ regions:
     type: Static Content
 
   layout: 
-    sequence: 120
+    sequence: 150
     parent-region: '[FORM]' # 61509134372840438
     position: BODY
     start-new-layout: false
@@ -301,7 +301,7 @@ page-items:
     position: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -354,7 +354,7 @@ page-items:
     alignment: Left
 
   settings: 
-    number-alignment: Start
+    number-alignment: End
     virtual-keyboard: Decimal
 
   layout: 
@@ -403,20 +403,18 @@ page-items:
   id: 23618272079153260
   identification: 
     name: P110_NOTES
-    type: Textarea
+    type: Markdown Editor
 
   label: 
     label: Notes
     alignment: Left
 
   settings: 
-    resizable: true
-    auto-height: false
-    character-counter: false
-    trim-spaces: Leading and Trailing
+    toolbar: Simple
+    syntax-highlighting: true
 
   layout: 
-    sequence: 180
+    sequence: 160
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
@@ -431,12 +429,9 @@ page-items:
     template: Optional - Floating # 17863699601506533
     template-options: 
     - '#DEFAULT#'
-    width: 30
-    height: 5
 
   validation: 
     value-required: false
-    maximum-length: 4000
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -451,9 +446,6 @@ page-items:
   session-state: 
     data-type: VARCHAR2
     storage: Per Request (Memory Only)
-
-  quick-picks: 
-    show-quick-picks: false
 
   security: 
     session-state-protection: Unrestricted
@@ -474,12 +466,12 @@ page-items:
     use-defaults: true
 
   layout: 
-    sequence: 140
+    sequence: 90
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
     start-new-layout: false
-    start-new-row: true
+    start-new-row: false
     column: Automatic
     new-column: true
     column-span: Automatic
@@ -531,15 +523,15 @@ page-items:
     on-label: Y
 
   layout: 
-    sequence: 150
+    sequence: 120
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
     start-new-layout: false
     start-new-row: false
-    column: 7
+    column: 10
     new-column: true
-    column-span: 2
+    column-span: 1
     label-column-span: Page Template Default
 
   appearance: 
@@ -584,15 +576,15 @@ page-items:
     on-label: Y
 
   layout: 
-    sequence: 160
+    sequence: 130
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
     start-new-layout: false
     start-new-row: false
-    column: 9
+    column: 11
     new-column: true
-    column-span: 2
+    column-span: 1
     label-column-span: Page Template Default
 
   appearance: 
@@ -637,15 +629,15 @@ page-items:
     on-label: Y
 
   layout: 
-    sequence: 170
+    sequence: 140
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
     start-new-layout: false
     start-new-row: false
-    column: 11
+    column: 12
     new-column: true
-    column-span: 2
+    column-span: 1
     label-column-span: Page Template Default
 
   appearance: 
@@ -722,7 +714,7 @@ page-items:
     disabled: false
 
   layout: 
-    sequence: 80
+    sequence: 100
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
@@ -730,7 +722,7 @@ page-items:
     start-new-row: true
     column: Automatic
     new-column: true
-    column-span: Automatic
+    column-span: 4
     label-column-span: Page Template Default
 
   appearance: 
@@ -783,15 +775,15 @@ page-items:
     disabled: false
 
   layout: 
-    sequence: 100
+    sequence: 110
     region: '[FORM]' # 61509134372840438
     position: BODY
     alignment: Left
     start-new-layout: false
     start-new-row: false
-    column: 7
+    column: Automatic
     new-column: true
-    column-span: Automatic
+    column-span: 4
     label-column-span: Page Template Default
 
   appearance: 
@@ -1031,7 +1023,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 190
+    sequence: 170
     region: '[FORM]' # 61509134372840438
     position: BODY
 
@@ -1064,7 +1056,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 200
+    sequence: 180
     region: '[FORM]' # 61509134372840438
     position: BODY
 
@@ -1207,6 +1199,66 @@ page-items:
     store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
+- # ====== Page Item: P110_PREV_STOP ===========================
+  id: 40848479924003020
+  identification: 
+    name: P110_PREV_STOP
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 70
+    region: '&P110_HEADER.' # 61508979059840437
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P110_NEXT_STOP ===========================
+  id: 40848575504003021
+  identification: 
+    name: P110_NEXT_STOP
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 80
+    region: '&P110_HEADER.' # 61508979059840437
+    position: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
 - # ====== Page Item: P110_HEADER ==============================
   id: 61510472604840447
   identification: 
@@ -1280,7 +1332,7 @@ buttons:
     label: Close Dialog
 
   layout: 
-    sequence: 10
+    sequence: 30
     region: '&P110_HEADER.' # 61508979059840437
     position: UP
     start-new-layout: false
@@ -1359,6 +1411,70 @@ buttons:
     action: Submit Page
     execute-validations: true
     warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: PREV_STOP ===================================
+  id: 40848131514003017
+  identification: 
+    button-name: PREV_STOP
+    label: Previous Stop
+
+  layout: 
+    sequence: 10
+    region: '&P110_HEADER.' # 61508979059840437
+    position: UP
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 17865448457506535
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-arrow-left
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P110_PREV_STOP
+
+- # ====== Button: NEXT_STOP ===================================
+  id: 40848232473003018
+  identification: 
+    button-name: NEXT_STOP
+    label: Next Stop
+
+  layout: 
+    sequence: 20
+    region: '&P110_HEADER.' # 61508979059840437
+    position: UP
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 17865448457506535
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-arrow-right
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+
+  server-side-condition: 
+    type: Item is NOT NULL
+    item: P110_NEXT_STOP
 
 dynamic-actions: 
 - # ====== Dynamic Action: CLOSE_DIALOG ========================
@@ -1569,6 +1685,10 @@ processes:
   error: 
     display-location: Inline in Notification
 
+  server-side-condition: 
+    type: Request is NOT contained in Value
+    value: PREV_STOP,NEXT_STOP
+
 - # ====== Process: INIT_FORM ==================================
   id: 23714320565896207
   identification: 
@@ -1602,4 +1722,87 @@ processes:
 
   error: 
     display-location: Inline in Notification
+
+- # ====== Process: INIT_DEFAULTS ==============================
+  id: 40848842576003024
+  identification: 
+    name: INIT_DEFAULTS
+    type: Execute Code
+    execution-chain: None
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: |
+      -- links to prev/next stops
+      BEGIN
+          SELECT t.stop_id
+          INTO :P110_NEXT_STOP
+          FROM trp_itinerary_grid_v t
+          WHERE t.r# = (SELECT r# FROM trp_itinerary_grid_v WHERE stop_id = :P110_STOP_ID) + 1;
+      EXCEPTION
+      WHEN NO_DATA_FOUND THEN
+          :P110_NEXT_STOP := NULL;
+      END;
+      --
+      BEGIN
+          SELECT t.stop_id
+          INTO :P110_PREV_STOP
+          FROM trp_itinerary_grid_v t
+          WHERE t.r# = (SELECT r# FROM trp_itinerary_grid_v WHERE stop_id = :P110_STOP_ID) - 1;
+      EXCEPTION
+      WHEN NO_DATA_FOUND THEN
+          :P110_PREV_STOP := NULL;
+      END;
+      
+
+  execution: 
+    sequence: 20
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+branches: 
+- # ====== Branch: GOTO_PREV ===================================
+  id: 40848364822003019
+  identification: 
+    name: GOTO_PREV
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110:P110_TRIP_ID,P110_STOP_ID:&P110_TRIP_ID.,&P110_PREV_STOP.&success_msg=#SUCCESS_MSG#'
+      page: 110 # Stop Detail
+      clear-cache: 110
+      values: 
+        p110_trip_id: '&P110_TRIP_ID.'
+        p110_stop_id: '&P110_PREV_STOP.'
+
+  server-side-condition: 
+    when-button-pressed: PREV_STOP # 40848131514003017
+
+- # ====== Branch: GOTO_NEXT ===================================
+  id: 40848936639003025
+  identification: 
+    name: GOTO_NEXT
+
+  execution: 
+    sequence: 20
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110:P110_TRIP_ID,P110_STOP_ID:&P110_TRIP_ID.,&P110_NEXT_STOP.&success_msg=#SUCCESS_MSG#'
+      page: 110 # Stop Detail
+      clear-cache: 110
+      values: 
+        p110_trip_id: '&P110_TRIP_ID.'
+        p110_stop_id: '&P110_NEXT_STOP.'
+
+  server-side-condition: 
+    when-button-pressed: NEXT_STOP # 40848232473003018
 

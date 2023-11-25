@@ -323,6 +323,7 @@ regions:
     table-owner: Parsing Schema
     table-name: TRP_ITINERARY_GRID_V
     include-rowid-column: false
+    order-by-clause: R#
 
   layout: 
     sequence: 40
@@ -1425,6 +1426,38 @@ regions:
     enable-users-to: 
       sort: false
       hide: true
+
+  - # ====== Column: R# ==========================================
+    id: 40848622265003022
+    identification: 
+      column-name: R#
+      type: Hidden
+
+    settings: 
+      value-protected: true
+
+    layout: 
+      sequence: 210
+
+    accessibility: 
+      value-identifies-row: false
+
+    source: 
+      type: Database Column
+      database-column: R#
+      data-type: NUMBER
+      query-only: true
+      primary-key: false
+
+    session-state: 
+      data-type: VARCHAR2
+
+    export-/-printing: 
+      include-in-export-/-print: false
+
+    enable-users-to: 
+      sort: true
+      control-break/aggregate: true
 
   printing: 
     page: 

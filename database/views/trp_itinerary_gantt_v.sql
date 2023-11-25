@@ -104,7 +104,7 @@ SELECT
         END AS css_class
     --
 FROM t
-ORDER BY 1, 2 NULLS FIRST, 3;
+ORDER BY row_id NULLS FIRST, start_at;
 --
 COMMENT ON TABLE trp_itinerary_gantt_v IS '';
 
