@@ -245,13 +245,25 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
         l_result        CLOB := '';
     BEGIN
         FOR c IN (
-            SELECT DISTINCT
+            SELECT
+                t.status_id,
+                t.color_bg
+            FROM app_lovs t
+            WHERE t.app_id      = core.get_app_id()
+                AND t.lov_id    = 'STATUS_TRIP'
+                AND t.color_bg IS NOT NULL
+        ) LOOP
+            l_result := l_result || '.' || c.status_id || ' { fill: ' || c.color_bg || '; }' || CHR(10);
+        END LOOP;
+        --
+        FOR c IN (
+            SELECT
                 t.category_id,
                 t.color_fill
             FROM trp_lov_categories_v t
             WHERE t.color_fill IS NOT NULL
         ) LOOP
-            l_result := l_result || '.' || c.category_id || ' { fill: ' || c.color_fill || '; }' || CHR(10);
+            l_result := l_result || '.CATEGORY_' || c.category_id || ' { fill: ' || c.color_fill || '; }' || CHR(10);
         END LOOP;
         --
         FOR c IN (

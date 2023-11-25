@@ -91,7 +91,7 @@ SELECT
     t.gantt_start_date,
     t.gantt_end_date,
     --
-    'DEFAULT ' ||
+    'STATUS_DEFAULT' ||
         CASE WHEN t.status = 'PAID' THEN
             CASE
                 WHEN t.is_paid      = 'Y' THEN  ' STATUS_PAID'
@@ -99,7 +99,8 @@ SELECT
                 WHEN t.is_pending   = 'Y' THEN  ' STATUS_PENDING'
                 ELSE                            ' STATUS_UNKNOWN'
             END
-        ELSE t.category_id || NULLIF(' COLOR_' || LTRIM(t.color_fill, '#'), ' COLOR_')
+        ELSE NULLIF(' CATEGORY_' || t.category_id, ' CATEGORY_') ||
+             NULLIF(' COLOR_' || LTRIM(t.color_fill, '#'), ' COLOR_')
         END AS css_class
     --
 FROM t

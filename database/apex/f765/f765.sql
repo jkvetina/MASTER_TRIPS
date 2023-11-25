@@ -33,7 +33,7 @@ prompt APPLICATION 765 - Trips Planning
 -- Application Export:
 --   Application:     765
 --   Name:            Trips Planning
---   Date and Time:   20:38 Čtvrtek Listopad 23, 2023
+--   Date and Time:   08:21 Sobota Listopad 25, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -121,7 +121,7 @@ wwv_imp_workspace.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2023-11-23'
+,p_flow_version=>'2023-11-25'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -18181,18 +18181,19 @@ wwv_flow_imp_page.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_imp.id(67422548002820357)  --  MAIN
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'.DEFAULT {',
+'.STATUS_DEFAULT {',
 '  stroke:           #222;',
 '  stroke-width:     1px;',
 '}',
-'.HOTEL, .CAR_RENTAL {',
+'.STATUS_BASELINE {',
+'  fill:             #E7242D;',
+'}',
+'.CATEGORY_HOTEL,',
+'.CATEGORY_CAR_RENTAL {',
 '  fill:             #ccc;',
 '  stroke:           #666;',
 '  stroke-width:     1px;',
 '  stroke-dasharray: 4, 4;',
-'}',
-'.BASELINE {',
-'  fill:             #E7242D;',
 '}',
 ''))
 ,p_page_css_classes=>'MULTICOLUMN'
@@ -18209,6 +18210,18 @@ wwv_flow_imp_page.create_page(
 ,p_page_component_map=>'25'
 ,p_last_updated_by=>'DEV'
 ,p_last_upd_yyyymmddhh24miss=>'20220101000000'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(23218207406318963)
+,p_plug_name=>'CSS'
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(17725987703506456)
+,p_plug_display_sequence=>30
+,p_function_body_language=>'PLSQL'
+,p_plug_source=>'RETURN trp_app.set_colors();'
+,p_lazy_loading=>false
+,p_plug_source_type=>'NATIVE_DYNAMIC_CONTENT'
+,p_ajax_items_to_submit=>'P100_TRIP_ID'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(23220046690318982)
@@ -18297,7 +18310,6 @@ wwv_flow_imp_page.create_jet_chart_series(
 ,p_name=>'Itinerary'
 ,p_location=>'REGION_SOURCE'
 ,p_items_label_rendered=>true
-,p_items_label_display_as=>'PERCENT'
 ,p_gantt_start_date_source=>'DB_COLUMN'
 ,p_gantt_start_date_column=>'GANTT_START_DATE'
 ,p_gantt_end_date_source=>'DB_COLUMN'
@@ -18311,13 +18323,12 @@ wwv_flow_imp_page.create_jet_chart_series(
 ,p_gantt_task_css_class=>'&CSS_CLASS.'
 ,p_gantt_baseline_start_column=>'BASELINE_START_AT'
 ,p_gantt_baseline_end_column=>'BASELINE_END_AT'
-,p_gantt_baseline_css_class=>'BASELINE'
+,p_gantt_baseline_css_class=>'STATUS_BASELINE'
 ,p_gantt_viewport_start_source=>'DB_COLUMN'
 ,p_gantt_viewport_start_column=>'GANTT_START_DATE'
 ,p_gantt_viewport_end_source=>'DB_COLUMN'
 ,p_gantt_viewport_end_column=>'GANTT_END_DATE'
 ,p_task_label_position=>'end'
-,p_threshold_display=>'onIndicator'
 );
 wwv_flow_imp_page.create_jet_chart_axis(
  p_id=>wwv_flow_imp.id(22658322931266476)
@@ -19271,6 +19282,9 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_is_frozen=>false
 ,p_width=>120
 );
+end;
+/
+begin
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(32767135533559823)
 ,p_view_id=>wwv_flow_imp.id(32754174504559767)
@@ -19280,9 +19294,6 @@ wwv_flow_imp_page.create_ig_report_column(
 ,p_is_frozen=>false
 ,p_width=>100
 );
-end;
-/
-begin
 wwv_flow_imp_page.create_ig_report_column(
  p_id=>wwv_flow_imp.id(32768040201559826)
 ,p_view_id=>wwv_flow_imp.id(32754174504559767)
@@ -19783,20 +19794,6 @@ wwv_flow_imp_page.create_page_plug(
 ,p_attribute_02=>'HTML'
 );
 wwv_flow_imp_page.create_page_plug(
- p_id=>wwv_flow_imp.id(23218207406318963)
-,p_plug_name=>'CSS'
-,p_parent_plug_id=>wwv_flow_imp.id(23220046690318982)
-,p_region_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_imp.id(17725987703506456)
-,p_plug_display_sequence=>50
-,p_plug_display_point=>'SUB_REGIONS'
-,p_function_body_language=>'PLSQL'
-,p_plug_source=>'RETURN trp_app.set_colors();'
-,p_lazy_loading=>false
-,p_plug_source_type=>'NATIVE_DYNAMIC_CONTENT'
-,p_ajax_items_to_submit=>'P100_TRIP_ID'
-);
-wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(23615638986153234)
 ,p_plug_name=>'TRIPS'
 ,p_region_template_options=>'#DEFAULT#'
@@ -19809,7 +19806,7 @@ wwv_flow_imp_page.create_page_plug(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(23615827817153235)
-,p_plug_name=>'Trips'
+,p_plug_name=>'Trips Planning'
 ,p_parent_plug_id=>wwv_flow_imp.id(23615638986153234)
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(17759298553506472)
@@ -20347,9 +20344,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
 );
-end;
-/
-begin
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(22658646377266480)
 ,p_name=>'P100_TRIP_ID'
@@ -20359,6 +20353,9 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
 );
+end;
+/
+begin
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(23216858438318950)
 ,p_name=>'P100_DAY'

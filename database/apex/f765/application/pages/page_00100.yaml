@@ -24,18 +24,19 @@ navigation:
 
 css: 
   inline: |
-    .DEFAULT {
+    .STATUS_DEFAULT {
       stroke:           #222;
       stroke-width:     1px;
     }
-    .HOTEL, .CAR_RENTAL {
+    .STATUS_BASELINE {
+      fill:             #E7242D;
+    }
+    .CATEGORY_HOTEL,
+    .CATEGORY_CAR_RENTAL {
       fill:             #ccc;
       stroke:           #666;
       stroke-width:     1px;
       stroke-dasharray: 4, 4;
-    }
-    .BASELINE {
-      fill:             #E7242D;
     }
     
 
@@ -210,7 +211,7 @@ regions:
         task-css-classes: 
         - '&CSS_CLASS.'
         baseline-css-classes: 
-        - BASELINE
+        - STATUS_BASELINE
 
       label: 
         show: true
@@ -1525,9 +1526,9 @@ regions:
     - P100_TRIP_ID
 
   layout: 
-    sequence: 50
-    parent-region: ITINERARY # 23220046690318982
-    position: SUB_REGIONS
+    sequence: 30
+    parent-region: No Parent
+    position: BODY
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -1648,10 +1649,10 @@ regions:
       output-as: HTML
       expand-shortcuts: false
 
-- # ====== Region: Trips =======================================
+- # ====== Region: Trips Planning ==============================
   id: 23615827817153235
   identification: 
-    title: Trips
+    title: Trips Planning
     type: Static Content
 
   layout: 
@@ -2749,7 +2750,7 @@ buttons:
 
   layout: 
     sequence: 10
-    region: Trips # 23615827817153235
+    region: Trips Planning # 23615827817153235
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
