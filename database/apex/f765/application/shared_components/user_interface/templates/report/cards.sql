@@ -8,11 +8,11 @@ wwv_flow_imp.component_begin (
 ,p_release=>'23.1.5'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
-,p_default_id_offset=>13885638367144232
+,p_default_id_offset=>45920449781012831
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_row_template(
- p_id=>wwv_flow_imp.id(17816707296506503)
+ p_id=>wwv_flow_imp.id(60013786008289851)
 ,p_row_template_name=>'Cards'
 ,p_internal_name=>'CARDS'
 ,p_row_template1=>wwv_flow_string.join(wwv_flow_t_varchar2(

@@ -1,36 +1,36 @@
 ---
 - # ====== Plugin: Avatar ======================================
-  id: 17868110936506543
+  id: 60065225442289896
   identification: 
     name: Avatar
 
 - # ====== Plugin: Badge =======================================
-  id: 17877052738506549
+  id: 60074075015289919
   identification: 
     name: Badge
 
 - # ====== Plugin: Button ======================================
-  id: 17882981719506552
+  id: 60080016229289924
   identification: 
     name: Button
 
 - # ====== Plugin: Comments ====================================
-  id: 17885619258506554
+  id: 60082695013289926
   identification: 
     name: Comments
 
 - # ====== Plugin: Content Row =================================
-  id: 17895667526506560
+  id: 60092743215289935
   identification: 
     name: Content Row
 
 - # ====== Plugin: Media List ==================================
-  id: 17918005697506573
+  id: 60115138365289948
   identification: 
     name: Media List
 
 - # ====== Plugin: Timeline ====================================
-  id: 17934782682506583
+  id: 60131828312289959
   identification: 
     name: Timeline
 

@@ -4,7 +4,7 @@ id: 765
 identification: 
   name: Trips Planning
   alias: TRIPS
-  version: 2023-07-30
+  version: 2023-12-13
   application-group: LAUNCHPAD # 14521045818542929
 
 row-search: 
@@ -30,10 +30,10 @@ advanced:
 
 authentication: 
   public-user: APEX_PUBLIC_USER
-  authentication-scheme: MASTER - OPEN_DOOR (TESTING ONLY) # 59727810078330583
+  authentication-scheme: MASTER - OPEN_DOOR (TESTING ONLY) # 96353050886840917
 
 authorization: 
-  source-for-role-or-group-schemes: Access Control User Role Assignments
+  source-for-role-or-group-schemes: Custom Code
 
 session-management: 
   rejoin-sessions: Disabled
@@ -41,7 +41,6 @@ session-management:
   session-timeout-url: '/ords/f?p=800:9999:0::::P9999_ERROR:SESSION_TIMEOUT'
   maximum-session-idle-time: 5400
   session-idle-timeout-url: '/ords/f?p=800:9999:0::::P9999_ERROR:SESSION_TIMEOUT'
-  session-timeout-warning: 0
 
 session-state-protection: 
   enabled: true
@@ -54,20 +53,21 @@ security:
   html-escaping-mode: Extended
 
 advanced: 
-  pass-ecid: N
+  pass-ecid: Y
 
 database-session: 
   parsing-schema: APPS
 
 globalization: 
-  primary-language: English (United Kingdom) (en-gb)
+  primary-language: English (en)
   document-direction: Left-To-Right
   language-derived-from: Application Primary Language
   automatic-time-zone: false
-  automatic-csv-encoding: true
+  automatic-csv-encoding: false
 
 application-format-masks: 
-  date: DS
+  date: '&FORMAT_DATE.'
+  date-time: '&FORMAT_DATE_TIME.'
   timestamp: DS
   timestamp-time-zone: DS
 
@@ -96,15 +96,16 @@ navigation:
     page: LOGIN
 
 navigation-menu: 
-  list-template: Navigation Bar Q # 17853508706506526
+  list-template: Top Navigation Menu # 60056387763289879
   template-options: 
   - '#DEFAULT#'
+  - js-tabLike
   list-position: Top
 
 navigation-bar: 
   implementation: List
-  list: NAVIGATION # 23407920305865460
-  list-template: Navigation Q23 # 29823902065064279
+  list: NAVIGATION # 59832708983261400
+  list-template: Navigation Q23 # 79455842052658286
   template-options: 
   - '#DEFAULT#'
 
@@ -121,6 +122,7 @@ css:
 
 attributes: 
   theme: Universal Theme # 800
+  global-page: 0
   enable-end-users-to-choose-theme-style: false
   add-"built-with-apex"-to-footer: false
 
@@ -141,16 +143,11 @@ substitutions:
   value: 
     static-value: Simple APEX app to plan trips and see itinerary as Gantt chart
 
-application-settings: 
-- # ====== Application Setting: APP_PREFIX =====================
-  id: 14534597660914188
+- # ====== Substitution: APP_PREFIX ============================
+  id: 3
   identification: 
     name: APP_PREFIX
 
   value: 
-    value: TRP_
-    required: true
-
-  advanced: 
-    on-upgrade-keep-value: true
+    static-value: TRP_
 

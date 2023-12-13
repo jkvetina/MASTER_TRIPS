@@ -116,19 +116,31 @@ const init_page_asap = function() {
         ping_loop = ping_fn();
     }
 };
-//
-const init_page_delayed = function() {
-    fix_grid_default();
-};
-//
+
 const init_page = function() {
     //
     // ADJUST GRIDS
     //
-    fix_grid_toolbars();
-    fix_grid_save_button();
+    $('.a-IG').each(function() {
+        var $parent     = $(this).parent();
+        var static_id   = $parent.attr('id');
+        //
+        if (!$parent.hasClass('ORIGINAL')) {
+            $('#' + static_id).on('interactivegridviewchange', function(event, data) {
+                //delay(100).then(() => );
+                alert('GRID CREATED ' + static_id);
+            });
+            //
+            fix_grid_toolbar(static_id);
+        }
+    });
     //
-    delay(300).then(() => init_page_delayed());
+    //fix_grid_save_button();
+
+    // fix badges on buttons
+    $('button > .t-Button-label').each(function(k, id) {
+        $(id).html($(id).html().replace(/\[([^\]]+)\]/, '<div class="BADGE">$1</div>'));
+    });
 
     //
     // INIT ACTION MENUS
@@ -141,107 +153,59 @@ const init_page = function() {
         var f = $(this);
         console.log('MENU CLICK', f, e);
     });
+
+    // catch IG refresh, thanks to @KarelEkema
+    $(document).on('ajaxComplete', function(jQueryEvent, data, settings) {
+        var region_id, static_id;
+        try {
+            region_id = data.responseJSON.regions[0].id;
+            static_id = $('.t-IRR-region.lto' + region_id + '_0').attr('id');
+        }
+        catch(err) {
+        }
+        if (data.status == 200 && static_id !== undefined) {
+            delay(100).then(() => fix_grid_default(static_id));
+        }
+    });
+
+    // delayed init
+    delay(300).then(() => init_page_delayed());
 };
-
-// fix badges on buttons
-$('button > .t-Button-label').each(function(k, id) {
-    $(id).html($(id).html().replace(/\[([^\]]+)\]/, '<div class="BADGE">$1</div>'));
-});
-
-// when page is loaded
-$(function() {
-    init_page_asap();
-    reset_tabs();
-});
-
-// when all APEX components are loaded
-apex.jQuery(window).on('theme42ready', function() {
-    init_page();
-
-
-
+//
+const init_page_delayed = function() {
     //
-    // TEST TO CATCH GRID REFRESH
-    // TEST TO CATCH GRID COLUMN CHANGE
+    // ADJUST GRIDS
     //
     $('.a-IG').each(function() {
         var $parent     = $(this).parent();
         var static_id   = $parent.attr('id');
         //
         if (!$parent.hasClass('ORIGINAL')) {
-            var grid        = apex.region(static_id).widget();
-            var model       = grid.interactiveGrid('getViews', 'grid').model;
-            var viewId = model.subscribe({
-                onChange: function(changeType, change) {
-                    var grid        = apex.region(static_id).widget();
-                    var model       = grid.interactiveGrid('getViews', 'grid').model;
-                    var gridview    = grid.interactiveGrid('getViews').grid;
-                    var columns     = {};
-                    //
-                    gridview.getColumns().forEach(function(row) {
-                        columns[row.property] = row.index;
-                    });
-                    //
-                    console.group('GRID_CHANGED', static_id);
-                    console.log('TYPE', changeType);
-                    console.log('CHANGE', change);
-                    console.log('MODEL', model);
-                    console.log('VIEW', gridview);
-                    //console.log('COLUMNS:', columns, gridview.getColumns());
-
-                    if (changeType == 'set') {
-                        console.log('CHANGED COLUMN', 'KEY=' + change.recordId, 'COL=' + change.field, 'OLD=' + change.oldValue, 'NEW=' + change.record[columns[change.field]], 'DATA:', change.record);
-
-                        var new_default = change.field == 'IS_DEFAULT' && change.oldValue === '' && change.record[columns[change.field]] == 'Y';
-                        if (new_default) {
-                            model.forEach(function(r, idx, id) {
-                                console.log('EDITED=', id === change.recordId, 'MODEL ROW', idx, id, r);
-                                //if (id === change.recordId) {
-                                //    console.log('MODEL DATA', idx, r);
-                                //}
-
-                                // new default selected, remove old values
-                                if (id !== change.recordId) {
-                                    if (model.getValue(r, 'IS_DEFAULT') == 'Y') {
-                                        model.setValue(r, 'IS_DEFAULT', '');
-                                    }
-                                }
-                            });
-                        }
-                    }
-
-                    //
-                    // THIS FIRE BEFORE THE GRID IS REFRESHED
-                    //
-
-                    if (changeType == 'refresh') {
-                        //model.fetchAll(function() {});
-                        //grid.interactiveGrid('getCurrentView').model.fetch();
-                        //grid.interactiveGrid('getViews').grid.refresh();
-
-                        //model.forEach(function(r, i, id) {
-                        //    console.log('ROW___', i, id, r);
-                        //});
-
-                        //alert('ON_CHANGE EVENT, TYPE=REFRESH');
-
-                        console.warn('REAPPLY_GRID_INIT + DELAYED', static_id);
-                        delay(300).then(() => fix_grid_default(static_id));
-                    }
-
-
-                    if (change.field == 'IS_DEFAULT') {
-                        //console.log('IS_DEFAULT');
-
-                        //grid_one_checkbox_only(static_id, change.field);
-                    }
-
-                    console.groupEnd();
-                }
-            });
-            console.log('GRID INIT', static_id, grid, model);
+            fix_grid_default(static_id);
         }
     });
+};
+
+
+
+// when page is loaded
+$(function() {
+    init_page_asap();
+    reset_tabs();
+
+    /*
+    $.widget('apex.interactiveGrid', $.apex.interactiveGrid, {
+        refresh: function () {
+            alert('Hello, I should refresh now...');
+            this._super();
+        }
+    });
+    */
+});
+
+// when all APEX components are loaded
+apex.jQuery(window).on('theme42ready', function() {
+    init_page();
 });
 
 
@@ -439,17 +403,6 @@ const cell_class = function (options, value, title) {
 //
 // COMMON TOOLBAR FOR ALL GRIDS
 //
-const fix_grid_toolbars = function (grid_id) {
-    $('.a-IG').each(function() {
-        var $parent     = $(this).parent();
-        var static_id   = $parent.attr('id');
-        //
-        if ((grid_id === undefined || grid_id === static_id) && !$parent.hasClass('ORIGINAL')) {
-            fix_grid_toolbar(static_id);
-        }
-    })
-};
-//
 const fix_grid_toolbar = function (region_id) {
     console.group('FIX_GRID_TOOLBAR', region_id);
     //
@@ -646,6 +599,7 @@ const fix_grid_toolbar = function (region_id) {
 
 //
 // FIX GRID SAVE BUTTON - look for css change on Edit button and apply it to Save button
+// UNUSED, CATCH IT VIA MODEL.SUBSCRIBE
 //
 const fix_grid_save_button = function () {
     var observer = new MutationObserver(function(mutations) {
@@ -674,15 +628,14 @@ const fix_grid_save_button = function () {
 // FIX GRID CHECKBOX CLICK
 // ACTIVATE EDIT MODE, SELECT CURRENT ROW, PROCEED WITH GRID_ONE FUNCTION
 //
-const fix_grid_checkbox = function(grid_id, grid_one_column) {
-    console.log('FIXING CHECKBOX....', grid_id, grid_one_column);
-    //
+const fix_grid_checkbox = function(grid_id) {
+    console.log('FIXING CHECKBOX', grid_id);
+    //    
     $('#' + grid_id + ' div.a-IG div.a-IG-body div.a-IG-contentContainer div.a-GV div.a-GV-bdy table.a-GV-table.a-GV-table--checkbox tbody td span.u-checkbox').on('click', function() {
-        apex.region(grid_id).call('getActions').set('edit', true);
-        $(this).closest('th.a-GV-cell.a-GV-selHeader').click();
-        //
-        if (grid_one_column) {
-        //    grid_one_checkbox_only(grid_id, grid_one_column);
+        var grid = apex.region(grid_id);
+        if (!grid.call('getActions').get('edit')) {
+            grid.call('getActions').set('edit', true);
+            $(this).closest('th.a-GV-cell.a-GV-selHeader').click();
         }
     });
 };
@@ -690,45 +643,92 @@ const fix_grid_checkbox = function(grid_id, grid_one_column) {
 
 
 //
-// MARK CURRENT ROW WITH ARROW,
-// FIX IS_DEFAULT COLUMNS (ONE CHECKBOX ONLY FOR ALL ROWS)
+// FIX GRID AFTER REFRESH (ON THE SCREEN, NOT JUST THE MODEL REFRESH)
+// MARK CURRENT ROW WITH ARROW, FIX IS_DEFAULT COLUMNS (ONE CHECKBOX ONLY FOR ALL ROWS)...
 //
-const fix_grid_default = function(grid_id) {
-    $('.a-IG').each(function() {
-        var $parent     = $(this).parent();
-        var static_id   = $parent.attr('id');
-        //
-        if ((grid_id === undefined || grid_id === static_id) && !$parent.hasClass('ORIGINAL')) {
-            console.group('GRID_MODIFIED + DELAYED', static_id);
-            //
+const fix_grid_default = function(static_id) {
+    console.group('GRID_MODIFIED + DELAYED', static_id, grid, model);
+    //
+    var grid        = apex.region(static_id).widget();
+    var model       = grid.interactiveGrid('getViews', 'grid').model;
+    var gridview    = grid.interactiveGrid('getViews').grid;
+    //
+    console.log('GRID', grid);
+    console.log('MODEL', model);
+    console.log('VIEW', gridview);
+
+    // find current row selector
+    var current_id = apex.item('P#_CURRENT_'.replace('#', apex.env.APP_PAGE_ID) + static_id).getValue();
+    if (current_id) {
+        current_id = current_id.replaceAll('&quot;', '').replace('[', '').replace(']', '');  // for composite keys
+        $('#' + static_id + ' .a-GV-bdy tr').each(function () {
+            if ('' + $(this).data('id') === current_id) {
+                var current_row = $(this).find('.a-GV-cell.u-tS.has-button > button > span');
+                current_row.removeClass('a-Icon').addClass('fa fa-arrow-circle-right');
+                console.log('CURRENT ROW FIXED', current_row);
+            }
+        });
+    }
+
+    //
+    // CATCH GRID COLUMN CHANGE
+    //
+    var viewId = model.subscribe({
+        onChange: function(changeType, change) {
             var grid        = apex.region(static_id).widget();
             var model       = grid.interactiveGrid('getViews', 'grid').model;
             var gridview    = grid.interactiveGrid('getViews').grid;
+            var columns     = {};
             //
-            console.log('GRID', grid);
-            console.log('MODEL', model);
-            console.log('VIEW', gridview);
+            gridview.getColumns().forEach(function(row) {
+                columns[row.property] = row.index;
+            });
+            //
+            console.group('GRID_CHANGED', static_id, 'TYPE:', changeType, change);
+            //console.log('CHANGE', changeType, change);
+            //console.log('MODEL', model);
+            //console.log('VIEW', gridview);
+            //console.log('COLUMNS:', columns, gridview.getColumns());
 
-            // find IS_DEFAULT column
-            if (!!gridview.modelColumns['IS_DEFAULT']) {
-                fix_grid_checkbox(static_id, 'IS_DEFAULT');
-            }
+            // on any change make Save button hot
+            $('#' + static_id).find('button.a-Toolbar-item[data-action="save"]').addClass('is-active a-Button--hot');
 
-            // find current row selector
-            var current_id = apex.item('P#_CURRENT_'.replace('#', apex.env.APP_PAGE_ID) + static_id).getValue();
-            if (current_id) {
-                current_id = current_id.replaceAll('&quot;', '').replace('[', '').replace(']', '');  // for composite keys
-                $('#' + static_id + ' .a-GV-bdy tr').each(function () {
-                    if ('' + $(this).data('id') === current_id) {
-                        var current_row = $(this).find('.a-GV-cell.u-tS.has-button > button > span');
-                        current_row.removeClass('a-Icon').addClass('fa fa-arrow-circle-right');
-                        console.log('CURRENT ROW FIXED', current_row);
-                    }
-                });
+            //
+            // MAKE SURE WE CAN SELECT ONLY ONE CHECKBOX IN A COLUMN THROUGH ALL ROWS
+            // GRID MUST BE IN EDIT MODE TO MAKE THIS WORK
+            //
+            if ((changeType == 'set' || changeType == 'insert') && !!gridview.modelColumns['IS_DEFAULT']) {
+                console.log('CHANGED COLUMN', 'ID=' + change.recordId, 'COL=' + change.field, 'OLD=' + change.oldValue, 'NEW=' + change.record[columns[change.field]], 'DATA:', change.record);
+                //
+                var new_default = (change.field == 'IS_DEFAULT' && change.oldValue === '' && change.record[columns[change.field]] == 'Y');
+                if (new_default) {
+                    model.forEach(function(r, idx, id) {
+                        // new default selected, remove old values
+                        if (id !== change.recordId) {
+                            if (model.getValue(r, 'IS_DEFAULT') == 'Y') {
+                                model.setValue(r, 'IS_DEFAULT', '');
+                            }
+                        }
+                    });
+
+                    console.warn('CHANGE MODEL', model);
+                    // refresh grid after model change
+                    //grid.interactiveGrid('getActions').invoke('save');
+                    //grid.interactiveGrid('getViews', 'grid').model.clearChanges();
+                    //grid.interactiveGrid('getActions').invoke('refresh');
+                    //grid.interactiveGrid('getCurrentView').model.fetch();
+                    //model.fetchRecords(model._data);
+                    //gridview.view$.grid('refresh');
+                    //alert('REFRESHED');
+                }
             }
             console.groupEnd();
         }
     });
+    //
+    fix_grid_checkbox(static_id);
+    //
+    console.groupEnd();
 };
 
 
@@ -851,25 +851,15 @@ const grid_one_checkbox_only = function (static_id, column_name) {
         selected_id = gridview.model.getRecordId(selected[0]);
     }
     //
-    //console.group('CHECKBOX', static_id);
-    //console.log('SELECTED:', selected);
-    //console.log('GRID:', grid);
-    //console.log('MODEL:', model);
-    //
     model.forEach(function(r, idx, id) {
-        //var id = gridview.model.getRecordId(r);
-        //console.log('RECORD', idx, id === selected_id, r === selected[0], r);
         try {
             if (id !== selected_id && model.getValue(r, column_name) === 'Y') {
                 model.setValue(r, column_name, '');
-                console.log('^ CHANGED');
             }
         }
         catch(err) {
-            console.log('ERROR', err);
         }
     });
-    //console.groupEnd();
 };
 
 

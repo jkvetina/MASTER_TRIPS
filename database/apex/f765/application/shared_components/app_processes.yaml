@@ -1,6 +1,6 @@
 ---
 - # ====== Application Process: INIT_DEFAULTS ==================
-  id: 14687834427390933
+  id: 60568702236716227
   identification: 
     name: INIT_DEFAULTS
     type: NATIVE_PLSQL
@@ -17,16 +17,16 @@
   security: 
     authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
 
-- # ====== Application Process: GET_AVATAR =====================
-  id: 24674529903843761
+- # ====== Application Process: AJAX_PING ======================
+  id: 61403611695862379
   identification: 
-    name: GET_AVATAR
+    name: AJAX_PING
     type: NATIVE_PLSQL
 
   source: 
     location: Local Database
     language: PL/SQL
-    pl/sql-code: app.download_avatar();
+    pl/sql-code: app.ajax_ping();
 
   execution: 
     sequence: 0

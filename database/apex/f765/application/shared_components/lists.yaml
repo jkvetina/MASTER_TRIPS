@@ -1,6 +1,6 @@
 ---
 - # ====== List: NAVIGATION ====================================
-  id: 23407920305865460
+  id: 59832708983261400
   identification: 
     name: NAVIGATION
 
@@ -27,6 +27,6 @@
           t.attribute08,
           t.attribute09,
           t.attribute10
-      FROM trp_navigation_v t
-      ORDER BY t.order#;
+      FROM app_navigation_v t
+      ORDER BY t.order# NULLS FIRST;
 

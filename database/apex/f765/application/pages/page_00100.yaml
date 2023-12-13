@@ -4,8 +4,8 @@ id: 100
 identification: 
   name: '#APP_NAME#'
   alias: HOME
-  title: '&APP_NAME.'
-  page-group: ' MAIN' # 67422548002820357
+  title: '#APP_NAME#'
+  page-group: ' MAIN' # 104047788811330691
 
 appearance: 
   page-mode: Normal
@@ -41,7 +41,7 @@ css:
     
 
 security: 
-  authorization-scheme: MASTER - IS_USER # 59731356907418259
+  authorization-scheme: MASTER - IS_USER # 96356597715928593
   authentication: Page Requires Authentication
   deep-linking: Application Default
   page-access-protection: Arguments Must Have Checksum
@@ -69,7 +69,7 @@ help:
 
 regions: 
 - # ====== Region: Gantt [CHART] ===============================
-  id: 22657826332266471
+  id: 114512999524328246
   identification: 
     title: Gantt [CHART]
     type: Chart
@@ -91,7 +91,7 @@ regions:
 
   layout: 
     sequence: 20
-    parent-region: ITINERARY # 23220046690318982
+    parent-region: ITINERARY # 115075219882380757
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -100,7 +100,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Blank with Attributes # 17725987703506456
+    template: Blank with Attributes # 59923030250289799
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -131,7 +131,7 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 22657894868266472
+    id: 45937447204054249
     chart: 
       type: Gantt
 
@@ -175,7 +175,7 @@ regions:
 
     series: 
     - # ====== Series: Itinerary ===================================
-      id: 22658013276266473
+      id: 45939121338054254
       identification: 
         name: Itinerary
 
@@ -219,7 +219,7 @@ regions:
 
     axes: 
     - # ====== Axis: major =========================================
-      id: 22658322931266476
+      id: 45937989244054251
       identification: 
         name: major
 
@@ -244,7 +244,7 @@ regions:
         format: Date - Full
 
     - # ====== Axis: minor =========================================
-      id: 22658433319266477
+      id: 45938540542054252
       identification: 
         name: minor
 
@@ -269,14 +269,14 @@ regions:
         pattern: HH
 
 - # ====== Region: &P100_ITINERARY_HEADER!RAW. =================
-  id: 23180114996012361
+  id: 115035288188074136
   identification: 
     title: '&P100_ITINERARY_HEADER!RAW.'
     type: Static Content
 
   layout: 
     sequence: 30
-    parent-region: ITINERARY # 23220046690318982
+    parent-region: ITINERARY # 115075219882380757
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -285,7 +285,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Hero # 17759298553506472
+    template: Hero # 59956268800289818
     template-options: 
     - '#DEFAULT#'
     css-classes: 
@@ -312,7 +312,7 @@ regions:
       expand-shortcuts: false
 
 - # ====== Region: Itinerary [GRID] ============================
-  id: 23180577614012366
+  id: 115035750806074141
   identification: 
     title: Itinerary [GRID]
     type: Interactive Grid
@@ -327,7 +327,7 @@ regions:
 
   layout: 
     sequence: 40
-    parent-region: ITINERARY # 23220046690318982
+    parent-region: ITINERARY # 115075219882380757
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -336,7 +336,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Interactive Report # 17782732707506484
+    template: Interactive Report # 59979826851289831
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -356,7 +356,7 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 23180682891012367
+    id: 115035856083074142
     edit: 
       enabled: true
       allowed-operations: 
@@ -410,53 +410,53 @@ regions:
 
     saved-reports: 
     - # ====== Saved Report: Primary Report ========================
-      id: 23190016395218846
+      id: 115045189587280621
       identification: 
         name: Primary Report
         alias: 93044
 
     - # ====== Saved Report: Pending ===============================
-      id: 32753990035559767
+      id: 124609163227621542
       identification: 
         name: Pending
         alias: 95641
 
     - # ====== Saved Report: Reserved ==============================
-      id: 42318584598902707
+      id: 134173757790964482
       identification: 
         name: Reserved
         alias: 95647
 
     - # ====== Saved Report: Paid ==================================
-      id: 51883708951249920
+      id: 143738882143311695
       identification: 
         name: Paid
         alias: 95653
 
   column-groups: 
   - # ====== Column Group: Flags =================================
-    id: 19758683403896031
+    id: 111613856595957806
     heading: 
       heading: Flags
 
   - # ====== Column Group: Event =================================
-    id: 19758780616896032
+    id: 111613953808957807
     heading: 
       heading: Event
 
   - # ====== Column Group: Info ==================================
-    id: 19758840032896033
+    id: 111614013224957808
     heading: 
       heading: Info
 
   - # ====== Column Group: Links =================================
-    id: 19758990839896034
+    id: 111614164031957809
     heading: 
       heading: Links
 
   columns: 
   - # ====== Column: TRIP_ID =====================================
-    id: 23180823013012368
+    id: 115035996205074143
     identification: 
       column-name: TRIP_ID
       type: Display Only
@@ -472,7 +472,7 @@ regions:
     layout: 
       sequence: 50
       column-alignment: start
-      group: Info # 19758840032896033
+      group: Info # 111614013224957808
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -507,7 +507,7 @@ regions:
       hide: true
 
   - # ====== Column: STOP_ID =====================================
-    id: 23180925112012369
+    id: 115036098304074144
     identification: 
       column-name: STOP_ID
       type: Number Field
@@ -523,7 +523,7 @@ regions:
     layout: 
       sequence: 60
       column-alignment: end
-      group: Info # 19758840032896033
+      group: Info # 111614013224957808
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -556,7 +556,7 @@ regions:
       hide: true
 
   - # ====== Column: STOP_NAME ===================================
-    id: 23181004424012370
+    id: 115036177616074145
     identification: 
       column-name: STOP_NAME
       type: Text Field
@@ -572,7 +572,7 @@ regions:
     layout: 
       sequence: 70
       column-alignment: start
-      group: Info # 19758840032896033
+      group: Info # 111614013224957808
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -613,7 +613,7 @@ regions:
       hide: true
 
   - # ====== Column: CATEGORY_ID =================================
-    id: 23181093551012371
+    id: 115036266743074146
     identification: 
       column-name: CATEGORY_ID
       type: Select List
@@ -625,7 +625,7 @@ regions:
     layout: 
       sequence: 80
       column-alignment: start
-      group: Info # 19758840032896033
+      group: Info # 111614013224957808
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -637,7 +637,7 @@ regions:
 
     list-of-values: 
       type: Shared Component
-      list-of-values: LOV_CATEGORIES # 23213761854288039
+      list-of-values: LOV_CATEGORIES # 45973366827054294
       display-extra-values: false
       display-null-value: true
 
@@ -671,7 +671,7 @@ regions:
       hide: true
 
   - # ====== Column: PRICE =======================================
-    id: 23181147322012372
+    id: 115036320514074147
     identification: 
       column-name: PRICE
       type: Number Field
@@ -687,7 +687,7 @@ regions:
     layout: 
       sequence: 90
       column-alignment: end
-      group: Info # 19758840032896033
+      group: Info # 111614013224957808
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -720,7 +720,7 @@ regions:
       hide: true
 
   - # ====== Column: START_AT ====================================
-    id: 23181247841012373
+    id: 115036421033074148
     identification: 
       column-name: START_AT
       type: Date Picker
@@ -744,7 +744,7 @@ regions:
     layout: 
       sequence: 100
       column-alignment: center
-      group: Event # 19758780616896032
+      group: Event # 111613953808957807
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -784,7 +784,7 @@ regions:
       hide: true
 
   - # ====== Column: END_AT ======================================
-    id: 23181427408012374
+    id: 115036600600074149
     identification: 
       column-name: END_AT
       type: Date Picker
@@ -808,7 +808,7 @@ regions:
     layout: 
       sequence: 110
       column-alignment: center
-      group: Event # 19758780616896032
+      group: Event # 111613953808957807
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -848,7 +848,7 @@ regions:
       hide: true
 
   - # ====== Column: NOTES =======================================
-    id: 23181520681012375
+    id: 115036693873074150
     identification: 
       column-name: NOTES
       type: Text Field
@@ -902,7 +902,7 @@ regions:
       hide: true
 
   - # ====== Column: APEX$ROW_ACTION =============================
-    id: 23181572672012376
+    id: 115036745864074151
     identification: 
       column-name: APEX$ROW_ACTION
       type: Actions Menu
@@ -911,7 +911,7 @@ regions:
       sequence: 20
 
   - # ====== Column: APEX$ROW_SELECTOR ===========================
-    id: 23181663272012377
+    id: 115036836464074152
     identification: 
       column-name: APEX$ROW_SELECTOR
       type: Row Selector
@@ -925,7 +925,7 @@ regions:
       sequence: 10
 
   - # ====== Column: DAY# ========================================
-    id: 23216259259318944
+    id: 115071432451380719
     identification: 
       column-name: DAY#
       type: Display Only
@@ -969,7 +969,7 @@ regions:
       hide: true
 
   - # ====== Column: OLD_TRIP_ID =================================
-    id: 23216485058318946
+    id: 115071658250380721
     identification: 
       column-name: OLD_TRIP_ID
       type: Hidden
@@ -1003,7 +1003,7 @@ regions:
       sort: false
 
   - # ====== Column: OLD_STOP_ID =================================
-    id: 23216600118318947
+    id: 115071773310380722
     identification: 
       column-name: OLD_STOP_ID
       type: Hidden
@@ -1037,7 +1037,7 @@ regions:
       sort: false
 
   - # ====== Column: COLOR_FILL ==================================
-    id: 23218070994318962
+    id: 115073244186380737
     identification: 
       column-name: COLOR_FILL
       type: Color Picker
@@ -1091,7 +1091,7 @@ regions:
       hide: true
 
   - # ====== Column: IS_RESERVED =================================
-    id: 23219427692318975
+    id: 115074600884380750
     identification: 
       column-name: IS_RESERVED
       type: Checkbox
@@ -1107,7 +1107,7 @@ regions:
     layout: 
       sequence: 140
       column-alignment: center
-      group: Flags # 19758683403896031
+      group: Flags # 111613856595957806
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -1147,7 +1147,7 @@ regions:
       hide: true
 
   - # ====== Column: IS_PAID =====================================
-    id: 23219455358318976
+    id: 115074628550380751
     identification: 
       column-name: IS_PAID
       type: Checkbox
@@ -1163,7 +1163,7 @@ regions:
     layout: 
       sequence: 150
       column-alignment: center
-      group: Flags # 19758683403896031
+      group: Flags # 111613856595957806
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -1203,7 +1203,7 @@ regions:
       hide: true
 
   - # ====== Column: DAY_ ========================================
-    id: 23219630402318977
+    id: 115074803594380752
     identification: 
       column-name: DAY_
       type: Display Only
@@ -1254,7 +1254,7 @@ regions:
       hide: true
 
   - # ====== Column: IS_PENDING ==================================
-    id: 23219700889318978
+    id: 115074874081380753
     identification: 
       column-name: IS_PENDING
       type: Checkbox
@@ -1270,7 +1270,7 @@ regions:
     layout: 
       sequence: 160
       column-alignment: center
-      group: Flags # 19758683403896031
+      group: Flags # 111613856595957806
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -1310,7 +1310,7 @@ regions:
       hide: true
 
   - # ====== Column: LINK_RESERVATION ============================
-    id: 23620360391153281
+    id: 115475533583215056
     identification: 
       column-name: LINK_RESERVATION
       type: Display Only
@@ -1326,7 +1326,7 @@ regions:
     layout: 
       sequence: 170
       column-alignment: center
-      group: Links # 19758990839896034
+      group: Links # 111614164031957809
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -1369,7 +1369,7 @@ regions:
       hide: true
 
   - # ====== Column: LINK_EVENT ==================================
-    id: 23620441916153282
+    id: 115475615108215057
     identification: 
       column-name: LINK_EVENT
       type: Display Only
@@ -1385,7 +1385,7 @@ regions:
     layout: 
       sequence: 180
       column-alignment: center
-      group: Links # 19758990839896034
+      group: Links # 111614164031957809
       use-group-for: Both
       stretch: Use Report Setting
 
@@ -1428,7 +1428,7 @@ regions:
       hide: true
 
   - # ====== Column: R# ==========================================
-    id: 40848622265003022
+    id: 132703795457064797
     identification: 
       column-name: R#
       type: Hidden
@@ -1499,14 +1499,14 @@ regions:
       alignment: center
 
 - # ====== Region: &P100_TRIP_HEADER!RAW. ======================
-  id: 23215188288318933
+  id: 115070361480380708
   identification: 
     title: '&P100_TRIP_HEADER!RAW.'
     type: Static Content
 
   layout: 
     sequence: 10
-    parent-region: ITINERARY # 23220046690318982
+    parent-region: ITINERARY # 115075219882380757
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -1515,7 +1515,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Hero # 17759298553506472
+    template: Hero # 59956268800289818
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -1547,7 +1547,7 @@ regions:
       expand-shortcuts: false
 
 - # ====== Region: CSS =========================================
-  id: 23218207406318963
+  id: 115073380598380738
   identification: 
     title: CSS
     type: Dynamic Content
@@ -1569,7 +1569,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Blank with Attributes # 17725987703506456
+    template: Blank with Attributes # 59923030250289799
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -1593,7 +1593,7 @@ regions:
       lazy-loading: false
 
 - # ====== Region: ITINERARY ===================================
-  id: 23220046690318982
+  id: 115075219882380757
   identification: 
     title: ITINERARY
     type: Static Content
@@ -1609,7 +1609,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Blank with Attributes # 17725987703506456
+    template: Blank with Attributes # 59923030250289799
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -1638,7 +1638,7 @@ regions:
       expand-shortcuts: false
 
 - # ====== Region: TRIPS =======================================
-  id: 23615638986153234
+  id: 115470812178215009
   identification: 
     title: TRIPS
     type: Static Content
@@ -1654,7 +1654,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Blank with Attributes # 17725987703506456
+    template: Blank with Attributes # 59923030250289799
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -1683,14 +1683,14 @@ regions:
       expand-shortcuts: false
 
 - # ====== Region: Trips Planning ==============================
-  id: 23615827817153235
+  id: 115471001009215010
   identification: 
     title: Trips Planning
     type: Static Content
 
   layout: 
     sequence: 10
-    parent-region: TRIPS # 23615638986153234
+    parent-region: TRIPS # 115470812178215009
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -1699,7 +1699,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Hero # 17759298553506472
+    template: Hero # 59956268800289818
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -1724,7 +1724,7 @@ regions:
       expand-shortcuts: false
 
 - # ====== Region: Trips [GRID] ================================
-  id: 42540448134606088
+  id: 134395621326667863
   identification: 
     title: Trips [GRID]
     type: Interactive Grid
@@ -1738,7 +1738,7 @@ regions:
 
   layout: 
     sequence: 20
-    parent-region: TRIPS # 23615638986153234
+    parent-region: TRIPS # 115470812178215009
     position: SUB_REGIONS
     start-new-layout: false
     start-new-row: true
@@ -1747,7 +1747,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Interactive Report # 17782732707506484
+    template: Interactive Report # 59979826851289831
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -1767,7 +1767,7 @@ regions:
     customizable: Not Customizable By End Users
 
   attributes: 
-    id: 42540553433606089
+    id: 134395726625667864
     edit: 
       enabled: true
       allowed-operations: 
@@ -1821,14 +1821,14 @@ regions:
 
     saved-reports: 
     - # ====== Saved Report: Primary Report ========================
-      id: 42551721372812595
+      id: 134406894564874370
       identification: 
         name: Primary Report
         alias: 93030
 
   columns: 
   - # ====== Column: YEAR_ =======================================
-    id: 22777555401601005
+    id: 114632728593662780
     identification: 
       column-name: YEAR_
       type: Text Field
@@ -1883,7 +1883,7 @@ regions:
       hide: true
 
   - # ====== Column: OLD_TRIP_ID =================================
-    id: 32944884779323851
+    id: 124800057971385626
     identification: 
       column-name: OLD_TRIP_ID
       type: Hidden
@@ -1917,7 +1917,7 @@ regions:
       sort: false
 
   - # ====== Column: TRIP_ID =====================================
-    id: 42540721198606090
+    id: 134395894390667865
     identification: 
       column-name: TRIP_ID
       type: Display Only
@@ -1974,7 +1974,7 @@ regions:
       hide: true
 
   - # ====== Column: TRIP_NAME ===================================
-    id: 42540818915606091
+    id: 134395992107667866
     identification: 
       column-name: TRIP_NAME
       type: Text Field
@@ -2029,7 +2029,7 @@ regions:
       hide: true
 
   - # ====== Column: START_AT ====================================
-    id: 42540848320606092
+    id: 134396021512667867
     identification: 
       column-name: START_AT
       type: Date Picker
@@ -2084,7 +2084,7 @@ regions:
       hide: true
 
   - # ====== Column: END_AT ======================================
-    id: 42541029110606093
+    id: 134396202302667868
     identification: 
       column-name: END_AT
       type: Date Picker
@@ -2139,7 +2139,7 @@ regions:
       hide: true
 
   - # ====== Column: APEX$ROW_ACTION =============================
-    id: 42541172621606095
+    id: 134396345813667870
     identification: 
       column-name: APEX$ROW_ACTION
       type: Actions Menu
@@ -2148,7 +2148,7 @@ regions:
       sequence: 20
 
   - # ====== Column: APEX$ROW_SELECTOR ===========================
-    id: 42541305704606096
+    id: 134396478896667871
     identification: 
       column-name: APEX$ROW_SELECTOR
       type: Row Selector
@@ -2162,7 +2162,7 @@ regions:
       sequence: 10
 
   - # ====== Column: CREATED_BY ==================================
-    id: 42582095245912725
+    id: 134437268437974500
     identification: 
       column-name: CREATED_BY
       type: Hidden
@@ -2196,7 +2196,7 @@ regions:
       sort: false
 
   - # ====== Column: CREATED_AT ==================================
-    id: 42582152496912726
+    id: 134437325688974501
     identification: 
       column-name: CREATED_AT
       type: Hidden
@@ -2270,7 +2270,7 @@ regions:
 
 page-items: 
 - # ====== Page Item: P100_TRIP_START ==========================
-  id: 22658513694266478
+  id: 114532160290328284
   identification: 
     name: P100_TRIP_START
     type: Hidden
@@ -2280,7 +2280,7 @@ page-items:
 
   layout: 
     sequence: 30
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: BODY
 
   advanced: 
@@ -2300,7 +2300,7 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_TRIP_END ============================
-  id: 22658582075266479
+  id: 114532228671328285
   identification: 
     name: P100_TRIP_END
     type: Hidden
@@ -2310,7 +2310,7 @@ page-items:
 
   layout: 
     sequence: 40
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: BODY
 
   advanced: 
@@ -2330,7 +2330,7 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_TRIP_ID =============================
-  id: 22658646377266480
+  id: 114532292973328286
   identification: 
     name: P100_TRIP_ID
     type: Hidden
@@ -2340,7 +2340,7 @@ page-items:
 
   layout: 
     sequence: 10
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: BODY
 
   advanced: 
@@ -2360,7 +2360,7 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_DAY =================================
-  id: 23216858438318950
+  id: 115090505034380756
   identification: 
     name: P100_DAY
     type: Hidden
@@ -2370,7 +2370,7 @@ page-items:
 
   layout: 
     sequence: 50
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: BODY
 
   advanced: 
@@ -2390,7 +2390,7 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_DAY_PREV ============================
-  id: 23217256685318954
+  id: 115090903281380760
   identification: 
     name: P100_DAY_PREV
     type: Hidden
@@ -2400,7 +2400,7 @@ page-items:
 
   layout: 
     sequence: 70
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: BODY
 
   advanced: 
@@ -2420,7 +2420,7 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_DAY_NEXT ============================
-  id: 23217345201318955
+  id: 115090991797380761
   identification: 
     name: P100_DAY_NEXT
     type: Hidden
@@ -2430,7 +2430,7 @@ page-items:
 
   layout: 
     sequence: 90
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: BODY
 
   advanced: 
@@ -2450,7 +2450,7 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_DAY_PREV_ATTR =======================
-  id: 23217683770318958
+  id: 115091330366380764
   identification: 
     name: P100_DAY_PREV_ATTR
     type: Hidden
@@ -2460,7 +2460,7 @@ page-items:
 
   layout: 
     sequence: 80
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: BODY
 
   advanced: 
@@ -2480,7 +2480,7 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_DAY_NEXT_ATTR =======================
-  id: 23217821392318959
+  id: 115091467988380765
   identification: 
     name: P100_DAY_NEXT_ATTR
     type: Hidden
@@ -2490,7 +2490,7 @@ page-items:
 
   layout: 
     sequence: 100
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: BODY
 
   advanced: 
@@ -2510,7 +2510,7 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_TRIP_HEADER =========================
-  id: 23218357761318965
+  id: 115092004357380771
   identification: 
     name: P100_TRIP_HEADER
     type: Hidden
@@ -2520,7 +2520,7 @@ page-items:
 
   layout: 
     sequence: 20
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: BODY
 
   advanced: 
@@ -2540,7 +2540,7 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_DAY_ATTR ============================
-  id: 23615889430153236
+  id: 115489536026215042
   identification: 
     name: P100_DAY_ATTR
     type: Hidden
@@ -2550,7 +2550,7 @@ page-items:
 
   layout: 
     sequence: 60
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: BODY
 
   advanced: 
@@ -2570,7 +2570,7 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_ITINERARY_HEADER ====================
-  id: 23982216750895334
+  id: 115855863346957140
   identification: 
     name: P100_ITINERARY_HEADER
     type: Hidden
@@ -2580,7 +2580,7 @@ page-items:
 
   layout: 
     sequence: 110
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: BODY
 
   advanced: 
@@ -2600,7 +2600,7 @@ page-items:
     restricted-characters: All characters can be saved.
 
 - # ====== Page Item: P100_STATUS ==============================
-  id: 23982971294895342
+  id: 115856617890957148
   identification: 
     name: P100_STATUS
     type: Hidden
@@ -2610,7 +2610,7 @@ page-items:
 
   layout: 
     sequence: 120
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: BODY
 
   advanced: 
@@ -2630,15 +2630,15 @@ page-items:
     restricted-characters: All characters can be saved.
 
 buttons: 
-- # ====== Button: CLOSE_TRIP ==================================
-  id: 19759056701896035
+- # ====== Button: ADD_STOP ====================================
+  id: 45940180709054256
   identification: 
-    button-name: CLOSE_TRIP
-    label: Close Trip
+    button-name: ADD_STOP
+    label: Add Stop
 
   layout: 
-    sequence: 40
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    sequence: 10
+    region: '&P100_ITINERARY_HEADER!RAW.' # 115035288188074136
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -2647,33 +2647,33 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Icon # 17865448457506535
+    button-template: Icon # 60062458726289887
     hot: false
     template-options: 
     - '#DEFAULT#'
-    css-classes: 
-    - u-pullRight
-    icon: fa-times
+    icon: fa-plus
 
   behavior: 
     action: Redirect to Page in this Application
     target: 
-      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_TRIP_ID:'
-      page: 100 # #APP_NAME#
-      clear-cache: 100
+      url: 'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110:P110_TRIP_ID,P110_STOP_ID,P110_START_AT:&P100_TRIP_ID.,,&P100_DAY.'
+      page: 110 # Stop Detail
+      clear-cache: 110
       values: 
+        p110_trip_id: '&P100_TRIP_ID.'
+        p110_start_at: '&P100_DAY.'
 
-    warn-on-unsaved-changes: Page Default
+    warn-on-unsaved-changes: Do Not Check
 
 - # ====== Button: PREV_DAY ====================================
-  id: 23216715429318948
+  id: 45952421325054275
   identification: 
     button-name: PREV_DAY
     label: Prev Day
 
   layout: 
     sequence: 10
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -2682,7 +2682,7 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Icon # 17865448457506535
+    button-template: Icon # 60062458726289887
     hot: false
     template-options: 
     - '#DEFAULT#'
@@ -2703,14 +2703,14 @@ buttons:
     - '&P100_DAY_PREV_ATTR.'
 
 - # ====== Button: NEXT_DAY ====================================
-  id: 23216757969318949
+  id: 45952874151054275
   identification: 
     button-name: NEXT_DAY
     label: Next Day
 
   layout: 
     sequence: 20
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -2719,7 +2719,7 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Icon # 17865448457506535
+    button-template: Icon # 60062458726289887
     hot: false
     template-options: 
     - '#DEFAULT#'
@@ -2740,14 +2740,14 @@ buttons:
     - '&P100_DAY_NEXT_ATTR.'
 
 - # ====== Button: WHOLE_TRIP ==================================
-  id: 23217223796318953
+  id: 45953275737054275
   identification: 
     button-name: WHOLE_TRIP
     label: Whole Trip
 
   layout: 
     sequence: 30
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -2756,7 +2756,7 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Icon # 17865448457506535
+    button-template: Icon # 60062458726289887
     hot: false
     template-options: 
     - '#DEFAULT#'
@@ -2775,15 +2775,15 @@ buttons:
     custom-attributes: 
     - '&P100_DAY_ATTR.'
 
-- # ====== Button: ADD_TRIP ====================================
-  id: 23616348809153241
+- # ====== Button: CLOSE_TRIP ==================================
+  id: 45953643621054275
   identification: 
-    button-name: ADD_TRIP
-    label: Add Trip
+    button-name: CLOSE_TRIP
+    label: Close Trip
 
   layout: 
-    sequence: 10
-    region: Trips Planning # 23615827817153235
+    sequence: 40
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -2792,65 +2792,33 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Icon # 17865448457506535
+    button-template: Icon # 60062458726289887
     hot: false
     template-options: 
     - '#DEFAULT#'
-    icon: fa-plus
+    css-classes: 
+    - u-pullRight
+    icon: fa-times
 
   behavior: 
     action: Redirect to Page in this Application
     target: 
-      url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
-      page: 105 # Trip Detail
-      clear-cache: 105
-
-    warn-on-unsaved-changes: Do Not Check
-
-- # ====== Button: ADD_STOP ====================================
-  id: 23617486234153252
-  identification: 
-    button-name: ADD_STOP
-    label: Add Stop
-
-  layout: 
-    sequence: 10
-    region: '&P100_ITINERARY_HEADER!RAW.' # 23180114996012361
-    position: RIGHT_OF_TITLE
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: Automatic
-
-  appearance: 
-    button-template: Icon # 17865448457506535
-    hot: false
-    template-options: 
-    - '#DEFAULT#'
-    icon: fa-plus
-
-  behavior: 
-    action: Redirect to Page in this Application
-    target: 
-      url: 'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110:P110_TRIP_ID,P110_STOP_ID,P110_START_AT:&P100_TRIP_ID.,,&P100_DAY.'
-      page: 110 # Stop Detail
-      clear-cache: 110
+      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_TRIP_ID:'
+      page: 100 # #APP_NAME#
+      clear-cache: 100
       values: 
-        p110_trip_id: '&P100_TRIP_ID.'
-        p110_start_at: '&P100_DAY.'
 
-    warn-on-unsaved-changes: Do Not Check
+    warn-on-unsaved-changes: Page Default
 
 - # ====== Button: SWITCH_COLORS ===============================
-  id: 23983082801895343
+  id: 45954089388054276
   identification: 
     button-name: SWITCH_COLORS
     label: Colors by Status
 
   layout: 
     sequence: 50
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -2859,7 +2827,7 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Text # 17866172241506537
+    button-template: Text # 60063248519289891
     hot: false
     template-options: 
     - '#DEFAULT#'
@@ -2881,14 +2849,14 @@ buttons:
     item: P100_STATUS
 
 - # ====== Button: SWITCH_COLORS_DEFAULT =======================
-  id: 23983482993895347
+  id: 45954413252054276
   identification: 
     button-name: SWITCH_COLORS_DEFAULT
     label: Colors by Category
 
   layout: 
     sequence: 60
-    region: '&P100_TRIP_HEADER!RAW.' # 23215188288318933
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
     position: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
@@ -2897,7 +2865,7 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Text # 17866172241506537
+    button-template: Text # 60063248519289891
     hot: false
     template-options: 
     - '#DEFAULT#'
@@ -2917,9 +2885,41 @@ buttons:
     type: Item is NOT NULL
     item: P100_STATUS
 
+- # ====== Button: ADD_TRIP ====================================
+  id: 45959229732054280
+  identification: 
+    button-name: ADD_TRIP
+    label: Add Trip
+
+  layout: 
+    sequence: 10
+    region: Trips Planning # 115471001009215010
+    position: RIGHT_OF_TITLE
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 60062458726289887
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-plus
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105::'
+      page: 105 # Trip Detail
+      clear-cache: 105
+
+    warn-on-unsaved-changes: Do Not Check
+
 dynamic-actions: 
 - # ====== Dynamic Action: REFRESH_CHART =======================
-  id: 23217887047318960
+  id: 45967387342054288
   identification: 
     name: REFRESH_CHART
 
@@ -2929,7 +2929,7 @@ dynamic-actions:
   when: 
     event: NATIVE_IG|REGION TYPE|interactivegridsave
     selection-type: Region
-    region: Itinerary [GRID] # 23180577614012366
+    region: Itinerary [GRID] # 115035750806074141
 
   execution: 
     event-scope: Static
@@ -2937,37 +2937,37 @@ dynamic-actions:
 
   actions: 
   - # ====== Action: Refresh =====================================
-    id: 23217957859318961
+    id: 45967808325054289
     identification: 
       action: Refresh
 
     affected-elements: 
       selection-type: Region
-      region: Gantt [CHART] # 22657826332266471
+      region: Gantt [CHART] # 114512999524328246
 
     execution: 
       sequence: 10
-      event: REFRESH_CHART # 23217887047318960
+      event: REFRESH_CHART # 45967387342054288
       fire-when-event-result-is: True
       fire-on-initialization: false
 
   - # ====== Action: Refresh =====================================
-    id: 23218245964318964
+    id: 45968342820054289
     identification: 
       action: Refresh
 
     affected-elements: 
       selection-type: Region
-      region: CSS # 23218207406318963
+      region: CSS # 115073380598380738
 
     execution: 
       sequence: 20
-      event: REFRESH_CHART # 23217887047318960
+      event: REFRESH_CHART # 45967387342054288
       fire-when-event-result-is: True
       fire-on-initialization: false
 
 - # ====== Dynamic Action: REFRESH_TRIPS =======================
-  id: 23615947535153237
+  id: 45968752850054290
   identification: 
     name: REFRESH_TRIPS
 
@@ -2977,7 +2977,7 @@ dynamic-actions:
   when: 
     event: NATIVE_IG|REGION TYPE|interactivegridsave
     selection-type: Region
-    region: Trips [GRID] # 42540448134606088
+    region: Trips [GRID] # 134395621326667863
 
   execution: 
     event-scope: Static
@@ -2985,7 +2985,7 @@ dynamic-actions:
 
   actions: 
   - # ====== Action: Submit Page =================================
-    id: 23616118344153238
+    id: 45969242453054290
     identification: 
       action: Submit Page
 
@@ -2994,12 +2994,12 @@ dynamic-actions:
 
     execution: 
       sequence: 10
-      event: REFRESH_TRIPS # 23615947535153237
+      event: REFRESH_TRIPS # 45968752850054290
       fire-when-event-result-is: True
       fire-on-initialization: false
 
 - # ====== Dynamic Action: GANTT_CLICKED =======================
-  id: 23617715615153254
+  id: 45969657426054290
   identification: 
     name: GANTT_CLICKED
 
@@ -3010,7 +3010,7 @@ dynamic-actions:
     event: EVENT.EVENT.CUSTOM.CUSTOM
     custom-event: ojoptionchange
     selection-type: Region
-    region: Gantt [CHART] # 22657826332266471
+    region: Gantt [CHART] # 114512999524328246
 
   execution: 
     event-scope: Static
@@ -3018,7 +3018,7 @@ dynamic-actions:
 
   actions: 
   - # ====== Action: Execute JavaScript Code =====================
-    id: 23617828660153255
+    id: 45970131979054291
     identification: 
       action: Execute JavaScript Code
 
@@ -3046,12 +3046,12 @@ dynamic-actions:
 
     execution: 
       sequence: 10
-      event: GANTT_CLICKED # 23617715615153254
+      event: GANTT_CLICKED # 45969657426054290
       fire-when-event-result-is: True
       fire-on-initialization: false
 
 - # ====== Dynamic Action: DETECT_MODAL_CLOSED =================
-  id: 23618956089153267
+  id: 45970532154054291
   identification: 
     name: DETECT_MODAL_CLOSED
 
@@ -3069,52 +3069,52 @@ dynamic-actions:
 
   actions: 
   - # ====== Action: Refresh =====================================
-    id: 22777767742601007
+    id: 45971005494054291
     identification: 
       action: Refresh
 
     affected-elements: 
       selection-type: Region
-      region: Trips [GRID] # 42540448134606088
-
-    execution: 
-      sequence: 30
-      event: DETECT_MODAL_CLOSED # 23618956089153267
-      fire-when-event-result-is: True
-      fire-on-initialization: false
-
-  - # ====== Action: Refresh =====================================
-    id: 23619073126153268
-    identification: 
-      action: Refresh
-
-    affected-elements: 
-      selection-type: Region
-      region: Gantt [CHART] # 22657826332266471
+      region: Gantt [CHART] # 114512999524328246
 
     execution: 
       sequence: 10
-      event: DETECT_MODAL_CLOSED # 23618956089153267
+      event: DETECT_MODAL_CLOSED # 45970532154054291
       fire-when-event-result-is: True
       fire-on-initialization: false
 
   - # ====== Action: Refresh =====================================
-    id: 23619237703153269
+    id: 45971532111054292
     identification: 
       action: Refresh
 
     affected-elements: 
       selection-type: Region
-      region: Itinerary [GRID] # 23180577614012366
+      region: Itinerary [GRID] # 115035750806074141
 
     execution: 
       sequence: 20
-      event: DETECT_MODAL_CLOSED # 23618956089153267
+      event: DETECT_MODAL_CLOSED # 45970532154054291
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
+  - # ====== Action: Refresh =====================================
+    id: 45972005198054292
+    identification: 
+      action: Refresh
+
+    affected-elements: 
+      selection-type: Region
+      region: Trips [GRID] # 134395621326667863
+
+    execution: 
+      sequence: 30
+      event: DETECT_MODAL_CLOSED # 45970532154054291
       fire-when-event-result-is: True
       fire-on-initialization: false
 
 - # ====== Dynamic Action: GANTT_REFRESHED =====================
-  id: 23619813436153275
+  id: 45972439771054292
   identification: 
     name: GANTT_REFRESHED
 
@@ -3124,7 +3124,7 @@ dynamic-actions:
   when: 
     event: EVENT.EVENT.FAMEWORK.APEXAFTERREFRESH
     selection-type: Region
-    region: Gantt [CHART] # 22657826332266471
+    region: Gantt [CHART] # 114512999524328246
 
   execution: 
     event-scope: Static
@@ -3132,7 +3132,7 @@ dynamic-actions:
 
   actions: 
   - # ====== Action: Execute JavaScript Code =====================
-    id: 23619927197153276
+    id: 45972910697054293
     identification: 
       action: Execute JavaScript Code
 
@@ -3161,18 +3161,18 @@ dynamic-actions:
 
     execution: 
       sequence: 10
-      event: GANTT_REFRESHED # 23619813436153275
+      event: GANTT_REFRESHED # 45972439771054292
       fire-when-event-result-is: True
       fire-on-initialization: false
 
 processes: 
 - # ====== Process: SAVE_ITINERARY =============================
-  id: 23181838242012378
+  id: 45951740750054274
   identification: 
     name: SAVE_ITINERARY
     type: Invoke API
     execution-chain: None
-    editable-region: Itinerary [GRID] # 23180577614012366
+    editable-region: Itinerary [GRID] # 115035750806074141
 
   settings: 
     type: PL/SQL Package
@@ -3191,49 +3191,13 @@ processes:
   server-side-condition: 
     execution-scope: For Created and Modified Rows
 
-- # ====== Process: SET_DAYS ===================================
-  id: 23217538902318957
-  identification: 
-    name: SET_DAYS
-    type: Invoke API
-    execution-chain: None
-
-  settings: 
-    type: PL/SQL Package
-    owner: PARSING SCHEMA
-    package: TRP_APP
-    procedure-or-function: SET_DAYS
-
-  execution: 
-    sequence: 20
-    point: Before Header
-    run-process: Once Per Page Visit (default)
-
-- # ====== Process: SET_DEFAULTS ===============================
-  id: 23218893977318970
-  identification: 
-    name: SET_DEFAULTS
-    type: Invoke API
-    execution-chain: None
-
-  settings: 
-    type: PL/SQL Package
-    owner: PARSING SCHEMA
-    package: TRP_APP
-    procedure-or-function: SET_DEFAULTS
-
-  execution: 
-    sequence: 10
-    point: Before Header
-    run-process: Once Per Page Visit (default)
-
 - # ====== Process: SAVE_TRIPS =================================
-  id: 23615298350151037
+  id: 45964846800054286
   identification: 
     name: SAVE_TRIPS
     type: Invoke API
     execution-chain: None
-    editable-region: Trips [GRID] # 42540448134606088
+    editable-region: Trips [GRID] # 134395621326667863
 
   settings: 
     type: PL/SQL Package
@@ -3252,8 +3216,44 @@ processes:
   server-side-condition: 
     execution-scope: For Created and Modified Rows
 
+- # ====== Process: SET_DAYS ===================================
+  id: 45965711030054287
+  identification: 
+    name: SET_DAYS
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TRP_APP
+    procedure-or-function: SET_DAYS
+
+  execution: 
+    sequence: 20
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
+- # ====== Process: SET_DEFAULTS ===============================
+  id: 45966153481054288
+  identification: 
+    name: SET_DEFAULTS
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TRP_APP
+    procedure-or-function: SET_DEFAULTS
+
+  execution: 
+    sequence: 10
+    point: Before Header
+    run-process: Once Per Page Visit (default)
+
 - # ====== Process: GET_DETAIL_LINK ============================
-  id: 23618881823153266
+  id: 45966553273054288
   identification: 
     name: GET_DETAIL_LINK
     type: Execute Code
@@ -3276,7 +3276,7 @@ processes:
     run-process: Once Per Page Visit (default)
 
 - # ====== Process: GET_LINES ==================================
-  id: 23619998350153277
+  id: 45966924101054288
   identification: 
     name: GET_LINES
     type: Execute Code

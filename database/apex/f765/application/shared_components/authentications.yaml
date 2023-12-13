@@ -1,6 +1,67 @@
 ---
+- # ====== Authentication: MASTER - GOOGLE =====================
+  id: 70028510378041441
+  identification: 
+    name: MASTER - GOOGLE
+
+  subscription: 
+    master: 
+      app: 800 # Master
+      referenced-id: 24099271848341251 # GOOGLE
+
+  settings: 
+    type: Social Sign-In
+    credential-store: 62013508289982337
+    authentication-provider: Google
+    scope: profile,email
+    username: '#email#'
+    convert-username-to-upper-case: false
+    additional-user-attributes: email,name
+    verify-attributes: true
+
+  session-not-valid: 
+    redirect-to: URL
+    invalid-session-url: '/ords/f?p=800:9999:0::::P9999_ERROR:SESSION_INVALID'
+
+  login-processing: 
+    post-authentication-procedure-name: app_auth.after_auth
+    switch-in-session: true
+
+  post-logout-url: 
+    post-logout-url: '/ords/f?p=800:9999:0'
+
+  real-application-security: 
+    ras-mode: Disabled
+
+- # ====== Authentication: MASTER - APEX_ACCOUNTS ==============
+  id: 96352848482840916
+  identification: 
+    name: MASTER - APEX_ACCOUNTS
+
+  subscription: 
+    master: 
+      app: 800 # Master
+      referenced-id: 63288166491439030 # APEX_ACCOUNTS
+
+  settings: 
+    type: Oracle APEX Accounts
+
+  session-not-valid: 
+    redirect-to: URL
+    invalid-session-url: '/ords/f?p=800:9999:0::::P9999_ERROR:SESSION_INVALID'
+
+  login-processing: 
+    post-authentication-procedure-name: app_auth.after_auth
+    switch-in-session: true
+
+  post-logout-url: 
+    post-logout-url: '/ords/f?p=800:9999:0'
+
+  real-application-security: 
+    ras-mode: Disabled
+
 - # ====== Authentication: MASTER - OPEN_DOOR (TESTING ONLY) ===
-  id: 59727810078330583
+  id: 96353050886840917
   identification: 
     name: MASTER - OPEN_DOOR (TESTING ONLY)
 
