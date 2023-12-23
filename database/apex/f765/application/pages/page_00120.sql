@@ -13,9 +13,9 @@ wwv_flow_imp.component_begin (
 );
 wwv_flow_imp_page.create_page(
  p_id=>120
-,p_name=>'Trips'
+,p_name=>'Trips Planning'
 ,p_alias=>'HOME'
-,p_step_title=>'Trips'
+,p_step_title=>'Trips Planning'
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_imp.id(104047788811330691)  --  MAIN
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(

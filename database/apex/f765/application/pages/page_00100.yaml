@@ -1,10 +1,10 @@
 ---
-# ====== Page: Trip ==========================================
+# ====== Page: Trip Overview =================================
 id: 100
 identification: 
-  name: Trip
+  name: Trip Overview
   alias: TRIP
-  title: Trip
+  title: Trip Overview
   page-group: ' MAIN' # 104047788811330691
 
 appearance: 
@@ -2794,7 +2794,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:&P100_DAY_PREV.'
-      page: 100 # Trip
+      page: 100 # Trip Overview
       values: 
         p100_day: '&P100_DAY_PREV.'
 
@@ -2831,7 +2831,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:&P100_DAY_NEXT.'
-      page: 100 # Trip
+      page: 100 # Trip Overview
       values: 
         p100_day: '&P100_DAY_NEXT.'
 
@@ -2868,7 +2868,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:'
-      page: 100 # Trip
+      page: 100 # Trip Overview
       values: 
 
     warn-on-unsaved-changes: Page Default
@@ -2906,7 +2906,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:120:&SESSION.::&DEBUG.:::'
-      page: 120 # Trips
+      page: 120 # Trips Planning
 
     warn-on-unsaved-changes: Page Default
 
@@ -2938,7 +2938,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_STATUS:PAID'
-      page: 100 # Trip
+      page: 100 # Trip Overview
       values: 
         p100_status: PAID
 
@@ -2976,7 +2976,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_STATUS:'
-      page: 100 # Trip
+      page: 100 # Trip Overview
       values: 
 
     warn-on-unsaved-changes: Page Default

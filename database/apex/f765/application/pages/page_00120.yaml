@@ -1,10 +1,10 @@
 ---
-# ====== Page: Trips =========================================
+# ====== Page: Trips Planning ================================
 id: 120
 identification: 
-  name: Trips
+  name: Trips Planning
   alias: HOME
-  title: Trips
+  title: Trips Planning
   page-group: ' MAIN' # 104047788811330691
 
 appearance: 
@@ -165,7 +165,7 @@ regions:
         type: Redirect to Page in this Application
         target: 
           url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_TRIP_ID:&TRIP_ID.'
-          page: 100 # Trip
+          page: 100 # Trip Overview
           clear-cache: 100
           values: 
             p100_trip_id: '&TRIP_ID.'

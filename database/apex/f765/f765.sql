@@ -33,7 +33,7 @@ prompt APPLICATION 765 - Trips Planning
 -- Application Export:
 --   Application:     765
 --   Name:            Trips Planning
---   Date and Time:   07:24 Sobota Prosinec 23, 2023
+--   Date and Time:   07:37 Sobota Prosinec 23, 2023
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -211,7 +211,7 @@ wwv_flow_imp_shared.create_list(
 '    t.attribute08,',
 '    t.attribute09,',
 '    t.attribute10',
-'FROM app_navigation_v t',
+'FROM trp_navigation_v t',
 'ORDER BY t.order# NULLS FIRST;'))
 ,p_list_status=>'PUBLIC'
 );
@@ -18400,9 +18400,9 @@ prompt --application/pages/page_00100
 begin
 wwv_flow_imp_page.create_page(
  p_id=>100
-,p_name=>'Trip'
+,p_name=>'Trip Overview'
 ,p_alias=>'TRIP'
-,p_step_title=>'Trip'
+,p_step_title=>'Trip Overview'
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_imp.id(104047788811330691)  --  MAIN
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -22052,9 +22052,9 @@ prompt --application/pages/page_00120
 begin
 wwv_flow_imp_page.create_page(
  p_id=>120
-,p_name=>'Trips'
+,p_name=>'Trips Planning'
 ,p_alias=>'HOME'
-,p_step_title=>'Trips'
+,p_step_title=>'Trips Planning'
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_imp.id(104047788811330691)  --  MAIN
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
