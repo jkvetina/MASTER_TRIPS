@@ -11,7 +11,8 @@ SELECT
     t.year_
     --
 FROM trp_trips t
-WHERE t.created_by = core.get_user_id();
+WHERE t.created_by = core.get_user_id()
+ORDER BY t.start_at, t.end_at, t.trip_id;
 --
 COMMENT ON TABLE trp_trips_grid_v IS '';
 
