@@ -3,7 +3,7 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
     PROCEDURE save_trips
     AS
         rec                 trp_trips%ROWTYPE;
-        in_action           CONSTANT CHAR := core.get_grid_action();
+        in_action           CONSTANT CHAR := COALESCE(core.get_grid_action(), SUBSTR(core.get_request(), 1, 1));
     BEGIN
         -- change record in table
         IF core.get_page_id() = 105 THEN
@@ -45,7 +45,7 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
     PROCEDURE save_itinerary
     AS
         rec                 trp_itinerary%ROWTYPE;
-        in_action           CONSTANT CHAR := core.get_grid_action();
+        in_action           CONSTANT CHAR := COALESCE(core.get_grid_action(), SUBSTR(core.get_request(), 1, 1));
     BEGIN
         -- change record in table
         IF core.get_page_id() = 110 THEN
