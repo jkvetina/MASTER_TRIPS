@@ -1,10 +1,10 @@
 ---
-# ====== Page: #APP_NAME# ====================================
+# ====== Page: Trip ==========================================
 id: 100
 identification: 
-  name: '#APP_NAME#'
-  alias: HOME
-  title: '#APP_NAME#'
+  name: Trip
+  alias: TRIP
+  title: Trip
   page-group: ' MAIN' # 104047788811330691
 
 appearance: 
@@ -455,6 +455,47 @@ regions:
       heading: Links
 
   columns: 
+  - # ====== Column: EDIT_BUTTON =================================
+    id: 40850633787003042
+    identification: 
+      column-name: EDIT_BUTTON
+      type: Display Only
+
+    heading: 
+      alignment: center
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 30
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110:P110_TRIP_ID,P110_STOP_ID:&TRIP_ID.,&STOP_ID.'
+        page: 110 # Stop Detail
+        clear-cache: 110
+        values: 
+          p110_trip_id: '&TRIP_ID.'
+          p110_stop_id: '&STOP_ID.'
+
+      link-text: <span class="fa fa-edit"></span>
+
+    source: 
+      type: None
+
+    session-state: 
+      data-type: VARCHAR2
+
+    enable-users-to: 
+      hide: true
+
   - # ====== Column: TRIP_ID =====================================
     id: 115035996205074143
     identification: 
@@ -470,7 +511,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: start
       group: Info # 111614013224957808
       use-group-for: Both
@@ -521,7 +562,7 @@ regions:
       virtual-keyboard: Decimal
 
     layout: 
-      sequence: 60
+      sequence: 70
       column-alignment: end
       group: Info # 111614013224957808
       use-group-for: Both
@@ -570,7 +611,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 70
+      sequence: 80
       column-alignment: start
       group: Info # 111614013224957808
       use-group-for: Both
@@ -623,7 +664,7 @@ regions:
       alignment: start
 
     layout: 
-      sequence: 80
+      sequence: 90
       column-alignment: start
       group: Info # 111614013224957808
       use-group-for: Both
@@ -685,7 +726,7 @@ regions:
       virtual-keyboard: Decimal
 
     layout: 
-      sequence: 90
+      sequence: 100
       column-alignment: end
       group: Info # 111614013224957808
       use-group-for: Both
@@ -742,7 +783,7 @@ regions:
       show-on: Item Focus
 
     layout: 
-      sequence: 100
+      sequence: 110
       column-alignment: center
       group: Event # 111613953808957807
       use-group-for: Both
@@ -806,7 +847,7 @@ regions:
       show-on: Item Focus
 
     layout: 
-      sequence: 110
+      sequence: 120
       column-alignment: center
       group: Event # 111613953808957807
       use-group-for: Both
@@ -862,7 +903,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 120
+      sequence: 130
       column-alignment: start
       stretch: Use Report Setting
 
@@ -910,6 +951,9 @@ regions:
     layout: 
       sequence: 20
 
+    server-side-condition: 
+      type: Never
+
   - # ====== Column: APEX$ROW_SELECTOR ===========================
     id: 115036836464074152
     identification: 
@@ -923,6 +967,9 @@ regions:
 
     layout: 
       sequence: 10
+
+    server-side-condition: 
+      type: Never
 
   - # ====== Column: DAY# ========================================
     id: 115071432451380719
@@ -939,7 +986,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 190
+      sequence: 200
       column-alignment: start
       stretch: Use Report Setting
 
@@ -978,7 +1025,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 30
+      sequence: 40
 
     accessibility: 
       value-identifies-row: false
@@ -1012,7 +1059,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 40
+      sequence: 50
 
     accessibility: 
       value-identifies-row: false
@@ -1050,7 +1097,7 @@ regions:
       use-defaults: true
 
     layout: 
-      sequence: 130
+      sequence: 140
       column-alignment: start
       stretch: Use Report Setting
 
@@ -1105,7 +1152,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 140
+      sequence: 150
       column-alignment: center
       group: Flags # 111613856595957806
       use-group-for: Both
@@ -1161,7 +1208,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 150
+      sequence: 160
       column-alignment: center
       group: Flags # 111613856595957806
       use-group-for: Both
@@ -1217,7 +1264,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 200
+      sequence: 210
       column-alignment: center
       stretch: Use Report Setting
 
@@ -1268,7 +1315,7 @@ regions:
       checked-value: Y
 
     layout: 
-      sequence: 160
+      sequence: 170
       column-alignment: center
       group: Flags # 111613856595957806
       use-group-for: Both
@@ -1324,7 +1371,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 170
+      sequence: 180
       column-alignment: center
       group: Links # 111614164031957809
       use-group-for: Both
@@ -1383,7 +1430,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 180
+      sequence: 190
       column-alignment: center
       group: Links # 111614164031957809
       use-group-for: Both
@@ -1437,7 +1484,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 210
+      sequence: 220
 
     accessibility: 
       value-identifies-row: false
@@ -1671,6 +1718,9 @@ regions:
     type: Item is NULL
     item: P100_TRIP_ID
 
+  security: 
+    authorization-scheme: MASTER - NOBODY # 89529175276116354
+
   server-cache: 
     caching: Disabled
 
@@ -1711,6 +1761,9 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
+
+  security: 
+    authorization-scheme: MASTER - NOBODY # 89529175276116354
 
   server-cache: 
     caching: Disabled
@@ -1759,6 +1812,9 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
+
+  security: 
+    authorization-scheme: MASTER - NOBODY # 89529175276116354
 
   server-cache: 
     caching: Disabled
@@ -1827,6 +1883,46 @@ regions:
         alias: 93030
 
   columns: 
+  - # ====== Column: EDIT_BUTTON =================================
+    id: 40850716727003043
+    identification: 
+      column-name: EDIT_BUTTON
+      type: Display Only
+
+    heading: 
+      alignment: center
+
+    settings: 
+      format: Plain Text
+      based-on: Item Value
+
+    layout: 
+      sequence: 30
+      column-alignment: center
+      stretch: Use Report Setting
+
+    accessibility: 
+      value-identifies-row: false
+
+    link: 
+      target: 
+        url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TRIP_ID:&TRIP_ID.'
+        page: 105 # Trip Detail
+        clear-cache: 105
+        values: 
+          p105_trip_id: '&TRIP_ID.'
+
+      link-text: <span class="fa fa-edit"></span>
+
+    source: 
+      type: None
+
+    session-state: 
+      data-type: VARCHAR2
+
+    enable-users-to: 
+      hide: true
+
   - # ====== Column: YEAR_ =======================================
     id: 114632728593662780
     identification: 
@@ -1892,7 +1988,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 30
+      sequence: 40
 
     accessibility: 
       value-identifies-row: false
@@ -1931,7 +2027,7 @@ regions:
       based-on: Item Value
 
     layout: 
-      sequence: 40
+      sequence: 50
       column-alignment: end
       stretch: Use Report Setting
 
@@ -1988,7 +2084,7 @@ regions:
       text-case: NO CHANGE
 
     layout: 
-      sequence: 50
+      sequence: 60
       column-alignment: start
       stretch: Use Report Setting
 
@@ -2047,7 +2143,7 @@ regions:
       use-defaults: true
 
     layout: 
-      sequence: 60
+      sequence: 70
       column-alignment: center
       stretch: Use Report Setting
 
@@ -2102,7 +2198,7 @@ regions:
       use-defaults: true
 
     layout: 
-      sequence: 70
+      sequence: 80
       column-alignment: center
       stretch: Use Report Setting
 
@@ -2147,6 +2243,9 @@ regions:
     layout: 
       sequence: 20
 
+    server-side-condition: 
+      type: Never
+
   - # ====== Column: APEX$ROW_SELECTOR ===========================
     id: 134396478896667871
     identification: 
@@ -2161,6 +2260,9 @@ regions:
     layout: 
       sequence: 10
 
+    server-side-condition: 
+      type: Never
+
   - # ====== Column: CREATED_BY ==================================
     id: 134437268437974500
     identification: 
@@ -2171,7 +2273,7 @@ regions:
       value-protected: true
 
     layout: 
-      sequence: 80
+      sequence: 90
 
     accessibility: 
       value-identifies-row: false
@@ -2692,7 +2794,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:&P100_DAY_PREV.'
-      page: 100 # #APP_NAME#
+      page: 100 # Trip
       values: 
         p100_day: '&P100_DAY_PREV.'
 
@@ -2729,7 +2831,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:&P100_DAY_NEXT.'
-      page: 100 # #APP_NAME#
+      page: 100 # Trip
       values: 
         p100_day: '&P100_DAY_NEXT.'
 
@@ -2766,7 +2868,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:'
-      page: 100 # #APP_NAME#
+      page: 100 # Trip
       values: 
 
     warn-on-unsaved-changes: Page Default
@@ -2803,10 +2905,8 @@ buttons:
   behavior: 
     action: Redirect to Page in this Application
     target: 
-      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_TRIP_ID:'
-      page: 100 # #APP_NAME#
-      clear-cache: 100
-      values: 
+      url: 'f?p=&APP_ID.:120:&SESSION.::&DEBUG.:::'
+      page: 120 # Trips
 
     warn-on-unsaved-changes: Page Default
 
@@ -2838,7 +2938,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_STATUS:PAID'
-      page: 100 # #APP_NAME#
+      page: 100 # Trip
       values: 
         p100_status: PAID
 
@@ -2876,7 +2976,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_STATUS:'
-      page: 100 # #APP_NAME#
+      page: 100 # Trip
       values: 
 
     warn-on-unsaved-changes: Page Default

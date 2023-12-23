@@ -473,7 +473,7 @@ buttons:
     action: Redirect to Page in this Application
     target: 
       url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_TRIP_ID:&P105_TRIP_ID.'
-      page: 100 # #APP_NAME#
+      page: 100 # Trip
       clear-cache: 100
       values: 
         p100_trip_id: '&P105_TRIP_ID.'

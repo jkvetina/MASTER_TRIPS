@@ -140,6 +140,7 @@ prompt --install
 @@application/pages/page_00100.sql
 @@application/pages/page_00105.sql
 @@application/pages/page_00110.sql
+@@application/pages/page_00120.sql
 @@application/deployment/definition.sql
 @@application/deployment/checks.sql
 @@application/deployment/buildoptions.sql
