@@ -49,7 +49,7 @@ future_trips AS (
 endpoints AS (
     -- endpoints to attach dynamic stuff, make sure this returns just 1 row
     SELECT /*+ MATERIALIZE */
-        MAX(CASE WHEN n.page_id = 100 THEN n.order# END) AS trips
+        MAX(CASE WHEN n.page_id = 120 THEN n.order# END) AS trips
         --
     FROM app_navigation_v n
     JOIN x
@@ -80,9 +80,9 @@ SELECT
     '<a href="' ||
     APEX_PAGE.GET_URL (
         --p_application   => x.app_id,
-        p_page          => 100,
-        p_clear_cache   => 100,
-        p_items         => 'P100_YEAR',
+        p_page          => 120,
+        p_clear_cache   => 120,
+        p_items         => 'P120_YEAR',
         p_values        => y.year_
     ) ||
     '"><span>' || y.year_ || '</span></a>' AS attribute01,
