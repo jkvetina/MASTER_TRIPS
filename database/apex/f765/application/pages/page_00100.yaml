@@ -2867,8 +2867,9 @@ buttons:
   behavior: 
     action: Redirect to Page in this Application
     target: 
-      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:'
+      url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_DAY:'
       page: 100 # Trip Overview
+      clear-cache: 100
       values: 
 
     warn-on-unsaved-changes: Page Default
@@ -2886,7 +2887,7 @@ buttons:
   layout: 
     sequence: 40
     region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
-    position: RIGHT_OF_TITLE
+    position: UP
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -2898,8 +2899,6 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
-    css-classes: 
-    - u-pullRight
     icon: fa-times
 
   behavior: 
@@ -2917,9 +2916,9 @@ buttons:
     label: Colors by Status
 
   layout: 
-    sequence: 50
+    sequence: 10
     region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
-    position: RIGHT_OF_TITLE
+    position: UP
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -2931,8 +2930,6 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
-    css-classes: 
-    - u-pullRight
 
   behavior: 
     action: Redirect to Page in this Application
@@ -2955,9 +2952,9 @@ buttons:
     label: Colors by Category
 
   layout: 
-    sequence: 60
+    sequence: 20
     region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
-    position: RIGHT_OF_TITLE
+    position: UP
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -2969,8 +2966,6 @@ buttons:
     hot: false
     template-options: 
     - '#DEFAULT#'
-    css-classes: 
-    - u-pullRight
 
   behavior: 
     action: Redirect to Page in this Application
@@ -3016,6 +3011,40 @@ buttons:
       clear-cache: 105
 
     warn-on-unsaved-changes: Do Not Check
+
+- # ====== Button: EDIT_TRIP ===================================
+  id: 46319216497303217
+  identification: 
+    button-name: EDIT_TRIP
+    label: Edit Trip
+
+  layout: 
+    sequence: 30
+    region: '&P100_TRIP_HEADER!RAW.' # 115070361480380708
+    position: UP
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 60062458726289887
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    icon: fa-edit
+
+  behavior: 
+    action: Redirect to Page in this Application
+    target: 
+      url: 'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TRIP_ID:&P100_TRIP_ID.'
+      page: 105 # Trip Detail
+      clear-cache: 105
+      values: 
+        p105_trip_id: '&P100_TRIP_ID.'
+
+    warn-on-unsaved-changes: Page Default
 
 dynamic-actions: 
 - # ====== Dynamic Action: REFRESH_CHART =======================

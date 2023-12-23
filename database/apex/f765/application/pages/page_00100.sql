@@ -2209,10 +2209,54 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_id=>wwv_flow_imp.id(60062458726289887)
 ,p_button_image_alt=>'Whole Trip'
 ,p_button_position=>'RIGHT_OF_TITLE'
-,p_button_redirect_url=>'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_DAY:'
+,p_button_redirect_url=>'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_DAY:'
 ,p_warn_on_unsaved_changes=>null
 ,p_icon_css_classes=>'fa-calendar-o'
 ,p_button_cattributes=>'&P100_DAY_ATTR.'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(45954089388054276)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_imp.id(115070361480380708)
+,p_button_name=>'SWITCH_COLORS'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(60063248519289891)
+,p_button_image_alt=>'Colors by Status'
+,p_button_position=>'UP'
+,p_button_redirect_url=>'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_STATUS:PAID'
+,p_warn_on_unsaved_changes=>null
+,p_button_condition=>'P100_STATUS'
+,p_button_condition_type=>'ITEM_IS_NULL'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(45954413252054276)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_imp.id(115070361480380708)
+,p_button_name=>'SWITCH_COLORS_DEFAULT'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(60063248519289891)
+,p_button_image_alt=>'Colors by Category'
+,p_button_position=>'UP'
+,p_button_redirect_url=>'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_STATUS:'
+,p_warn_on_unsaved_changes=>null
+,p_button_condition=>'P100_STATUS'
+,p_button_condition_type=>'ITEM_IS_NOT_NULL'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(46319216497303217)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_imp.id(115070361480380708)
+,p_button_name=>'EDIT_TRIP'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(60062458726289887)
+,p_button_image_alt=>'Edit Trip'
+,p_button_position=>'UP'
+,p_button_redirect_url=>'f?p=&APP_ID.:105:&SESSION.::&DEBUG.:105:P105_TRIP_ID:&P100_TRIP_ID.'
+,p_warn_on_unsaved_changes=>null
+,p_icon_css_classes=>'fa-edit'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(45953643621054275)
@@ -2223,43 +2267,10 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(60062458726289887)
 ,p_button_image_alt=>'Close Trip'
-,p_button_position=>'RIGHT_OF_TITLE'
+,p_button_position=>'UP'
 ,p_button_redirect_url=>'f?p=&APP_ID.:120:&SESSION.::&DEBUG.:::'
 ,p_warn_on_unsaved_changes=>null
-,p_button_css_classes=>'u-pullRight'
 ,p_icon_css_classes=>'fa-times'
-);
-wwv_flow_imp_page.create_page_button(
- p_id=>wwv_flow_imp.id(45954089388054276)
-,p_button_sequence=>50
-,p_button_plug_id=>wwv_flow_imp.id(115070361480380708)
-,p_button_name=>'SWITCH_COLORS'
-,p_button_action=>'REDIRECT_PAGE'
-,p_button_template_options=>'#DEFAULT#'
-,p_button_template_id=>wwv_flow_imp.id(60063248519289891)
-,p_button_image_alt=>'Colors by Status'
-,p_button_position=>'RIGHT_OF_TITLE'
-,p_button_redirect_url=>'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_STATUS:PAID'
-,p_warn_on_unsaved_changes=>null
-,p_button_condition=>'P100_STATUS'
-,p_button_condition_type=>'ITEM_IS_NULL'
-,p_button_css_classes=>'u-pullRight'
-);
-wwv_flow_imp_page.create_page_button(
- p_id=>wwv_flow_imp.id(45954413252054276)
-,p_button_sequence=>60
-,p_button_plug_id=>wwv_flow_imp.id(115070361480380708)
-,p_button_name=>'SWITCH_COLORS_DEFAULT'
-,p_button_action=>'REDIRECT_PAGE'
-,p_button_template_options=>'#DEFAULT#'
-,p_button_template_id=>wwv_flow_imp.id(60063248519289891)
-,p_button_image_alt=>'Colors by Category'
-,p_button_position=>'RIGHT_OF_TITLE'
-,p_button_redirect_url=>'f?p=&APP_ID.:100:&SESSION.::&DEBUG.::P100_STATUS:'
-,p_warn_on_unsaved_changes=>null
-,p_button_condition=>'P100_STATUS'
-,p_button_condition_type=>'ITEM_IS_NOT_NULL'
-,p_button_css_classes=>'u-pullRight'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(114532160290328284)
