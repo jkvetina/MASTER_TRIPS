@@ -360,6 +360,21 @@ dynamic-actions:
     event-scope: Static
     type: Immediate
 
+computations: 
+- # ====== Computation: P120_YEAR ==============================
+  id: 46319321997303218
+  identification: 
+    item-name: P120_YEAR
+
+  execution: 
+    sequence: 10
+    point: Before Regions
+
+  computation: 
+    type: Expression
+    language: PL/SQL
+    pl/sql-expression: TO_CHAR(TRUNC(SYSDATE), 'YYYY')
+
 processes: 
 - # ====== Process: SET_DEFAULTS ===============================
   id: 46372704808379668

@@ -33,13 +33,13 @@ prompt APPLICATION 765 - Trips Planning
 -- Application Export:
 --   Application:     765
 --   Name:            Trips Planning
---   Date and Time:   11:09 Sobota Prosinec 23, 2023
+--   Date and Time:   10:19 Pondělí Leden 1, 2024
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
 --     Pages:                      5
 --       Items:                   46
---       Computations:             8
+--       Computations:             9
 --       Processes:               14
 --       Regions:                 17
 --       Buttons:                 19
@@ -121,7 +121,7 @@ wwv_imp_workspace.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2023-12-23'
+,p_flow_version=>'2024-01-01'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -22180,6 +22180,15 @@ wwv_flow_imp_page.create_page_item(
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'
+);
+wwv_flow_imp_page.create_page_computation(
+ p_id=>wwv_flow_imp.id(46319321997303218)
+,p_computation_sequence=>10
+,p_computation_item=>'P120_YEAR'
+,p_computation_point=>'BEFORE_BOX_BODY'
+,p_computation_type=>'EXPRESSION'
+,p_computation_language=>'PLSQL'
+,p_computation=>'TO_CHAR(TRUNC(SYSDATE), ''YYYY'')'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(46377131529379675)

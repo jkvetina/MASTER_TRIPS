@@ -131,6 +131,15 @@ wwv_flow_imp_page.create_page_item(
 ,p_attribute_01=>'NONE'
 ,p_attribute_02=>'N'
 );
+wwv_flow_imp_page.create_page_computation(
+ p_id=>wwv_flow_imp.id(46319321997303218)
+,p_computation_sequence=>10
+,p_computation_item=>'P120_YEAR'
+,p_computation_point=>'BEFORE_BOX_BODY'
+,p_computation_type=>'EXPRESSION'
+,p_computation_language=>'PLSQL'
+,p_computation=>'TO_CHAR(TRUNC(SYSDATE), ''YYYY'')'
+);
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(46377131529379675)
 ,p_name=>'DETECT_MODAL_CLOSED'
