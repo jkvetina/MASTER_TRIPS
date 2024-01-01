@@ -13,7 +13,7 @@ future_years AS (
     FROM trp_trips t
     JOIN x
         ON x.user_id    = t.created_by
-    WHERE t.year_       >= TO_CHAR(TRUNC(SYSDATE), 'YYYY')
+    WHERE t.year_       >= TO_CHAR(TRUNC(SYSDATE), 'YYYY') - 1
     GROUP BY
         t.year_
 ),
@@ -107,7 +107,7 @@ SELECT
     --
     '<a href="' ||
     APEX_PAGE.GET_URL (
-        p_application   => x.app_id,
+        --p_application   => x.app_id,
         p_page          => 100,
         p_clear_cache   => 100,
         p_items         => 'P100_TRIP_ID',
@@ -131,7 +131,7 @@ SELECT
 FROM trp_trips t
 JOIN x
     ON x.user_id    = t.created_by
-WHERE t.year_       >= TO_CHAR(TRUNC(SYSDATE), 'YYYY')
+WHERE t.year_       >= TO_CHAR(TRUNC(SYSDATE), 'YYYY') - 1
 UNION ALL
 --
 -- SAME THING BUT AS MULTICOLUMN MENU WITH ICONS/FLAGS
