@@ -19,19 +19,13 @@ wwv_flow_imp_page.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_imp.id(104047788811330691)  --  MAIN
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'.STATUS_DEFAULT {',
-'  stroke:           #222;',
-'  stroke-width:     1px;',
+'.RED {',
+'  background: red;',
+'  color: #fff;',
 '}',
-'.STATUS_BASELINE {',
-'  fill:             #E7242D;',
-'}',
-'.CATEGORY_HOTEL,',
-'.CATEGORY_CAR_RENTAL {',
-'  fill:             #ccc;',
-'  stroke:           #666;',
-'  stroke-width:     1px;',
-'  stroke-dasharray: 4, 4;',
+'.GREY {',
+'  background: #ccc;',
+'  color: #fff;',
 '}',
 ''))
 ,p_page_css_classes=>'MULTICOLUMN'
@@ -58,10 +52,10 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_sequence=>30
 ,p_query_type=>'TABLE'
 ,p_query_table=>'TRP_TRIPS_GRID_V'
-,p_query_where=>'year_ = :P120_YEAR'
 ,p_include_rowid_column=>false
-,p_lazy_loading=>false
+,p_lazy_loading=>true
 ,p_plug_source_type=>'NATIVE_CARDS'
+,p_ajax_items_to_submit=>'P120_YEAR'
 ,p_plug_query_num_rows_type=>'SCROLL'
 ,p_show_total_row_count=>false
 );
@@ -78,6 +72,8 @@ wwv_flow_imp_page.create_card(
 '<br /><br />'))
 ,p_body_adv_formatting=>false
 ,p_second_body_adv_formatting=>false
+,p_badge_column_name=>'BADGE_DAYS'
+,p_badge_css_classes=>'&BADGE_CLASS.'
 ,p_media_adv_formatting=>false
 ,p_pk1_column_name=>'OLD_TRIP_ID'
 );

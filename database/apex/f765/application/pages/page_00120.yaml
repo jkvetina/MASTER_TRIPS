@@ -24,19 +24,13 @@ navigation:
 
 css: 
   inline: |
-    .STATUS_DEFAULT {
-      stroke:           #222;
-      stroke-width:     1px;
+    .RED {
+      background: red;
+      color: #fff;
     }
-    .STATUS_BASELINE {
-      fill:             #E7242D;
-    }
-    .CATEGORY_HOTEL,
-    .CATEGORY_CAR_RENTAL {
-      fill:             #ccc;
-      stroke:           #666;
-      stroke-width:     1px;
-      stroke-dasharray: 4, 4;
+    .GREY {
+      background: #ccc;
+      color: #fff;
     }
     
 
@@ -80,7 +74,8 @@ regions:
     table-owner: Parsing Schema
     table-name: TRP_TRIPS_GRID_V
     include-rowid-column: false
-    where-clause: 'year_ = :P120_YEAR'
+    page-items-to-submit: 
+    - P120_YEAR
 
   order-by: 
     type: None
@@ -142,13 +137,16 @@ regions:
 
     icon-and-badge: 
       icon-source: No Icon
+      badge-column: BADGE_DAYS
+      badge-css-classes: 
+      - '&BADGE_CLASS.'
 
     media: 
       advanced-formatting: false
       source: No Media
 
     performance: 
-      lazy-loading: false
+      lazy-loading: true
 
     pagination: 
       type: Scroll
