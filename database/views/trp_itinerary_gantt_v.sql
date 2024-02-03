@@ -41,12 +41,12 @@ t AS (
         t.notes,
         d.gantt_start_date,
         d.gantt_end_date,
-        c.order#,
         t.color_fill,
         d.status,
         t.is_paid,
         t.is_reserved,
-        t.is_pending
+        t.is_pending,
+        c.order#
     FROM trp_itinerary_grid_v t
     JOIN trp_lov_categories_v c
         ON c.category_id = t.category_id
@@ -68,7 +68,8 @@ SELECT
     NULL                AS notes,
     d.gantt_start_date,
     d.gantt_end_date,
-    NULL                AS css_class
+    NULL                AS css_class,
+    c.order#
 FROM trp_lov_categories_v c
 CROSS JOIN d
 WHERE c.category_id IN (
@@ -101,7 +102,8 @@ SELECT
             END
         ELSE NULLIF(' CATEGORY_' || t.category_id, ' CATEGORY_') ||
              NULLIF(' COLOR_' || LTRIM(t.color_fill, '#'), ' COLOR_')
-        END AS css_class
+        END AS css_class,
+    t.order#
     --
 FROM t
 ORDER BY row_id NULLS FIRST, start_at;
