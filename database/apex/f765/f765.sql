@@ -19,7 +19,7 @@ whenever sqlerror exit sql.sqlcode rollback
 begin
 wwv_flow_imp.import_begin (
  p_version_yyyy_mm_dd=>'2023.10.31'
-,p_release=>'23.2.1'
+,p_release=>'23.2.3'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
 ,p_default_id_offset=>45920449781012831
@@ -33,7 +33,7 @@ prompt APPLICATION 765 - Trips Planning
 -- Application Export:
 --   Application:     765
 --   Name:            Trips Planning
---   Date and Time:   09:41 Pondělí Leden 29, 2024
+--   Date and Time:   09:19 Sobota Únor 3, 2024
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -72,7 +72,7 @@ prompt APPLICATION 765 - Trips Planning
 --       Reports:
 --       E-Mail:
 --     Supporting Objects:  Included
---   Version:         23.2.1
+--   Version:         23.2.3
 --   Instance ID:     7462307610850096
 --
 
@@ -120,7 +120,7 @@ wwv_imp_workspace.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2024-01-29'
+,p_flow_version=>'2024-02-03'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -22209,11 +22209,14 @@ wwv_flow_imp_page.create_card(
  p_id=>wwv_flow_imp.id(46318661781303211)
 ,p_region_id=>wwv_flow_imp.id(46318514789303210)
 ,p_layout_type=>'GRID'
+,p_grid_column_count=>5
 ,p_title_adv_formatting=>false
 ,p_title_column_name=>'TRIP_NAME'
-,p_sub_title_adv_formatting=>false
-,p_body_adv_formatting=>true
-,p_body_html_expr=>'&START_AT. - &END_AT.'
+,p_sub_title_adv_formatting=>true
+,p_sub_title_html_expr=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'<span class="a-CardView-subTitle">&START_AT. - &END_AT.</span>',
+'<br /><br />'))
+,p_body_adv_formatting=>false
 ,p_second_body_adv_formatting=>false
 ,p_media_adv_formatting=>false
 ,p_pk1_column_name=>'OLD_TRIP_ID'
@@ -22278,7 +22281,7 @@ wwv_flow_imp_page.create_page_computation(
 ,p_computation_point=>'BEFORE_BOX_BODY'
 ,p_computation_type=>'EXPRESSION'
 ,p_computation_language=>'PLSQL'
-,p_computation=>'TO_CHAR(TRUNC(SYSDATE), ''YYYY'')'
+,p_computation=>'NVL(:P120_YEAR, TO_CHAR(TRUNC(SYSDATE), ''YYYY''))'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(46377131529379675)

@@ -119,7 +119,7 @@ regions:
     id: 46318661781303211
     appearance: 
       layout: Grid
-      grid-columns: Auto
+      grid-columns: 5 Columns
 
     card: 
       primary-key-column-1: OLD_TRIP_ID
@@ -129,11 +129,13 @@ regions:
       column: TRIP_NAME
 
     subtitle: 
-      advanced-formatting: false
+      advanced-formatting: true
+      html-expression: |
+        <span class="a-CardView-subTitle">&START_AT. - &END_AT.</span>
+        <br /><br />
 
     body: 
-      advanced-formatting: true
-      html-expression: '&START_AT. - &END_AT.'
+      advanced-formatting: false
 
     secondary-body: 
       advanced-formatting: false
@@ -369,7 +371,7 @@ computations:
   computation: 
     type: Expression
     language: PL/SQL
-    pl/sql-expression: TO_CHAR(TRUNC(SYSDATE), 'YYYY')
+    pl/sql-expression: "NVL(:P120_YEAR, TO_CHAR(TRUNC(SYSDATE), 'YYYY'))"
 
 processes: 
 - # ====== Process: SET_DEFAULTS ===============================

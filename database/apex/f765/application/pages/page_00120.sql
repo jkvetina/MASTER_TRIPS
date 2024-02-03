@@ -5,7 +5,7 @@ begin
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2023.10.31'
-,p_release=>'23.2.1'
+,p_release=>'23.2.3'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
 ,p_default_id_offset=>45920449781012831
@@ -69,11 +69,14 @@ wwv_flow_imp_page.create_card(
  p_id=>wwv_flow_imp.id(46318661781303211)
 ,p_region_id=>wwv_flow_imp.id(46318514789303210)
 ,p_layout_type=>'GRID'
+,p_grid_column_count=>5
 ,p_title_adv_formatting=>false
 ,p_title_column_name=>'TRIP_NAME'
-,p_sub_title_adv_formatting=>false
-,p_body_adv_formatting=>true
-,p_body_html_expr=>'&START_AT. - &END_AT.'
+,p_sub_title_adv_formatting=>true
+,p_sub_title_html_expr=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'<span class="a-CardView-subTitle">&START_AT. - &END_AT.</span>',
+'<br /><br />'))
+,p_body_adv_formatting=>false
 ,p_second_body_adv_formatting=>false
 ,p_media_adv_formatting=>false
 ,p_pk1_column_name=>'OLD_TRIP_ID'
@@ -138,7 +141,7 @@ wwv_flow_imp_page.create_page_computation(
 ,p_computation_point=>'BEFORE_BOX_BODY'
 ,p_computation_type=>'EXPRESSION'
 ,p_computation_language=>'PLSQL'
-,p_computation=>'TO_CHAR(TRUNC(SYSDATE), ''YYYY'')'
+,p_computation=>'NVL(:P120_YEAR, TO_CHAR(TRUNC(SYSDATE), ''YYYY''))'
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(46377131529379675)
