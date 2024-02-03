@@ -79,12 +79,23 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
             rec.start_at        := core.get_date(core.get_grid_data('START_AT'));
             rec.end_at          := core.get_date(core.get_grid_data('END_AT'));
         END IF;
-        --
-        trp_tapi.save_itinerary (rec,
-            in_action           => in_action,
-            in_trip_id          => NVL(core.get_grid_data('OLD_TRIP_ID'), rec.trip_id),
-            in_stop_id          => NVL(core.get_grid_data('OLD_STOP_ID'), rec.stop_id)
-        );
+
+        -- duplicate entry
+        IF core.get_request() = 'CREATE_AS_NEW_STOP' THEN
+            rec.stop_id         := NULL;
+            --
+            trp_tapi.save_itinerary (rec,
+                in_action       => in_action,
+                in_trip_id      => rec.trip_id,
+                in_stop_id      => rec.stop_id
+            );
+        ELSE
+            trp_tapi.save_itinerary (rec,
+                in_action       => in_action,
+                in_trip_id      => NVL(core.get_grid_data('OLD_TRIP_ID'), rec.trip_id),
+                in_stop_id      => NVL(core.get_grid_data('OLD_STOP_ID'), rec.stop_id)
+            );
+        END IF;
         --
         IF in_action = 'D' THEN
             RETURN;     -- exit this procedure
@@ -95,8 +106,8 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
             core.set_item('$TRIP_ID', rec.trip_id);
             core.set_item('$STOP_ID', rec.stop_id);
         ELSE
-            core.set_grid_data('OLD_TRIP_ID',       rec.trip_id);
-            core.set_grid_data('OLD_STOP_ID',       rec.stop_id);
+            core.set_grid_data('OLD_TRIP_ID', rec.trip_id);
+            core.set_grid_data('OLD_STOP_ID', rec.stop_id);
         END IF;
     EXCEPTION
     WHEN core.app_exception THEN
