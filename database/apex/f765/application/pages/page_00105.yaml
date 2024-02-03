@@ -447,6 +447,41 @@ page-items:
     restricted-characters: All characters can be saved.
 
 buttons: 
+- # ====== Button: DELETE_TRIP =================================
+  id: 8594281741358107
+  identification: 
+    button-name: DELETE_TRIP
+    label: Delete Trip
+
+  layout: 
+    sequence: 80
+    region: '[FORM]' # 143529345524135296
+    position: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 60062458726289887
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+    icon: fa-trash-o
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL DELETE action
+
+  confirmation: 
+    message: Are you sure?
+    style: Default
+
 - # ====== Button: SHOW_ITINERARY ==============================
   id: 45924995295039316
   identification: 
@@ -551,15 +586,13 @@ dynamic-actions:
 
   execution: 
     sequence: 10
+    event-scope: Static
+    type: Immediate
 
   when: 
     event: EVENT.EVENT.BROWSER.CLICK
     selection-type: Button
     button: CLOSE_DIALOG # 45925398364039317
-
-  execution: 
-    event-scope: Static
-    type: Immediate
 
   actions: 
   - # ====== Action: Close Dialog ================================
@@ -612,6 +645,9 @@ processes:
     type: Close Dialog
     execution-chain: None
 
+  settings: 
+    show-success-messages: false
+
   execution: 
     sequence: 20
     point: Processing
@@ -640,4 +676,20 @@ processes:
 
   error: 
     display-location: Inline in Notification
+
+branches: 
+- # ====== Branch: GO_HOME =====================================
+  id: 8594475489358109
+  identification: 
+    name: GO_HOME
+
+  execution: 
+    sequence: 10
+    point: After Processing
+
+  behavior: 
+    type: Page or URL (Redirect)
+    target: 
+      url: 'f?p=&APP_ID.:120:&SESSION.::&DEBUG.:::&success_msg=#SUCCESS_MSG#'
+      page: 120 # Trips Planning
 

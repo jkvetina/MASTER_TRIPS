@@ -4,8 +4,8 @@ begin
 --     PAGE: 00110
 --   Manifest End
 wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.04.28'
-,p_release=>'23.1.5'
+ p_version_yyyy_mm_dd=>'2023.10.31'
+,p_release=>'23.2.1'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
 ,p_default_id_offset=>45920449781012831
@@ -92,8 +92,22 @@ wwv_flow_imp_page.create_page_button(
 ,p_database_action=>'INSERT'
 );
 wwv_flow_imp_page.create_page_button(
- p_id=>wwv_flow_imp.id(45984913947080244)
+ p_id=>wwv_flow_imp.id(8593612232358101)
 ,p_button_sequence=>80
+,p_button_plug_id=>wwv_flow_imp.id(153408085456928208)
+,p_button_name=>'CREATE_AS_NEW_STOP'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(60062458726289887)
+,p_button_image_alt=>'Create as New Stop'
+,p_button_position=>'NEXT'
+,p_button_css_classes=>'u-pullRight'
+,p_icon_css_classes=>'fa-clipboard-new'
+,p_database_action=>'INSERT'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(45984913947080244)
+,p_button_sequence=>90
 ,p_button_plug_id=>wwv_flow_imp.id(153408085456928208)
 ,p_button_name=>'DELETE_STOP'
 ,p_button_action=>'SUBMIT'
@@ -710,25 +724,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_attribute_09=>'N'
 ,p_wait_for_result=>'Y'
 );
-wwv_flow_imp_page.create_page_da_event(
- p_id=>wwv_flow_imp.id(46002779150080258)
-,p_name=>'New'
-,p_event_sequence=>30
-,p_triggering_element_type=>'JAVASCRIPT_EXPRESSION'
-,p_triggering_element=>'window'
-,p_bind_type=>'bind'
-,p_execution_type=>'IMMEDIATE'
-,p_bind_event_type=>'apexafterclosedialog'
-);
-wwv_flow_imp_page.create_page_da_action(
- p_id=>wwv_flow_imp.id(46003277780080259)
-,p_event_id=>wwv_flow_imp.id(46002779150080258)
-,p_event_result=>'TRUE'
-,p_action_sequence=>10
-,p_execute_on_page_init=>'N'
-,p_action=>'NATIVE_ALERT'
-,p_attribute_01=>'1'
-);
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(46000143907080257)
 ,p_process_sequence=>10
@@ -747,6 +742,7 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_CLOSE_WINDOW'
 ,p_process_name=>'CLOSE_DIALOG'
+,p_attribute_02=>'N'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when=>'PREV_STOP,NEXT_STOP'
 ,p_process_when_type=>'REQUEST_NOT_IN_CONDITION'

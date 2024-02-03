@@ -1283,6 +1283,37 @@ page-items:
     restricted-characters: All characters can be saved.
 
 buttons: 
+- # ====== Button: CREATE_AS_NEW_STOP ==========================
+  id: 8593612232358101
+  identification: 
+    button-name: CREATE_AS_NEW_STOP
+    label: Create as New Stop
+
+  layout: 
+    sequence: 80
+    region: '[FORM]' # 153408085456928208
+    position: NEXT
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    button-template: Icon # 60062458726289887
+    hot: false
+    template-options: 
+    - '#DEFAULT#'
+    css-classes: 
+    - u-pullRight
+    icon: fa-clipboard-new
+
+  behavior: 
+    action: Submit Page
+    execute-validations: true
+    warn-on-unsaved-changes: Do Not Check
+    database-action: SQL INSERT action
+
 - # ====== Button: PREV_STOP ===================================
   id: 45980852566080241
   identification: 
@@ -1413,7 +1444,7 @@ buttons:
     label: Delete Stop
 
   layout: 
-    sequence: 80
+    sequence: 90
     region: '[FORM]' # 153408085456928208
     position: NEXT
     start-new-layout: false
@@ -1477,15 +1508,13 @@ dynamic-actions:
 
   execution: 
     sequence: 10
+    event-scope: Static
+    type: Immediate
 
   when: 
     event: EVENT.EVENT.BROWSER.CLICK
     selection-type: Button
     button: CLOSE_DIALOG # 45981600422080241
-
-  execution: 
-    event-scope: Static
-    type: Immediate
 
   actions: 
   - # ====== Action: Close Dialog ================================
@@ -1506,16 +1535,14 @@ dynamic-actions:
 
   execution: 
     sequence: 20
+    event-scope: Static
+    type: Immediate
 
   when: 
     event: EVENT.EVENT.BROWSER.CHANGE
     selection-type: Item(s)
     item(s): 
     - P110_START_AT
-
-  execution: 
-    event-scope: Static
-    type: Immediate
 
   actions: 
   - # ====== Action: Set Value ===================================
@@ -1544,39 +1571,6 @@ dynamic-actions:
       fire-on-initialization: false
       stop-execution-on-error: true
       wait-for-result: true
-
-- # ====== Dynamic Action: New =================================
-  id: 46002779150080258
-  identification: 
-    name: New
-
-  execution: 
-    sequence: 30
-
-  when: 
-    event: EVENT.EVENT.FAMEWORK.APEXAFTERCLOSEDIALOG
-    selection-type: JavaScript Expression
-    javascript-expression: window
-
-  execution: 
-    event-scope: Static
-    type: Immediate
-
-  actions: 
-  - # ====== Action: Alert =======================================
-    id: 46003277780080259
-    identification: 
-      action: Alert
-
-    settings: 
-      message: 1
-      style: Default
-
-    execution: 
-      sequence: 10
-      event: New # 46002779150080258
-      fire-when-event-result-is: True
-      fire-on-initialization: false
 
 computations: 
 - # ====== Computation: P110_SUBMIT ============================
@@ -1715,6 +1709,9 @@ processes:
     name: CLOSE_DIALOG
     type: Close Dialog
     execution-chain: None
+
+  settings: 
+    show-success-messages: false
 
   execution: 
     sequence: 20

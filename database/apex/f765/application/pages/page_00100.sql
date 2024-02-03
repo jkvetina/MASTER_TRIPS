@@ -4,8 +4,8 @@ begin
 --     PAGE: 00100
 --   Manifest End
 wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.04.28'
-,p_release=>'23.1.5'
+ p_version_yyyy_mm_dd=>'2023.10.31'
+,p_release=>'23.2.1'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
 ,p_default_id_offset=>45920449781012831
@@ -84,6 +84,8 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_point=>'SUB_REGIONS'
 ,p_query_type=>'TABLE'
 ,p_query_table=>'TRP_ITINERARY_GANTT_V'
+,p_query_order_by_type=>'STATIC'
+,p_query_order_by=>'ORDER#'
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_JET_CHART'
 ,p_ajax_items_to_submit=>'P100_TRIP_ID,P100_TRIP_START,P100_TRIP_END,P100_DAY'
@@ -171,27 +173,6 @@ wwv_flow_imp_page.create_jet_chart_series(
 ,p_threshold_display=>'onIndicator'
 );
 wwv_flow_imp_page.create_jet_chart_axis(
- p_id=>wwv_flow_imp.id(45937989244054251)
-,p_chart_id=>wwv_flow_imp.id(45937447204054249)
-,p_axis=>'major'
-,p_is_rendered=>'on'
-,p_title=>'MAJOR'
-,p_format_type=>'date-full'
-,p_baseline_scaling=>'zero'
-,p_major_tick_rendered=>'auto'
-,p_minor_tick_rendered=>'auto'
-,p_tick_label_rendered=>'on'
-,p_axis_scale=>'days'
-,p_zoom_order_seconds=>false
-,p_zoom_order_minutes=>false
-,p_zoom_order_hours=>true
-,p_zoom_order_days=>true
-,p_zoom_order_weeks=>false
-,p_zoom_order_months=>false
-,p_zoom_order_quarters=>false
-,p_zoom_order_years=>false
-);
-wwv_flow_imp_page.create_jet_chart_axis(
  p_id=>wwv_flow_imp.id(45938540542054252)
 ,p_chart_id=>wwv_flow_imp.id(45937447204054249)
 ,p_axis=>'minor'
@@ -205,6 +186,27 @@ wwv_flow_imp_page.create_jet_chart_axis(
 ,p_axis_scale=>'hours'
 ,p_zoom_order_seconds=>false
 ,p_zoom_order_minutes=>true
+,p_zoom_order_hours=>true
+,p_zoom_order_days=>true
+,p_zoom_order_weeks=>false
+,p_zoom_order_months=>false
+,p_zoom_order_quarters=>false
+,p_zoom_order_years=>false
+);
+wwv_flow_imp_page.create_jet_chart_axis(
+ p_id=>wwv_flow_imp.id(45937989244054251)
+,p_chart_id=>wwv_flow_imp.id(45937447204054249)
+,p_axis=>'major'
+,p_is_rendered=>'on'
+,p_title=>'MAJOR'
+,p_format_type=>'date-full'
+,p_baseline_scaling=>'zero'
+,p_major_tick_rendered=>'auto'
+,p_minor_tick_rendered=>'auto'
+,p_tick_label_rendered=>'on'
+,p_axis_scale=>'days'
+,p_zoom_order_seconds=>false
+,p_zoom_order_minutes=>false
 ,p_zoom_order_hours=>true
 ,p_zoom_order_days=>true
 ,p_zoom_order_weeks=>false
@@ -1109,8 +1111,8 @@ end;
 /
 begin
 wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.04.28'
-,p_release=>'23.1.5'
+ p_version_yyyy_mm_dd=>'2023.10.31'
+,p_release=>'23.2.1'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
 ,p_default_id_offset=>45920449781012831
@@ -1682,11 +1684,6 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_template=>wwv_flow_imp.id(59956268800289818)
 ,p_plug_display_sequence=>10
 ,p_plug_display_point=>'SUB_REGIONS'
-,p_plug_display_condition_type=>'EXISTS'
-,p_plug_display_when_condition=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT 1',
-'FROM trp_itinerary_grid_v',
-'WHERE ROWNUM = 1'))
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -2142,6 +2139,11 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_image_alt=>'Add Stop'
 ,p_button_position=>'RIGHT_OF_TITLE'
 ,p_button_redirect_url=>'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110:P110_TRIP_ID,P110_STOP_ID,P110_START_AT:&P100_TRIP_ID.,,&P100_DAY.'
+,p_button_condition=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT 1',
+'FROM trp_itinerary_grid_v',
+'WHERE ROWNUM = 1'))
+,p_button_condition_type=>'EXISTS'
 ,p_icon_css_classes=>'fa-plus'
 );
 wwv_flow_imp_page.create_page_button(
@@ -2173,6 +2175,37 @@ wwv_flow_imp_page.create_page_button(
 ,p_icon_css_classes=>'fa-plus'
 );
 wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(8594550237358110)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_imp.id(115035288188074136)
+,p_button_name=>'ADD_STOP_FIRST'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_imp.id(60063248519289891)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Add Stop'
+,p_button_position=>'RIGHT_OF_TITLE'
+,p_button_redirect_url=>'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110:P110_TRIP_ID,P110_STOP_ID,P110_START_AT:&P100_TRIP_ID.,,&P100_DAY.'
+,p_button_condition=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT 1',
+'FROM trp_itinerary_grid_v',
+'WHERE ROWNUM = 1'))
+,p_button_condition_type=>'NOT_EXISTS'
+,p_icon_css_classes=>'fa-plus'
+);
+wwv_flow_imp.component_end;
+end;
+/
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2023.10.31'
+,p_release=>'23.2.1'
+,p_default_workspace_id=>13869170895410902
+,p_default_application_id=>765
+,p_default_id_offset=>45920449781012831
+,p_default_owner=>'APPS'
+);
+wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(45952874151054275)
 ,p_button_sequence=>20
 ,p_button_plug_id=>wwv_flow_imp.id(115070361480380708)
@@ -2186,18 +2219,6 @@ wwv_flow_imp_page.create_page_button(
 ,p_warn_on_unsaved_changes=>null
 ,p_icon_css_classes=>'fa-arrow-right'
 ,p_button_cattributes=>'&P100_DAY_NEXT_ATTR.'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.04.28'
-,p_release=>'23.1.5'
-,p_default_workspace_id=>13869170895410902
-,p_default_application_id=>765
-,p_default_id_offset=>45920449781012831
-,p_default_owner=>'APPS'
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(45953275737054275)
@@ -2271,6 +2292,19 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_redirect_url=>'f?p=&APP_ID.:120:&SESSION.::&DEBUG.:::'
 ,p_warn_on_unsaved_changes=>null
 ,p_icon_css_classes=>'fa-times'
+);
+wwv_flow_imp_page.create_page_branch(
+ p_id=>wwv_flow_imp.id(8594363901358108)
+,p_branch_name=>'GO_HOME'
+,p_branch_action=>'f?p=&APP_ID.:120:&SESSION.::&DEBUG.:::&success_msg=#SUCCESS_MSG#'
+,p_branch_point=>'BEFORE_HEADER'
+,p_branch_type=>'REDIRECT_URL'
+,p_branch_sequence=>10
+,p_branch_condition_type=>'NOT_EXISTS'
+,p_branch_condition=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'SELECT 1 AS trip_exists',
+'FROM trp_trips t',
+'WHERE t.trip_id = :P100_TRIP_ID'))
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(114532160290328284)
