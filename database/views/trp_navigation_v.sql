@@ -22,7 +22,9 @@ future_trips AS (
     SELECT /*+ MATERIALIZE */
         CASE WHEN t.trip_id = x.trip_id THEN 'Y' END AS is_current_trip,
         --
-        CASE WHEN t.year_ = TO_CHAR(TRUNC(SYSDATE), 'YYYY') AND t.trip_id = MIN(CASE WHEN t.end_at > TRUNC(SYSDATE) THEN t.trip_id END) KEEP (DENSE_RANK FIRST ORDER BY t.start_at DESC)
+        CASE WHEN t.year_ = TO_CHAR(TRUNC(SYSDATE), 'YYYY')
+                AND t.trip_name NOT LIKE '%(?)%'
+                AND t.start_at = MIN(CASE WHEN t.start_at - TRUNC(SYSDATE) > 0 THEN t.start_at END) OVER ()
             THEN 'Y'
             END AS is_next_trip,
         --
@@ -31,7 +33,8 @@ future_trips AS (
         t.year_,
         t.trip_id,
         t.trip_name,
-        t.end_at
+        t.end_at,
+        t.start_at - TRUNC(SYSDATE) AS badge
         --
     FROM trp_trips t
     JOIN future_years y
@@ -170,18 +173,24 @@ SELECT
     ) ||
     '" class="NAV_L3">' ||
     CASE
-        WHEN t.end_at <= TRUNC(SYSDATE)
-            THEN core.get_icon('fa-check') || ' &nbsp;'
+        WHEN t.trip_name LIKE '%(?)%'
+            THEN core.get_icon('fa-question') || ' &nbsp;'
             --
         WHEN t.is_next_trip = 'Y'
             THEN core.get_icon('fa-arrow-right') || ' &nbsp;'
             --
-        WHEN t.trip_name LIKE '%(?)%'
-            THEN core.get_icon('fa-question') || ' &nbsp;'
+        WHEN t.end_at <= TRUNC(SYSDATE)
+            THEN core.get_icon('fa-check') || ' &nbsp;'
+            --
         ELSE
             '<span>&mdash; &nbsp;</span>'
         END ||
-    '<span>' || REGEXP_REPLACE(REPLACE(t.trip_name, ' - ', ' &' || 'ndash; '), '\s*\(\?\)\s*', '') || '</span></a>' AS attribute01,
+    '<span>' || LTRIM(REGEXP_REPLACE(REPLACE(t.trip_name, ' - ', ' &' || 'ndash; '), '\s*\(\?\)\s*', '')) || '</span>' ||
+    CASE
+        WHEN t.is_next_trip = 'Y'
+            THEN '<span class="BADGE">' || t.badge || '</span>'
+        END ||
+    '</a>' AS attribute01,
     --
     '' AS attribute02,
     '' AS attribute03,
