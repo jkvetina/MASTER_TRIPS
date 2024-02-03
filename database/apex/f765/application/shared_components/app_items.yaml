@@ -9,6 +9,9 @@
     session-state-protection: Restricted - May not be set from browser
     escape-special-characters: true
 
+  subscription: 
+    version-number: 1
+
 - # ====== Application Item: G_CONTEXT_ID ======================
   id: 59796732266484856
   identification: 
@@ -18,6 +21,9 @@
   security: 
     session-state-protection: Restricted - May not be set from browser
     escape-special-characters: true
+
+  subscription: 
+    version-number: 1
 
 - # ====== Application Item: G_APP_ID ==========================
   id: 59797202779492359
@@ -29,6 +35,9 @@
     session-state-protection: Restricted - May not be set from browser
     escape-special-characters: true
 
+  subscription: 
+    version-number: 1
+
 - # ====== Application Item: FORMAT_NUMBER_CURRENCY ============
   id: 59797764195521938
   identification: 
@@ -38,6 +47,9 @@
   security: 
     session-state-protection: Restricted - May not be set from browser
     escape-special-characters: true
+
+  subscription: 
+    version-number: 1
 
 - # ====== Application Item: FORMAT_INTEGER_CURRENCY ===========
   id: 59798047625522894
@@ -49,6 +61,9 @@
     session-state-protection: Restricted - May not be set from browser
     escape-special-characters: true
 
+  subscription: 
+    version-number: 1
+
 - # ====== Application Item: FORMAT_NUMBER =====================
   id: 59798206097524291
   identification: 
@@ -58,6 +73,9 @@
   security: 
     session-state-protection: Restricted - May not be set from browser
     escape-special-characters: true
+
+  subscription: 
+    version-number: 1
 
 - # ====== Application Item: FORMAT_INTEGER ====================
   id: 59798404112527202
@@ -69,6 +87,9 @@
     session-state-protection: Restricted - May not be set from browser
     escape-special-characters: true
 
+  subscription: 
+    version-number: 1
+
 - # ====== Application Item: FORMAT_TIME =======================
   id: 59798645271528945
   identification: 
@@ -78,6 +99,9 @@
   security: 
     session-state-protection: Restricted - May not be set from browser
     escape-special-characters: true
+
+  subscription: 
+    version-number: 1
 
 - # ====== Application Item: FORMAT_TIME_SHORT =================
   id: 59798781485529916
@@ -89,6 +113,9 @@
     session-state-protection: Restricted - May not be set from browser
     escape-special-characters: true
 
+  subscription: 
+    version-number: 1
+
 - # ====== Application Item: FORMAT_DATE =======================
   id: 59799017906531173
   identification: 
@@ -98,6 +125,9 @@
   security: 
     session-state-protection: Restricted - May not be set from browser
     escape-special-characters: true
+
+  subscription: 
+    version-number: 1
 
 - # ====== Application Item: FORMAT_DATE_SHORT =================
   id: 59799182764531786
@@ -109,6 +139,9 @@
     session-state-protection: Restricted - May not be set from browser
     escape-special-characters: true
 
+  subscription: 
+    version-number: 1
+
 - # ====== Application Item: FORMAT_DATE_TIME ==================
   id: 59799448129533978
   identification: 
@@ -119,6 +152,9 @@
     session-state-protection: Restricted - May not be set from browser
     escape-special-characters: true
 
+  subscription: 
+    version-number: 1
+
 - # ====== Application Item: G_APP_NAME ========================
   id: 69182179045837766
   identification: 
@@ -128,4 +164,7 @@
   security: 
     session-state-protection: Restricted - May not be set from browser
     escape-special-characters: true
+
+  subscription: 
+    version-number: 1
 

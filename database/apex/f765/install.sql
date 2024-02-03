@@ -5,6 +5,7 @@ prompt --install
 @@application/user_interfaces.sql
 @@workspace/credentials/sso_google.sql
 @@application/shared_components/navigation/lists/navigation.sql
+@@application/shared_components/navigation/listentry.sql
 @@application/shared_components/files/icons_app_icon_144_rounded_png.sql
 @@application/shared_components/files/icons_app_icon_256_rounded_png.sql
 @@application/shared_components/files/icons_app_icon_32_png.sql

@@ -153,7 +153,7 @@ regions:
       show-total-count: false
 
     actions: 
-    - # ====== Action: FULL_CARD ===================================
+    - # ====== Action: Full Card ===================================
       id: 46318785031303212
       identification: 
         type: Full Card
@@ -317,16 +317,14 @@ dynamic-actions:
 
   execution: 
     sequence: 90
+    event-scope: Static
+    type: Immediate
 
   when: 
     event: EVENT.EVENT.BROWSER.CHANGE
     selection-type: Item(s)
     item(s): 
     - P120_YEAR
-
-  execution: 
-    event-scope: Static
-    type: Immediate
 
   actions: 
   - # ====== Action: Submit Page =================================
@@ -350,15 +348,13 @@ dynamic-actions:
 
   execution: 
     sequence: 80
+    event-scope: Static
+    type: Immediate
 
   when: 
     event: EVENT.EVENT.FAMEWORK.APEXAFTERCLOSEDIALOG
     selection-type: JavaScript Expression
     javascript-expression: window
-
-  execution: 
-    event-scope: Static
-    type: Immediate
 
 computations: 
 - # ====== Computation: P120_YEAR ==============================

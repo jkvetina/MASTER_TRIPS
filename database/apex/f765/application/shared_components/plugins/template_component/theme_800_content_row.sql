@@ -4,8 +4,8 @@ begin
 --     PLUGIN: THEME_800$CONTENT_ROW
 --   Manifest End
 wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.04.28'
-,p_release=>'23.1.5'
+ p_version_yyyy_mm_dd=>'2023.10.31'
+,p_release=>'23.2.1'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
 ,p_default_id_offset=>45920449781012831
@@ -109,16 +109,16 @@ wwv_flow_imp_shared.create_plugin(
 ,p_help_text=>'Display content in a formatted row with a title, description, and more. Supports avatars and badges. Available for a single row or as a report with multiple rows.'
 );
 wwv_flow_imp_shared.create_plugin_attr_group(
- p_id=>wwv_flow_imp.id(2036796997703343785)
-,p_plugin_id=>wwv_flow_imp.id(60092743215289935)
-,p_title=>'Avatar'
-,p_display_sequence=>10
-);
-wwv_flow_imp_shared.create_plugin_attr_group(
  p_id=>wwv_flow_imp.id(2036796442691343784)
 ,p_plugin_id=>wwv_flow_imp.id(60092743215289935)
 ,p_title=>'Badge'
 ,p_display_sequence=>20
+);
+wwv_flow_imp_shared.create_plugin_attr_group(
+ p_id=>wwv_flow_imp.id(2036796997703343785)
+,p_plugin_id=>wwv_flow_imp.id(60092743215289935)
+,p_title=>'Avatar'
+,p_display_sequence=>10
 );
 wwv_flow_imp_shared.create_plugin_attribute(
  p_id=>wwv_flow_imp.id(83328204476139902)
