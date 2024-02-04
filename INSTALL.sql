@@ -2,7 +2,6 @@
 -- YOU HAVE TO INSTALL THE CORE PACKAGE FIRST
 -- https://github.com/jkvetina/CORE23/tree/main/database
 --
--- INDEX .................. 2
 -- PACKAGE ................ 2
 -- PACKAGE BODY ........... 2
 -- SEQUENCE ............... 2
