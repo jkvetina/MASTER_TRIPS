@@ -170,7 +170,8 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
             core.set_item('P100_TRIP_END',      TO_CHAR(c.end_at,   'YYYY-MM-DD'));
             --
             v_trip_header       := c.trip_name;
-            v_itinerary_header  := RTRIM('Itinerary - ' || core.get_item('P100_DAY'), ' - ') || NULLIF(' [' || c.price || ']', ' [0]');
+            v_itinerary_header  := RTRIM('Itinerary - ' || core.get_item('P100_DAY'), ' - ') ||
+                CASE WHEN c.price > 0 THEN '<span class="BADGE" style="margin-right: 1rem;">' || (c.price / 1000) || 'k</span>' END;
         END LOOP;
         --
         core.set_item('P100_TRIP_HEADER',       REPLACE(v_trip_header,      ' - ', ' &' || 'ndash; '));
