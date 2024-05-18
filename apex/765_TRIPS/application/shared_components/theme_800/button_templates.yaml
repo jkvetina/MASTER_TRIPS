@@ -15,7 +15,7 @@
     translatable: false
 
   templates: 
-    normal: '<button class="t-Button t-Button--noLabel t-Button--icon #BUTTON_CSS_CLASSES#" #BUTTON_ATTRIBUTES# onclick="#JAVASCRIPT#" type="button" id="#BUTTON_ID#" title="#LABEL!ATTR#" aria-label="#LABEL!ATTR#"><span class="t-Icon #ICON_CSS_CLASSES#" aria-hidden="true"></span></button>'
+    normal: '<button class="t-Button t-Button--noLabel  t-Button--icon #BUTTON_CSS_CLASSES#" #BUTTON_ATTRIBUTES# onclick="#JAVASCRIPT#" type="button" id="#BUTTON_ID#" title="#LABEL!ATTR#" aria-label="#LABEL!ATTR#"><span class="t-Icon #ICON_CSS_CLASSES#" aria-hidden="true"></span></button>'
     hot: '<button class="t-Button t-Button--noLabel t-Button--icon #BUTTON_CSS_CLASSES# t-Button--hot" #BUTTON_ATTRIBUTES# onclick="#JAVASCRIPT#" type="button" id="#BUTTON_ID#" title="#LABEL!ATTR#" aria-label="#LABEL!ATTR#"><span class="t-Icon #ICON_CSS_CLASSES#" aria-hidden="true"></span></button>'
 
   template-options: 
@@ -24,7 +24,7 @@
     identification: 
       name: Push
       identifier: PUSH
-      group: Icon Hover Animation # 82703821968139458
+      group: Icon Hover Animation # 39691852658508595
       sequence: 20
 
     settings: 
@@ -42,7 +42,7 @@
     identification: 
       name: Spin
       identifier: SPIN
-      group: Icon Hover Animation # 82703821968139458
+      group: Icon Hover Animation # 39691852658508595
       sequence: 10
 
     settings: 
@@ -137,7 +137,7 @@
     identification: 
       name: Left
       identifier: LEFTICON
-      group: Icon Position # 82704199337139458
+      group: Icon Position # 39692216238508596
       sequence: 10
 
     settings: 
@@ -152,7 +152,7 @@
     identification: 
       name: Push
       identifier: PUSH
-      group: Icon Hover Animation # 82703821968139458
+      group: Icon Hover Animation # 39691852658508595
       sequence: 20
 
     settings: 
@@ -170,7 +170,7 @@
     identification: 
       name: Right
       identifier: RIGHTICON
-      group: Icon Position # 82704199337139458
+      group: Icon Position # 39692216238508596
       sequence: 20
 
     settings: 
@@ -185,7 +185,7 @@
     identification: 
       name: Spin
       identifier: SPIN
-      group: Icon Hover Animation # 82703821968139458
+      group: Icon Hover Animation # 39691852658508595
       sequence: 10
 
     settings: 

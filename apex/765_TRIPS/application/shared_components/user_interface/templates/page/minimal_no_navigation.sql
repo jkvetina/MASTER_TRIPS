@@ -8,7 +8,7 @@ wwv_flow_imp.component_begin (
 ,p_release=>'23.2.3'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
-,p_default_id_offset=>45920449781012831
+,p_default_id_offset=>0
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_template(
@@ -191,7 +191,7 @@ wwv_flow_imp_shared.create_template(
 ,p_reference_id=>63310942936439067
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(82880609174139572)
+ p_id=>wwv_flow_imp.id(39868450884509004)
 ,p_page_template_id=>wwv_flow_imp.id(59897523656289782)
 ,p_name=>'After Logo'
 ,p_placeholder=>'AFTER_LOGO'
@@ -203,7 +203,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_max_fixed_grid_columns=>4
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(82881135185139572)
+ p_id=>wwv_flow_imp.id(39868931585509005)
 ,p_page_template_id=>wwv_flow_imp.id(59897523656289782)
 ,p_name=>'After Navigation Bar'
 ,p_placeholder=>'AFTER_NAVIGATION_BAR'
@@ -215,7 +215,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_max_fixed_grid_columns=>4
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(82881575046139573)
+ p_id=>wwv_flow_imp.id(39869467759509005)
 ,p_page_template_id=>wwv_flow_imp.id(59897523656289782)
 ,p_name=>'Before Navigation Bar'
 ,p_placeholder=>'BEFORE_NAVIGATION_BAR'
@@ -227,7 +227,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_max_fixed_grid_columns=>4
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(82882117704139573)
+ p_id=>wwv_flow_imp.id(39869981415509005)
 ,p_page_template_id=>wwv_flow_imp.id(59897523656289782)
 ,p_name=>'Body'
 ,p_placeholder=>'BODY'
@@ -239,7 +239,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_max_fixed_grid_columns=>12
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(82882620238139573)
+ p_id=>wwv_flow_imp.id(39870415157509005)
 ,p_page_template_id=>wwv_flow_imp.id(59897523656289782)
 ,p_name=>'Breadcrumb Bar'
 ,p_placeholder=>'REGION_POSITION_01'
@@ -250,7 +250,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(82883056749139573)
+ p_id=>wwv_flow_imp.id(39870930958509006)
 ,p_page_template_id=>wwv_flow_imp.id(59897523656289782)
 ,p_name=>'Dialogs, Drawers and Popups'
 ,p_placeholder=>'REGION_POSITION_04'
@@ -262,7 +262,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_max_fixed_grid_columns=>12
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(82883559205139574)
+ p_id=>wwv_flow_imp.id(39871439735509006)
 ,p_page_template_id=>wwv_flow_imp.id(59897523656289782)
 ,p_name=>'Footer'
 ,p_placeholder=>'REGION_POSITION_05'
@@ -274,7 +274,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_max_fixed_grid_columns=>12
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(82884072812139574)
+ p_id=>wwv_flow_imp.id(39871925801509006)
 ,p_page_template_id=>wwv_flow_imp.id(59897523656289782)
 ,p_name=>'Top Navigation'
 ,p_placeholder=>'REGION_POSITION_06'
@@ -285,7 +285,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(82884567995139574)
+ p_id=>wwv_flow_imp.id(39872460602509006)
 ,p_page_template_id=>wwv_flow_imp.id(59897523656289782)
 ,p_name=>'Banner'
 ,p_placeholder=>'REGION_POSITION_07'
@@ -296,7 +296,7 @@ wwv_flow_imp_shared.create_page_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_page_tmpl_display_point(
- p_id=>wwv_flow_imp.id(82885127913139575)
+ p_id=>wwv_flow_imp.id(39872971393509007)
 ,p_page_template_id=>wwv_flow_imp.id(59897523656289782)
 ,p_name=>'Full Width Content'
 ,p_placeholder=>'REGION_POSITION_08'

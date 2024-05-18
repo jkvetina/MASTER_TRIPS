@@ -8,7 +8,7 @@ wwv_flow_imp.component_begin (
 ,p_release=>'23.2.3'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
-,p_default_id_offset=>45920449781012831
+,p_default_id_offset=>0
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_page.create_page(
@@ -17,7 +17,7 @@ wwv_flow_imp_page.create_page(
 ,p_alias=>'TRIP'
 ,p_step_title=>'Trip Overview'
 ,p_autocomplete_on_off=>'OFF'
-,p_group_id=>wwv_flow_imp.id(104047788811330691)  --  MAIN
+,p_group_id=>wwv_flow_imp.id(104047788811330691)  -- PAGE GROUP:  MAIN
 ,p_inline_css=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '.STATUS_DEFAULT {',
 '  stroke:           #222;',
@@ -36,7 +36,7 @@ wwv_flow_imp_page.create_page(
 ''))
 ,p_page_css_classes=>'MULTICOLUMN'
 ,p_page_template_options=>'#DEFAULT#'
-,p_required_role=>wwv_flow_imp.id(96356597715928593)  -- MASTER - IS_USER
+,p_required_role=>wwv_flow_imp.id(96356597715928593)  -- AUTHORIZATION: MASTER - IS_USER
 ,p_protection_level=>'C'
 ,p_help_text=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'How to use the app?',
@@ -46,8 +46,8 @@ wwv_flow_imp_page.create_page(
 '- check your trip in the chart',
 ''))
 ,p_page_component_map=>'25'
-,p_last_updated_by=>'DEV'
-,p_last_upd_yyyymmddhh24miss=>'20220101000000'
+,p_last_updated_by=>'JAN.KVETINA@GMAIL.COM'
+,p_last_upd_yyyymmddhh24miss=>'20240129093056'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(115073380598380738)
@@ -407,7 +407,7 @@ wwv_flow_imp_page.create_region_column(
 ,p_use_group_for=>'BOTH'
 ,p_is_required=>true
 ,p_lov_type=>'SHARED'
-,p_lov_id=>wwv_flow_imp.id(45973366827054294)  -- LOV_CATEGORIES
+,p_lov_id=>wwv_flow_imp.id(45973366827054294)  -- LOV: LOV_CATEGORIES
 ,p_lov_display_extra=>false
 ,p_lov_display_null=>true
 ,p_enable_filter=>true
@@ -1115,7 +1115,7 @@ wwv_flow_imp.component_begin (
 ,p_release=>'23.2.3'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
-,p_default_id_offset=>45920449781012831
+,p_default_id_offset=>0
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_page.create_ig_report(
@@ -1693,7 +1693,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(59923030250289799)
 ,p_plug_display_sequence=>20
-,p_plug_required_role=>wwv_flow_imp.id(89529175276116354)  -- MASTER - NOBODY
+,p_plug_required_role=>wwv_flow_imp.id(89529175276116354)  -- AUTHORIZATION: MASTER - NOBODY
 ,p_plug_display_condition_type=>'ITEM_IS_NULL'
 ,p_plug_display_when_condition=>'P100_TRIP_ID'
 ,p_attribute_01=>'N'
@@ -1707,7 +1707,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_template=>wwv_flow_imp.id(59956268800289818)
 ,p_plug_display_sequence=>10
 ,p_plug_display_point=>'SUB_REGIONS'
-,p_plug_required_role=>wwv_flow_imp.id(89529175276116354)  -- MASTER - NOBODY
+,p_plug_required_role=>wwv_flow_imp.id(89529175276116354)  -- AUTHORIZATION: MASTER - NOBODY
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
 );
@@ -1724,7 +1724,7 @@ wwv_flow_imp_page.create_page_plug(
 ,p_query_table=>'TRP_TRIPS_GRID_V'
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IG'
-,p_plug_required_role=>wwv_flow_imp.id(89529175276116354)  -- MASTER - NOBODY
+,p_plug_required_role=>wwv_flow_imp.id(89529175276116354)  -- AUTHORIZATION: MASTER - NOBODY
 ,p_prn_units=>'INCHES'
 ,p_prn_paper_size=>'LETTER'
 ,p_prn_width=>11
@@ -2202,7 +2202,7 @@ wwv_flow_imp.component_begin (
 ,p_release=>'23.2.3'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
-,p_default_id_offset=>45920449781012831
+,p_default_id_offset=>0
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_page.create_page_button(

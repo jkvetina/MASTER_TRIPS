@@ -56,11 +56,11 @@ icons:
   library: Font APEX
 
 files: 
-  file-prefix: '#APEX_FILES#themes/theme_42/23.1/'
+  file-prefix: '#APEX_FILES#themes/theme_42/23.2/'
 
 styles: 
 - # ====== Style: Redwood Light ================================
-  id: 82539458465139344
+  id: 39527689902508394
   identification: 
     name: Redwood Light
 
@@ -80,7 +80,7 @@ styles:
     output-css-file-url: '#THEME_FILES#css/Redwood-Theme#MIN#.css?v=#APEX_VERSION#'
 
 - # ====== Style: Vita =========================================
-  id: 82539889700139345
+  id: 39528016674508394
   identification: 
     name: Vita
 
@@ -95,7 +95,7 @@ styles:
     output-css-file-url: '#THEME_FILES#css/Vita#MIN#.css?v=#APEX_VERSION#'
 
 - # ====== Style: Vita - Dark ==================================
-  id: 82540268688139345
+  id: 39528401874508395
   identification: 
     name: Vita - Dark
 
@@ -110,7 +110,7 @@ styles:
     output-css-file-url: '#THEME_FILES#css/Vita-Dark#MIN#.css?v=#APEX_VERSION#'
 
 - # ====== Style: Vita - Red ===================================
-  id: 82540654213139345
+  id: 39528844313508395
   identification: 
     name: Vita - Red
 
@@ -125,7 +125,7 @@ styles:
     output-css-file-url: '#THEME_FILES#css/Vita-Red#MIN#.css?v=#APEX_VERSION#'
 
 - # ====== Style: Vita - Slate =================================
-  id: 82541064577139345
+  id: 39529214733508395
   identification: 
     name: Vita - Slate
 

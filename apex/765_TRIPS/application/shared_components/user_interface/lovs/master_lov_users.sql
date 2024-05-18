@@ -8,11 +8,11 @@ wwv_flow_imp.component_begin (
 ,p_release=>'23.2.3'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
-,p_default_id_offset=>45920449781012831
+,p_default_id_offset=>0
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_list_of_values(
- p_id=>wwv_flow_imp.id(79723040502460872)  -- MASTER - LOV_USERS
+ p_id=>wwv_flow_imp.id(79723040502460872)  -- LOV: MASTER - LOV_USERS
 ,p_lov_name=>'MASTER - LOV_USERS'
 ,p_reference_id=>18781697091885858
 ,p_source_type=>'TABLE'

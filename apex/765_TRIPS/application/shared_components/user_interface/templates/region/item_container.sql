@@ -8,7 +8,7 @@ wwv_flow_imp.component_begin (
 ,p_release=>'23.2.3'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
-,p_default_id_offset=>45920449781012831
+,p_default_id_offset=>0
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_plug_template(
@@ -30,7 +30,7 @@ wwv_flow_imp_shared.create_plug_template(
 ,p_translate_this_template=>'N'
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(83087916662139718)
+ p_id=>wwv_flow_imp.id(40075503572509648)
 ,p_plug_template_id=>wwv_flow_imp.id(59981859576289832)
 ,p_name=>'Item'
 ,p_placeholder=>'BODY'
@@ -41,7 +41,7 @@ wwv_flow_imp_shared.create_plug_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(83088384227139718)
+ p_id=>wwv_flow_imp.id(40076007008509648)
 ,p_plug_template_id=>wwv_flow_imp.id(59981859576289832)
 ,p_name=>'Button End'
 ,p_placeholder=>'BUTTON_END'
@@ -52,7 +52,7 @@ wwv_flow_imp_shared.create_plug_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(83088887976139718)
+ p_id=>wwv_flow_imp.id(40076583763509648)
 ,p_plug_template_id=>wwv_flow_imp.id(59981859576289832)
 ,p_name=>'Button Start'
 ,p_placeholder=>'BUTTON_START'
