@@ -57,6 +57,16 @@
 @@"./patches/55_indexes/50_recompile.sql"
 
 --
+-- DATA
+--
+@@"./patches/60_data/app_applications.sql"
+@@"./patches/60_data/app_lovs.sql"
+@@"./patches/60_data/app_navigation.sql"
+@@"./patches/60_data/app_contexts.sql"
+--
+COMMIT;
+
+--
 -- FINALLY
 --
 @@"./patches/90_finally/98_checks.sql"
