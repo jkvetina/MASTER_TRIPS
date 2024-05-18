@@ -33,14 +33,14 @@ prompt APPLICATION 765 - Trips Planning
 -- Application Export:
 --   Application:     765
 --   Name:            Trips Planning
---   Date and Time:   19:17 Sobota Únor 3, 2024
+--   Date and Time:   16:01 Neděle Únor 4, 2024
 --   Exported By:     APPS
 --   Flashback:       0
 --   Export Type:     Application Export
 --     Pages:                      5
 --       Items:                   46
 --       Computations:             9
---       Processes:               14
+--       Processes:               13
 --       Regions:                 17
 --       Buttons:                 22
 --       Dynamic Actions:         13
@@ -120,7 +120,7 @@ wwv_imp_workspace.create_flow(
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2024-02-03'
+,p_flow_version=>'2024-02-04'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -22307,18 +22307,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_SUBMIT_PAGE'
 ,p_attribute_02=>'Y'
-);
-wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(46372704808379668)
-,p_process_sequence=>10
-,p_process_point=>'BEFORE_HEADER'
-,p_process_type=>'NATIVE_INVOKE_API'
-,p_process_name=>'SET_DEFAULTS'
-,p_attribute_01=>'PLSQL_PACKAGE'
-,p_attribute_03=>'TRP_APP'
-,p_attribute_04=>'SET_DEFAULTS'
-,p_process_when_type=>'NEVER'
-,p_internal_uid=>46372704808379668
 );
 end;
 /

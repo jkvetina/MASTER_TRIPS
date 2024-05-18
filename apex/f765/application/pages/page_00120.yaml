@@ -371,25 +371,3 @@ computations:
     language: PL/SQL
     pl/sql-expression: "NVL(:P120_YEAR, TO_CHAR(TRUNC(SYSDATE), 'YYYY'))"
 
-processes: 
-- # ====== Process: SET_DEFAULTS ===============================
-  id: 46372704808379668
-  identification: 
-    name: SET_DEFAULTS
-    type: Invoke API
-    execution-chain: None
-
-  settings: 
-    type: PL/SQL Package
-    owner: PARSING SCHEMA
-    package: TRP_APP
-    procedure-or-function: SET_DEFAULTS
-
-  execution: 
-    sequence: 10
-    point: Before Header
-    run-process: Once Per Page Visit (default)
-
-  server-side-condition: 
-    type: Never
-

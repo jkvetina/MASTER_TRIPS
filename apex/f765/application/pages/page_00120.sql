@@ -168,18 +168,6 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_SUBMIT_PAGE'
 ,p_attribute_02=>'Y'
 );
-wwv_flow_imp_page.create_page_process(
- p_id=>wwv_flow_imp.id(46372704808379668)
-,p_process_sequence=>10
-,p_process_point=>'BEFORE_HEADER'
-,p_process_type=>'NATIVE_INVOKE_API'
-,p_process_name=>'SET_DEFAULTS'
-,p_attribute_01=>'PLSQL_PACKAGE'
-,p_attribute_03=>'TRP_APP'
-,p_attribute_04=>'SET_DEFAULTS'
-,p_process_when_type=>'NEVER'
-,p_internal_uid=>46372704808379668
-);
 wwv_flow_imp.component_end;
 end;
 /
