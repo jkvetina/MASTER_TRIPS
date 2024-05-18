@@ -10,6 +10,5 @@ FROM app_lovs t
 WHERE t.app_id      = core.get_app_id()
     AND t.lov_id    = 'CATEGORY'
     AND t.order#    IS NOT NULL;
---
-COMMENT ON TABLE trp_lov_categories_v IS '';
+/
 

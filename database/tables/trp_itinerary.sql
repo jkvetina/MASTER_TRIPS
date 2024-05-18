@@ -1,8 +1,8 @@
 CREATE TABLE trp_itinerary (
-    trip_id                         NUMBER(10,0)    NOT NULL,
-    stop_id                         NUMBER(4,0)     NOT NULL,
-    stop_name                       VARCHAR2(128)   NOT NULL,
-    category_id                     VARCHAR2(32)    NOT NULL,
+    trip_id                         NUMBER(10,0)          NOT NULL,
+    stop_id                         NUMBER(4,0)           NOT NULL,
+    stop_name                       VARCHAR2(128)         NOT NULL,
+    category_id                     VARCHAR2(32)          NOT NULL,
     price                           NUMBER(10,0),
     start_at                        DATE,
     end_at                          DATE,
@@ -17,16 +17,25 @@ CREATE TABLE trp_itinerary (
     created_at                      DATE,
     --
     CONSTRAINT fk_trp_itinerary_reserved
-        CHECK (is_reserved = 'Y' OR is_reserved IS NULL),
+        CHECK (
+            is_reserved = 'Y' OR is_reserved IS NULL
+        ),
     --
     CONSTRAINT fk_trp_itinerary_paid
-        CHECK (is_paid = 'Y' OR is_paid IS NULL),
+        CHECK (
+            is_paid = 'Y' OR is_paid IS NULL
+        ),
     --
     CONSTRAINT fk_trp_itinerary_pending
-        CHECK (is_pending = 'Y' OR is_pending IS NULL),
+        CHECK (
+            is_pending = 'Y' OR is_pending IS NULL
+        ),
     --
     CONSTRAINT pk_trp_itinerary
-        PRIMARY KEY (trip_id, stop_id),
+        PRIMARY KEY (
+            trip_id,
+            stop_id
+        ),
     --
     CONSTRAINT fk_trp_itinerary_trip
         FOREIGN KEY (trip_id)

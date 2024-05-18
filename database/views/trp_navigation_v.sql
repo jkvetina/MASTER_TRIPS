@@ -208,6 +208,5 @@ SELECT
 FROM future_trips t
 JOIN endpoints e
     ON e.trips IS NOT NULL;
---
-COMMENT ON TABLE trp_navigation_v IS '';
+/
 

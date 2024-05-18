@@ -55,6 +55,5 @@ JOIN filter_days r
     ON (r.day_      = TO_CHAR(TRUNC(t.start_at), 'YYYY-MM-DD') OR t.start_at IS NULL)
 WHERE 1 = 1
     AND (r.day_     = x.day_ OR x.day_ IS NULL);
---
-COMMENT ON TABLE trp_itinerary_grid_v IS '';
+/
 

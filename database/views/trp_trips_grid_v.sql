@@ -34,6 +34,5 @@ ORDER BY
     t.start_at,
     t.end_at,
     t.trip_id;
---
-COMMENT ON TABLE trp_trips_grid_v IS '';
+/
 

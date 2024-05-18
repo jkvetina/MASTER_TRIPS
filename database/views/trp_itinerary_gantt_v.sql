@@ -107,6 +107,5 @@ SELECT
     --
 FROM t
 ORDER BY row_id NULLS FIRST, start_at;
---
-COMMENT ON TABLE trp_itinerary_gantt_v IS '';
+/
 

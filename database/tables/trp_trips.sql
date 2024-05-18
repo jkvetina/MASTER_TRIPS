@@ -1,8 +1,8 @@
 CREATE TABLE trp_trips (
-    trip_id                         NUMBER(10,0)    NOT NULL,
-    trip_name                       VARCHAR2(128)   NOT NULL,
-    start_at                        DATE            NOT NULL,
-    end_at                          DATE            NOT NULL,
+    trip_id                         NUMBER(10,0)          NOT NULL,
+    trip_name                       VARCHAR2(128)         NOT NULL,
+    start_at                        DATE                  NOT NULL,
+    end_at                          DATE                  NOT NULL,
     year_                           VARCHAR2(4),
     created_by                      VARCHAR2(128),
     created_at                      DATE,
