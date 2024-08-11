@@ -6,6 +6,8 @@ CREATE TABLE trp_trips (
     year_                           VARCHAR2(4),
     created_by                      VARCHAR2(128),
     created_at                      DATE,
+    gps_lat                         NUMBER,
+    gps_long                        NUMBER,
     --
     CONSTRAINT pk_trp_trips
         PRIMARY KEY (trip_id)
@@ -18,4 +20,6 @@ COMMENT ON COLUMN trp_trips.trip_name   IS '';
 COMMENT ON COLUMN trp_trips.start_at    IS '';
 COMMENT ON COLUMN trp_trips.end_at      IS '';
 COMMENT ON COLUMN trp_trips.year_       IS '';
+COMMENT ON COLUMN trp_trips.gps_lat     IS '';
+COMMENT ON COLUMN trp_trips.gps_long    IS '';
 

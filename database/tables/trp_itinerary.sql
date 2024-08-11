@@ -15,6 +15,8 @@ CREATE TABLE trp_itinerary (
     is_pending                      CHAR(1),
     created_by                      VARCHAR2(128),
     created_at                      DATE,
+    gps_lat                         NUMBER,
+    gps_long                        NUMBER,
     --
     CONSTRAINT fk_trp_itinerary_reserved
         CHECK (
@@ -58,4 +60,6 @@ COMMENT ON COLUMN trp_itinerary.link_event          IS '';
 COMMENT ON COLUMN trp_itinerary.is_reserved         IS '';
 COMMENT ON COLUMN trp_itinerary.is_paid             IS '';
 COMMENT ON COLUMN trp_itinerary.is_pending          IS '';
+COMMENT ON COLUMN trp_itinerary.gps_lat             IS '';
+COMMENT ON COLUMN trp_itinerary.gps_long            IS '';
 

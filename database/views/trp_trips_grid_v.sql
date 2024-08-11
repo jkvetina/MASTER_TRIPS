@@ -14,6 +14,8 @@ SELECT
     t.created_by,
     t.created_at,
     t.year_,
+    t.gps_lat,
+    t.gps_long,
     --
     CASE
         WHEN t.start_at - TRUNC(SYSDATE) >= 0

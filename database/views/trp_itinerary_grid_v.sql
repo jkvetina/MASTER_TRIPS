@@ -42,6 +42,8 @@ SELECT
     t.end_at,
     t.notes,
     t.color_fill,
+    t.gps_lat,
+    t.gps_long,
     --
     CASE WHEN t.start_at IS NULL THEN 0 ELSE r.day# END AS day#,
     r.day_,
