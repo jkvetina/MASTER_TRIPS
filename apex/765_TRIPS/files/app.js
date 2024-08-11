@@ -33,4 +33,3 @@ const parse_gps_coordinates = function(google_link) {
     }
     //
 };
-

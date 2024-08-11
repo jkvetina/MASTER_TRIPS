@@ -111,7 +111,8 @@ navigation-bar:
 
 javascript: 
   file-urls: 
-  - '#WORKSPACE_FILES#master_app#MIN#.js?version=#APP_VERSION#'
+  - '#WORKSPACE_FILES#master_app#MIN#.js?version=#APP_VERSION#'
+  - '#APP_FILES#app#MIN#.js?version=#APP_VERSION#'
   include-jquery-migrate: false
 
 css: 
