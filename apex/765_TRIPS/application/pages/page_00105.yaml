@@ -45,13 +45,13 @@ regions:
 - # ====== Region: &P105_HEADER. ===============================
   id: 143529190211135295
   identification: 
-    title: '&P105_HEADER.'
+    name: '&P105_HEADER.'
     type: Static Content
 
   layout: 
     sequence: 10
     parent-region: No Parent
-    position: REGION_POSITION_01
+    slot: REGION_POSITION_01
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -59,7 +59,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Hero # 59956268800289818
+    template: Hero
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -71,9 +71,6 @@ regions:
   advanced: 
     region-display-selector: true
     exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
 
   customization: 
     customizable: Not Customizable By End Users
@@ -86,7 +83,7 @@ regions:
 - # ====== Region: [FORM] ======================================
   id: 143529345524135296
   identification: 
-    title: '[FORM]'
+    name: '[FORM]'
     type: Form
 
   source: 
@@ -99,7 +96,7 @@ regions:
   layout: 
     sequence: 20
     parent-region: No Parent
-    position: BODY
+    slot: BODY
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -107,7 +104,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Blank with Attributes # 59923030250289799
+    template: Blank with Attributes
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -119,9 +116,6 @@ regions:
   advanced: 
     region-display-selector: true
     exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
 
   customization: 
     customizable: Not Customizable By End Users
@@ -135,6 +129,211 @@ regions:
       lost-update-type: Row Values
 
 page-items: 
+- # ====== Page Item: P105_YEAR_ ===============================
+  id: 8595202245358117
+  identification: 
+    name: P105_YEAR_
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 70
+    region: '[FORM]' # 143529345524135296
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 143529345524135296
+    column: YEAR_
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Request (Memory Only)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_GPS_LAT =============================
+  id: 8595373473358118
+  identification: 
+    name: P105_GPS_LAT
+    type: Number Field
+
+  label: 
+    label: Gps Lat
+    alignment: Left
+
+  settings: 
+    number-alignment: Start
+    virtual-keyboard: Decimal
+
+  layout: 
+    sequence: 80
+    region: '[FORM]' # 143529345524135296
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 143529345524135296
+    column: GPS_LAT
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_GPS_LONG ============================
+  id: 8595454496358119
+  identification: 
+    name: P105_GPS_LONG
+    type: Number Field
+
+  label: 
+    label: Gps Long
+    alignment: Left
+
+  settings: 
+    number-alignment: Start
+    virtual-keyboard: Decimal
+
+  layout: 
+    sequence: 90
+    region: '[FORM]' # 143529345524135296
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: false
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: false
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 143529345524135296
+    column: GPS_LONG
+    data-type: NUMBER
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_GPS_BUTTON ==========================
+  id: 8596586058358130
+  identification: 
+    name: P105_GPS_BUTTON
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 40
+    region: '&P105_HEADER.' # 143529190211135295
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_SUBMIT ==============================
+  id: 8596737980358132
+  identification: 
+    name: P105_SUBMIT
+    type: Hidden
+
+  settings: 
+    value-protected: true
+
+  layout: 
+    sequence: 30
+    region: '&P105_HEADER.' # 143529190211135295
+    slot: BODY
+
+  advanced: 
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    type: Null
+    used: Only when current value in session state is null
+
+  session-state: 
+    data-type: VARCHAR2
+    storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
 - # ====== Page Item: P105_TRIP_ID =============================
   id: 115462222338200099
   identification: 
@@ -147,7 +346,7 @@ page-items:
   layout: 
     sequence: 10
     region: '[FORM]' # 143529345524135296
-    position: BODY
+    slot: BODY
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -188,7 +387,7 @@ page-items:
   layout: 
     sequence: 20
     region: '[FORM]' # 143529345524135296
-    position: BODY
+    slot: BODY
     alignment: Left
     start-new-layout: false
     start-new-row: true
@@ -198,7 +397,7 @@ page-items:
     label-column-span: Page Template Default
 
   appearance: 
-    template: Optional - Floating # 60060717525289884
+    template: Optional - Floating
     template-options: 
     - '#DEFAULT#'
     width: 30
@@ -208,6 +407,7 @@ page-items:
     maximum-length: 128
 
   advanced: 
+    post-text-: '&P105_GPS_BUTTON!RAW.'
     warn-on-unsaved-changes: Page Default
 
   source: 
@@ -249,7 +449,7 @@ page-items:
   layout: 
     sequence: 30
     region: '[FORM]' # 143529345524135296
-    position: BODY
+    slot: BODY
     alignment: Left
     start-new-layout: false
     start-new-row: true
@@ -259,7 +459,7 @@ page-items:
     label-column-span: Page Template Default
 
   appearance: 
-    template: Optional - Floating # 60060717525289884
+    template: Optional - Floating
     template-options: 
     - '#DEFAULT#'
     format-mask: YYYY-MM-DD
@@ -310,7 +510,7 @@ page-items:
   layout: 
     sequence: 40
     region: '[FORM]' # 143529345524135296
-    position: BODY
+    slot: BODY
     alignment: Left
     start-new-layout: false
     start-new-row: false
@@ -320,7 +520,7 @@ page-items:
     label-column-span: Page Template Default
 
   appearance: 
-    template: Optional - Floating # 60060717525289884
+    template: Optional - Floating
     template-options: 
     - '#DEFAULT#'
     format-mask: YYYY-MM-DD
@@ -362,7 +562,7 @@ page-items:
   layout: 
     sequence: 50
     region: '[FORM]' # 143529345524135296
-    position: BODY
+    slot: BODY
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -395,7 +595,7 @@ page-items:
   layout: 
     sequence: 60
     region: '[FORM]' # 143529345524135296
-    position: BODY
+    slot: BODY
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -428,7 +628,7 @@ page-items:
   layout: 
     sequence: 20
     region: '&P105_HEADER.' # 143529190211135295
-    position: BODY
+    slot: BODY
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -443,7 +643,7 @@ page-items:
 
   security: 
     session-state-protection: Unrestricted
-    store-value-encrypted-in-session-state: true
+    store-value-encrypted-in-session-state: false
     restricted-characters: All characters can be saved.
 
 buttons: 
@@ -456,7 +656,7 @@ buttons:
   layout: 
     sequence: 80
     region: '[FORM]' # 143529345524135296
-    position: NEXT
+    slot: NEXT
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -464,7 +664,7 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Icon # 60062458726289887
+    button-template: Icon
     hot: false
     template-options: 
     - '#DEFAULT#'
@@ -475,6 +675,7 @@ buttons:
   behavior: 
     action: Submit Page
     execute-validations: true
+    show-processing: false
     warn-on-unsaved-changes: Do Not Check
     database-action: SQL DELETE action
 
@@ -491,7 +692,7 @@ buttons:
   layout: 
     sequence: 10
     region: '&P105_HEADER.' # 143529190211135295
-    position: RIGHT_OF_TITLE
+    slot: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -499,7 +700,7 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Text # 60063248519289891
+    button-template: Text
     hot: false
     template-options: 
     - '#DEFAULT#'
@@ -528,7 +729,7 @@ buttons:
   layout: 
     sequence: 20
     region: '&P105_HEADER.' # 143529190211135295
-    position: UP
+    slot: UP
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -536,7 +737,7 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Icon # 60062458726289887
+    button-template: Icon
     hot: false
     template-options: 
     - '#DEFAULT#'
@@ -552,12 +753,12 @@ buttons:
   id: 45926450240039325
   identification: 
     button-name: CREATE_TRIP
-    label: Create Trip
+    label: '&P105_SUBMIT.'
 
   layout: 
     sequence: 70
     region: '[FORM]' # 143529345524135296
-    position: NEXT
+    slot: NEXT
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -565,7 +766,7 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Text # 60063248519289891
+    button-template: Text
     hot: true
     template-options: 
     - '#DEFAULT#'
@@ -575,6 +776,7 @@ buttons:
   behavior: 
     action: Submit Page
     execute-validations: true
+    show-processing: false
     warn-on-unsaved-changes: Do Not Check
     database-action: SQL INSERT action
 
@@ -590,7 +792,7 @@ dynamic-actions:
     type: Immediate
 
   when: 
-    event: EVENT.EVENT.BROWSER.CLICK
+    event: Click
     selection-type: Button
     button: CLOSE_DIALOG # 45925398364039317
 
@@ -606,25 +808,25 @@ dynamic-actions:
       fire-when-event-result-is: True
       fire-on-initialization: false
 
-computations: 
-- # ====== Computation: P105_HEADER ============================
-  id: 45931162493039334
+processes: 
+- # ====== Process: INIT_DEFAULTS ==============================
+  id: 8596689534358131
   identification: 
-    item-name: P105_HEADER
+    name: INIT_DEFAULTS
+    type: Invoke API
+    execution-chain: None
+
+  settings: 
+    type: PL/SQL Package
+    owner: PARSING SCHEMA
+    package: TRP_APP
+    procedure-or-function: INIT_DEFAULT_P105
 
   execution: 
-    sequence: 10
-    point: Before Regions
+    sequence: 20
+    point: Before Header
+    run-process: Once Per Page Visit (default)
 
-  computation: 
-    type: SQL Query (return single value)
-    sql-query: |
-      SELECT p.page_name
-      FROM apex_application_pages p
-      WHERE p.application_id  = :APP_ID
-          AND p.page_id       = :APP_PAGE_ID;
-
-processes: 
 - # ====== Process: INIT_FORM ==================================
   id: 45930502906039329
   identification: 

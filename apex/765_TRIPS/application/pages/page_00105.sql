@@ -4,8 +4,8 @@ begin
 --     PAGE: 00105
 --   Manifest End
 wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.10.31'
-,p_release=>'23.2.3'
+ p_version_yyyy_mm_dd=>'2024.05.31'
+,p_release=>'24.1.1'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
 ,p_default_id_offset=>0
@@ -24,8 +24,6 @@ wwv_flow_imp_page.create_page(
 ,p_dialog_chained=>'N'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'17'
-,p_last_updated_by=>'JAN.KVETINA@GMAIL.COM'
-,p_last_upd_yyyymmddhh24miss=>'20240128083206'
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(143529190211135295)
@@ -35,8 +33,9 @@ wwv_flow_imp_page.create_page_plug(
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'Y'
 ,p_plug_display_point=>'REGION_POSITION_01'
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
+,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
+  'expand_shortcuts', 'N',
+  'output_as', 'HTML')).to_clob
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(143529345524135296)
@@ -62,7 +61,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(60063248519289891)
 ,p_button_is_hot=>'Y'
-,p_button_image_alt=>'Create Trip'
+,p_button_image_alt=>'&P105_SUBMIT.'
 ,p_button_position=>'NEXT'
 ,p_button_css_classes=>'u-pullRight'
 ,p_database_action=>'INSERT'
@@ -92,6 +91,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_id=>wwv_flow_imp.id(60063248519289891)
 ,p_button_image_alt=>'Show Itinerary'
 ,p_button_position=>'RIGHT_OF_TITLE'
+,p_button_alignment=>'RIGHT'
 ,p_button_redirect_url=>'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_TRIP_ID:&P105_TRIP_ID.'
 ,p_button_condition=>'P105_TRIP_ID'
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
@@ -106,6 +106,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_id=>wwv_flow_imp.id(60062458726289887)
 ,p_button_image_alt=>'Close Dialog'
 ,p_button_position=>'UP'
+,p_button_alignment=>'RIGHT'
 ,p_button_execute_validations=>'N'
 ,p_warn_on_unsaved_changes=>null
 ,p_button_css_classes=>'u-pullRight'
@@ -118,6 +119,77 @@ wwv_flow_imp_page.create_page_branch(
 ,p_branch_point=>'AFTER_PROCESSING'
 ,p_branch_type=>'REDIRECT_URL'
 ,p_branch_sequence=>10
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(8595202245358117)
+,p_name=>'P105_YEAR_'
+,p_source_data_type=>'VARCHAR2'
+,p_item_sequence=>70
+,p_item_plug_id=>wwv_flow_imp.id(143529345524135296)
+,p_item_source_plug_id=>wwv_flow_imp.id(143529345524135296)
+,p_source=>'YEAR_'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+,p_display_as=>'NATIVE_HIDDEN'
+,p_is_persistent=>'N'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'Y'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(8595373473358118)
+,p_name=>'P105_GPS_LAT'
+,p_source_data_type=>'NUMBER'
+,p_item_sequence=>80
+,p_item_plug_id=>wwv_flow_imp.id(143529345524135296)
+,p_item_source_plug_id=>wwv_flow_imp.id(143529345524135296)
+,p_prompt=>'Gps Lat'
+,p_source=>'GPS_LAT'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_cSize=>30
+,p_field_template=>wwv_flow_imp.id(60060717525289884)
+,p_item_template_options=>'#DEFAULT#'
+,p_is_persistent=>'N'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_03=>'left'
+,p_attribute_04=>'decimal'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(8595454496358119)
+,p_name=>'P105_GPS_LONG'
+,p_source_data_type=>'NUMBER'
+,p_item_sequence=>90
+,p_item_plug_id=>wwv_flow_imp.id(143529345524135296)
+,p_item_source_plug_id=>wwv_flow_imp.id(143529345524135296)
+,p_prompt=>'Gps Long'
+,p_source=>'GPS_LONG'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_cSize=>30
+,p_begin_on_new_line=>'N'
+,p_field_template=>wwv_flow_imp.id(60060717525289884)
+,p_item_template_options=>'#DEFAULT#'
+,p_is_persistent=>'N'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_03=>'left'
+,p_attribute_04=>'decimal'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(8596586058358130)
+,p_name=>'P105_GPS_BUTTON'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_imp.id(143529190211135295)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'Y'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(8596737980358132)
+,p_name=>'P105_SUBMIT'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_imp.id(143529190211135295)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'Y'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(115462222338200099)
@@ -144,6 +216,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_item_source_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_prompt=>'Trip Name'
+,p_post_element_text=>'&P105_GPS_BUTTON!RAW.'
 ,p_source=>'TRIP_NAME'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_TEXT_FIELD'
@@ -243,19 +316,8 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_imp.id(143529190211135295)
 ,p_display_as=>'NATIVE_HIDDEN'
+,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
-);
-wwv_flow_imp_page.create_page_computation(
- p_id=>wwv_flow_imp.id(45931162493039334)
-,p_computation_sequence=>10
-,p_computation_item=>'P105_HEADER'
-,p_computation_point=>'BEFORE_BOX_BODY'
-,p_computation_type=>'QUERY'
-,p_computation=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT p.page_name',
-'FROM apex_application_pages p',
-'WHERE p.application_id  = :APP_ID',
-'    AND p.page_id       = :APP_PAGE_ID;'))
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(45932265756039336)
@@ -305,6 +367,17 @@ wwv_flow_imp_page.create_page_process(
 ,p_process_type=>'NATIVE_FORM_INIT'
 ,p_process_name=>'INIT_FORM'
 ,p_internal_uid=>45930502906039329
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(8596689534358131)
+,p_process_sequence=>20
+,p_process_point=>'BEFORE_HEADER'
+,p_process_type=>'NATIVE_INVOKE_API'
+,p_process_name=>'INIT_DEFAULTS'
+,p_attribute_01=>'PLSQL_PACKAGE'
+,p_attribute_03=>'TRP_APP'
+,p_attribute_04=>'INIT_DEFAULT_P105'
+,p_internal_uid=>8596689534358131
 );
 wwv_flow_imp.component_end;
 end;
