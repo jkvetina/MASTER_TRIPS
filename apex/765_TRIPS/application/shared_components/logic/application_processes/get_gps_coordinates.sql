@@ -19,11 +19,12 @@ wwv_flow_imp_shared.create_flow_process(
 ,p_process_name=>'GET_GPS_COORDINATES'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'trp_app.get_gps_coords (',
-'    in_location => APEX_APPLICATION.G_X01',
+'    in_location     => APEX_APPLICATION.G_X01,',
+'    in_event_link   => APEX_APPLICATION.G_X02',
 ');'))
 ,p_process_clob_language=>'PLSQL'
 ,p_security_scheme=>'MUST_NOT_BE_PUBLIC_USER'
-,p_version_scn=>41472031378097
+,p_version_scn=>41472037817716
 );
 wwv_flow_imp.component_end;
 end;

@@ -1926,6 +1926,38 @@ dynamic-actions:
       fire-when-event-result-is: True
       fire-on-initialization: true
 
+- # ====== Dynamic Action: CHANGED_GPS =========================
+  id: 8597307087358138
+  identification: 
+    name: CHANGED_GPS
+
+  execution: 
+    sequence: 40
+    event-scope: Static
+    type: Immediate
+
+  when: 
+    event: Change
+    selection-type: Item(s)
+    item(s): 
+    - P110_GPS_LAT
+    - P110_GPS_LONG
+
+  actions: 
+  - # ====== Action: Execute JavaScript Code =====================
+    id: 8597419933358139
+    identification: 
+      action: Execute JavaScript Code
+
+    settings: 
+      code: "parse_gps_coordinates(this.triggeringElement ? this.triggeringElement.value : '');"
+
+    execution: 
+      sequence: 10
+      event: CHANGED_GPS # 8597307087358138
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
 - # ====== Dynamic Action: CLOSE_DIALOG ========================
   id: 46000911789080257
   identification: 

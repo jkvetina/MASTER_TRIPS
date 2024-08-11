@@ -17,3 +17,8 @@ else {
 }
 
 
+// ----------------------------------------
+// Page: 110 - Stop Detail > Dynamic Action: CHANGED_GPS > Action: Execute JavaScript Code > Settings > Code
+
+parse_gps_coordinates(this.triggeringElement ? this.triggeringElement.value : '');
+

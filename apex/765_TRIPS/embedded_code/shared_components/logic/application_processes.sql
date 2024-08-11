@@ -7,7 +7,8 @@ app.ajax_ping();
 -- Application Process: GET_GPS_COORDINATES > Source > PL/SQL Code
 
 trp_app.get_gps_coords (
-    in_location => APEX_APPLICATION.G_X01
+    in_location     => APEX_APPLICATION.G_X01,
+    in_event_link   => APEX_APPLICATION.G_X02
 );
 
 -- ----------------------------------------

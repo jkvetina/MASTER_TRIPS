@@ -813,6 +813,25 @@ wwv_flow_imp_page.create_page_da_action(
 '}',
 ''))
 );
+wwv_flow_imp_page.create_page_da_event(
+ p_id=>wwv_flow_imp.id(8597307087358138)
+,p_name=>'CHANGED_GPS'
+,p_event_sequence=>40
+,p_triggering_element_type=>'ITEM'
+,p_triggering_element=>'P110_GPS_LAT,P110_GPS_LONG'
+,p_bind_type=>'bind'
+,p_execution_type=>'IMMEDIATE'
+,p_bind_event_type=>'change'
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(8597419933358139)
+,p_event_id=>wwv_flow_imp.id(8597307087358138)
+,p_event_result=>'TRUE'
+,p_action_sequence=>10
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_JAVASCRIPT_CODE'
+,p_attribute_01=>'parse_gps_coordinates(this.triggeringElement ? this.triggeringElement.value : '''');'
+);
 wwv_flow_imp_page.create_page_process(
  p_id=>wwv_flow_imp.id(46000143907080257)
 ,p_process_sequence=>10

@@ -10,7 +10,8 @@
     language: PL/SQL
     pl/sql-code: |
       trp_app.get_gps_coords (
-          in_location => APEX_APPLICATION.G_X01
+          in_location     => APEX_APPLICATION.G_X01,
+          in_event_link   => APEX_APPLICATION.G_X02
       );
 
   execution: 
@@ -21,7 +22,7 @@
     authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
 
   subscription: 
-    version-number: 41472031378097
+    version-number: 41472037817716
 
 - # ====== Application Process: INIT_DEFAULTS ==================
   id: 60568702236716227
