@@ -137,10 +137,10 @@ regions:
       lazy-loading: true
 
     layers: 
-    - # ====== Layer: Trip Stops ===================================
+    - # ====== Layer: TRIP_STOPS ===================================
       id: 8597108196358136
       identification: 
-        name: Trip Stops
+        name: TRIP_STOPS
         layer-type: Points
 
       layout: 
@@ -150,16 +150,18 @@ regions:
         location: Local Database
         type: Table / View
         table-owner: Parsing Schema
-        table-name: TRP_ITINERARY
+        table-name: TRP_ITINERARY_MAP_V
         include-rowid-column: false
-        where-clause: 'trip_id = :P100_TRIP_ID'
+        page-items-to-submit: 
+        - P100_TRIP_ID
+        - P100_DAY
         use-spatial-index: false
 
       column-mapping: 
         geometry-column-data-type: Longitude/Latitude
         longitude-column: GPS_LONG
         latitude-column: GPS_LAT
-        primary-key-column: TRIP_ID
+        primary-key-column: STOP_ID
 
       point-objects: 
         style: SVG
@@ -167,7 +169,7 @@ regions:
         shape-scale: 1.5
 
       appearance: 
-        fill-color: '#ff0000'
+        fill-color: '&COLOR.'
 
       point-clustering: 
         enable: false
@@ -175,12 +177,18 @@ regions:
       tooltip: 
         advanced-formatting: false
 
-      info-window: 
-        advanced-formatting: false
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110:P110_TRIP_ID,P110_STOP_ID:&TRIP_ID.,&STOP_ID.'
+          page: 110 # Stop Detail
+          clear-cache: 110
+          values: 
+            p110_trip_id: '&TRIP_ID.'
+            p110_stop_id: '&STOP_ID.'
 
       legend: 
-        show: true
-        enable-to-hide: true
+        show: false
 
 - # ====== Region: Gantt [CHART] ===============================
   id: 114512999524328246

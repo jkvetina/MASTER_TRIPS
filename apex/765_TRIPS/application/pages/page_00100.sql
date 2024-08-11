@@ -99,27 +99,28 @@ wwv_flow_imp_page.create_map_region(
 wwv_flow_imp_page.create_map_region_layer(
  p_id=>wwv_flow_imp.id(8597108196358136)
 ,p_map_region_id=>wwv_flow_imp.id(8597067329358135)
-,p_name=>'Trip Stops'
+,p_name=>'TRIP_STOPS'
 ,p_layer_type=>'POINT'
 ,p_display_sequence=>10
 ,p_location=>'LOCAL'
 ,p_query_type=>'TABLE'
-,p_table_name=>'TRP_ITINERARY'
-,p_where_clause=>'trip_id = :P100_TRIP_ID'
+,p_table_name=>'TRP_ITINERARY_MAP_V'
 ,p_include_rowid_column=>false
+,p_items_to_submit=>'P100_TRIP_ID,P100_DAY'
 ,p_has_spatial_index=>false
-,p_pk_column=>'TRIP_ID'
+,p_pk_column=>'STOP_ID'
 ,p_geometry_column_data_type=>'LONLAT_COLUMNS'
 ,p_longitude_column=>'GPS_LONG'
 ,p_latitude_column=>'GPS_LAT'
-,p_fill_color=>'#ff0000'
+,p_fill_color=>'&COLOR.'
 ,p_point_display_type=>'SVG'
 ,p_point_svg_shape=>'Default'
 ,p_point_svg_shape_scale=>'1.5'
 ,p_feature_clustering=>false
 ,p_tooltip_adv_formatting=>false
-,p_info_window_adv_formatting=>false
-,p_allow_hide=>true
+,p_link_target_type=>'REDIRECT_PAGE'
+,p_link_target=>'f?p=&APP_ID.:110:&SESSION.::&DEBUG.:110:P110_TRIP_ID,P110_STOP_ID:&TRIP_ID.,&STOP_ID.'
+,p_display_in_legend=>false
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(114512999524328246)

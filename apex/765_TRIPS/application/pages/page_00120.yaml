@@ -136,10 +136,10 @@ regions:
       lazy-loading: true
 
     layers: 
-    - # ====== Layer: Map ==========================================
+    - # ====== Layer: PAST_EVENTS ==================================
       id: 8594880453358113
       identification: 
-        name: Map
+        name: PAST_EVENTS
         layer-type: Points
 
       layout: 
@@ -149,9 +149,9 @@ regions:
         location: Local Database
         type: Table / View
         table-owner: Parsing Schema
-        table-name: TRP_TRIPS
+        table-name: TRP_TRIPS_MAP_V
         include-rowid-column: false
-        where-clause: 'year_ = :P120_YEAR'
+        where-clause: is_future IS NULL
         page-items-to-submit: 
         - P120_YEAR
         use-spatial-index: false
@@ -168,7 +168,59 @@ regions:
         shape-scale: 1.5
 
       appearance: 
-        fill-color: '#ff0000'
+        fill-color: '&COLOR.'
+
+      point-clustering: 
+        enable: false
+
+      tooltip: 
+        advanced-formatting: false
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_TRIP_ID:&TRIP_ID.'
+          page: 100 # Trip Overview
+          clear-cache: 100
+          values: 
+            p100_trip_id: '&TRIP_ID.'
+
+      legend: 
+        show: false
+
+    - # ====== Layer: FUTURE_EVENTS ================================
+      id: 8597526677358140
+      identification: 
+        name: FUTURE_EVENTS
+        layer-type: Points
+
+      layout: 
+        sequence: 20
+
+      source: 
+        location: Local Database
+        type: Table / View
+        table-owner: Parsing Schema
+        table-name: TRP_TRIPS_MAP_V
+        include-rowid-column: false
+        where-clause: is_future = 'Y'
+        page-items-to-submit: 
+        - P120_YEAR
+        use-spatial-index: false
+
+      column-mapping: 
+        geometry-column-data-type: Longitude/Latitude
+        longitude-column: GPS_LONG
+        latitude-column: GPS_LAT
+        primary-key-column: TRIP_ID
+
+      point-objects: 
+        style: SVG
+        shape: Default
+        shape-scale: 1.5
+
+      appearance: 
+        fill-color: '&COLOR.'
 
       point-clustering: 
         enable: false
