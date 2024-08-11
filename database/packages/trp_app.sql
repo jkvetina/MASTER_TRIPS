@@ -11,11 +11,15 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
             rec.trip_name       := core.get_item('$TRIP_NAME');
             rec.start_at        := core.get_date_item('$START_AT');
             rec.end_at          := core.get_date_item('$END_AT');
+            rec.gps_lat         := core.get_number_item('$GPS_LAT');
+            rec.gps_long        := core.get_number_item('$GPS_LONG');
         ELSE
             rec.trip_id         := core.get_grid_data('TRIP_ID');
             rec.trip_name       := core.get_grid_data('TRIP_NAME');
             rec.start_at        := core.get_date(core.get_grid_data('START_AT'));
             rec.end_at          := core.get_date(core.get_grid_data('END_AT'));
+            rec.gps_lat         := core.get_grid_data('GPS_LAT');
+            rec.gps_long        := core.get_grid_data('GPS_LONG');
         END IF;
         --
         trp_tapi.save_trips (rec,
@@ -63,6 +67,8 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
             rec.is_pending      := NULLIF(core.get_item('$IS_PENDING'), 'N');
             rec.start_at        := core.get_date_item('$START_AT');
             rec.end_at          := core.get_date_item('$END_AT');
+            rec.gps_lat         := core.get_number_item('$GPS_LAT');
+            rec.gps_long        := core.get_number_item('$GPS_LONG');
         ELSE
             rec.trip_id         := core.get_grid_data('TRIP_ID');
             rec.stop_id         := core.get_grid_data('STOP_ID');
@@ -78,6 +84,8 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
             rec.is_pending      := core.get_grid_data('IS_PENDING');
             rec.start_at        := core.get_date(core.get_grid_data('START_AT'));
             rec.end_at          := core.get_date(core.get_grid_data('END_AT'));
+            rec.gps_lat         := core.get_grid_data('GPS_LAT');
+            rec.gps_long        := core.get_grid_data('GPS_LONG');
         END IF;
 
         -- duplicate entry
@@ -326,6 +334,13 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
         --
         core.set_item('$NEXT_STOP', v_next_stop);
         core.set_item('$PREV_STOP', v_prev_stop);
+        --
+        core.set_item('$GPS_BUTTON',
+            '<button type="button" class="a-Button" aria-label="Open link" tabindex="-1" ' ||
+            'style="height: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;" ' ||
+            'onclick="javascript:{get_gps_coordinates($v(''P110_STOP_NAME''));}">' ||
+            '<span class="fa fa-ai-microchip"></span></button>'
+        );
 
         -- stop related items
         FOR c IN (
@@ -348,12 +363,7 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
                         'style="height: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;" ' ||
                         'onclick="javascript:{window.open(''' || t.link_reservation || ''', ''_blank'');}">' ||
                         '<span class="fa fa-anchor"></span></button>'
-                    END AS reserv_button,
-                --
-                '<button type="button" class="a-Button" aria-label="Open link" tabindex="-1" ' ||
-                'style="height: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;" ' ||
-                'onclick="javascript:{get_gps_coordibates();}">' ||
-                '<span class="fa fa-ai-microchip"></span></button>' AS gps_button
+                    END AS reserv_button
                 --
             FROM trp_itinerary t
             WHERE t.trip_id     = core.get_number_item('$TRIP_ID')
@@ -362,7 +372,6 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
             core.set_item('$STOP_STATUS',       c.stop_status);
             core.set_item('$EVENT_BUTTON',      c.event_button);
             core.set_item('$RESERV_BUTTON',     c.reserv_button);
-            core.set_item('$GPS_BUTTON',        c.gps_button);
         END LOOP;
 
         -- trip related items
@@ -407,7 +416,7 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
         core.set_item('$GPS_BUTTON',
             '<button type="button" class="a-Button" aria-label="Open link" tabindex="-1" ' ||
             'style="height: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;" ' ||
-            'onclick="javascript:{get_gps_coordibates();}">' ||
+            'onclick="javascript:{get_gps_coordinates($v(''P105_TRIP_NAME''));}">' ||
             '<span class="fa fa-ai-microchip"></span></button>'
         );
 
@@ -432,6 +441,71 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
         RAISE;
     WHEN OTHERS THEN
         core.raise_error();
+    END;
+
+
+
+    PROCEDURE get_gps_coords (
+        in_location         VARCHAR2,
+        in_event_link       VARCHAR2 := NULL
+    )
+    AS
+        in_model            VARCHAR2(256)   := 'gpt-4o-mini';
+        --
+        v_response          CLOB;
+        v_result            VARCHAR2(256);
+        v_tokens            PLS_INTEGER;
+    BEGIN
+        APEX_WEB_SERVICE.SET_REQUEST_HEADERS (
+            p_name_01           => 'Content-Type',
+            p_value_01          => 'application/json',
+            p_reset             => TRUE,
+            p_skip_if_exists    => TRUE
+        );
+        --
+        v_response := APEX_WEB_SERVICE.MAKE_REST_REQUEST (
+            p_url           => 'https://api.openai.com/v1/chat/completions',
+            p_http_method   => 'POST',
+            p_body          => TO_CLOB(APEX_STRING.FORMAT(
+                q'!{
+                  !    "model"              : "%2",
+                  !    "messages": [
+                  !        {
+                  !            "role"       : "user",
+                  !            "content"    : "Give me GPS coordinates for: %1 as a JSON object, no explanations, just the coords."
+                  !        }
+                  !    ],
+                  !    "temperature"        : 1,
+                  !    "top_p"              : 1,
+                  !    "n"                  : 1,
+                  !    "stream"             : false,
+                  !    "max_tokens"         : 250,
+                  !    "presence_penalty"   : 0,
+                  !    "frequency_penalty"  : 0
+                  !}
+                  !',
+                p1          => SUBSTR(in_location, 1, 128),   -- limit input
+                p2          => in_model,
+                p_prefix    => '!'
+            )),
+            p_transfer_timeout      => 10,
+            p_credential_static_id  => 'JAN_OPENAI'
+        );
+        --
+        DBMS_OUTPUT.PUT_LINE('--');
+        DBMS_OUTPUT.PUT_LINE(v_response);
+        DBMS_OUTPUT.PUT_LINE('--');
+
+        -- get the response we seek
+        v_result := JSON_VALUE(v_response, '$.choices[0].message.content');
+        v_result := REPLACE(REPLACE(v_result, '```json', ''), '```', '');
+        --
+        HTP.P(v_result);
+
+        -- show price of the request (in tokens)
+        v_tokens := JSON_VALUE(v_response, '$.usage.total_tokens');
+        --
+        DBMS_OUTPUT.PUT_LINE('TOKENS: ' || v_tokens);
     END;
 
 END;

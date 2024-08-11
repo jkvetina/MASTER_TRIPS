@@ -4,9 +4,11 @@
 app.ajax_ping();
 
 -- ----------------------------------------
--- Application Process: GET_COORDS_FROM_AI > Source > PL/SQL Code
+-- Application Process: GET_GPS_COORDINATES > Source > PL/SQL Code
 
-NULL;
+trp_app.get_gps_coords (
+    in_location => APEX_APPLICATION.G_X01
+);
 
 -- ----------------------------------------
 -- Application Process: INIT_DEFAULTS > Source > PL/SQL Code

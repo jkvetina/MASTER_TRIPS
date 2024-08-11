@@ -1,14 +1,17 @@
 ---
-- # ====== Application Process: GET_COORDS_FROM_AI =============
+- # ====== Application Process: GET_GPS_COORDINATES ============
   id: 11225899687924568
   identification: 
-    name: GET_COORDS_FROM_AI
+    name: GET_GPS_COORDINATES
     type: NATIVE_PLSQL
 
   source: 
     location: Local Database
     language: PL/SQL
-    pl/sql-code: NULL;
+    pl/sql-code: |
+      trp_app.get_gps_coords (
+          in_location => APEX_APPLICATION.G_X01
+      );
 
   execution: 
     sequence: 10
@@ -18,7 +21,7 @@
     authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
 
   subscription: 
-    version-number: 41471951028970
+    version-number: 41472031378097
 
 - # ====== Application Process: INIT_DEFAULTS ==================
   id: 60568702236716227

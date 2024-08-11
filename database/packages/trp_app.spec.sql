@@ -27,6 +27,11 @@ CREATE OR REPLACE PACKAGE trp_app as
 
 
 
+    PROCEDURE get_gps_coords (
+        in_location         VARCHAR2,
+        in_event_link       VARCHAR2 := NULL
+    );
+
 END;
 /
 

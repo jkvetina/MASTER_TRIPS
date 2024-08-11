@@ -139,7 +139,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 70
+    sequence: 80
     region: '[FORM]' # 143529345524135296
     slot: BODY
 
@@ -169,15 +169,15 @@ page-items:
     type: Number Field
 
   label: 
-    label: Gps Lat
+    label: Latitude
     alignment: Left
 
   settings: 
-    number-alignment: Start
+    number-alignment: End
     virtual-keyboard: Decimal
 
   layout: 
-    sequence: 80
+    sequence: 90
     region: '[FORM]' # 143529345524135296
     slot: BODY
     alignment: Left
@@ -225,15 +225,15 @@ page-items:
     type: Number Field
 
   label: 
-    label: Gps Long
+    label: Longtitude
     alignment: Left
 
   settings: 
-    number-alignment: Start
+    number-alignment: End
     virtual-keyboard: Decimal
 
   layout: 
-    sequence: 90
+    sequence: 100
     region: '[FORM]' # 143529345524135296
     slot: BODY
     alignment: Left
@@ -328,6 +328,70 @@ page-items:
   session-state: 
     data-type: VARCHAR2
     storage: Per Session (Persistent)
+
+  security: 
+    session-state-protection: Unrestricted
+    store-value-encrypted-in-session-state: false
+    restricted-characters: All characters can be saved.
+
+- # ====== Page Item: P105_TRIP_LOCATION =======================
+  id: 8596853573358133
+  identification: 
+    name: P105_TRIP_LOCATION
+    type: Text Field
+
+  label: 
+    label: Trip Location
+    alignment: Left
+
+  settings: 
+    subtype: Text
+    trim-spaces: Leading and Trailing
+    text-case: NO CHANGE
+    submit-when-enter-pressed: false
+    disabled: false
+
+  layout: 
+    sequence: 30
+    region: '[FORM]' # 143529345524135296
+    slot: BODY
+    alignment: Left
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+    label-column-span: Page Template Default
+
+  appearance: 
+    template: Optional - Floating
+    template-options: 
+    - '#DEFAULT#'
+    width: 30
+
+  validation: 
+    value-required: true
+    maximum-length: 128
+
+  advanced: 
+    post-text-: '&P105_GPS_BUTTON!RAW.'
+    warn-on-unsaved-changes: Page Default
+
+  source: 
+    form-region: '[FORM]' # 143529345524135296
+    column: TRIP_NAME
+    data-type: VARCHAR2
+    query-only: false
+    primary-key: false
+
+  session-state: 
+    storage: Per Request (Memory Only)
+
+  quick-picks: 
+    show-quick-picks: false
+
+  server-side-condition: 
+    type: Never
 
   security: 
     session-state-protection: Unrestricted
@@ -447,7 +511,7 @@ page-items:
     use-defaults: true
 
   layout: 
-    sequence: 30
+    sequence: 40
     region: '[FORM]' # 143529345524135296
     slot: BODY
     alignment: Left
@@ -508,7 +572,7 @@ page-items:
     use-defaults: true
 
   layout: 
-    sequence: 40
+    sequence: 50
     region: '[FORM]' # 143529345524135296
     slot: BODY
     alignment: Left
@@ -560,7 +624,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 50
+    sequence: 60
     region: '[FORM]' # 143529345524135296
     slot: BODY
 
@@ -593,7 +657,7 @@ page-items:
     value-protected: true
 
   layout: 
-    sequence: 60
+    sequence: 70
     region: '[FORM]' # 143529345524135296
     slot: BODY
 

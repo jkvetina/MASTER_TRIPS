@@ -26,7 +26,9 @@ wwv_flow_imp_shared.create_user_interface(
 '#WORKSPACE_FILES#master_fonts#MIN#.css?version=#APP_VERSION#',
 '#WORKSPACE_FILES#master_menu_top#MIN#.css?version=#APP_VERSION#',
 '#WORKSPACE_FILES#master_app#MIN#.css?version=#APP_VERSION#'))
-,p_javascript_file_urls=>'#WORKSPACE_FILES#master_app#MIN#.js?version=#APP_VERSION#'
+,p_javascript_file_urls=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'#WORKSPACE_FILES#master_app#MIN#.js?version=#APP_VERSION#',
+'#APP_FILES#app#MIN#.js?version=#APP_VERSION#'))
 ,p_nav_bar_type=>'LIST'
 ,p_nav_bar_list_id=>wwv_flow_imp.id(59832708983261400)  -- LIST: NAVIGATION
 ,p_nav_bar_list_template_id=>wwv_flow_imp.id(79455842052658286)

@@ -255,11 +255,11 @@ page-items:
     type: Number Field
 
   label: 
-    label: Gps Lat
+    label: Latitude
     alignment: Left
 
   settings: 
-    number-alignment: Start
+    number-alignment: End
     virtual-keyboard: Decimal
 
   layout: 
@@ -430,18 +430,15 @@ page-items:
   id: 8596007461358125
   identification: 
     name: P110_GPS_LONG
-    type: Text Field
+    type: Number Field
 
   label: 
-    label: Gps Long
+    label: Longtitude
     alignment: Left
 
   settings: 
-    subtype: Text
-    trim-spaces: Leading and Trailing
-    text-case: NO CHANGE
-    submit-when-enter-pressed: false
-    disabled: false
+    number-alignment: End
+    virtual-keyboard: Decimal
 
   layout: 
     sequence: 240

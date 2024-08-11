@@ -124,7 +124,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(8595202245358117)
 ,p_name=>'P105_YEAR_'
 ,p_source_data_type=>'VARCHAR2'
-,p_item_sequence=>70
+,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_item_source_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_source=>'YEAR_'
@@ -138,10 +138,10 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(8595373473358118)
 ,p_name=>'P105_GPS_LAT'
 ,p_source_data_type=>'NUMBER'
-,p_item_sequence=>80
+,p_item_sequence=>90
 ,p_item_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_item_source_plug_id=>wwv_flow_imp.id(143529345524135296)
-,p_prompt=>'Gps Lat'
+,p_prompt=>'Latitude'
 ,p_source=>'GPS_LAT'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -150,17 +150,17 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_template_options=>'#DEFAULT#'
 ,p_is_persistent=>'N'
 ,p_encrypt_session_state_yn=>'N'
-,p_attribute_03=>'left'
+,p_attribute_03=>'right'
 ,p_attribute_04=>'decimal'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(8595454496358119)
 ,p_name=>'P105_GPS_LONG'
 ,p_source_data_type=>'NUMBER'
-,p_item_sequence=>90
+,p_item_sequence=>100
 ,p_item_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_item_source_plug_id=>wwv_flow_imp.id(143529345524135296)
-,p_prompt=>'Gps Long'
+,p_prompt=>'Longtitude'
 ,p_source=>'GPS_LONG'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -170,7 +170,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_item_template_options=>'#DEFAULT#'
 ,p_is_persistent=>'N'
 ,p_encrypt_session_state_yn=>'N'
-,p_attribute_03=>'left'
+,p_attribute_03=>'right'
 ,p_attribute_04=>'decimal'
 );
 wwv_flow_imp_page.create_page_item(
@@ -190,6 +190,31 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
 ,p_attribute_01=>'Y'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(8596853573358133)
+,p_name=>'P105_TRIP_LOCATION'
+,p_source_data_type=>'VARCHAR2'
+,p_is_required=>true
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_imp.id(143529345524135296)
+,p_item_source_plug_id=>wwv_flow_imp.id(143529345524135296)
+,p_prompt=>'Trip Location'
+,p_post_element_text=>'&P105_GPS_BUTTON!RAW.'
+,p_source=>'TRIP_NAME'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>30
+,p_cMaxlength=>128
+,p_display_when_type=>'NEVER'
+,p_field_template=>wwv_flow_imp.id(60060717525289884)
+,p_item_template_options=>'#DEFAULT#'
+,p_is_persistent=>'N'
+,p_encrypt_session_state_yn=>'N'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'BOTH'
 );
 wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(115462222338200099)
@@ -236,7 +261,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P105_START_AT'
 ,p_source_data_type=>'DATE'
 ,p_is_required=>true
-,p_item_sequence=>30
+,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_item_source_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_prompt=>'Start At'
@@ -261,7 +286,7 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P105_END_AT'
 ,p_source_data_type=>'DATE'
 ,p_is_required=>true
-,p_item_sequence=>40
+,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_item_source_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_prompt=>'End At'
@@ -286,7 +311,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(115462639217200103)
 ,p_name=>'P105_CREATED_BY'
 ,p_source_data_type=>'VARCHAR2'
-,p_item_sequence=>50
+,p_item_sequence=>60
 ,p_item_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_item_source_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_source=>'CREATED_BY'
@@ -300,7 +325,7 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(115462736267200104)
 ,p_name=>'P105_CREATED_AT'
 ,p_source_data_type=>'DATE'
-,p_item_sequence=>60
+,p_item_sequence=>70
 ,p_item_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_item_source_plug_id=>wwv_flow_imp.id(143529345524135296)
 ,p_source=>'CREATED_AT'
