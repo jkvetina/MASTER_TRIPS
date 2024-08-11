@@ -62,10 +62,136 @@ help:
     
 
 regions: 
+- # ====== Region: [MAP] =======================================
+  id: 8594624432358111
+  identification: 
+    name: '[MAP]'
+    type: Map
+
+  source: 
+    location: None
+
+  layout: 
+    sequence: 40
+    parent-region: No Parent
+    slot: BODY
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    custom-attributes: 
+    - 'style="margin-top:'
+    - 2rem;"
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 8594707191358112
+    map: 
+      background: Built-In
+      standard: OpenStreetMap Positron
+      dark-mode: Same as Standard
+      height: 640
+
+    controls: 
+      navigation-bar: Zoom and Compass
+      navigation-bar-position: End
+      options: 
+      - Mousewheel Zoom
+      - Rectangle Zoom
+      - Scale Bar
+      - Infinite Map
+      - Get Browser Location
+      - Circle Tool
+      - Distance Tool
+
+    initial-position-and-zoom: 
+      get-position-from-browser: true
+      type: Based on Spatial Results
+
+    legend: 
+      show: false
+
+    attributes: 
+      messages-position: Below
+      unit-system: Metric
+
+    performance: 
+      lazy-loading: true
+
+    layers: 
+    - # ====== Layer: Map ==========================================
+      id: 8594880453358113
+      identification: 
+        name: Map
+        layer-type: Points
+
+      layout: 
+        sequence: 10
+
+      source: 
+        location: Local Database
+        type: Table / View
+        table-owner: Parsing Schema
+        table-name: TRP_TRIPS
+        include-rowid-column: false
+        where-clause: 'year_ = :P120_YEAR'
+        page-items-to-submit: 
+        - P120_YEAR
+        use-spatial-index: false
+
+      column-mapping: 
+        geometry-column-data-type: Longitude/Latitude
+        longitude-column: GPS_LONG
+        latitude-column: GPS_LAT
+        primary-key-column: TRIP_ID
+
+      point-objects: 
+        style: SVG
+        shape: Default
+        shape-scale: 1.5
+
+      appearance: 
+        fill-color: '#ff0000'
+
+      point-clustering: 
+        enable: false
+
+      tooltip: 
+        advanced-formatting: false
+
+      link: 
+        type: Redirect to Page in this Application
+        target: 
+          url: 'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_TRIP_ID:&TRIP_ID.'
+          page: 100 # Trip Overview
+          clear-cache: 100
+          values: 
+            p100_trip_id: '&TRIP_ID.'
+
+      legend: 
+        show: false
+
 - # ====== Region: Trips [CARDS] ===============================
   id: 46318514789303210
   identification: 
-    title: Trips [CARDS]
+    name: Trips [CARDS]
     type: Cards
 
   source: 
@@ -83,7 +209,7 @@ regions:
   layout: 
     sequence: 30
     parent-region: No Parent
-    position: BODY
+    slot: BODY
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -91,7 +217,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Cards Container # 59930115538289803
+    template: Cards Container
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -103,9 +229,6 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
 
   customization: 
     customizable: Not Customizable By End Users
@@ -170,16 +293,16 @@ regions:
           values: 
             p100_trip_id: '&TRIP_ID.'
 
-- # ====== Region: Trips Planning ==============================
+- # ====== Region: Trips for &P120_YEAR. =======================
   id: 161813364415594570
   identification: 
-    title: Trips Planning
+    name: Trips for &P120_YEAR.
     type: Static Content
 
   layout: 
     sequence: 10
     parent-region: No Parent
-    position: BODY
+    slot: BODY
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -187,7 +310,7 @@ regions:
     column-span: Automatic
 
   appearance: 
-    template: Hero # 59956268800289818
+    template: Hero
     template-options: 
     - '#DEFAULT#'
     render-components: Above Content
@@ -199,9 +322,6 @@ regions:
   advanced: 
     region-display-selector: false
     exclude-title-from-translation: false
-
-  server-cache: 
-    caching: Disabled
 
   customization: 
     customizable: Not Customizable By End Users
@@ -216,47 +336,15 @@ page-items:
   id: 46318978957303214
   identification: 
     name: P120_YEAR
-    type: Select List
-
-  label: 
-    label: Year
-    alignment: Left
+    type: Hidden
 
   settings: 
-    page-action-on-selection: None
-    allow-multi-selection: false
+    value-protected: true
 
   layout: 
     sequence: 10
-    region: Trips Planning # 161813364415594570
-    position: BODY
-    alignment: Left
-    start-new-layout: false
-    start-new-row: true
-    column: Automatic
-    new-column: true
-    column-span: 2
-    label-column-span: Page Template Default
-
-  appearance: 
-    template: Optional - Floating # 60060717525289884
-    template-options: 
-    - '#DEFAULT#'
-    height: 1
-
-  validation: 
-    value-required: false
-
-  list-of-values: 
-    type: SQL Query
-    sql-query: |
-      SELECT DISTINCT
-          t.year_ AS name,
-          t.year_ AS id
-      FROM trp_trips_grid_v t
-      ORDER BY 1
-    display-extra-values: false
-    display-null-value: true
+    region: Trips for &P120_YEAR. # 161813364415594570
+    slot: BODY
 
   advanced: 
     warn-on-unsaved-changes: Page Default
@@ -266,10 +354,8 @@ page-items:
     used: Only when current value in session state is null
 
   session-state: 
+    data-type: VARCHAR2
     storage: Per Session (Persistent)
-
-  quick-picks: 
-    show-quick-picks: false
 
   security: 
     session-state-protection: Unrestricted
@@ -285,8 +371,8 @@ buttons:
 
   layout: 
     sequence: 10
-    region: Trips Planning # 161813364415594570
-    position: RIGHT_OF_TITLE
+    region: Trips for &P120_YEAR. # 161813364415594570
+    slot: RIGHT_OF_TITLE
     start-new-layout: false
     start-new-row: true
     column: Automatic
@@ -294,7 +380,7 @@ buttons:
     column-span: Automatic
 
   appearance: 
-    button-template: Icon # 60062458726289887
+    button-template: Icon
     hot: false
     template-options: 
     - '#DEFAULT#'
@@ -321,7 +407,7 @@ dynamic-actions:
     type: Immediate
 
   when: 
-    event: EVENT.EVENT.BROWSER.CHANGE
+    event: Change
     selection-type: Item(s)
     item(s): 
     - P120_YEAR
@@ -352,7 +438,7 @@ dynamic-actions:
     type: Immediate
 
   when: 
-    event: EVENT.EVENT.FAMEWORK.APEXAFTERCLOSEDIALOG
+    event: Dialog Closed
     selection-type: JavaScript Expression
     javascript-expression: window
 

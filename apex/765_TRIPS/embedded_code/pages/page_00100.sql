@@ -34,14 +34,14 @@ HTP.P(APEX_PAGE.GET_URL(
 
 
 -- ----------------------------------------
--- Page: 100 - Trip Overview > Button: ADD_STOP > Server-side Condition (Rows returned) > SQL Query
+-- Page: 100 - Trip Overview > Button: ADD_STOP_FIRST > Server-side Condition (No Rows returned) > SQL Query
 
 SELECT 1
 FROM trp_itinerary_grid_v
 WHERE ROWNUM = 1;
 
 -- ----------------------------------------
--- Page: 100 - Trip Overview > Button: ADD_STOP_FIRST > Server-side Condition (No Rows returned) > SQL Query
+-- Page: 100 - Trip Overview > Button: ADD_STOP > Server-side Condition (Rows returned) > SQL Query
 
 SELECT 1
 FROM trp_itinerary_grid_v

@@ -4,8 +4,8 @@ begin
 --     PAGE: 00120
 --   Manifest End
 wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.10.31'
-,p_release=>'23.2.3'
+ p_version_yyyy_mm_dd=>'2024.05.31'
+,p_release=>'24.1.1'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
 ,p_default_id_offset=>0
@@ -40,8 +40,59 @@ wwv_flow_imp_page.create_page(
 '- check your trip in the chart',
 ''))
 ,p_page_component_map=>'23'
-,p_last_updated_by=>'JAN.KVETINA@GMAIL.COM'
-,p_last_upd_yyyymmddhh24miss=>'20240204153307'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(8594624432358111)
+,p_plug_name=>'[MAP]'
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_region_attributes=>'style="margin-top: 2rem;"'
+,p_plug_template=>wwv_flow_imp.id(59923030250289799)
+,p_plug_display_sequence=>40
+,p_location=>null
+,p_lazy_loading=>true
+,p_plug_source_type=>'NATIVE_MAP_REGION'
+);
+wwv_flow_imp_page.create_map_region(
+ p_id=>wwv_flow_imp.id(8594707191358112)
+,p_region_id=>wwv_flow_imp.id(8594624432358111)
+,p_height=>640
+,p_tilelayer_type=>'CUSTOM'
+,p_tilelayer_name_default=>'osm-positron'
+,p_navigation_bar_type=>'FULL'
+,p_navigation_bar_position=>'END'
+,p_init_position_zoom_type=>'QUERY_RESULTS'
+,p_init_position_from_browser=>true
+,p_layer_messages_position=>'BELOW'
+,p_show_legend=>false
+,p_features=>'MOUSEWHEEL_ZOOM:RECTANGLE_ZOOM:SCALE_BAR:INFINITE_MAP:BROWSER_LOCATION:CIRCLE_TOOL:DISTANCE_TOOL'
+);
+wwv_flow_imp_page.create_map_region_layer(
+ p_id=>wwv_flow_imp.id(8594880453358113)
+,p_map_region_id=>wwv_flow_imp.id(8594707191358112)
+,p_name=>'Map'
+,p_layer_type=>'POINT'
+,p_display_sequence=>10
+,p_location=>'LOCAL'
+,p_query_type=>'TABLE'
+,p_table_name=>'TRP_TRIPS'
+,p_where_clause=>'year_ = :P120_YEAR'
+,p_include_rowid_column=>false
+,p_items_to_submit=>'P120_YEAR'
+,p_has_spatial_index=>false
+,p_pk_column=>'TRIP_ID'
+,p_geometry_column_data_type=>'LONLAT_COLUMNS'
+,p_longitude_column=>'GPS_LONG'
+,p_latitude_column=>'GPS_LAT'
+,p_fill_color=>'#ff0000'
+,p_point_display_type=>'SVG'
+,p_point_svg_shape=>'Default'
+,p_point_svg_shape_scale=>'1.5'
+,p_feature_clustering=>false
+,p_tooltip_adv_formatting=>false
+,p_link_target_type=>'REDIRECT_PAGE'
+,p_link_target=>'f?p=&APP_ID.:100:&SESSION.::&DEBUG.:100:P100_TRIP_ID:&TRIP_ID.'
+,p_display_in_legend=>false
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(46318514789303210)
@@ -87,12 +138,14 @@ wwv_flow_imp_page.create_card_action(
 );
 wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(161813364415594570)
-,p_plug_name=>'Trips Planning'
+,p_plug_name=>'Trips for &P120_YEAR.'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_imp.id(59956268800289818)
 ,p_plug_display_sequence=>10
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
+,p_location=>null
+,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
+  'expand_shortcuts', 'N',
+  'output_as', 'HTML')).to_clob
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(46365495208379647)
@@ -112,23 +165,9 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P120_YEAR'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_imp.id(161813364415594570)
-,p_prompt=>'Year'
-,p_display_as=>'NATIVE_SELECT_LIST'
-,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
-'SELECT DISTINCT',
-'    t.year_ AS name,',
-'    t.year_ AS id',
-'FROM trp_trips_grid_v t',
-'ORDER BY 1'))
-,p_lov_display_null=>'YES'
-,p_cHeight=>1
-,p_colspan=>2
-,p_field_template=>wwv_flow_imp.id(60060717525289884)
-,p_item_template_options=>'#DEFAULT#'
-,p_lov_display_extra=>'NO'
+,p_display_as=>'NATIVE_HIDDEN'
 ,p_encrypt_session_state_yn=>'N'
-,p_attribute_01=>'NONE'
-,p_attribute_02=>'N'
+,p_attribute_01=>'Y'
 );
 wwv_flow_imp_page.create_page_computation(
  p_id=>wwv_flow_imp.id(46319321997303218)
