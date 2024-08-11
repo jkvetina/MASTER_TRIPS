@@ -19,6 +19,14 @@ CREATE OR REPLACE PACKAGE trp_app as
     FUNCTION set_colors
     RETURN CLOB;
 
+
+
+    PROCEDURE init_default_p105;
+    --
+    PROCEDURE init_default_p110;
+
+
+
 END;
 /
 

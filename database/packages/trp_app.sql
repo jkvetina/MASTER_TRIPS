@@ -295,6 +295,145 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
         core.raise_error();
     END;
 
+
+
+    PROCEDURE init_default_p110
+    AS
+        v_next_stop     trp_itinerary_grid_v.stop_id%TYPE;
+        v_prev_stop     trp_itinerary_grid_v.stop_id%TYPE;
+        v_json          VARCHAR2(4000);
+    BEGIN
+        -- links to prev/next stops
+        BEGIN
+            SELECT t.stop_id
+            INTO v_next_stop
+            FROM trp_itinerary_grid_v t
+            WHERE t.r# = (SELECT r# FROM trp_itinerary_grid_v WHERE stop_id = core.get_number_item('$STOP_ID')) + 1;
+        EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            NULL;
+        END;
+        --
+        BEGIN
+            SELECT t.stop_id
+            INTO v_prev_stop
+            FROM trp_itinerary_grid_v t
+            WHERE t.r# = (SELECT r# FROM trp_itinerary_grid_v WHERE stop_id = core.get_number_item('$STOP_ID')) - 1;
+        EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            NULL;
+        END;
+        --
+        core.set_item('$NEXT_STOP', v_next_stop);
+        core.set_item('$PREV_STOP', v_prev_stop);
+
+        -- stop related items
+        FOR c IN (
+            SELECT
+                CASE
+                    WHEN t.is_paid      = 'Y' THEN 'PAID'
+                    WHEN t.is_reserved  = 'Y' THEN 'RESERVED'
+                    WHEN t.is_pending   = 'Y' THEN 'PENDING'
+                    END AS stop_status,
+                --
+                CASE WHEN t.link_event IS NOT NULL
+                    THEN '<button type="button" class="a-Button" aria-label="Open link" tabindex="-1" ' ||
+                        'style="height: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;" ' ||
+                        'onclick="javascript:{window.open(''' || t.link_event || ''', ''_blank'');}">' ||
+                        '<span class="fa fa-anchor"></span></button>'
+                    END AS event_button,
+                --
+                CASE WHEN t.link_reservation IS NOT NULL
+                    THEN '<button type="button" class="a-Button" aria-label="Open link" tabindex="-1" ' ||
+                        'style="height: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;" ' ||
+                        'onclick="javascript:{window.open(''' || t.link_reservation || ''', ''_blank'');}">' ||
+                        '<span class="fa fa-anchor"></span></button>'
+                    END AS reserv_button,
+                --
+                '<button type="button" class="a-Button" aria-label="Open link" tabindex="-1" ' ||
+                'style="height: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;" ' ||
+                'onclick="javascript:{get_gps_coordibates();}">' ||
+                '<span class="fa fa-ai-microchip"></span></button>' AS gps_button
+                --
+            FROM trp_itinerary t
+            WHERE t.trip_id     = core.get_number_item('$TRIP_ID')
+                AND t.stop_id   = core.get_number_item('$STOP_ID')
+        ) LOOP
+            core.set_item('$STOP_STATUS',       c.stop_status);
+            core.set_item('$EVENT_BUTTON',      c.event_button);
+            core.set_item('$RESERV_BUTTON',     c.reserv_button);
+            core.set_item('$GPS_BUTTON',        c.gps_button);
+        END LOOP;
+
+        -- trip related items
+        FOR c IN (
+            SELECT
+                TO_CHAR(MIN(t.start_at), 'YYYY-MM-DD') AS trip_start_at,
+                --
+                CASE WHEN core.get_number_item('$STOP_ID') IS NULL
+                THEN 'Create Stop'
+                ELSE 'Update Stop' END AS header_
+                --
+            FROM trp_trips t
+            WHERE t.trip_id = core.get_number_item('$TRIP_ID')
+        ) LOOP
+            core.set_item('$HEADER', c.header_);
+            core.set_item('$SUBMIT', c.header_);
+            core.set_item('$TRIP_START_AT', c.trip_start_at);
+        END LOOP;
+
+        -- colors
+        FOR c IN (
+            SELECT JSON_ARRAY(JSON_OBJECTAGG (
+                    KEY t.status_id VALUE t.color
+                )) AS json_
+            FROM trp_lov_stop_statuses_v t
+        ) LOOP
+            core.set_item('$STOP_STATUS_JSON', c.json_);
+        END LOOP;
+        --
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE init_default_p105
+    AS
+    BEGIN
+        core.set_item('$GPS_BUTTON',
+            '<button type="button" class="a-Button" aria-label="Open link" tabindex="-1" ' ||
+            'style="height: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;" ' ||
+            'onclick="javascript:{get_gps_coordibates();}">' ||
+            '<span class="fa fa-ai-microchip"></span></button>'
+        );
+
+        -- trip related items
+        FOR c IN (
+            SELECT
+                TO_CHAR(MIN(t.start_at), 'YYYY-MM-DD') AS trip_start_at,
+                --
+                CASE WHEN core.get_number_item('$TRIP_ID') IS NULL
+                THEN 'Create Trip'
+                ELSE 'Update Trip' END AS header_
+                --
+            FROM trp_trips t
+            WHERE t.trip_id = core.get_number_item('$TRIP_ID')
+        ) LOOP
+            core.set_item('$HEADER', c.header_);
+            core.set_item('$SUBMIT', c.header_);
+        END LOOP;
+        --
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
 END;
 /
 
