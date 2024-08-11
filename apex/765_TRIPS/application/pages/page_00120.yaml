@@ -169,6 +169,7 @@ regions:
 
       appearance: 
         fill-color: '&COLOR.'
+        stroke-color: '#000000'
 
       point-clustering: 
         enable: false
@@ -221,6 +222,7 @@ regions:
 
       appearance: 
         fill-color: '&COLOR.'
+        stroke-color: '#000000'
 
       point-clustering: 
         enable: false

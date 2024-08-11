@@ -6,9 +6,11 @@ SELECT
     --
     t.gps_lat,
     t.gps_long,
-    t.color_fill AS color
+    NVL(t.color_fill, c.color_fill) AS color
     --
-FROM trp_itinerary t
+FROM trp_itinerary_grid_v t
+LEFT JOIN trp_lov_categories_v c
+    ON c.category_id = t.category_id
 UNION ALL
 --
 SELECT
