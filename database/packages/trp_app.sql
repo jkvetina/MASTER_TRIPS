@@ -338,7 +338,7 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
         core.set_item('$GPS_BUTTON',
             '<button type="button" class="a-Button" aria-label="Open link" tabindex="-1" ' ||
             'style="height: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;" ' ||
-            'onclick="javascript:{get_gps_coordinates($v(''P110_STOP_NAME''));}">' ||
+            'onclick="javascript:{get_gps_coordinates($v(''P110_STOP_NAME''), $v(''P110_LINK_EVENT''));}">' ||
             '<span class="fa fa-ai-microchip"></span></button>'
         );
 
@@ -445,9 +445,8 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
 
 
 
-    PROCEDURE get_gps_coords (
-        in_location         VARCHAR2,
-        in_event_link       VARCHAR2 := NULL
+    PROCEDURE get_gps_coords_from_ai (
+        in_location         VARCHAR2
     )
     AS
         in_model            VARCHAR2(256)   := 'gpt-4o-mini';
@@ -506,6 +505,37 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
         v_tokens := JSON_VALUE(v_response, '$.usage.total_tokens');
         --
         DBMS_OUTPUT.PUT_LINE('TOKENS: ' || v_tokens);
+        --
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
+    END;
+
+
+
+    PROCEDURE get_gps_coords (
+        in_location         VARCHAR2,
+        in_event_link       VARCHAR2 := NULL
+    )
+    AS
+    BEGIN
+        --IF in_event_link IS NOT NULL THEN
+        --    get_gps_coords_from_web (
+        --        in_event_link => in_event_link
+        --    );
+        --ELSE
+            get_gps_coords_from_ai (
+                in_location => in_location
+            );
+        --END IF;
+        --
+    EXCEPTION
+    WHEN core.app_exception THEN
+        RAISE;
+    WHEN OTHERS THEN
+        core.raise_error();
     END;
 
 END;
