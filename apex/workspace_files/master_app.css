@@ -9,6 +9,18 @@ body {
 
 
 
+/* RESTYLE SWITCH BACKGROUND */
+.a-Switch input[type=checkbox]:checked+.a-Switch-toggle {
+    --a-switch-background-color         : #518D54;
+    --a-switch-toggle-background-color  : #fff;
+}
+.t-Form-fieldContainer--floatingLabel.apex-item-wrapper--yes-no:hover .a-Switch-toggle,
+.t-Form-fieldContainer--floatingLabel.apex-item-wrapper--yes-no:hover .t-Form-itemWrapper .t-Form-helpButton {
+    --a-switch-background-color         : #333 !important;
+}
+
+
+
 /*
  * ADJUST MODAL + DRAWER DIALOGS
  */
@@ -59,13 +71,30 @@ body.t-Drawer-page .t-HeroRegion-col--beforeIcon button {
     /* background: gray; */
 }
 
+/* FIX HEADERS ON MODAL */
+.ui-dialog .ui-dialog-titlebar h1.t-HeroRegion-title,
+.t-Dialog .t-Dialog-header .t-HeroRegion .t-HeroRegion-top h1.t-HeroRegion-title {
+    line-height         : 1.8rem;
+    height              : 1.8rem;
+    margin-top          : 0.5rem;
+}
+
+/* FIX SPACING AROUND */
+.t-Dialog-body > .container:last-child > .row:last-child > .col > div > button {
+    margin-top          : 1rem !important;
+    margin-bottom       : -1rem !important;
+}
+.t-Dialog-footer {
+    margin              : 0 1rem 1rem;
+}
+
 
 
 /*
  * HERO REGION
  */
 .t-HeroRegion {
-    padding             : 0.75rem 0.5rem 1rem;
+    padding             : 1rem 0.5rem 0.5rem 0;
 }
 .t-HeroRegion.SECOND,
 body.t-Dialog-page .t-HeroRegion.SECOND,
@@ -76,7 +105,8 @@ h1.t-HeroRegion-title {
     font-family         : 'Mate', serif;
     font-weight         : 600;
     font-size           : 1.8rem;
-    line-height         : 150%;
+    line-height         : 1.8rem;
+    height              : 2.8rem;
 }
 .t-HeroRegion-wrap {    /* TO ALSO ALIGN RIGHT/UP BUTTON PROPERLY */
     align-items         : flex-start;
@@ -89,8 +119,6 @@ h1.t-HeroRegion-title {
     margin              : 1px 0 0;
     gap                 : 0.13rem;
 }
-
-
 
 /* HERO REGION - HIDE ICONS */
 .t-HeroRegion .t-HeroRegion-icon {
@@ -130,9 +158,14 @@ button.ui-button,
 }
 button.t-Button:hover,
 button.ui-button:hover,
-.apex-item-filedrop-action.a-Button.a-Button--hot:hover {
-    background          : #DFDEDC;
-    background          : #d7d6d4;
+.apex-item-filedrop-action.a-Button.a-Button--hot:hover,
+/* BUTTON IN GRID */
+.a-Button:hover,
+.a-CardView-button:hover,
+.apex-button-group label:hover,
+.t-Form-fieldContainer--radioButtonGroup .apex-item-group--rc input+label:hover,
+.t-Form-helpButton:hover {
+    background          : #dbd8d4;
 }
 
 /* HOT BUTTONS */
@@ -140,13 +173,13 @@ button.t-Button--hot,
 button.ui-button--hot,
 button.js-confirmBtn.ui-button--danger,
 button.a-Button.a-Toolbar-item.a-Button--hot {
-    background          : #5f5c58;
+    background          : #464237;
 }
 button.t-Button--hot:hover,
 button.ui-button--hot:hover,
 button.a-Button.a-Toolbar-item.a-Button--hot:hover,
 button.js-confirmBtn.ui-button--danger:hover {
-    background          : #333;
+    background          : #222;
 }
 
 /* BUTTON TO UPLOAD FILES */
@@ -226,45 +259,72 @@ span.BADGE.ICON > .fa {
 
 
 
+
+
+/* TO SHOW RADIO BUTTONS AS TABS */
+/*
+    CREATE RADIO BUTTON
+    SET MORE THEN 1 COLUMN
+    SET PAGE ACTION TO REDIRECT AND SAVE VALUE
+    SET HIDDEN ITEM LABEL
+    SET TEMPLATE OPTION - DISPLAY AS PILL
+    SET IGNORE CHANGES
+*/
+.TABS > .container > .row > .col > .apex-item-wrapper > .t-Form-labelContainer {
+    display             : none;
+}
+.TABS .apex-item-grid-row {
+    margin-top          : -1.3rem;  /* FOR PIXEL PERFECT ALIGNMENT */
+    display             : flex !important;
+}
+.TABS .apex-item-grid-row .apex-item-option {
+    margin              : 0.5rem 8px 0.75rem 0;
+}
+
 /* FIX TABS HEIGHT */
 .t-TabsRegion-items {
    min-height           : auto !important;
 }
 
-/* REMOVE OUTLINE FROM ACTIVE TABS */
-ul.t-Tabs li.t-Tabs-item a.t-Tabs-link {
-    outline             : none !important;
-}
-
 /* TABS COLOR BORDER AND SOME SPACING ADJUSTMENTS */
-ul.t-Tabs {
-    margin-bottom       : 0.5rem;
+.TABS ul.t-Tabs {
+    margin-bottom       : 1.2rem;
 }
-ul.t-Tabs::selection {
+.TABS ul.t-Tabs::selection {
     user-select         : none;
 }
-ul.t-Tabs .t-Tabs-link {
+.TABS ul.t-Tabs .t-Tabs-link {
     padding-bottom      : 0.5rem;
     background          : transparent;
     font-size           : 1rem;
 }
-ul.t-Tabs li.t-Tabs-item a.t-Tabs-link,
-ul.t-Tabs li.t-Tabs-item.is-active a.t-Tabs-link {
-    outline             : none;
-    box-shadow          : none;
+.TABS ul.t-Tabs li.t-Tabs-item a.t-Tabs-link,
+.TABS ul.t-Tabs li.t-Tabs-item.is-active a.t-Tabs-link,
+.TABS .apex-item-grid-row .apex-item-option label {
+    font-size           : 1rem;
     font-weight         : 600;
-    color               : #444;
-    background          : transparent;
-    padding-bottom      : 0.6rem;
+    color               : #444 !important;
+    background          : transparent !important;
+    padding             : 0.5rem 0.7rem;
+    border              : 0;
     border-bottom       : 8px solid #ededed;
+    border-radius       : 0 0 !important;
+    box-shadow          : none !important;
+    outline             : none !important;
 }
-ul.t-Tabs li.t-Tabs-item.is-active a.t-Tabs-link {
-    color               : #000;
+.TABS .apex-item-grid-row .apex-item-option label {
+    padding-bottom      : 0.3rem;  /* FOR PIXEL PERFECT ALIGNMENT */
+}
+.TABS ul.t-Tabs li.t-Tabs-item.is-active a.t-Tabs-link,
+.TABS .apex-item-grid-row .apex-item-option input:checked + label {
+    color               : #000 !important;
     border-bottom       : 8px solid #5f5c58 !important;
 }
-ul.t-Tabs li.t-Tabs-item a.t-Tabs-link:hover,
-ul.t-Tabs li.t-Tabs-item.is-active a.t-Tabs-link:hover {
-    color               : #000;
+.TABS ul.t-Tabs li.t-Tabs-item a.t-Tabs-link:hover,
+.TABS ul.t-Tabs li.t-Tabs-item.is-active a.t-Tabs-link:hover,
+.TABS .apex-item-grid-row .apex-item-option label:hover,
+.TABS .apex-item-grid-row .apex-item-option input:checked + label:hover {
+    color               : #000 !important;
     border-bottom       : 8px solid #333 !important;
 }
 
@@ -326,13 +386,18 @@ ul.a-CardView-items {
 }
 
 
-    
+
 /* FIX READ ONLY LABELS ON FORM TEXTAREA */
 .apex-item-wrapper--display-only label {
-    background: transparent !important;
+    background          : transparent !important;
 }
 .apex-item-wrapper--display-only label::before {
-    background: transparent !important;
+    background          : transparent !important;
+}
+
+/* HIDE REQUIRED MESSAGE, KEEP THE RED TRIANGLE */
+.t-Form-itemRequired {
+    display             : none;
 }
 
 
@@ -345,6 +410,9 @@ div.a-Toolbar-group [data-action="edit"] {
 
 
 /* GRID CONTROL BREAK */
+.a-GV-table th.a-GV-controlBreakHeader {
+    background          : #f1efed;
+}
 .a-GV-controlBreak .a-GV-controlBreakLabel {
     font-size           : 120%;
     color               : #333;
@@ -353,14 +421,115 @@ div.a-Toolbar-group [data-action="edit"] {
     font-weight         : bold;
 }
 
+/* GRID HEADERS */
+.a-GV-headerLabel {
+    color               : #333;
+}
 
+/* FIX GRID BORDERS */
+.a-IG-controlsContainer,
+.a-IRR-controlsContainer,
+.a-IG-header,
+.a-GV-footer {
+    border              : 1px solid #eaeaea;
+}
+.a-GV-cell:last-child,
+.a-GV-table th.a-GV-header:last-child,
+.a-GV-table th.a-GV-headerGroup:last-child {
+    border-right-width  : 0;
+}
+
+/* TRANSPARENT FOOTER */
+.a-IG {
+    border              : 0;
+    box-shadow          : 0;
+}
+.a-GV-footer {
+    background          : #FCF9F8 !important;
+    color               : #888;
+    border              : 0;
+    border-top          : 1px solid #eaeaea;
+    box-shadow          : 0;
+}
+
+/* REDESIGN GRID BORDERS */
+.a-IG-header {
+    border              : 2px solid #eaeaea;
+}
+.a-IG-body .a-MediaBlock,
+.a-IG-gridView.a-GV > .a-GV-hdr,
+.a-IG-gridView.a-GV > .a-GV-bdy {
+    border-left         : 1px solid #eaeaea;
+    border-right        : 2px solid #eaeaea;
+    box-shadow          : 0;
+}
+.a-IG-body .a-MediaBlock {
+    border-top          : 0;
+    border-left         : 2px solid #eaeaea;
+    border-right        : 2px solid #eaeaea;
+}
+.a-GV-hdr .a-GV-w-frozen .a-GV-table,
+.a-GV-hdr .a-GV-w-hdr .a-GV-table {
+    border              : 0 !important;
+}
+.a-GV-row th.a-GV-header {
+    border-bottom       : 2px solid #eaeaea;
+}
+.a-GV-row th.a-GV-header:first-child {
+    border-left         : 1px solid #eaeaea;
+}
+.a-GV-table th.a-GV-controlBreakHeader {
+    border-left         : 2px solid #eaeaea;
+    border-bottom       : 1px solid #eaeaea;
+}
+.a-GV-altMessage {
+    border              : 1px solid #eaeaea;
+    border-top          : 0;
+    border-right        : 0;
+}
+
+
+
+/* FIX BROKEN GRID PAGINATION */
+.a-GV-footer.js-stickyWidget-toggle {
+    width               : 100%;
+}
 
 /* FIX WRONG OFFSET FOR ICONS ON GRID */
 .a-GV-bdy span.fa {
     margin              : 0.125rem 0.2rem 0;
 }
 
+/* CHANGE GRID FILTERS ICON BACKGROUND */
+.a-IG-controls-cell:nth-child(2),
+.a-IRR-controls-cell:nth-child(2),
+/* CHANGE GRID FILTER COLLAPSED */
+.a-IG-reportSummary-icon,
+.a-IRR-reportSummary-icon,
+/* CHANGE GRID CHECKBOXES ON FILTERS AND ROW SELECTOR */
+.a-IG-controlsCheckbox:checked+.a-IG-controlsCheckboxLabel,
+.a-IRR-controlsCheckbox:checked+.a-IRR-controlsCheckboxLabel,
+.u-selector.is-selected {
+    background-color    : #8b8673;
+    color               : #fff;
+}
+.a-IG-controlsLabel:hover,
+.a-IRR-controlsLabel:hover,
+.a-IG-controlsLabel:active,
+.a-IRR-controlsLabel:active,
+.a-IG-reportSummary-value:hover,
+.a-IRR-reportSummary-value:hover {
+    background          : #f1efed !important;
+    outline             : none !important;
+}
 
+/* CHANGE GRID CHECKBOXES INSIDE OF THE GRID */
+.apex-item-single-checkbox input:checked+.u-checkbox,
+.apex-item-single-checkbox input:checked+label,
+.u-checkbox.is-checked {
+    background-color    : #464237;
+    color               : #fff;
+}
 
 /* FIX MISSING BORDER ON GRID HEADER */
 th.a-GV-header {
@@ -406,20 +575,16 @@ tr.a-GV-row.is-updated th {
     background          : white !important;
 }
 tr.a-GV-row.is-selected td,
-tr.a-GV-row.is-selected th {
-    background          : #F5F4F2 !important;
-}
+tr.a-GV-row.is-selected th,
 tr.a-GV-row.is-hover td,
-tr.a-GV-row.is-hover th {
+tr.a-GV-row.is-hover th,
+tr.a-GV-row.is-selected td.is-readonly,
+tr.a-GV-row.is-hover td.is-readonly {
     background          : #F5F4F2 !important;
 }
 tr.a-GV-row.is-selected.is-hover td,
 tr.a-GV-row.is-selected.is-hover th {
-    background          : #E9E7E7 !important;
-}
-tr.a-GV-row.is-selected td.is-readonly,
-tr.a-GV-row.is-hover td.is-readonly {
-    background          : #FBFAF8 !important;
+    background          : #f1efed !important;
 }
 
 
@@ -641,5 +806,29 @@ span.CURRENT:hover {
 }
 .t-Comments-comment .GREY {
     color               : #888;
+}
+
+
+
+/* FIX NAV BUTTONS */
+.t-Header-navBar button,
+.t-Header-navBar button:hover {
+    background          : transparent;
+    outline             : none !important;
+}
+
+
+
+/* FIX TOO SMALL TEXT ON CONFIRM DIALOGS */
+.a-AlertMessage-details {
+    font-size           : 1rem;
+    line-height         : 1.25rem;
+}
+
+/* FIX TOO SMALL VALIDATION ERROR TEXT */
+.t-Form-error {
+    color               : #222;
+    font-size           : 0.85rem;
+    line-height         : 1rem;
 }
 

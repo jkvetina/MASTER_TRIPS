@@ -52,7 +52,7 @@ const init_page_asap = function() {
                 if (msg.message.toUpperCase().includes('YOUR SESSION HAS ENDED')) {
                     ping_active = false;
                     for (var i = 0 ; i <= ping_loop; i++) {
-                        clearTimeout(i); 
+                        clearTimeout(i);
                     }
                     redirect_to_login();
                 }
@@ -247,7 +247,7 @@ const redirect_to_login = function() {
 };
 //
 const check_session = function () {
-    $(document).on('dialogopen', function(event) {  
+    $(document).on('dialogopen', function(event) {
         if ($('button:contains("Sign In Again")').length > 0) {
             event.preventDefault();
             event.stopPropagation();
@@ -364,12 +364,27 @@ const delay = function (time) {
 // COPY TO CLIPBOARD
 //
 const copy_to_clipboard = function (text) {
-    var dummy = document.createElement('textarea');
-    document.body.appendChild(dummy);
-    dummy.value = text;
-    dummy.select();
-    document.execCommand('copy');
-    document.body.removeChild(dummy);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+            navigator.clipboard.writeText(text);
+        }
+        catch(err) {
+            console.log('FAIL', err);
+        }
+    }
+    else {
+        const dummy = document.createElement('textarea');
+        document.body.appendChild(dummy);
+        dummy.value = text;
+        dummy.select();
+        try {
+            document.execCommand('copy');
+        }
+        catch(err) {
+            console.log('FAIL', err);
+        }
+        document.body.removeChild(dummy);
+    }
 };
 
 
@@ -377,18 +392,27 @@ const copy_to_clipboard = function (text) {
 //
 // COPY GRID CELL - ATTACH ONLY TO GRIDS AND TO READ ONLY CELLS
 //
-/*
-const attach_copy_to_grid = function (el) {
-    console.log('ADDING...', el);
-    $(el).one('copy', (event) => {
-        console.log('ATTACHED');
-        event.clipboardData.setData('text/plain', $(document.activeElement)[0].innerText || window.getSelection());
-        event.preventDefault();
-    });
-};
-//
-wait_for_element('.a-GV-cell', 'main', attach_copy_to_grid);
-*/
+document.addEventListener('copy', (event) => {
+    const allowed   = 'a-GV-cell';
+    const active_el = document.activeElement;
+    const cell      = active_el.closest(`.${allowed.replace(/\s+/g, '.')}`);
+    //
+    if (cell && cell.tagName === 'TD') {
+        // get selected text
+        let selected = window.getSelection().toString().trim();
+        if (!selected) {
+            // if no text is selected, get only the text nodes directly inside this cell
+            selected = $(document.activeElement)[0].innerText;
+        }
+        if (selected) {
+            // copy selected text to the clipboard
+            // be aware that navigator works only on https
+            copy_to_clipboard(selected);
+            console.log('COPIED', selected);
+            event.preventDefault();
+        }
+    }
+});
 
 
 
@@ -429,16 +453,14 @@ const fix_grid_toolbar = function (region_id) {
     var actions     = widget.interactiveGrid('getActions');
     var toolbar     = widget.interactiveGrid('getToolbar');
     var config      = $.apex.interactiveGrid.copyDefaultToolbar();
-    var action1     = config.toolbarFind('actions1');
-    var action2     = config.toolbarFind('actions2');
-    var action3     = config.toolbarFind('actions3');
-    var action4     = config.toolbarFind('actions4');
-    //
-    //console.log('TOOLBAR DATA - ORIGINAL', config_bak.data);
-    //console.log('ACTIONS', widget.interactiveGrid('getActions').list());
+    var action1     = config.toolbarFind('actions1');   // action menu
+    var action2     = config.toolbarFind('actions2');   // save button
+    var action3     = config.toolbarFind('actions3');   // best place for custom buttons
+    var action4     = config.toolbarFind('actions4');   // reset report
 
+    //
     // manipulate buttons
-    // https://docs.oracle.com/en/database/oracle/application-express/20.1/aexjs/interactiveGrid.html#actions-section
+    // https://docs.oracle.com/en/database/oracle/application-express/23.2/aexjs/interactiveGrid.html#actions-section
     //
     // grid actions
     // widget.interactiveGrid('getActions').list()
@@ -468,7 +490,7 @@ const fix_grid_toolbar = function (region_id) {
         if (button.action == 'selection-add-row') {
             button.icon         = 'fa fa-plus';
             button.iconOnly     = true;
-            button.label        = ' ';
+            button.label        = 'Add new row';
             break;
         }
     }
@@ -561,13 +583,6 @@ const fix_grid_toolbar = function (region_id) {
         });
     }
 
-    // return back the row selectors
-    /*
-    action2.controls.unshift({
-        type    : 'SELECT',
-        action  : 'change-rows-per-page'
-    });*/
-
     // show refresh button before save button
     action4.controls.push({
         type            : 'BUTTON',
@@ -576,6 +591,17 @@ const fix_grid_toolbar = function (region_id) {
         icon            : '',
         iconBeforeLabel : true
     });
+
+    // add pagination since it is missing
+    //if (model.config.paginationType === 'page') {
+    //if (config.features.pagination.type === 'page') {
+    if ($region.find('.a-GV-footer .a-GV-pagination button.a-GV-pageButton').length) {
+        action4.controls.push({
+            type            : 'SELECT',
+            action          : 'change-rows-per-page',
+            title           : 'Rows per page'
+        });
+    }
 
     // only for developers
     if ($('#apexDevToolbar.a-DevToolbar')) {
@@ -602,7 +628,6 @@ const fix_grid_toolbar = function (region_id) {
     //config.views.grid.features.singleRowView = false;
     //config.defaultGridViewOptions.rowHeader = "sequence";
     //config.defaultGridViewOptions.singleRowView = false;
-    
 
     //actions.set('edit', true);    // not working
     //config.editable = true;
@@ -648,7 +673,7 @@ const fix_grid_save_button = function () {
 //
 const fix_grid_checkbox = function(grid_id) {
     console.log('FIXING CHECKBOX', grid_id);
-    //    
+    //
     $('#' + grid_id + ' div.a-IG div.a-IG-body div.a-IG-contentContainer div.a-GV div.a-GV-bdy table.a-GV-table.a-GV-table--checkbox tbody td span.u-checkbox').on('click', function() {
         var grid = apex.region(grid_id);
         if (!grid.call('getActions').get('edit')) {
@@ -802,7 +827,7 @@ const process_grid_all_rows = function (static_id, fake_column_name, action_name
 //
 // PROCESS SELECTED ROWS FROM GRID
 //
-const process_grid_selected_rows = function (static_id, fake_column_name, action_name) {
+const process_grid_selected_rows = function (static_id, fake_column_name, action_name, is_ajax) {
     var grid        = apex.region(static_id).widget();
     var model       = grid.interactiveGrid('getViews', 'grid').model;
     var gridview    = grid.interactiveGrid('getViews').grid;
@@ -829,8 +854,13 @@ const process_grid_selected_rows = function (static_id, fake_column_name, action
         catch(err) {
         }
     });
-    //grid.interactiveGrid('getActions').invoke('save');
-    apex.submit(action_name);
+    //
+    if (is_ajax !== undefined) {
+        grid.interactiveGrid('getActions').invoke('save');
+    }
+    else {
+        apex.submit(action_name);
+    }
 };
 
 
