@@ -1,8 +1,54 @@
 ---
-- # ====== List of Values: LOV_CATEGORIES ======================
+- # ====== List of Values: LOV_CURRENCY ========================
+  id: 11622188329114363
+  identification: 
+    name: LOV_CURRENCY
+
+  subscription: 
+    version-number: 41472001101416
+
+  source: 
+    location: Local Database
+    type: SQL Query
+    sql-query: |
+      SELECT 'CZK' AS d, 'CZK' AS r FROM DUAL UNION ALL
+      SELECT 'EUR' AS d, 'EUR' AS r FROM DUAL UNION ALL
+      SELECT 'USD' AS d, 'USD' AS r FROM DUAL;
+      
+
+  column-mapping: 
+    return: R
+    display: D
+    default-sort: D
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: LOV_STOP_STATUS =====================
+  id: 11628157748055231
+  identification: 
+    name: LOV_STOP_STATUS
+
+  subscription: 
+    version-number: 41472011649582
+
+  source: 
+    location: Local Database
+    type: Table / View
+    table-owner: Parsing Schema
+    table-name: TRP_LOV_STOP_STATUSES_V
+
+  column-mapping: 
+    return: STATUS_ID
+    display: STATUS_NAME
+    default-sort: ORDER#
+    sort-direction: Ascending (Nulls Last)
+
+- # ====== List of Values: LOV_CATEGORY ========================
   id: 45973366827054294
   identification: 
-    name: LOV_CATEGORIES
+    name: LOV_CATEGORY
+
+  subscription: 
+    version-number: 41472011661171
 
   source: 
     location: Local Database

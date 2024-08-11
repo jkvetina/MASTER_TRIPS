@@ -1,4 +1,25 @@
 ---
+- # ====== Application Process: GET_COORDS_FROM_AI =============
+  id: 11225899687924568
+  identification: 
+    name: GET_COORDS_FROM_AI
+    type: NATIVE_PLSQL
+
+  source: 
+    location: Local Database
+    language: PL/SQL
+    pl/sql-code: NULL;
+
+  execution: 
+    sequence: 10
+    point: Ajax Callback
+
+  security: 
+    authorization-scheme: MODEL.LOV.MUST_NOT_BE_PUBLIC_USER
+
+  subscription: 
+    version-number: 41471951028970
+
 - # ====== Application Process: INIT_DEFAULTS ==================
   id: 60568702236716227
   identification: 

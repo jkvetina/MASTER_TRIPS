@@ -4,8 +4,8 @@ begin
 --     THEME OPTIONS: 765
 --   Manifest End
 wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.10.31'
-,p_release=>'23.2.3'
+ p_version_yyyy_mm_dd=>'2024.05.31'
+,p_release=>'24.1.1'
 ,p_default_workspace_id=>13869170895410902
 ,p_default_application_id=>765
 ,p_default_id_offset=>0
@@ -1028,18 +1028,6 @@ wwv_flow_imp_shared.create_template_option(
 ,p_group_id=>wwv_flow_imp.id(39707422055508612)
 ,p_template_types=>'PAGE'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.10.31'
-,p_release=>'23.2.3'
-,p_default_workspace_id=>13869170895410902
-,p_default_application_id=>765
-,p_default_id_offset=>0
-,p_default_owner=>'APPS'
-);
 wwv_flow_imp_shared.create_template_option(
  p_id=>wwv_flow_imp.id(59893436153289780)
 ,p_theme_id=>800
@@ -1998,18 +1986,6 @@ wwv_flow_imp_shared.create_template_option(
 ,p_template_types=>'REGION'
 ,p_help_text=>'This option saves the current state of the collapsible region for the duration of the session.'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.10.31'
-,p_release=>'23.2.3'
-,p_default_workspace_id=>13869170895410902
-,p_default_application_id=>765
-,p_default_id_offset=>0
-,p_default_owner=>'APPS'
-);
 wwv_flow_imp_shared.create_template_option(
  p_id=>wwv_flow_imp.id(59951172344289816)
 ,p_theme_id=>800
@@ -2947,18 +2923,6 @@ wwv_flow_imp_shared.create_template_option(
 ,p_group_id=>wwv_flow_imp.id(39717825090508616)
 ,p_template_types=>'REGION'
 ,p_help_text=>'Sets the icon size to medium (32px).'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.10.31'
-,p_release=>'23.2.3'
-,p_default_workspace_id=>13869170895410902
-,p_default_application_id=>765
-,p_default_id_offset=>0
-,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_template_option(
  p_id=>wwv_flow_imp.id(59988938735289835)
@@ -3929,18 +3893,6 @@ wwv_flow_imp_shared.create_template_option(
 ,p_css_classes=>'u-colors'
 ,p_template_types=>'REPORT'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.10.31'
-,p_release=>'23.2.3'
-,p_default_workspace_id=>13869170895410902
-,p_default_application_id=>765
-,p_default_id_offset=>0
-,p_default_owner=>'APPS'
-);
 wwv_flow_imp_shared.create_template_option(
  p_id=>wwv_flow_imp.id(60019704854289854)
 ,p_theme_id=>800
@@ -4898,18 +4850,6 @@ wwv_flow_imp_shared.create_template_option(
 ,p_template_types=>'LIST'
 ,p_help_text=>'Initials come from List Attribute 3'
 );
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.10.31'
-,p_release=>'23.2.3'
-,p_default_workspace_id=>13869170895410902
-,p_default_application_id=>765
-,p_default_id_offset=>0
-,p_default_owner=>'APPS'
-);
 wwv_flow_imp_shared.create_template_option(
  p_id=>wwv_flow_imp.id(60042310907289871)
 ,p_theme_id=>800
@@ -5829,18 +5769,6 @@ wwv_flow_imp_shared.create_template_option(
 ,p_css_classes=>'t-Button--desktopHideIcon'
 ,p_template_types=>'BUTTON'
 ,p_help_text=>'This template options hides the button icon on large screens.'
-);
-wwv_flow_imp.component_end;
-end;
-/
-begin
-wwv_flow_imp.component_begin (
- p_version_yyyy_mm_dd=>'2023.10.31'
-,p_release=>'23.2.3'
-,p_default_workspace_id=>13869170895410902
-,p_default_application_id=>765
-,p_default_id_offset=>0
-,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_template_option(
  p_id=>wwv_flow_imp.id(60063703795289891)
