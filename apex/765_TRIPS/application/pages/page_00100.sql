@@ -72,6 +72,56 @@ wwv_flow_imp_page.create_page_plug(
   'output_as', 'HTML')).to_clob
 );
 wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(8596902490358134)
+,p_plug_name=>'[MAP]'
+,p_parent_plug_id=>wwv_flow_imp.id(115075219882380757)
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(59923030250289799)
+,p_plug_display_sequence=>50
+,p_plug_display_point=>'SUB_REGIONS'
+,p_location=>null
+,p_lazy_loading=>true
+,p_plug_source_type=>'NATIVE_MAP_REGION'
+);
+wwv_flow_imp_page.create_map_region(
+ p_id=>wwv_flow_imp.id(8597067329358135)
+,p_region_id=>wwv_flow_imp.id(8596902490358134)
+,p_height=>640
+,p_navigation_bar_type=>'FULL'
+,p_navigation_bar_position=>'END'
+,p_init_position_zoom_type=>'QUERY_RESULTS'
+,p_init_position_from_browser=>false
+,p_layer_messages_position=>'BELOW'
+,p_show_legend=>false
+,p_features=>'MOUSEWHEEL_ZOOM:RECTANGLE_ZOOM:SCALE_BAR:INFINITE_MAP:BROWSER_LOCATION:CIRCLE_TOOL:DISTANCE_TOOL'
+);
+wwv_flow_imp_page.create_map_region_layer(
+ p_id=>wwv_flow_imp.id(8597108196358136)
+,p_map_region_id=>wwv_flow_imp.id(8597067329358135)
+,p_name=>'Trip Stops'
+,p_layer_type=>'POINT'
+,p_display_sequence=>10
+,p_location=>'LOCAL'
+,p_query_type=>'TABLE'
+,p_table_name=>'TRP_ITINERARY'
+,p_where_clause=>'trip_id = :P100_TRIP_ID'
+,p_include_rowid_column=>false
+,p_has_spatial_index=>false
+,p_pk_column=>'TRIP_ID'
+,p_geometry_column_data_type=>'LONLAT_COLUMNS'
+,p_longitude_column=>'GPS_LONG'
+,p_latitude_column=>'GPS_LAT'
+,p_fill_color=>'#ff0000'
+,p_point_display_type=>'SVG'
+,p_point_svg_shape=>'Default'
+,p_point_svg_shape_scale=>'1.5'
+,p_feature_clustering=>false
+,p_tooltip_adv_formatting=>false
+,p_info_window_adv_formatting=>false
+,p_allow_hide=>true
+);
+wwv_flow_imp_page.create_page_plug(
  p_id=>wwv_flow_imp.id(114512999524328246)
 ,p_plug_name=>'Gantt [CHART]'
 ,p_region_name=>'GANTT_CHART'
@@ -2525,6 +2575,16 @@ wwv_flow_imp_page.create_page_da_action(
 ,p_action=>'NATIVE_REFRESH'
 ,p_affected_elements_type=>'REGION'
 ,p_affected_region_id=>wwv_flow_imp.id(134395621326667863)
+);
+wwv_flow_imp_page.create_page_da_action(
+ p_id=>wwv_flow_imp.id(8597258899358137)
+,p_event_id=>wwv_flow_imp.id(45970532154054291)
+,p_event_result=>'TRUE'
+,p_action_sequence=>40
+,p_execute_on_page_init=>'N'
+,p_action=>'NATIVE_REFRESH'
+,p_affected_elements_type=>'REGION'
+,p_affected_region_id=>wwv_flow_imp.id(8596902490358134)
 );
 wwv_flow_imp_page.create_page_da_event(
  p_id=>wwv_flow_imp.id(45972439771054292)

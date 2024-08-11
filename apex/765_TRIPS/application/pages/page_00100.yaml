@@ -68,6 +68,120 @@ help:
     
 
 regions: 
+- # ====== Region: [MAP] =======================================
+  id: 8596902490358134
+  identification: 
+    name: '[MAP]'
+    type: Map
+
+  source: 
+    location: None
+
+  layout: 
+    sequence: 50
+    parent-region: ITINERARY # 115075219882380757
+    slot: SUB_REGIONS
+    start-new-layout: false
+    start-new-row: true
+    column: Automatic
+    new-column: true
+    column-span: Automatic
+
+  appearance: 
+    template: Blank with Attributes
+    template-options: 
+    - '#DEFAULT#'
+    render-components: Above Content
+
+  accessibility: 
+    use-landmark: true
+    landmark-type: Template Default
+
+  advanced: 
+    region-display-selector: false
+    exclude-title-from-translation: false
+
+  customization: 
+    customizable: Not Customizable By End Users
+
+  attributes: 
+    id: 8597067329358135
+    map: 
+      background: Default
+      height: 640
+
+    controls: 
+      navigation-bar: Zoom and Compass
+      navigation-bar-position: End
+      options: 
+      - Mousewheel Zoom
+      - Rectangle Zoom
+      - Scale Bar
+      - Infinite Map
+      - Get Browser Location
+      - Circle Tool
+      - Distance Tool
+
+    initial-position-and-zoom: 
+      get-position-from-browser: false
+      type: Based on Spatial Results
+
+    legend: 
+      show: false
+
+    attributes: 
+      messages-position: Below
+      unit-system: Metric
+
+    performance: 
+      lazy-loading: true
+
+    layers: 
+    - # ====== Layer: Trip Stops ===================================
+      id: 8597108196358136
+      identification: 
+        name: Trip Stops
+        layer-type: Points
+
+      layout: 
+        sequence: 10
+
+      source: 
+        location: Local Database
+        type: Table / View
+        table-owner: Parsing Schema
+        table-name: TRP_ITINERARY
+        include-rowid-column: false
+        where-clause: 'trip_id = :P100_TRIP_ID'
+        use-spatial-index: false
+
+      column-mapping: 
+        geometry-column-data-type: Longitude/Latitude
+        longitude-column: GPS_LONG
+        latitude-column: GPS_LAT
+        primary-key-column: TRIP_ID
+
+      point-objects: 
+        style: SVG
+        shape: Default
+        shape-scale: 1.5
+
+      appearance: 
+        fill-color: '#ff0000'
+
+      point-clustering: 
+        enable: false
+
+      tooltip: 
+        advanced-formatting: false
+
+      info-window: 
+        advanced-formatting: false
+
+      legend: 
+        show: true
+        enable-to-hide: true
+
 - # ====== Region: Gantt [CHART] ===============================
   id: 114512999524328246
   identification: 
@@ -3205,6 +3319,21 @@ dynamic-actions:
     javascript-expression: window
 
   actions: 
+  - # ====== Action: Refresh =====================================
+    id: 8597258899358137
+    identification: 
+      action: Refresh
+
+    affected-elements: 
+      selection-type: Region
+      region: '[MAP]' # 8596902490358134
+
+    execution: 
+      sequence: 40
+      event: DETECT_MODAL_CLOSED # 45970532154054291
+      fire-when-event-result-is: True
+      fire-on-initialization: false
+
   - # ====== Action: Refresh =====================================
     id: 45971005494054291
     identification: 
