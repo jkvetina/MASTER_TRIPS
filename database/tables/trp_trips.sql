@@ -11,15 +11,17 @@ CREATE TABLE trp_trips (
     --
     CONSTRAINT pk_trp_trips
         PRIMARY KEY (trip_id)
+    country_name                    VARCHAR2(64)
 );
 --
 COMMENT ON TABLE trp_trips IS '';
 --
-COMMENT ON COLUMN trp_trips.trip_id     IS '';
-COMMENT ON COLUMN trp_trips.trip_name   IS '';
-COMMENT ON COLUMN trp_trips.start_at    IS '';
-COMMENT ON COLUMN trp_trips.end_at      IS '';
-COMMENT ON COLUMN trp_trips.year_       IS '';
-COMMENT ON COLUMN trp_trips.gps_lat     IS '';
-COMMENT ON COLUMN trp_trips.gps_long    IS '';
+COMMENT ON COLUMN trp_trips.trip_id         IS '';
+COMMENT ON COLUMN trp_trips.trip_name       IS '';
+COMMENT ON COLUMN trp_trips.start_at        IS '';
+COMMENT ON COLUMN trp_trips.end_at          IS '';
+COMMENT ON COLUMN trp_trips.year_           IS '';
+COMMENT ON COLUMN trp_trips.gps_lat         IS '';
+COMMENT ON COLUMN trp_trips.gps_long        IS '';
+COMMENT ON COLUMN trp_trips.country_name    IS '';
 
