@@ -107,9 +107,10 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
             core.set_item('$TRIP_START',    TO_CHAR(c.start_at, 'YYYY-MM-DD'));
             core.set_item('$TRIP_END',      TO_CHAR(c.end_at,   'YYYY-MM-DD'));
             --
-            v_trip_header       := c.trip_name;
-            v_itinerary_header  := RTRIM('Itinerary - ' || core.get_item('$DAY'), ' - ') ||
-                CASE WHEN c.price > 0 THEN '<span class="BADGE" style="margin-right: 1rem;">' || CEIL(c.price / 1000) || 'k</span>' END;
+            v_trip_header := c.trip_name ||
+                CASE WHEN c.price > 0 THEN '<span class="BADGE GREY" style="margin-right: 1rem;">' || CEIL(c.price / 1000) || 'k</span>' END;
+            --
+            v_itinerary_header := RTRIM('Itinerary - ' || core.get_item('$DAY'), ' - ');
         END LOOP;
         --
         core.set_item('$TRIP_HEADER',       REPLACE(v_trip_header,      ' - ', ' &' || 'ndash; '));
