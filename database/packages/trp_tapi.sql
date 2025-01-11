@@ -7,7 +7,7 @@ CREATE OR REPLACE PACKAGE BODY trp_tapi as
         in_trip_id          trp_trips.trip_id%TYPE          := NULL
     )
     AS
-        c_action            CONSTANT CHAR                   := gen_tapi.get_action(in_action);
+        c_action            CONSTANT CHAR                   := core_tapi.get_action(in_action);
     BEGIN
         -- delete record
         IF c_action = 'D' THEN
@@ -20,7 +20,7 @@ CREATE OR REPLACE PACKAGE BODY trp_tapi as
 
         -- are we renaming the primary key?
         IF c_action = 'U' AND in_trip_id != rec.trip_id THEN
-            gen_tapi.rename_primary_key (
+            core_tapi.rename_primary_key (
                 in_column_name  => 'TRIP_ID',
                 in_old_key      => in_trip_id,
                 in_new_key      => rec.trip_id
@@ -79,7 +79,7 @@ CREATE OR REPLACE PACKAGE BODY trp_tapi as
         in_stop_id          trp_itinerary.stop_id%TYPE          := NULL
     )
     AS
-        c_action            CONSTANT CHAR                       := gen_tapi.get_action(in_action);
+        c_action            CONSTANT CHAR                       := core_tapi.get_action(in_action);
     BEGIN
         -- delete record
         IF c_action = 'D' THEN
@@ -93,7 +93,7 @@ CREATE OR REPLACE PACKAGE BODY trp_tapi as
 
         -- are we renaming the primary key?
         IF c_action = 'U' AND in_trip_id != rec.trip_id THEN
-            gen_tapi.rename_primary_key (
+            core_tapi.rename_primary_key (
                 in_column_name  => 'TRIP_ID',
                 in_old_key      => in_trip_id,
                 in_new_key      => rec.trip_id
@@ -102,7 +102,7 @@ CREATE OR REPLACE PACKAGE BODY trp_tapi as
 
         -- are we renaming the primary key?
         IF c_action = 'U' AND in_stop_id != rec.stop_id THEN
-            gen_tapi.rename_primary_key (
+            core_tapi.rename_primary_key (
                 in_column_name  => 'STOP_ID',
                 in_old_key      => in_stop_id,
                 in_new_key      => rec.stop_id

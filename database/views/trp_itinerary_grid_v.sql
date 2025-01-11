@@ -38,6 +38,7 @@ SELECT
     t.is_reserved,
     t.is_paid,
     t.is_pending,
+    --
     t.start_at,
     t.end_at,
     t.notes,

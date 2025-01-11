@@ -13,7 +13,7 @@ future_years AS (
     FROM trp_trips t
     JOIN x
         ON x.user_id    = t.created_by
-    WHERE t.year_       >= TO_CHAR(TRUNC(SYSDATE), 'YYYY') - 1
+    WHERE t.year_       >= TO_CHAR(TRUNC(SYSDATE), 'YYYY') - 2
     GROUP BY
         t.year_
 ),
@@ -52,9 +52,9 @@ future_trips AS (
 endpoints AS (
     -- endpoints to attach dynamic stuff, make sure this returns just 1 row
     SELECT /*+ MATERIALIZE */
-        MAX(CASE WHEN n.page_id = 120 THEN n.order# END) AS trips
+        MAX(CASE WHEN n.page_id = 100 THEN n.order# END) AS trips
         --
-    FROM app_navigation_v n
+    FROM master.app_navigation_v n
     JOIN x
         ON x.app_id     = n.app_id
 )
@@ -72,72 +72,10 @@ SELECT
     n.attribute09,
     n.attribute10,
     n.order#
-FROM app_navigation_v n
+FROM master.app_navigation_v n
 UNION ALL
 --
--- CLASSIC MENU - REMOVE AFTER PRESENTATION
---
-SELECT
-    1 AS lvl,
-    --
-    '<a href="' ||
-    APEX_PAGE.GET_URL (
-        --p_application   => x.app_id,
-        p_page          => 120,
-        p_clear_cache   => 120,
-        p_items         => 'P120_YEAR',
-        p_values        => y.year_
-    ) ||
-    '"><span>' || y.year_ || '</span></a>' AS attribute01,
-    --
-    '' AS attribute02,
-    '' AS attribute03,
-    '' AS attribute04,
-    '' AS attribute05,
-    '' AS attribute06,
-    '' AS attribute07,
-    '' AS attribute08,
-    '' AS attribute09,
-    '' AS attribute10,
-    --
-    '/0.100.' || y.year_ AS order#
-    --
-FROM future_years y
-UNION ALL
---
-SELECT
-    2 AS lvl,
-    --
-    '<a href="' ||
-    APEX_PAGE.GET_URL (
-        --p_application   => x.app_id,
-        p_page          => 100,
-        p_clear_cache   => 100,
-        p_items         => 'P100_TRIP_ID',
-        p_values        => t.trip_id
-    ) ||
-    '"><span>' || t.trip_name || '</span></a>' AS attribute01,
-    --
-    '' AS attribute02,
-    '' AS attribute03,
-    '' AS attribute04,
-    '' AS attribute05,
-    '' AS attribute06,
-    '' AS attribute07,
-    '' AS attribute08,
-    '' AS attribute09,
-    --
-    CASE WHEN t.trip_id = x.trip_id THEN ' class="ACTIVE"' END AS attribute10,
-    --
-    '/0.100.' || t.year_ || '/' || LPAD(ROW_NUMBER() OVER (ORDER BY t.start_at, t.end_at, t.trip_id), 8, '0') AS order#
-    --
-FROM trp_trips t
-JOIN x
-    ON x.user_id    = t.created_by
-WHERE t.year_       >= TO_CHAR(TRUNC(SYSDATE), 'YYYY') - 1
-UNION ALL
---
--- SAME THING BUT AS MULTICOLUMN MENU WITH ICONS/FLAGS
+-- MULTICOLUMN MENU WITH ICONS/FLAGS
 --
 SELECT
     2 AS lvl,
@@ -166,9 +104,9 @@ SELECT
     --
     '<a href="' ||
     APEX_PAGE.GET_URL (
-        p_page          => 100,
-        p_clear_cache   => 100,
-        p_items         => 'P100_TRIP_ID',
+        p_page          => 150,
+        p_clear_cache   => 150,
+        p_items         => 'P150_TRIP_ID',
         p_values        => t.trip_id
     ) ||
     '" class="NAV_L3">' ||

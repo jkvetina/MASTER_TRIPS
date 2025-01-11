@@ -7,7 +7,7 @@ SELECT
     --
     ROW_NUMBER() OVER (ORDER BY t.order#, t.status_id) AS order#
     --
-FROM app_lovs t
+FROM master.app_lovs t
 WHERE t.app_id      = core.get_app_id()
     AND t.lov_id    = 'STATUS_TRIP'
     AND t.order#    IS NOT NULL;

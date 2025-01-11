@@ -11,11 +11,14 @@ SELECT
     t.trip_name,
     t.start_at,
     t.end_at,
+    --
     t.created_by,
     t.created_at,
     t.year_,
     t.gps_lat,
     t.gps_long,
+    --
+    TO_CHAR(t.start_at, 'MON-DD') || ' - ' || TO_CHAR(t.end_at, 'MON-DD') AS trip_subheader,
     --
     CASE
         WHEN t.start_at - TRUNC(SYSDATE) >= 0
