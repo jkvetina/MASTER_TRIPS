@@ -109,7 +109,7 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
             --
             v_trip_header       := c.trip_name;
             v_itinerary_header  := RTRIM('Itinerary - ' || core.get_item('$DAY'), ' - ') ||
-                CASE WHEN c.price > 0 THEN '<span class="BADGE" style="margin-right: 1rem;">' || (c.price / 1500) || 'k</span>' END;
+                CASE WHEN c.price > 0 THEN '<span class="BADGE" style="margin-right: 1rem;">' || CEIL(c.price / 1000) || 'k</span>' END;
         END LOOP;
         --
         core.set_item('$TRIP_HEADER',       REPLACE(v_trip_header,      ' - ', ' &' || 'ndash; '));
