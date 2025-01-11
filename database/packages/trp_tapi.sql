@@ -30,19 +30,16 @@ CREATE OR REPLACE PACKAGE BODY trp_tapi as
         -- overwrite some values
         rec.created_by      := NVL(rec.created_by, core.get_user_id());
         rec.created_at      := NVL(rec.created_at, SYSDATE);
-        --
-        IF rec.trip_id IS NULL THEN
-            rec.trip_id := trp_trip_id.NEXTVAL;
-        END IF;
 
         -- upsert record
         UPDATE trp_trips t
         SET ROW = rec
-        WHERE t.trip_id             = rec.trip_id;
+        WHERE t.trip_id     = rec.trip_id;
         --
         IF SQL%ROWCOUNT = 0 THEN
             INSERT INTO trp_trips
-            VALUES rec;
+            VALUES rec
+            RETURN trip_id INTO rec.trip_id;
         END IF;
     EXCEPTION
     WHEN core.app_exception THEN
@@ -112,20 +109,17 @@ CREATE OR REPLACE PACKAGE BODY trp_tapi as
         -- overwrite some values
         rec.created_by          := NVL(rec.created_by, core.get_user_id());
         rec.created_at          := NVL(rec.created_at, SYSDATE);
-        --
-        IF rec.stop_id IS NULL THEN
-            rec.stop_id := trp_stop_id.NEXTVAL;
-        END IF;
 
         -- upsert record
         UPDATE trp_itinerary t
         SET ROW = rec
-        WHERE t.trip_id             = rec.trip_id
-            AND t.stop_id           = rec.stop_id;
+        WHERE t.trip_id     = rec.trip_id
+            AND t.stop_id   = rec.stop_id;
         --
         IF SQL%ROWCOUNT = 0 THEN
             INSERT INTO trp_itinerary
-            VALUES rec;
+            VALUES rec
+            RETURN stop_id INTO rec.stop_id;
         END IF;
     EXCEPTION
     WHEN core.app_exception THEN
