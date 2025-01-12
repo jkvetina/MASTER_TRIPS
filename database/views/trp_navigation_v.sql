@@ -54,7 +54,7 @@ endpoints AS (
     SELECT /*+ MATERIALIZE */
         MAX(CASE WHEN n.page_id = 100 THEN n.order# END) AS trips
         --
-    FROM master.app_navigation_v n
+    FROM app_navigation_vpd_v n
     JOIN x
         ON x.app_id     = n.app_id
 )
@@ -72,7 +72,7 @@ SELECT
     n.attribute09,
     n.attribute10,
     n.order#
-FROM master.app_navigation_v n
+FROM app_navigation_vpd_v n
 UNION ALL
 --
 -- MULTICOLUMN MENU WITH ICONS/FLAGS

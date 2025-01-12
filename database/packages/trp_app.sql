@@ -444,8 +444,8 @@ CREATE OR REPLACE PACKAGE BODY trp_app as
             SELECT
                 t.status_id,
                 t.color_bg
-            FROM master.app_lovs t
-            WHERE t.app_id      = core.get_app_id()
+            FROM app_lovs_vpd_v t
+            WHERE 1 = 1
                 AND t.lov_id    = 'STATUS_TRIP'
                 AND t.color_bg IS NOT NULL
         ) LOOP

@@ -6,8 +6,8 @@ SELECT
     --
     ROW_NUMBER() OVER (ORDER BY t.order#, t.status_id) AS order#
     --
-FROM master.app_lovs t
-WHERE t.app_id      = core.get_app_id()
+FROM app_lovs_vpd_v t
+WHERE 1 = 1
     AND t.lov_id    = 'CATEGORY'
     AND t.order#    IS NOT NULL;
 /
