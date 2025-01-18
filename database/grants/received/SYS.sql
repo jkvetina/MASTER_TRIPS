@@ -4,6 +4,7 @@ ALTER SESSION SET CURRENT_SCHEMA = sys;
 -- PACKAGE
 --
 GRANT EXECUTE ON dbms_application_info TO apps;
+GRANT EXECUTE ON dbms_rls TO apps;
 GRANT EXECUTE ON dbms_scheduler TO apps;
 GRANT EXECUTE ON dbms_session TO apps;
 GRANT EXECUTE ON dbms_utility TO apps;

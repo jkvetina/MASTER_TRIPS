@@ -5,14 +5,14 @@ begin
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2024.05.31'
-,p_release=>'24.1.1'
-,p_default_workspace_id=>13869170895410902
+,p_release=>'24.1.7'
+,p_default_workspace_id=>1000000000000
 ,p_default_application_id=>765
 ,p_default_id_offset=>0
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_plug_template(
- p_id=>wwv_flow_imp.id(59999386506289840)
+ p_id=>wwv_flow_imp.id(29353935234377412)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<div class="t-TabsRegion #REGION_CSS_CLASSES# apex-tabs-region" #REGION_LANDMARK_ATTRIBUTES# #REGION_ATTRIBUTES# id="#REGION_STATIC_ID#">',
@@ -28,12 +28,12 @@ wwv_flow_imp_shared.create_plug_template(
 ,p_preset_template_options=>'t-TabsRegion-mod--simple'
 ,p_default_label_alignment=>'RIGHT'
 ,p_default_field_alignment=>'LEFT'
-,p_reference_id=>63372587703439106
+,p_reference_id=>12685321904084610
 ,p_translate_this_template=>'N'
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(40122276260509675)
-,p_plug_template_id=>wwv_flow_imp.id(59999386506289840)
+ p_id=>wwv_flow_imp.id(39417701687617996)
+,p_plug_template_id=>wwv_flow_imp.id(29353935234377412)
 ,p_name=>'Region Body'
 ,p_placeholder=>'BODY'
 ,p_has_grid_support=>true
@@ -43,8 +43,8 @@ wwv_flow_imp_shared.create_plug_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(40122744420509675)
-,p_plug_template_id=>wwv_flow_imp.id(59999386506289840)
+ p_id=>wwv_flow_imp.id(39418287564617996)
+,p_plug_template_id=>wwv_flow_imp.id(29353935234377412)
 ,p_name=>'Tabs'
 ,p_placeholder=>'SUB_REGIONS'
 ,p_has_grid_support=>false

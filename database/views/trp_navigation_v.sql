@@ -6,6 +6,24 @@ WITH x AS (
         core.get_item('$TRIP_ID')   AS trip_id
     FROM DUAL
 ),
+n AS (
+    SELECT /*+ MATERIALIZE */
+        n.app_id,
+        n.page_id,
+        n.lvl,                  -- use Master application navigation
+        n.attribute01,
+        n.attribute02,
+        n.attribute03,
+        n.attribute04,
+        n.attribute05,
+        n.attribute06,
+        n.attribute07,
+        n.attribute08,
+        n.attribute09,
+        n.attribute10,
+        n.order#
+    FROM master.app_navigation_v n
+),
 future_years AS (
     -- columns used to divide trips
     SELECT /*+ MATERIALIZE */
@@ -54,7 +72,7 @@ endpoints AS (
     SELECT /*+ MATERIALIZE */
         MAX(CASE WHEN n.page_id = 100 THEN n.order# END) AS trips
         --
-    FROM app_navigation_vpd_v n
+    FROM n
     JOIN x
         ON x.app_id     = n.app_id
 )
@@ -72,7 +90,7 @@ SELECT
     n.attribute09,
     n.attribute10,
     n.order#
-FROM app_navigation_vpd_v n
+FROM n
 UNION ALL
 --
 -- MULTICOLUMN MENU WITH ICONS/FLAGS
@@ -112,18 +130,18 @@ SELECT
     '" class="NAV_L3">' ||
     CASE
         WHEN t.trip_name LIKE '%(?)%'
-            THEN core.get_icon('fa-question') || ' &nbsp;'
+            THEN core.get_icon('fa-question') || ' &' || 'nbsp;'
             --
         WHEN t.is_next_trip = 'Y'
-            THEN core.get_icon('fa-arrow-right') || ' &nbsp;'
+            THEN core.get_icon('fa-arrow-right') || ' &' || 'nbsp;'
             --
         WHEN t.end_at <= TRUNC(SYSDATE)
-            THEN core.get_icon('fa-check') || ' &nbsp;'
+            THEN core.get_icon('fa-check') || ' &' || 'nbsp;'
             --
         ELSE
-            '<span>&mdash; &nbsp;</span>'
+            '<span>&' || 'mdash; &' || 'nbsp;</span>'
         END ||
-    '<span>' || LTRIM(REGEXP_REPLACE(REPLACE(t.trip_name, ' - ', ' &' || 'ndash; '), '\s*\(\?\)\s*', '')) || '</span>' ||
+    '<span>' || LTRIM(REGEXP_REPLACE(REPLACE(t.trip_name, ' - ', ' &' || '' || 'ndash; '), '\s*\(\?\)\s*', '')) || '</span>' ||
     CASE
         WHEN t.is_next_trip = 'Y'
             THEN '<span class="BADGE">' || t.badge || '</span>'

@@ -5,14 +5,14 @@ begin
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2024.05.31'
-,p_release=>'24.1.1'
-,p_default_workspace_id=>13869170895410902
+,p_release=>'24.1.7'
+,p_default_workspace_id=>1000000000000
 ,p_default_application_id=>765
 ,p_default_id_offset=>0
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_plug_template(
- p_id=>wwv_flow_imp.id(59986922242289834)
+ p_id=>wwv_flow_imp.id(29341477532377387)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<div class="t-ResultsRegion #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_LANDMARK_ATTRIBUTES# #REGION_ATTRIBUTES#>',
@@ -29,12 +29,12 @@ wwv_flow_imp_shared.create_plug_template(
 ,p_default_label_alignment=>'RIGHT'
 ,p_default_field_alignment=>'LEFT'
 ,p_default_landmark_type=>'region'
-,p_reference_id=>63360129894439100
+,p_reference_id=>12672845636084584
 ,p_translate_this_template=>'N'
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(40088108311509655)
-,p_plug_template_id=>wwv_flow_imp.id(59986922242289834)
+ p_id=>wwv_flow_imp.id(39383645153617920)
+,p_plug_template_id=>wwv_flow_imp.id(29341477532377387)
 ,p_name=>'Search Results'
 ,p_placeholder=>'BODY'
 ,p_has_grid_support=>false
@@ -44,8 +44,8 @@ wwv_flow_imp_shared.create_plug_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(40088634687509655)
-,p_plug_template_id=>wwv_flow_imp.id(59986922242289834)
+ p_id=>wwv_flow_imp.id(39384131917617921)
+,p_plug_template_id=>wwv_flow_imp.id(29341477532377387)
 ,p_name=>'Search Field'
 ,p_placeholder=>'SEARCH_FIELD'
 ,p_has_grid_support=>false
@@ -55,8 +55,8 @@ wwv_flow_imp_shared.create_plug_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(40089162828509655)
-,p_plug_template_id=>wwv_flow_imp.id(59986922242289834)
+ p_id=>wwv_flow_imp.id(39384628342617922)
+,p_plug_template_id=>wwv_flow_imp.id(29341477532377387)
 ,p_name=>'Sub Regions'
 ,p_placeholder=>'SUB_REGIONS'
 ,p_has_grid_support=>false

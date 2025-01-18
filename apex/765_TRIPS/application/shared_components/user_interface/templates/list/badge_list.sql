@@ -5,14 +5,14 @@ begin
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2024.05.31'
-,p_release=>'24.1.1'
-,p_default_workspace_id=>13869170895410902
+,p_release=>'24.1.7'
+,p_default_workspace_id=>1000000000000
 ,p_default_application_id=>765
 ,p_default_id_offset=>0
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_list_template(
- p_id=>wwv_flow_imp.id(60034597460289866)
+ p_id=>wwv_flow_imp.id(29389579380377489)
 ,p_list_template_current=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<li class="t-BadgeList-item #A02# is-current" aria-current="page">',
 '  <a class="t-BadgeList-wrap u-color #A04#" href="#LINK#" #A03#>',
@@ -40,7 +40,7 @@ wwv_flow_imp_shared.create_list_template(
 ,p_a02_label=>'List item CSS Classes'
 ,p_a03_label=>'Link Attributes'
 ,p_a04_label=>'Link Classes'
-,p_reference_id=>63435844911439143
+,p_reference_id=>12720982136084690
 ,p_list_template_comment=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'A01: Large Number',
 'A02: List Item Classes',

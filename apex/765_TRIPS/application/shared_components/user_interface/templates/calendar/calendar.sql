@@ -5,14 +5,14 @@ begin
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2024.05.31'
-,p_release=>'24.1.1'
-,p_default_workspace_id=>13869170895410902
+,p_release=>'24.1.7'
+,p_default_workspace_id=>1000000000000
 ,p_default_application_id=>765
 ,p_default_id_offset=>0
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_calendar_template(
- p_id=>wwv_flow_imp.id(60064870091289893)
+ p_id=>wwv_flow_imp.id(29420413016377560)
 ,p_cal_template_name=>'Calendar'
 ,p_internal_name=>'CALENDAR'
 ,p_day_of_week_format=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -155,7 +155,7 @@ wwv_flow_imp_shared.create_calendar_template(
 ,p_month_data_entry_format=>'<span class="t-ClassicCalendar-event">#DATA#</span>'
 ,p_theme_id=>800
 ,p_theme_class_id=>1
-,p_reference_id=>63465715722439170
+,p_reference_id=>12750829685084764
 );
 wwv_flow_imp.component_end;
 end;

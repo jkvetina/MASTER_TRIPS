@@ -26,7 +26,7 @@ GRANT DELETE ON app_lovs_vpd_v TO apps;
 GRANT INSERT ON app_lovs_vpd_v TO apps;
 GRANT SELECT ON app_lovs_vpd_v TO apps;
 GRANT UPDATE ON app_lovs_vpd_v TO apps;
-GRANT SELECT ON app_navigation_vpd_v TO apps;
+GRANT SELECT ON app_navigation_v TO apps;
 GRANT DELETE ON app_settings_vpd_v TO apps;
 GRANT INSERT ON app_settings_vpd_v TO apps;
 GRANT SELECT ON app_settings_vpd_v TO apps;

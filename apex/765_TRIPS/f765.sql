@@ -19,7 +19,7 @@ whenever sqlerror exit sql.sqlcode rollback
 begin
 wwv_flow_imp.import_begin (
  p_version_yyyy_mm_dd=>'2024.05.31'
-,p_release=>'24.1.4'
+,p_release=>'24.1.7'
 ,p_default_workspace_id=>1000000000000
 ,p_default_application_id=>765
 ,p_default_id_offset=>11312657192710409
@@ -39,19 +39,19 @@ prompt APPLICATION 765 - Trips Planning
 --     Pages:                      5
 --       Items:                   60
 --       Processes:                9
---       Regions:                 22
+--       Regions:                 24
 --       Buttons:                 18
 --       Dynamic Actions:         13
 --     Shared Components:
 --       Logic:
---         Items:                 21
+--         Items:                 23
 --         Processes:              5
 --         Build Options:          1
 --       Navigation:
 --         Lists:                  2
 --       Security:
 --         Authentication:         1
---         Authorization:          4
+--         Authorization:          8
 --       User Interface:
 --         Themes:                 1
 --         Templates:
@@ -71,7 +71,7 @@ prompt APPLICATION 765 - Trips Planning
 --       Reports:
 --       E-Mail:
 --     Supporting Objects:  Included
---   Version:         24.1.4
+--   Version:         24.1.7
 --   Instance ID:     7511683781338639
 --
 
@@ -112,13 +112,13 @@ wwv_imp_workspace.create_flow(
 ,p_documentation_banner=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'Created by Jan Kvetina, 2/2022',
 'www.jankvetina.cz'))
-,p_authentication_id=>wwv_flow_imp.id(16178796941459013)
+,p_authentication_id=>wwv_flow_imp.id(41501601859913292)
 ,p_populate_roles=>'C'
 ,p_application_tab_set=>1
 ,p_public_user=>'APEX_PUBLIC_USER'
 ,p_proxy_server=>nvl(wwv_flow_application_install.get_proxy,'')
 ,p_no_proxy_domains=>nvl(wwv_flow_application_install.get_no_proxy_domains,'')
-,p_flow_version=>'2025-01-11'
+,p_flow_version=>'2025-01-18'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
 ,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
@@ -191,7 +191,7 @@ wwv_flow_imp_shared.create_list(
 'ORDER BY',
 '    t.order# NULLS FIRST;'))
 ,p_list_status=>'PUBLIC'
-,p_version_scn=>42101199005701
+,p_version_scn=>42190749948353
 );
 end;
 /
@@ -686,6 +686,86 @@ wwv_flow_imp_shared.create_plugin_setting(
 );
 end;
 /
+prompt --application/shared_components/security/authorizations/is_user_d
+begin
+wwv_flow_imp_shared.create_security_scheme(
+ p_id=>wwv_flow_imp.id(40783178019017799)  -- AUTHORIZATION: IS_USER_D
+,p_name=>'IS_USER_D'
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'RETURN app_auth.is_user_component (',
+'    in_component_id     => :APP_COMPONENT_ID,',
+'    in_component_type   => :APP_COMPONENT_TYPE,',
+'    in_component_name   => :APP_COMPONENT_NAME,',
+'    in_action           => ''D''',
+') = ''Y'';'))
+,p_error_message=>'ACCESS_DENIED|IS_USER_D'
+,p_reference_id=>39918369623120475
+,p_version_scn=>42190236131449
+,p_caching=>'NOCACHE'
+);
+end;
+/
+prompt --application/shared_components/security/authorizations/is_user_component
+begin
+wwv_flow_imp_shared.create_security_scheme(
+ p_id=>wwv_flow_imp.id(40783766151017802)  -- AUTHORIZATION: IS_USER_COMPONENT
+,p_name=>'IS_USER_COMPONENT'
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'RETURN app_auth.is_user_component (',
+'    in_component_id     => :APP_COMPONENT_ID,',
+'    in_component_type   => :APP_COMPONENT_TYPE,',
+'    in_component_name   => :APP_COMPONENT_NAME,',
+'    in_action           => NULL',
+') = ''Y'';'))
+,p_error_message=>'ACCESS_DENIED|IS_USER_COMPONENT'
+,p_reference_id=>39918974528136938
+,p_version_scn=>42190236159480
+,p_caching=>'NOCACHE'
+);
+end;
+/
+prompt --application/shared_components/security/authorizations/is_user_c
+begin
+wwv_flow_imp_shared.create_security_scheme(
+ p_id=>wwv_flow_imp.id(40785102031017809)  -- AUTHORIZATION: IS_USER_C
+,p_name=>'IS_USER_C'
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'RETURN app_auth.is_user_component (',
+'    in_component_id     => :APP_COMPONENT_ID,',
+'    in_component_type   => :APP_COMPONENT_TYPE,',
+'    in_component_name   => :APP_COMPONENT_NAME,',
+'    in_action           => ''C''',
+') = ''Y'';'))
+,p_error_message=>'ACCESS_DENIED|IS_USER_C'
+,p_reference_id=>39917183273113133
+,p_version_scn=>42190236125622
+,p_caching=>'NOCACHE'
+);
+end;
+/
+prompt --application/shared_components/security/authorizations/is_user_u
+begin
+wwv_flow_imp_shared.create_security_scheme(
+ p_id=>wwv_flow_imp.id(40786165379017811)  -- AUTHORIZATION: IS_USER_U
+,p_name=>'IS_USER_U'
+,p_scheme_type=>'NATIVE_FUNCTION_BODY'
+,p_attribute_01=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'RETURN app_auth.is_user_component (',
+'    in_component_id     => :APP_COMPONENT_ID,',
+'    in_component_type   => :APP_COMPONENT_TYPE,',
+'    in_component_name   => :APP_COMPONENT_NAME,',
+'    in_action           => ''U''',
+') = ''Y'';'))
+,p_error_message=>'ACCESS_DENIED|IS_USER_U'
+,p_reference_id=>39918522071121241
+,p_version_scn=>42190236130794
+,p_caching=>'NOCACHE'
+);
+end;
+/
 prompt --application/shared_components/security/authorizations/nobody
 begin
 wwv_flow_imp_shared.create_security_scheme(
@@ -693,9 +773,9 @@ wwv_flow_imp_shared.create_security_scheme(
 ,p_name=>'NOBODY'
 ,p_scheme_type=>'NATIVE_FUNCTION_BODY'
 ,p_attribute_01=>'RETURN FALSE;'
-,p_version_scn=>42101121144033
+,p_reference_id=>23613577070590582
+,p_version_scn=>42188991664013
 ,p_caching=>'BY_USER_BY_SESSION'
-,p_comments=>'This is an alternative to build option Never and/or server side condition Never so you can keep values there'
 );
 end;
 /
@@ -706,9 +786,9 @@ wwv_flow_imp_shared.create_security_scheme(
 ,p_name=>'IS_DEVELOPER'
 ,p_scheme_type=>'NATIVE_FUNCTION_BODY'
 ,p_attribute_01=>'RETURN core.is_developer();'
-,p_error_message=>'AUTH|IS_DEVELOPER'
+,p_error_message=>'ACCESS_DENIED|IS_DEVELOPER'
 ,p_reference_id=>15014622076335206
-,p_version_scn=>42101082893611
+,p_version_scn=>42190236119845
 ,p_caching=>'BY_USER_BY_SESSION'
 );
 end;
@@ -720,9 +800,9 @@ wwv_flow_imp_shared.create_security_scheme(
 ,p_name=>'IS_ADMIN'
 ,p_scheme_type=>'NATIVE_FUNCTION_BODY'
 ,p_attribute_01=>'RETURN master.app_auth.is_admin() = ''Y'';'
-,p_error_message=>'AUTH|IS_ADMIN'
+,p_error_message=>'ACCESS_DENIED|IS_ADMIN'
 ,p_reference_id=>15176840787568678
-,p_version_scn=>42101120250737
+,p_version_scn=>42190236118045
 ,p_caching=>'BY_USER_BY_PAGE_VIEW'
 );
 end;
@@ -734,9 +814,9 @@ wwv_flow_imp_shared.create_security_scheme(
 ,p_name=>'IS_USER'
 ,p_scheme_type=>'NATIVE_FUNCTION_BODY'
 ,p_attribute_01=>'RETURN master.app_auth.is_user() = ''Y'';'
-,p_error_message=>'AUTH|IS_USER'
+,p_error_message=>'ACCESS_DENIED|IS_USER'
 ,p_reference_id=>15176507132562951
-,p_version_scn=>42101120262830
+,p_version_scn=>42190236120922
 ,p_caching=>'BY_USER_BY_PAGE_VIEW'
 );
 end;
@@ -746,18 +826,18 @@ begin
 null;
 end;
 /
-prompt --application/shared_components/logic/application_processes/after_auth
+prompt --application/shared_components/logic/application_processes/init_defaults
 begin
 wwv_flow_imp_shared.create_flow_process(
- p_id=>wwv_flow_imp.id(16193391207636335)
-,p_process_sequence=>-10
-,p_process_point=>'AFTER_LOGIN'
+ p_id=>wwv_flow_imp.id(71881359429426636)
+,p_process_sequence=>-20
+,p_process_point=>'BEFORE_HEADER'
 ,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'AFTER_AUTH'
-,p_process_sql_clob=>'master.app_auth.after_auth();'
+,p_process_name=>'INIT_DEFAULTS'
+,p_process_sql_clob=>'master.app.init_defaults();'
 ,p_process_clob_language=>'PLSQL'
-,p_reference_id=>14906883819651706
-,p_version_scn=>42101121784681
+,p_reference_id=>14906665904648711
+,p_version_scn=>42190676353681
 );
 end;
 /
@@ -785,22 +865,30 @@ wwv_flow_imp_shared.create_flow_process(
 ,p_process_clob_language=>'PLSQL'
 ,p_security_scheme=>'MUST_NOT_BE_PUBLIC_USER'
 ,p_reference_id=>14981262570116587
-,p_version_scn=>42101065090044
+,p_version_scn=>42188994139633
 );
 end;
 /
-prompt --application/shared_components/logic/application_processes/init_defaults
+prompt --application/shared_components/logic/application_processes/ajax_favorite_switch
 begin
 wwv_flow_imp_shared.create_flow_process(
- p_id=>wwv_flow_imp.id(71881359429426636)
+ p_id=>wwv_flow_imp.id(40789410021017839)
 ,p_process_sequence=>0
-,p_process_point=>'BEFORE_HEADER'
+,p_process_point=>'ON_DEMAND'
 ,p_process_type=>'NATIVE_PLSQL'
-,p_process_name=>'INIT_DEFAULTS'
-,p_process_sql_clob=>'master.app.init_defaults();'
+,p_process_name=>'AJAX_FAVORITE_SWITCH'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'app.favorite_switch (',
+'    in_app_id           => APEX_APPLICATION.G_X01,',
+'    in_page_id          => APEX_APPLICATION.G_X02,',
+'    in_element_id       => APEX_APPLICATION.G_X03,',
+'    in_favorite_type    => APEX_APPLICATION.G_X04,',
+'    in_favorite_id      => APEX_APPLICATION.G_X05',
+');'))
 ,p_process_clob_language=>'PLSQL'
-,p_reference_id=>14906665904648711
-,p_version_scn=>42101121794804
+,p_security_scheme=>'MUST_NOT_BE_PUBLIC_USER'
+,p_reference_id=>20377427996780225
+,p_version_scn=>42188921969473
 );
 end;
 /
@@ -876,10 +964,20 @@ begin
 wwv_flow_imp_shared.create_flow_item(
  p_id=>wwv_flow_imp.id(16188877931636312)
 ,p_name=>'CONTEXT_APP'
-,p_scope=>'GLOBAL'
 ,p_protection_level=>'N'
 ,p_reference_id=>13990984847194643
-,p_version_scn=>42101049020755
+,p_version_scn=>42190676661970
+);
+end;
+/
+prompt --application/shared_components/logic/application_items/context_id
+begin
+wwv_flow_imp_shared.create_flow_item(
+ p_id=>wwv_flow_imp.id(40787496366017816)
+,p_name=>'CONTEXT_ID'
+,p_protection_level=>'I'
+,p_reference_id=>40782518161014981
+,p_version_scn=>42190676668088
 );
 end;
 /
@@ -888,10 +986,9 @@ begin
 wwv_flow_imp_shared.create_flow_item(
  p_id=>wwv_flow_imp.id(16189415687636313)
 ,p_name=>'CONTEXT_PAGE'
-,p_scope=>'GLOBAL'
 ,p_protection_level=>'N'
 ,p_reference_id=>13991138632197038
-,p_version_scn=>42101049033764
+,p_version_scn=>42190676674194
 );
 end;
 /
@@ -1024,6 +1121,18 @@ wwv_flow_imp_shared.create_flow_item(
 ,p_protection_level=>'I'
 ,p_reference_id=>13992016837204038
 ,p_version_scn=>42101049086874
+);
+end;
+/
+prompt --application/shared_components/logic/application_items/page_title
+begin
+wwv_flow_imp_shared.create_flow_item(
+ p_id=>wwv_flow_imp.id(41718458213029305)
+,p_name=>'PAGE_TITLE'
+,p_scope=>'GLOBAL'
+,p_protection_level=>'I'
+,p_reference_id=>41715409492026540
+,p_version_scn=>42190632095627
 );
 end;
 /
@@ -15372,19 +15481,22 @@ begin
 null;
 end;
 /
-prompt --application/shared_components/security/authentications/open_door
+prompt --application/shared_components/security/authentications/custom
 begin
 wwv_flow_imp_shared.create_authentication(
- p_id=>wwv_flow_imp.id(16178796941459013)
-,p_name=>'OPEN_DOOR'
-,p_scheme_type=>'NATIVE_OPEN_DOOR'
-,p_logout_url=>'f?p=800:9999:0'
+ p_id=>wwv_flow_imp.id(41501601859913292)
+,p_name=>'CUSTOM'
+,p_scheme_type=>'NATIVE_CUSTOM'
+,p_attribute_03=>'master.app_auth.auth_function'
+,p_attribute_05=>'N'
+,p_invalid_session_type=>'LOGIN'
+,p_post_auth_process=>'master.app_auth.after_auth'
 ,p_cookie_name=>'&WORKSPACE_COOKIE.'
 ,p_use_secure_cookie_yn=>'N'
 ,p_ras_mode=>0
 ,p_switch_in_session_yn=>'Y'
-,p_reference_id=>13156773430345572
-,p_version_scn=>42101120134023
+,p_reference_id=>41495533057124518
+,p_version_scn=>42190511488285
 );
 end;
 /
@@ -18798,9 +18910,9 @@ prompt --application/pages/page_00100
 begin
 wwv_flow_imp_page.create_page(
  p_id=>100
-,p_name=>'&APP_NAME.'
+,p_name=>'Trips Planning'
 ,p_alias=>'HOME'
-,p_step_title=>'&APP_NAME.'
+,p_step_title=>'Trips Planning'
 ,p_autocomplete_on_off=>'OFF'
 ,p_group_id=>wwv_flow_imp.id(115360446004041100)  -- PAGE GROUP: 1) Trips
 ,p_page_css_classes=>'MULTICOLUMN'
@@ -19010,6 +19122,7 @@ wwv_flow_imp_page.create_page(
 ,p_group_id=>wwv_flow_imp.id(115360446004041100)  -- PAGE GROUP: 1) Trips
 ,p_page_template_options=>'#DEFAULT#'
 ,p_required_role=>wwv_flow_imp.id(107669254908639002)  -- AUTHORIZATION: IS_USER
+,p_dialog_width=>'800'
 ,p_dialog_chained=>'N'
 ,p_protection_level=>'C'
 ,p_page_component_map=>'17'
@@ -19054,6 +19167,34 @@ wwv_flow_imp_page.create_page_plug(
 ,p_edit_operations=>'i:u'
 ,p_lost_update_check_type=>'VALUES'
 ,p_plug_source_type=>'NATIVE_FORM'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(41727801858164912)
+,p_plug_name=>'LEFT'
+,p_parent_plug_id=>wwv_flow_imp.id(234470025842247291)
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(29277583231377259)
+,p_plug_display_sequence=>10
+,p_plug_grid_column_span=>7
+,p_plug_display_point=>'SUB_REGIONS'
+,p_location=>null
+,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
+  'expand_shortcuts', 'N',
+  'output_as', 'HTML')).to_clob
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(41727988706164913)
+,p_plug_name=>'RIGHT'
+,p_parent_plug_id=>wwv_flow_imp.id(234470025842247291)
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_imp.id(29277583231377259)
+,p_plug_display_sequence=>20
+,p_plug_new_grid_row=>false
+,p_plug_display_point=>'SUB_REGIONS'
+,p_location=>null
+,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(
+  'expand_shortcuts', 'N',
+  'output_as', 'HTML')).to_clob
 );
 wwv_flow_imp_page.create_page_button(
  p_id=>wwv_flow_imp.id(39835630686558244)
@@ -19146,15 +19287,14 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(99543897051470138)
 ,p_name=>'P105_GPS_LAT'
 ,p_source_data_type=>'NUMBER'
-,p_item_sequence=>60
-,p_item_plug_id=>wwv_flow_imp.id(234470025842247291)
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_imp.id(41727988706164913)
 ,p_item_source_plug_id=>wwv_flow_imp.id(234470025842247291)
 ,p_prompt=>'Latitude'
 ,p_source=>'GPS_LAT'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
-,p_begin_on_new_line=>'N'
 ,p_field_template=>wwv_flow_imp.id(29416269746377549)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_is_persistent=>'N'
@@ -19166,8 +19306,8 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(99543978074470139)
 ,p_name=>'P105_GPS_LONG'
 ,p_source_data_type=>'NUMBER'
-,p_item_sequence=>70
-,p_item_plug_id=>wwv_flow_imp.id(234470025842247291)
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_imp.id(41727988706164913)
 ,p_item_source_plug_id=>wwv_flow_imp.id(234470025842247291)
 ,p_prompt=>'Longtitude'
 ,p_source=>'GPS_LONG'
@@ -19186,8 +19326,8 @@ wwv_flow_imp_page.create_page_item(
  p_id=>wwv_flow_imp.id(99546547375470165)
 ,p_name=>'P105_COUNTRY_NAME'
 ,p_source_data_type=>'VARCHAR2'
-,p_item_sequence=>30
-,p_item_plug_id=>wwv_flow_imp.id(234470025842247291)
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(41727988706164913)
 ,p_item_source_plug_id=>wwv_flow_imp.id(234470025842247291)
 ,p_prompt=>'Country'
 ,p_source=>'COUNTRY_NAME'
@@ -19196,7 +19336,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_cSize=>30
 ,p_cMaxlength=>64
 ,p_begin_on_new_line=>'N'
-,p_colspan=>3
 ,p_field_template=>wwv_flow_imp.id(29416269746377549)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_is_persistent=>'N'
@@ -19237,8 +19376,8 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P105_TRIP_NAME'
 ,p_source_data_type=>'VARCHAR2'
 ,p_is_required=>true
-,p_item_sequence=>20
-,p_item_plug_id=>wwv_flow_imp.id(234470025842247291)
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(41727801858164912)
 ,p_item_source_plug_id=>wwv_flow_imp.id(234470025842247291)
 ,p_prompt=>'Trip Name'
 ,p_post_element_text=>'&P105_GPS_BUTTON!RAW.'
@@ -19247,7 +19386,6 @@ wwv_flow_imp_page.create_page_item(
 ,p_display_as=>'NATIVE_TEXT_FIELD'
 ,p_cSize=>30
 ,p_cMaxlength=>128
-,p_colspan=>9
 ,p_field_template=>wwv_flow_imp.id(29416269746377549)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_is_persistent=>'N'
@@ -19262,8 +19400,8 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P105_START_AT'
 ,p_source_data_type=>'DATE'
 ,p_is_required=>true
-,p_item_sequence=>40
-,p_item_plug_id=>wwv_flow_imp.id(234470025842247291)
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_imp.id(41727801858164912)
 ,p_item_source_plug_id=>wwv_flow_imp.id(234470025842247291)
 ,p_prompt=>'Start At'
 ,p_format_mask=>'YYYY-MM-DD'
@@ -19287,8 +19425,8 @@ wwv_flow_imp_page.create_page_item(
 ,p_name=>'P105_END_AT'
 ,p_source_data_type=>'DATE'
 ,p_is_required=>true
-,p_item_sequence=>50
-,p_item_plug_id=>wwv_flow_imp.id(234470025842247291)
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_imp.id(41727801858164912)
 ,p_item_source_plug_id=>wwv_flow_imp.id(234470025842247291)
 ,p_prompt=>'End At'
 ,p_format_mask=>'YYYY-MM-DD'
@@ -21774,8 +21912,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(29418018738377554)
 ,p_button_image_alt=>'Previous Stop'
-,p_button_position=>'UP'
-,p_button_alignment=>'RIGHT'
+,p_button_position=>'RIGHT_OF_TITLE'
 ,p_button_condition=>'P155_PREV_STOP'
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_icon_css_classes=>'fa-arrow-left'
@@ -21789,8 +21926,7 @@ wwv_flow_imp_page.create_page_button(
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_imp.id(29418018738377554)
 ,p_button_image_alt=>'Next Stop'
-,p_button_position=>'UP'
-,p_button_alignment=>'RIGHT'
+,p_button_position=>'RIGHT_OF_TITLE'
 ,p_button_condition=>'P155_NEXT_STOP'
 ,p_button_condition_type=>'ITEM_IS_NOT_NULL'
 ,p_icon_css_classes=>'fa-arrow-right'
@@ -22477,7 +22613,7 @@ wwv_flow_imp_shared.create_component_group(
  p_id=>wwv_flow_imp.id(16182257494636287)
 ,p_name=>'MASTER'
 ,p_reference_id=>13993288442216437
-,p_version_scn=>42101190550077
+,p_version_scn=>42190676674214
 );
 wwv_flow_imp_shared.create_comp_grp_component(
  p_id=>wwv_flow_imp.id(16184339668636301)
@@ -22528,6 +22664,14 @@ wwv_flow_imp_shared.create_comp_grp_component(
 ,p_app_item_id=>wwv_flow_imp.id(16629519846082389)
 );
 wwv_flow_imp_shared.create_comp_grp_component(
+ p_id=>wwv_flow_imp.id(40787724901017817)
+,p_app_item_id=>wwv_flow_imp.id(40787496366017816)
+);
+wwv_flow_imp_shared.create_comp_grp_component(
+ p_id=>wwv_flow_imp.id(41718706582029306)
+,p_app_item_id=>wwv_flow_imp.id(41718458213029305)
+);
+wwv_flow_imp_shared.create_comp_grp_component(
  p_id=>wwv_flow_imp.id(16641975055126653)
 ,p_app_item_id=>wwv_flow_imp.id(71110421388232347)
 );
@@ -22568,8 +22712,8 @@ wwv_flow_imp_shared.create_comp_grp_component(
 ,p_app_process_id=>wwv_flow_imp.id(16192071300636330)
 );
 wwv_flow_imp_shared.create_comp_grp_component(
- p_id=>wwv_flow_imp.id(16193684955636335)
-,p_app_process_id=>wwv_flow_imp.id(16193391207636335)
+ p_id=>wwv_flow_imp.id(40789753983017840)
+,p_app_process_id=>wwv_flow_imp.id(40789410021017839)
 );
 wwv_flow_imp_shared.create_comp_grp_component(
  p_id=>wwv_flow_imp.id(16191738133636327)
@@ -22580,8 +22724,28 @@ wwv_flow_imp_shared.create_comp_grp_component(
 ,p_app_process_id=>wwv_flow_imp.id(72716268888572788)
 );
 wwv_flow_imp_shared.create_comp_grp_component(
- p_id=>wwv_flow_imp.id(16195700473636341)
-,p_authentication_id=>wwv_flow_imp.id(16178796941459013)
+ p_id=>wwv_flow_imp.id(41501906055913294)
+,p_authentication_id=>wwv_flow_imp.id(41501601859913292)
+);
+wwv_flow_imp_shared.create_comp_grp_component(
+ p_id=>wwv_flow_imp.id(40783446311017801)
+,p_authorization_id=>wwv_flow_imp.id(40783178019017799)  -- AUTHORIZATION: IS_USER_D
+);
+wwv_flow_imp_shared.create_comp_grp_component(
+ p_id=>wwv_flow_imp.id(40784036818017803)
+,p_authorization_id=>wwv_flow_imp.id(40783766151017802)  -- AUTHORIZATION: IS_USER_COMPONENT
+);
+wwv_flow_imp_shared.create_comp_grp_component(
+ p_id=>wwv_flow_imp.id(40785455455017809)
+,p_authorization_id=>wwv_flow_imp.id(40785102031017809)  -- AUTHORIZATION: IS_USER_C
+);
+wwv_flow_imp_shared.create_comp_grp_component(
+ p_id=>wwv_flow_imp.id(40786437696017812)
+,p_authorization_id=>wwv_flow_imp.id(40786165379017811)  -- AUTHORIZATION: IS_USER_U
+);
+wwv_flow_imp_shared.create_comp_grp_component(
+ p_id=>wwv_flow_imp.id(40787132429017814)
+,p_authorization_id=>wwv_flow_imp.id(100841832468826763)  -- AUTHORIZATION: NOBODY
 );
 wwv_flow_imp_shared.create_comp_grp_component(
  p_id=>wwv_flow_imp.id(16183448460636298)

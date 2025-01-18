@@ -5,14 +5,14 @@ begin
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2024.05.31'
-,p_release=>'24.1.1'
-,p_default_workspace_id=>13869170895410902
+,p_release=>'24.1.7'
+,p_default_workspace_id=>1000000000000
 ,p_default_application_id=>765
 ,p_default_id_offset=>0
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_list(
- p_id=>wwv_flow_imp.id(59832708983261400)  -- LIST: NAVIGATION
+ p_id=>wwv_flow_imp.id(71145366175971809)  -- LIST: NAVIGATION
 ,p_name=>'NAVIGATION'
 ,p_list_type=>'SQL_QUERY'
 ,p_list_query=>wwv_flow_string.join(wwv_flow_t_varchar2(
@@ -36,10 +36,13 @@ wwv_flow_imp_shared.create_list(
 '    t.attribute08,',
 '    t.attribute09,',
 '    t.attribute10',
-'FROM trp_navigation_v t',
-'ORDER BY t.order# NULLS FIRST;'))
+'    --',
+'FROM master.app_navigation_v t',
+'ORDER BY',
+'    t.order# NULLS FIRST;'))
 ,p_list_status=>'PUBLIC'
-,p_version_scn=>1
+,p_reference_id=>13154021299338235
+,p_version_scn=>42101135209027
 );
 wwv_flow_imp.component_end;
 end;

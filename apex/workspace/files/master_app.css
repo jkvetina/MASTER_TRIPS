@@ -24,7 +24,6 @@ a.ENV_BANNER.UAT        { background : #227e9e; }
 a.ENV_BANNER.PROD       { background : #d63b25; }
 */
 html.app-MASTER a.ENV_BANNER > span.fa {
-    display             : none;
 }
 
 /* HIDE HOVER CURSORS WHEN HOVERING OVER CARD WITH EMPTY LINK */
@@ -181,7 +180,7 @@ h1.t-HeroRegion-title {
 .t-HeroRegion-col--beforeIcon,
 .t-HeroRegion-col--beforeIcon {
     order               : 5;
-    margin              : 1px 0 0;
+    margin              : -0.425rem 0 0;
     gap                 : 0.13rem;
 }
 
@@ -413,6 +412,10 @@ div.a-FileDrop.a-FileDrop--dropzone > div.a-FileDrop-action > span.a-Button.a-Fi
     margin-top          : -0.5rem;  /* to compensate for badge */
     margin-bottom       : 1.2rem;
 }
+body.t-Dialog-page .TABS ul.t-Tabs,
+body.t-Drawer-page .TABS ul.t-Tabs {
+    margin-top          : 0;
+}
 .TABS ul.t-Tabs::selection {
     user-select         : none !important;
 }
@@ -495,10 +498,18 @@ ul.a-CardView-items {
     padding             : 2px;
 }
 
-/* CARDS - ALLOW MORE COLUMNS THEN 5 */
-.CARDS6 ul.a-CardView-items {
-    grid-template-columns: repeat(6, minmax(0,1fr));
-}
+/* CARDS - ALLOW MORE COLUMNS THEN 5, SET THE CLAS ON THE REGION */
+.CARDS_1 ul.a-CardView-items  { grid-template-columns: repeat(1,  minmax(0, 1fr)) !important; }
+.CARDS_2 ul.a-CardView-items  { grid-template-columns: repeat(2,  minmax(0, 1fr)) !important; }
+.CARDS_3 ul.a-CardView-items  { grid-template-columns: repeat(3,  minmax(0, 1fr)) !important; }
+.CARDS_4 ul.a-CardView-items  { grid-template-columns: repeat(4,  minmax(0, 1fr)) !important; }
+.CARDS_5 ul.a-CardView-items  { grid-template-columns: repeat(5,  minmax(0, 1fr)) !important; }
+.CARDS_6 ul.a-CardView-items  { grid-template-columns: repeat(6,  minmax(0, 1fr)) !important; }
+.CARDS_7 ul.a-CardView-items  { grid-template-columns: repeat(7,  minmax(0, 1fr)) !important; }
+.CARDS_8 ul.a-CardView-items  { grid-template-columns: repeat(8,  minmax(0, 1fr)) !important; }
+.CARDS_9 ul.a-CardView-items  { grid-template-columns: repeat(9,  minmax(0, 1fr)) !important; }
+.CARDS_10 ul.a-CardView-items { grid-template-columns: repeat(10, minmax(0, 1fr)) !important; }
+.CARDS_12 ul.a-CardView-items { grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
 
 /* SHADOWS */
 .a-CardView {
@@ -1219,7 +1230,7 @@ span.CURRENT:hover {
 }
 .P980_HELP_CONTENT ul {
     list-style-type     : none;
-    margin              : 0.5rem 0 0.5rem 3rem;
+    margin              : 0 0.5rem 1.5rem 3rem;
 }
 .P980_HELP_CONTENT ul li:before {
     content             : '\2014';  /* mdash */

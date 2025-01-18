@@ -5,14 +5,14 @@ begin
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2024.05.31'
-,p_release=>'24.1.1'
-,p_default_workspace_id=>13869170895410902
+,p_release=>'24.1.7'
+,p_default_workspace_id=>1000000000000
 ,p_default_application_id=>765
 ,p_default_id_offset=>0
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_list_template(
- p_id=>wwv_flow_imp.id(60048554198289874)
+ p_id=>wwv_flow_imp.id(29403598010377520)
 ,p_list_template_current=>'<li data-current="true" data-id="#A01#" data-disabled="#A02#" data-hide="#A03#" data-shortcut="#A05#" data-icon="#ICON_CSS_CLASSES#"><a href="#LINK#" title="#A04#" target="#A06#">#TEXT_ESC_SC#</a></li>'
 ,p_list_template_noncurrent=>'<li data-id="#A01#" data-disabled="#A02#" data-hide="#A03#" data-shortcut="#A05#" data-icon="#ICON_CSS_CLASSES#"><a href="#LINK#" title="#A04#" target="#A06#">#TEXT_ESC_SC#</a></li>'
 ,p_list_template_name=>'Menu Bar'
@@ -49,7 +49,7 @@ wwv_flow_imp_shared.create_list_template(
 ,p_a04_label=>'Title Attribute (Used By Actions Only)'
 ,p_a05_label=>'Shortcut'
 ,p_a06_label=>'Link Target'
-,p_reference_id=>63453047248439155
+,p_reference_id=>12734933232084724
 );
 wwv_flow_imp.component_end;
 end;

@@ -5,14 +5,14 @@ begin
 --   Manifest End
 wwv_flow_imp.component_begin (
  p_version_yyyy_mm_dd=>'2024.05.31'
-,p_release=>'24.1.1'
-,p_default_workspace_id=>13869170895410902
+,p_release=>'24.1.7'
+,p_default_workspace_id=>1000000000000
 ,p_default_application_id=>765
 ,p_default_id_offset=>0
 ,p_default_owner=>'APPS'
 );
 wwv_flow_imp_shared.create_plug_template(
- p_id=>wwv_flow_imp.id(59930115538289803)
+ p_id=>wwv_flow_imp.id(29284659758377272)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<div class="t-CardsRegion #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_LANDMARK_ATTRIBUTES# #REGION_ATTRIBUTES#>',
@@ -28,12 +28,12 @@ wwv_flow_imp_shared.create_plug_template(
 ,p_default_label_alignment=>'RIGHT'
 ,p_default_field_alignment=>'LEFT'
 ,p_default_landmark_type=>'region'
-,p_reference_id=>63327898435439081
+,p_reference_id=>12616008635084466
 ,p_translate_this_template=>'N'
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(39943575535509132)
-,p_plug_template_id=>wwv_flow_imp.id(59930115538289803)
+ p_id=>wwv_flow_imp.id(39238925095617608)
+,p_plug_template_id=>wwv_flow_imp.id(29284659758377272)
 ,p_name=>'Region Body'
 ,p_placeholder=>'BODY'
 ,p_has_grid_support=>true
@@ -43,19 +43,19 @@ wwv_flow_imp_shared.create_plug_tmpl_display_point(
 ,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(39944007644509142)
-,p_plug_template_id=>wwv_flow_imp.id(59930115538289803)
+ p_id=>wwv_flow_imp.id(39239479583617609)
+,p_plug_template_id=>wwv_flow_imp.id(29284659758377272)
 ,p_name=>'Sort Order'
 ,p_placeholder=>'ORDER_BY_ITEM'
 ,p_has_grid_support=>false
 ,p_has_region_support=>false
 ,p_has_item_support=>true
 ,p_has_button_support=>true
-,p_glv_new_row=>false
+,p_glv_new_row=>true
 );
 wwv_flow_imp_shared.create_plug_tmpl_display_point(
- p_id=>wwv_flow_imp.id(39944564481509143)
-,p_plug_template_id=>wwv_flow_imp.id(59930115538289803)
+ p_id=>wwv_flow_imp.id(39239986478617610)
+,p_plug_template_id=>wwv_flow_imp.id(29284659758377272)
 ,p_name=>'Sub Regions'
 ,p_placeholder=>'SUB_REGIONS'
 ,p_has_grid_support=>true
